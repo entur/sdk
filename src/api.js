@@ -13,6 +13,12 @@ function makeRequest(url: string, params: Object, headers?: Object, config?: Obj
         },
         body: JSON.stringify(params),
     })
+        .then((res) => {
+            if (!res.ok) {
+                throw Error(res.statusText);
+            }
+            return res;
+        })
         .then(res => res.json())
         .then(cleanDeep);
 }
