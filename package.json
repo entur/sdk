@@ -6,7 +6,8 @@
   },
   "dependencies": {
     "clean-deep": "^3.0.2",
-    "node-fetch": "^2.0.0"
+    "node-fetch": "^2.0.0",
+    "query-params": "0.0.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0-beta.40",
@@ -15,11 +16,11 @@
     "@babel/preset-env": "^7.0.0-beta.40",
     "@babel/preset-flow": "^7.0.0-beta.40",
     "@babel/preset-stage-2": "^7.0.0-beta.40",
+    "babel-eslint": "^8.2.1",
     "eslint": "^4.15.0",
     "eslint-config-airbnb": "^16.1.0",
-    "eslint-plugin-flowtype": "^2.41.0",
+    "eslint-plugin-flowtype": "^2.46.1",
     "eslint-plugin-import": "^2.8.0",
-    "babel-eslint": "^8.2.1",
     "flow-bin": "^0.66.0"
   }
 }

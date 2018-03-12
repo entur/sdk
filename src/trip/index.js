@@ -1,72 +1,89 @@
 // @flow
-import type { Itinerary } from '../flow-types/Itinerary'
-import api from '../api'
-import query from './properties'
-import type { Location } from '../flow-types/Location'
+import { post } from '../api';
+import { FOOT, BUS, TRAM, RAIL, METRO, WATER, AIR } from '../constants/travelModes';
+import query from './properties';
+import type { Itinerary } from '../flow-types/Itinerary';
+import type { HostConfig } from '../config';
+import type { Location } from '../flow-types/Location';
 
 type SearchParams = {
     searchDate: Date,
     from: Location,
     to: Location,
-    arriveBy: boolean,
-    modes: Array<string>,
-    limit: number,
-    wheelchairAccessible: boolean,
-    waitReluctance: number,
-    walkReluctance: number,
-    walkBoardCost: number,
-    walkSpeed: number,
-    maxWalkDistance: number,
+    arriveBy?: boolean,
+    modes?: Array<string>,
+    limit?: number,
+    wheelchairAccessible?: boolean,
+    waitReluctance?: number,
+    walkReluctance?: number,
+    walkBoardCost?: number,
+    walkSpeed?: number,
+    maxWalkDistance?: number,
 }
 
+const DEFAULT_SEARCH_PARAMS = {
+    arriveBy: false,
+    modes: [FOOT, BUS, TRAM, RAIL, METRO, WATER, AIR],
+    limit: 5,
+    wheelchairAccessible: false,
+    waitReluctance: 0.5,
+    walkReluctance: 2,
+    walkBoardCost: 600,
+    walkSpeed: 1.2,
+    maxWalkDistance: 2000,
+};
+
 function toDateString(date: Date): string {
-    const year: string = String(date.getFullYear())
-    const month: string = String(date.getMonth()+1).padStart(2, '0')
-    const day: string = String(date.getDate()).padStart(2, '0')
-    return `${year}-${month}-${day}`
+    const year: string = String(date.getFullYear());
+    const month: string = String(date.getMonth() + 1).padStart(2, '0');
+    const day: string = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
 }
 
 function parseLegs(legs: Array<Object>) {
-    return legs.map(leg => {
+    return legs.map((leg) => {
         const {
             aimedStartTime, aimedEndTime, expectedStartTime, expectedEndTime, ...rest
-        } = leg
+        } = leg;
 
         const returnObj = {
             ...rest,
             aimedStartTime: new Date(aimedStartTime),
             aimedEndTime: new Date(aimedEndTime),
-        }
+        };
 
         if (expectedStartTime) {
-            returnObj.expectedStartTime = new Date(expectedStartTime)
+            returnObj.expectedStartTime = new Date(expectedStartTime);
         }
 
         if (expectedEndTime) {
-            returnObj.expectedEndTime = new Date(expectedEndTime)
+            returnObj.expectedEndTime = new Date(expectedEndTime);
         }
 
-        return returnObj
-    })
+        return returnObj;
+    });
 }
 
 function parseTrips(trips: Array<Object>) {
-    return trips.map(({ startTime, endTime, legs, ...rest }) => {
-        return {
-            ...rest,
-            startTime: new Date(startTime),
-            endTime: new Date(endTime),
-            legs: parseLegs(legs),
-        }
-    })
+    return trips.map(({
+        startTime, endTime, legs, ...rest
+    }) => ({
+        ...rest,
+        startTime: new Date(startTime),
+        endTime: new Date(endTime),
+        legs: parseLegs(legs),
+    }));
 }
 
-function getTripPatterns(searchParams: SearchParams, host: string, headers: Object): Promise<Array<Itinerary>> {
+function getTripPatterns(
+    { host, headers }: HostConfig,
+    searchParams: SearchParams,
+): Promise<Array<Itinerary>> {
     const {
         searchDate, limit, wheelchairAccessible, ...rest
-    } = searchParams
+    } = { ...searchParams, ...DEFAULT_SEARCH_PARAMS };
 
-    const url = `${host}/graphql`
+    const url = `${host}/graphql`;
 
     const variables = {
         ...rest,
@@ -74,13 +91,13 @@ function getTripPatterns(searchParams: SearchParams, host: string, headers: Obje
         date: toDateString(searchDate),
         numTripPatterns: limit,
         wheelchair: wheelchairAccessible,
-    }
+    };
 
-    const params = { query, variables }
+    const params = { query, variables };
 
-    return api(url, params, headers).then(
-        (response: Object) => response.data.trip.tripPatterns
-    ).then(parseTrips)
+    return post(url, params, headers)
+        .then((response: Object) => response.data.trip.tripPatterns)
+        .then(parseTrips);
 }
 
-export default getTripPatterns
+export default getTripPatterns;
