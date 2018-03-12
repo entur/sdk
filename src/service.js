@@ -1,5 +1,5 @@
 // @flow
-import getTripPatternService from './trip';
+import { getTripPatterns, getStopPlaceDepartures, getStopPlaces } from './trip';
 import getLocationService from './geocoder';
 import { getJourneyPlannerHost, getGeocoderHost } from './config';
 import type { Environment, Hosts } from './config';
@@ -26,14 +26,24 @@ class EnturService {
         };
     }
 
-    getLocations(query: string) {
+    getLocations(query: string): Promise<Array<Object>> {
         const host = getGeocoderHost(this.config);
         return getLocationService(host, query);
     }
 
-    getTripPatterns(query: Object) {
+    getTripPatterns(query: Object): Promise<Array<Object>> {
         const host = getJourneyPlannerHost(this.config);
-        return getTripPatternService(host, query);
+        return getTripPatterns(host, query);
+    }
+
+    getStopPlaceDepartures(stopPlaceId: string): Promise<Array<Object>> {
+        const host = getJourneyPlannerHost(this.config);
+        return getStopPlaceDepartures(host, stopPlaceId);
+    }
+
+    getStopPlaces(stopPlaceIds: Array<string>): Promise<Array<Object>> {
+        const host = getJourneyPlannerHost(this.config);
+        return getStopPlaces(host, stopPlaceIds);
     }
 }
 
