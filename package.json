@@ -1,8 +1,13 @@
 {
   "name": "@entur/sdk",
   "version": "0.0.1",
-  "scripts": {},
-  "dependencies": {},
+  "scripts": {
+    "transpile": "babel src --out-dir lib --copy-files"
+  },
+  "dependencies": {
+    "clean-deep": "^3.0.2",
+    "node-fetch": "^2.0.0"
+  },
   "devDependencies": {
     "@babel/cli": "^7.0.0-beta.40",
     "@babel/core": "^7.0.0-beta.40",
