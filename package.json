@@ -2,6 +2,8 @@
   "name": "@entur/sdk",
   "version": "0.0.1",
   "scripts": {
+    "lint": "eslint src/",
+    "flow": "flow",
     "transpile": "babel src --out-dir lib --copy-files"
   },
   "dependencies": {
