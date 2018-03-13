@@ -1,9 +1,6 @@
 const { default: EnturService, convertLocationToPosition } = require('../lib')
 
-const service = new EnturService({
-    environment: 'PROD',
-})
-
+const service = new EnturService()
 
 async function example() {
     const [fromLocation] = await service.getLocations('Ryllikvegen, Lillehammer')

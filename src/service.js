@@ -2,16 +2,14 @@
 import { getTripPatterns, getStopPlaceDepartures, getStopPlaces } from './trip'
 import getLocationService from './geocoder'
 import { getJourneyPlannerHost, getGeocoderHost } from './config'
-import type { Environment, Hosts } from './config'
+import type { Hosts } from './config'
 
 type ServiceConfig = {
-    environment: Environment,
     hosts: Hosts,
     apikeys: Hosts,
 };
 
 const DEFAULT_CONFIG = {
-    environment: 'DEV',
     hosts: {},
     apikeys: {},
 }

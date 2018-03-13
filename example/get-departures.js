@@ -1,8 +1,6 @@
 const { default: EnturService } = require('../lib')
 
-const service = new EnturService({
-    environment: 'PROD',
-})
+const service = new EnturService()
 const now = new Date()
 
 function toTimeString(date) {
