@@ -18,11 +18,12 @@ function minutesDifference(date1, date2) {
 
 service.getStopPlaceDepartures('NSR:StopPlace:14202').then(departures => departures.forEach((departure) => {
     const { expectedDepartureTime, destinationDisplay, serviceJourney } = departure
-    const departureTime = new Date(expectedDepartureTime)
+    const { line } = serviceJourney.journeyPattern
 
+    const departureTime = new Date(expectedDepartureTime)
     const minDiff = minutesDifference(now, departureTime)
     const departureLabel = minDiff < 15 ? `${minDiff} min` : toTimeString(departureTime)
 
-    const { line } = serviceJourney.journeyPattern
-    console.log(`${departureLabel} ${line.transportMode} ${line.publicCode} ${destinationDisplay.frontText}`) // eslint-disable-line no-console
+    // eslint-disable-next-line no-console
+    console.log(`${departureLabel} ${line.transportMode} ${line.publicCode} ${destinationDisplay.frontText}`)
 }))
