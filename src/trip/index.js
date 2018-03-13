@@ -18,11 +18,6 @@ type SearchParams = {
     modes?: Array<string>,
     limit?: number,
     wheelchairAccessible?: boolean,
-    waitReluctance?: number,
-    walkReluctance?: number,
-    walkBoardCost?: number,
-    walkSpeed?: number,
-    maxWalkDistance?: number,
 }
 
 const DEFAULT_SEARCH_PARAMS = {
@@ -30,11 +25,6 @@ const DEFAULT_SEARCH_PARAMS = {
     modes: [FOOT, BUS, TRAM, RAIL, METRO, WATER, AIR],
     limit: 5,
     wheelchairAccessible: false,
-    waitReluctance: 0.5,
-    walkReluctance: 2,
-    walkBoardCost: 600,
-    walkSpeed: 1.2,
-    maxWalkDistance: 2000,
 }
 
 function toDateString(date: Date): string {
