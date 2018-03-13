@@ -4,7 +4,8 @@
   "scripts": {
     "lint": "eslint src/ example/",
     "flow": "flow",
-    "transpile": "babel src --out-dir lib --copy-files"
+    "transpile": "rm -rf lib && babel src --out-dir lib --copy-files",
+    "prepublishOnly": "npm run transpile"
   },
   "dependencies": {
     "clean-deep": "^3.0.2",
