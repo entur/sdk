@@ -1,6 +1,7 @@
 {
   "name": "@entur/sdk",
   "version": "0.0.1",
+  "license": "EUPL-1.2",
   "scripts": {
     "lint": "eslint src/ example/",
     "flow": "flow",
