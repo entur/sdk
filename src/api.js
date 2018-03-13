@@ -4,7 +4,7 @@ import queryParams from 'query-params'
 import cleanDeep from 'clean-deep'
 
 
-const DEFUALT_HEADERS = {
+const DEFAULT_HEADERS = {
     Accept: 'application/json',
     'Content-Type': 'application/json',
 }
@@ -25,7 +25,7 @@ export function get(
     return fetch(`${url}?${queryParams.encode(params)}`, {
         method: 'get',
         ...config,
-        headers: { ...DEFUALT_HEADERS, ...headers },
+        headers: { ...DEFAULT_HEADERS, ...headers },
     })
         .then(responseHandler)
         .then(res => res.json())
@@ -41,7 +41,7 @@ export function post(
     return fetch(url, {
         method: 'post',
         ...config,
-        headers: { ...DEFUALT_HEADERS, ...headers },
+        headers: { ...DEFAULT_HEADERS, ...headers },
         body: JSON.stringify(params),
     })
         .then(responseHandler)
