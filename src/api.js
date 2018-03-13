@@ -1,19 +1,19 @@
 // @flow
-import fetch from 'node-fetch';
-import queryParams from 'query-params';
-import cleanDeep from 'clean-deep';
+import fetch from 'node-fetch'
+import queryParams from 'query-params'
+import cleanDeep from 'clean-deep'
 
 
 const DEFUALT_HEADERS = {
     Accept: 'application/json',
     'Content-Type': 'application/json',
-};
+}
 
 function responseHandler(response) {
     if (!response.ok) {
-        throw Error(response.statusText);
+        throw Error(response.statusText)
     }
-    return response;
+    return response
 }
 
 export function get(
@@ -29,7 +29,7 @@ export function get(
     })
         .then(responseHandler)
         .then(res => res.json())
-        .then(cleanDeep);
+        .then(cleanDeep)
 }
 
 export function post(
@@ -46,5 +46,5 @@ export function post(
     })
         .then(responseHandler)
         .then(res => res.json())
-        .then(cleanDeep);
+        .then(cleanDeep)
 }

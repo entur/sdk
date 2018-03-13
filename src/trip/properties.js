@@ -7,7 +7,7 @@ import {
     situationFields,
     intermediateEstimatedCallFragment,
     situationFragment,
-} from './queryHelper';
+} from './queryHelper'
 
 
 export const getItinerariesProps = `
@@ -82,7 +82,7 @@ export const getItinerariesProps = `
     }
 
     ${situationFragment}
-`;
+`
 
 export const getStopPlacesProps = `
     query StopPlaces($ids:[String]!,$start:DateTime!,$range:Int!,$departures:Int!) {
@@ -124,7 +124,7 @@ export const getStopPlacesProps = `
        transportMode
        authority { id name }
      }
-`;
+`
 
 export const getStopPlaceDeparturesProps = `
     query StopPlaceDepartures($id:String!,$start:DateTime!,$range:Int!,$departures:Int!) {
@@ -171,4 +171,4 @@ export const getStopPlaceDeparturesProps = `
     ${lineFragment}
 
     ${situationFragment}
-`;
+`

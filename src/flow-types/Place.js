@@ -1,7 +1,8 @@
 // @flow
 
 /**
- * Representation of Graphql fragment 'Place' in commons/data/itineraries.js and commons/data/stopPlaceConnections
+ * Representation of Graphql fragment 'Place' in commons/data/itineraries.js
+ * and commons/data/stopPlaceConnections
  * The fields that are common in both places are required, the rest are optional
  */
 

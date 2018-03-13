@@ -1,8 +1,8 @@
 // @flow
 
-import { get } from '../api';
-import type { HostConfig } from '../config';
-import type { Position } from '../flow-types/Position';
+import { get } from '../api'
+import type { HostConfig } from '../config'
+import type { Position } from '../flow-types/Position'
 
 type PositionParam = {
     'focus.point.lat'?: number,
@@ -12,14 +12,14 @@ type PositionParam = {
 
 function getPositionParamsFromGeolocationResult(geolocation?: Position): PositionParam {
     if (!geolocation || geolocation.coordinates) {
-        return {};
+        return {}
     }
 
-    const { coordinates = {} } = geolocation;
+    const { coordinates = {} } = geolocation
     return {
         'focus.point.lat': coordinates.latitude,
         'focus.point.lon': coordinates.longitude,
-    };
+    }
 }
 
 
@@ -34,10 +34,10 @@ function getLocations(
         lang: 'no',
         text,
         ...params,
-    };
+    }
 
-    const url = `${host}/autocomplete`;
-    return get(url, searchParams, headers).then(data => data.features || []);
+    const url = `${host}/autocomplete`
+    return get(url, searchParams, headers).then(data => data.features || [])
 }
 
-export default getLocations;
+export default getLocations
