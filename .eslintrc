@@ -2,7 +2,8 @@
     "extends": ["plugin:flowtype/recommended", "airbnb-base"],
     "parser": "babel-eslint",
     "rules": {
-        "indent": ["error", 4, {"SwitchCase": 1}],    
+        "indent": ["error", 4, {"SwitchCase": 1}],
+        "semi": ["error", "never"]
     },
     "plugins": [
         "flowtype"

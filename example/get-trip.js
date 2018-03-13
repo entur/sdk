@@ -1,21 +1,18 @@
-// @flow
-const EnturService = require('../lib').default;
+const { default: EnturService, convertLocationToPosition } = require('../lib')
 
-const service = new EnturService({
-    environment: 'STAGING',
-});
+const service = new EnturService()
 
-service.getTripPatterns({
-    searchDate: new Date(),
-    from: {
-        name: 'Ryllikvegen, Lillehammer',
-        coordinates: {
-            latitude: 61.102848368937416,
-            longitude: 10.51613308426234,
-        },
-    },
-    to: {
-        place: 'NSR:StopPlace:337',
-        name: 'Oslo S, Oslo',
-    },
-}).then(console.log);
+async function example() {
+    const [fromLocation] = await service.getLocations('Ryllikvegen, Lillehammer')
+    const [toLocation] = await service.getLocations('Oslo S')
+
+    if (fromLocation && toLocation) {
+        service.getTripPatterns({
+            searchDate: new Date(),
+            from: convertLocationToPosition(fromLocation),
+            to: convertLocationToPosition(toLocation),
+        }).then(console.log) // eslint-disable-line no-console
+    }
+}
+
+example()

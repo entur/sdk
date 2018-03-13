@@ -1,26 +1,50 @@
 // @flow
-import fetch from 'node-fetch';
-import cleanDeep from 'clean-deep';
+import fetch from 'node-fetch'
+import queryParams from 'query-params'
+import cleanDeep from 'clean-deep'
 
-function makeRequest(url: string, params: Object, headers?: Object, config?: Object): Promise<Object> {
+
+const DEFAULT_HEADERS = {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+}
+
+function responseHandler(response) {
+    if (!response.ok) {
+        throw Error(response.statusText)
+    }
+    return response
+}
+
+export function get(
+    url: string,
+    params?: Object,
+    headers?: Object,
+    config?: Object,
+): Promise<Object> {
+    return fetch(`${url}?${queryParams.encode(params)}`, {
+        method: 'get',
+        ...config,
+        headers: { ...DEFAULT_HEADERS, ...headers },
+    })
+        .then(responseHandler)
+        .then(res => res.json())
+        .then(cleanDeep)
+}
+
+export function post(
+    url: string,
+    params?: Object,
+    headers?: Object,
+    config?: Object,
+): Promise<Object> {
     return fetch(url, {
         method: 'post',
         ...config,
-        headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-            ...headers,
-        },
+        headers: { ...DEFAULT_HEADERS, ...headers },
         body: JSON.stringify(params),
     })
-        .then((res) => {
-            if (!res.ok) {
-                throw Error(res.statusText);
-            }
-            return res;
-        })
+        .then(responseHandler)
         .then(res => res.json())
-        .then(cleanDeep);
+        .then(cleanDeep)
 }
-
-export default makeRequest;

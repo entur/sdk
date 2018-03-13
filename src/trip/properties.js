@@ -10,7 +10,7 @@ import {
 } from './queryHelper'
 
 
-const getItinerariesProps = `
+export const getItinerariesProps = `
     query tripPatterns($numTripPatterns:Int!,$wheelchair:Boolean!,$from:Location!,$to:Location!,$date:Date!,$dateTime:DateTime!,$arriveBy:Boolean!,$modes:[Mode]!){
         trip(
             numTripPatterns: $numTripPatterns
@@ -84,4 +84,91 @@ const getItinerariesProps = `
     ${situationFragment}
 `
 
-export default getItinerariesProps
+export const getStopPlacesProps = `
+    query StopPlaces($ids:[String]!,$start:DateTime!,$range:Int!,$departures:Int!) {
+        stopPlaces(ids:$ids) {
+          id
+          estimatedCalls(startTime:$start, timeRange:$range, numberOfDepartures:$departures) { ...estimatedCallFields }
+        }
+    }
+
+    fragment estimatedCallFields on EstimatedCall {
+        realtimeState
+        aimedDepartureTime
+        expectedDepartureTime
+        aimedArrivalTime
+        expectedArrivalTime
+        realtime
+        forBoarding
+        forAlighting
+        destinationDisplay { frontText }
+        quay { id publicCode description }
+        serviceJourney { ...serviceJourneyFields }
+    }
+
+    fragment serviceJourneyFields on ServiceJourney {
+      id
+      journeyPattern { ...journeyPatternFields }
+    }
+
+    fragment journeyPatternFields on JourneyPattern {
+      id
+      name
+      line { ...lineFields }
+    }
+
+    fragment lineFields on Line {
+       id
+       publicCode
+       name
+       transportMode
+       authority { id name }
+     }
+`
+
+export const getStopPlaceDeparturesProps = `
+    query StopPlaceDepartures($id:String!,$start:DateTime!,$range:Int!,$departures:Int!) {
+        stopPlace(id:$id) {
+          id
+          estimatedCalls(startTime:$start, timeRange:$range, numberOfDepartures:$departures) { ...estimatedCallFields }
+        }
+    }
+
+    fragment estimatedCallFields on EstimatedCall {
+        aimedDepartureTime
+        expectedDepartureTime
+        realtime
+        forBoarding
+        forAlighting
+        date
+        destinationDisplay { frontText }
+        notices { text }
+        quay { ...quayFields }
+        serviceJourney { ...serviceJourneyFields }
+    }
+
+    fragment quayFields on Quay {
+        id
+        publicCode
+        description
+        ${situationFields}
+    }
+
+    fragment serviceJourneyFields on ServiceJourney {
+      id
+      journeyPattern { ...journeyPatternFields }
+      notices { text }
+      ${situationFields}
+    }
+
+    fragment journeyPatternFields on JourneyPattern {
+      id
+      name
+      ${lineFields}
+      notices { text }
+    }
+
+    ${lineFragment}
+
+    ${situationFragment}
+`
