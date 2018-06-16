@@ -83,7 +83,7 @@ service.getTripPatterns({
 ```
 
 
-See [example/get-trip.js](./example.get-trip.js) for a more in depth example
+See [example/get-trip.js](./example/get-trip.js) for a more in depth example
 
 ## Custom Types
 #### Position
