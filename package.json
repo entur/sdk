@@ -2,6 +2,11 @@
   "name": "@entur/sdk",
   "version": "0.0.1",
   "license": "EUPL-1.2",
+  "main": "./lib/index.js",
+  "repository": "github:entur/sdk",
+  "bugs": {
+    "url": "https://github.com/entur/sdk/issues"
+  },
   "scripts": {
     "lint": "eslint src/ example/",
     "flow": "flow",
