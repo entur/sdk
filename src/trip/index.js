@@ -34,41 +34,6 @@ function toDateString(date: Date): string {
     return `${year}-${month}-${day}`
 }
 
-function parseLegs(legs: Array<Object>) {
-    return legs.map((leg) => {
-        const {
-            aimedStartTime, aimedEndTime, expectedStartTime, expectedEndTime, ...rest
-        } = leg
-
-        const returnObj = {
-            ...rest,
-            aimedStartTime: new Date(aimedStartTime),
-            aimedEndTime: new Date(aimedEndTime),
-        }
-
-        if (expectedStartTime) {
-            returnObj.expectedStartTime = new Date(expectedStartTime)
-        }
-
-        if (expectedEndTime) {
-            returnObj.expectedEndTime = new Date(expectedEndTime)
-        }
-
-        return returnObj
-    })
-}
-
-function parseTrips(trips: Array<Object>) {
-    return trips.map(({
-        startTime, endTime, legs, ...rest
-    }) => ({
-        ...rest,
-        startTime: new Date(startTime),
-        endTime: new Date(endTime),
-        legs: parseLegs(legs),
-    }))
-}
-
 export function getTripPatterns(
     { host, headers }: HostConfig,
     searchParams: SearchParams,
@@ -91,7 +56,6 @@ export function getTripPatterns(
 
     return post(url, params, headers)
         .then((response: Object) => response.data.trip.tripPatterns)
-        .then(parseTrips)
 }
 
 export function getStopPlaceDepartures(
