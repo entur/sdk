@@ -15,7 +15,6 @@
   },
   "dependencies": {
     "clean-deep": "^3.0.2",
-    "node-fetch": "^2.1.2",
     "query-params": "0.0.1"
   },
   "devDependencies": {
