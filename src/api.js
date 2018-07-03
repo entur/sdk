@@ -1,5 +1,4 @@
 // @flow
-import fetch from 'node-fetch'
 import queryParams from 'query-params'
 import cleanDeep from 'clean-deep'
 
