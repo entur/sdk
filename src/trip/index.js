@@ -20,11 +20,24 @@ type SearchParams = {
     wheelchairAccessible?: boolean,
 }
 
+type StopPlaceParams = {
+    stopPlaceId: string,
+    onForBoarding?: boolean,
+    departures?: number,
+    timeRange?: number,
+}
+
 const DEFAULT_SEARCH_PARAMS = {
     arriveBy: false,
     modes: [FOOT, BUS, TRAM, RAIL, METRO, WATER, AIR],
     limit: 5,
     wheelchairAccessible: false,
+}
+
+const DEFAULT_STOP_PLACE_PARAMS = {
+    onForBoarding: false,
+    departures: 50,
+    timeRange: 72000,
 }
 
 function toDateString(date: Date): string {
@@ -60,21 +73,28 @@ export function getTripPatterns(
 
 export function getStopPlaceDepartures(
     { host, headers }: HostConfig,
-    stopPlaceId: string,
+    stopPlaceParams: StopPlaceParams,
 ): Object {
+    const {
+        stopPlaceId, timeRange, departures, onForBoarding
+    } = { ...DEFAULT_STOP_PLACE_PARAMS, ...stopPlaceParams }
+
     const url = `${host}/graphql`
 
     const variables = {
         id: stopPlaceId,
         start: new Date().toISOString(),
-        range: 72000,
-        departures: 50,
+        range: timeRange,
+        departures,
+        onForBoarding,
     }
 
     const params = { query: getStopPlaceDeparturesProps, variables }
 
     return post(url, params, headers)
-        .then(response => response.data.stopPlace.estimatedCalls || [])
+        .then((response: Object) => {
+            return (response.data.stopPlace.estimatedCalls || [])
+        })
 }
 
 
