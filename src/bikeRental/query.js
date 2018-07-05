@@ -1,6 +1,6 @@
 export const getBikeRentalStationByBoxProps = `
-query bikeRentalStationsByBox($minimumLatitude:Float, $minimumLongitude:Float, $maximumLatitude:Float, $maximumLongitude:Float) {
-  bikeRentalStationsByBbox(minimumLatitude: $minimumLatitude, minimumLongitude: $minimumLongitude, maximumLatitude: $maximumLatitude, maximumLongitude: $maximumLongitude) {
+query bikeRentalStationsByBox($minLat:Float, $minLng:Float, $maxLat:Float, $maxLng:Float) {
+  bikeRentalStationsByBbox(minimumLatitude: $minLat, minimumLongitude: $minLng, maximumLatitude: $maxLat , maximumLongitude: $maxLng) {
     id
     name
     bikesAvailable
