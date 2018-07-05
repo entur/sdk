@@ -73,7 +73,7 @@ export function getTripPatterns(
 export function getStopPlaceDepartures(
     { host, headers }: HostConfig,
     stopPlaceId: string,
-    stopPlaceParams:? StopPlaceParams
+    stopPlaceParams?: StopPlaceParams,
 ): Object {
     const {
         timeRange, departures, onForBoarding,
