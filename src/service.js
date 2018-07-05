@@ -35,9 +35,9 @@ class EnturService {
         return getTripPatterns(host, query)
     }
 
-    getStopPlaceDepartures(query: Object): Promise<Array<Object>> {
+    getStopPlaceDepartures(stopPlaceId: string, query?: Object): Promise<Array<Object>> {
         const host = getJourneyPlannerHost(this.config)
-        return getStopPlaceDepartures(host, query)
+        return getStopPlaceDepartures(host, stopPlaceId, query)
     }
 
     getStopPlaces(stopPlaceIds: Array<string>): Promise<Array<Object>> {

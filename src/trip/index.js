@@ -21,7 +21,6 @@ type SearchParams = {
 }
 
 type StopPlaceParams = {
-    stopPlaceId: string,
     onForBoarding?: boolean,
     departures?: number,
     timeRange?: number,
@@ -73,10 +72,11 @@ export function getTripPatterns(
 
 export function getStopPlaceDepartures(
     { host, headers }: HostConfig,
-    stopPlaceParams: StopPlaceParams,
+    stopPlaceId: string,
+    stopPlaceParams:? StopPlaceParams
 ): Object {
     const {
-        stopPlaceId, timeRange, departures, onForBoarding,
+        timeRange, departures, onForBoarding,
     } = { ...DEFAULT_STOP_PLACE_PARAMS, ...stopPlaceParams }
 
     const url = `${host}/graphql`
