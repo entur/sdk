@@ -127,10 +127,10 @@ export const getStopPlacesProps = `
 `
 
 export const getStopPlaceDeparturesProps = `
-    query StopPlaceDepartures($id:String!,$start:DateTime!,$range:Int!,$departures:Int!) {
+    query StopPlaceDepartures($id:String!,$start:DateTime!,$range:Int!,$departures:Int!,$onForBoarding:Boolean!) {
         stopPlace(id:$id) {
           id
-          estimatedCalls(startTime:$start, timeRange:$range, numberOfDepartures:$departures) { ...estimatedCallFields }
+          estimatedCalls(startTime:$start, timeRange:$range, numberOfDepartures:$departures, omitNonBoarding:$onForBoarding) { ...estimatedCallFields }
         }
     }
 
