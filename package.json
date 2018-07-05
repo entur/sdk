@@ -10,7 +10,7 @@
   "scripts": {
     "lint": "eslint src/ example/",
     "flow": "flow",
-    "transpile": "rm -rf lib && babel src --watch --out-dir lib --copy-files",
+    "transpile": "rm -rf lib && babel src --out-dir lib --copy-files",
     "prepublishOnly": "npm run transpile"
   },
   "dependencies": {

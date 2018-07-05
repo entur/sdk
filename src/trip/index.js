@@ -76,7 +76,7 @@ export function getStopPlaceDepartures(
     stopPlaceParams: StopPlaceParams,
 ): Object {
     const {
-        stopPlaceId, timeRange, departures, onForBoarding
+        stopPlaceId, timeRange, departures, onForBoarding,
     } = { ...DEFAULT_STOP_PLACE_PARAMS, ...stopPlaceParams }
 
     const url = `${host}/graphql`
@@ -92,9 +92,7 @@ export function getStopPlaceDepartures(
     const params = { query: getStopPlaceDeparturesProps, variables }
 
     return post(url, params, headers)
-        .then((response: Object) => {
-            return (response.data.stopPlace.estimatedCalls || [])
-        })
+        .then((response: Object) => response.data.stopPlace.estimatedCalls || [])
 }
 
 
