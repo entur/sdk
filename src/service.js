@@ -1,9 +1,15 @@
 // @flow
+<<<<<<< HEAD
 import { getTripPatterns, getStopPlaceDepartures, getStopPlaces } from './trip'
 import { getBikeRentalStation, getBikeRentalStations } from './bikeRental'
+=======
+import { getTripPatterns, getStopPlaceDepartures, getStopPlaces, getStopPlacesByPosition } from './trip'
+import { getBikeRentalStation } from './bikeRental'
+>>>>>>> master
 import getLocationService from './geocoder'
 import { getJourneyPlannerHost, getGeocoderHost } from './config'
 import type { Hosts } from './config'
+import type { Coordinates } from './flow-types'
 
 type ServiceConfig = {
     hosts: Hosts,
@@ -43,6 +49,11 @@ class EnturService {
     getStopPlaces(stopPlaceIds: Array<string>): Promise<Array<Object>> {
         const host = getJourneyPlannerHost(this.config)
         return getStopPlaces(host, stopPlaceIds)
+    }
+
+    getStopPlacesByPosition(position: Coordinates, distance?: number): Promise<Array<Object>> {
+        const host = getJourneyPlannerHost(this.config)
+        return getStopPlacesByPosition(host, position, distance)
     }
 
     getBikeRentalStation(stationId: string): Promise<Array<Object>> {

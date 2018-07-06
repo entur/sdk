@@ -126,6 +126,22 @@ export const getStopPlacesProps = `
      }
 `
 
+export const getStopPlacesByBboxProps = `
+    query StopPlacesByBboxProps($minLat:Float, $minLng:Float, $maxLng:Float, $maxLat:Float) {
+        stopPlacesByBbox(minimumLatitude:$minLat, minimumLongitude:$minLng, maximumLatitude:$maxLat, maximumLongitude:$maxLng) {
+            id
+            name
+            latitude
+            longitude
+            description
+            wheelchairBoarding
+            weighting
+            transportMode
+            transportSubmode
+        }
+    }
+`
+
 export const getStopPlaceDeparturesProps = `
     query StopPlaceDepartures($id:String!,$start:DateTime!,$range:Int!,$departures:Int!,$onForBoarding:Boolean!) {
         stopPlace(id:$id) {

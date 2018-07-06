@@ -1,10 +1,8 @@
 // @flow
+import type { Coordinates } from './'
 
 export type Position = {
     name: string,
     place?: string,
-    coordinates?: {
-        latitude: number,
-        longitude: number
-    }
+    coordinates?: Coordinates,
 }
