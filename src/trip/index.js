@@ -5,10 +5,15 @@ import {
     getItinerariesProps,
     getStopPlacesProps,
     getStopPlaceDeparturesProps,
+    getStopPlacesByBboxProps,
 } from './properties'
-import type { Itinerary } from '../flow-types/Itinerary'
 import type { HostConfig } from '../config'
-import type { Location } from '../flow-types/Location'
+import type {
+    Coordinates,
+    Itinerary,
+    Location,
+} from '../flow-types'
+import { convertPositionToBbox } from '../utils'
 
 type SearchParams = {
     searchDate: Date,
@@ -113,4 +118,25 @@ export function getStopPlaces(
 
     return post(url, params, headers)
         .then(response => response.data.stopPlaces || [])
+}
+
+export function getStopPlacesByPosition(
+    { host, headers }: HostConfig,
+    coordinates: Coordinates,
+    distance: number = 500,
+): Promise<Array<Object>> {
+    const url = `${host}/graphql`
+
+    const positionArray = convertPositionToBbox(coordinates, distance)
+    const variables = {
+        minLng: positionArray[0],
+        minLat: positionArray[1],
+        maxLng: positionArray[2],
+        maxLat: positionArray[3],
+    }
+
+    const params = { query: getStopPlacesByBboxProps, variables }
+
+    return post(url, params, headers)
+        .then(response => response.data.stopPlacesByBbox)
 }
