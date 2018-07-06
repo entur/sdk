@@ -2,7 +2,7 @@
 
 // @flow
 import turf from 'turf'
-import { Position, Location, Coordinates } from './flow-types'
+import type { Position, Location, Coordinates } from './flow-types'
 
 export function convertLocationToPosition(location: Location): Position {
     const { properties, geometry } = location

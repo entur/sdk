@@ -8,7 +8,7 @@ import {
     getStopPlacesByBboxProps,
 } from './properties'
 import type { HostConfig } from '../config'
-import {
+import type {
     Coordinates,
     Itinerary,
     Location,
