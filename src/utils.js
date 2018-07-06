@@ -19,13 +19,14 @@ export function convertLocationToPosition(location: Location): Position {
 
 export function convertPositionToBbox(coordinates: Coordinates, distance: number) {
     const { latitude, longitude } = coordinates
+    const distanceToKilometer = distance / 1000
 
     const point = turf.point([longitude, latitude])
 
-    const east = turf.destination(point, distance / 1000, 0)
-    const north = turf.destination(point, distance / 1000, 90)
-    const west = turf.destination(point, distance / 1000, 180)
-    const south = turf.destination(point, distance / 1000, -90)
+    const east = turf.destination(point, distanceToKilometer, 0)
+    const north = turf.destination(point, distanceToKilometer, 90)
+    const west = turf.destination(point, distanceToKilometer, 180)
+    const south = turf.destination(point, distanceToKilometer, -90)
 
     const line = turf.lineString([
         east.geometry.coordinates,

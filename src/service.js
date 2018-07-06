@@ -4,6 +4,7 @@ import { getBikeRentalStation } from './bikeRental'
 import getLocationService from './geocoder'
 import { getJourneyPlannerHost, getGeocoderHost } from './config'
 import type { Hosts } from './config'
+import type { Coordinates } from './flow-types'
 
 type ServiceConfig = {
     hosts: Hosts,
@@ -45,7 +46,7 @@ class EnturService {
         return getStopPlaces(host, stopPlaceIds)
     }
 
-    getStopPlacesByPosition(position: Object, distance?: number): Promise<Array<Object>> {
+    getStopPlacesByPosition(position: Coordinates, distance?: number): Promise<Array<Object>> {
         const host = getJourneyPlannerHost(this.config)
         return getStopPlacesByPosition(host, position, distance)
     }
