@@ -1,5 +1,4 @@
 /* eslint import/prefer-default-export:0  */
-
 // @flow
 import turf from 'turf'
 import type { Position, Location, Coordinates } from './flow-types'

@@ -1,17 +1,9 @@
 // @flow
-import geolib from 'geolib'
 import { post } from '../api'
 import type { HostConfig } from '../config'
 import { getBikeRentalStationProp, getBikeRentalStationByBoxProps } from './query'
-
-function getBoundingBox(initialPoint, dist) {
-    const east = geolib.computeDestinationPoint(initialPoint, dist, 0)
-    const north = geolib.computeDestinationPoint(initialPoint, dist, 90)
-    const west = geolib.computeDestinationPoint(initialPoint, dist, 180)
-    const south = geolib.computeDestinationPoint(initialPoint, dist, 270)
-
-    return geolib.getBounds([east, north, west, south])
-}
+import { convertPositionToBbox } from '../utils'
+import type { Coordinates } from '../flow-types'
 
 export function getBikeRentalStation(
     { host, headers }: HostConfig,
@@ -29,18 +21,19 @@ export function getBikeRentalStation(
 
 export function getBikeRentalStations(
     { host, headers }: HostConfig,
-    coordinates: Object,
+    coordinates: Coordinates,
     distance: number = 500,
 ): Promise<Array<Object>> {
     const url = `${host}/graphql`
 
-    const {
-        maxLat, maxLng, minLat, minLng,
-    } = getBoundingBox(coordinates, distance)
-
+    const positionArray = convertPositionToBbox(coordinates, distance)
     const variables = {
-        maxLat, maxLng, minLat, minLng,
+        minLng: positionArray[0],
+        minLat: positionArray[1],
+        maxLng: positionArray[2],
+        maxLat: positionArray[3],
     }
+
     const params = { query: getBikeRentalStationByBoxProps, variables }
 
     return post(url, params, headers)

@@ -1,11 +1,6 @@
 // @flow
-<<<<<<< HEAD
-import { getTripPatterns, getStopPlaceDepartures, getStopPlaces } from './trip'
-import { getBikeRentalStation, getBikeRentalStations } from './bikeRental'
-=======
 import { getTripPatterns, getStopPlaceDepartures, getStopPlaces, getStopPlacesByPosition } from './trip'
-import { getBikeRentalStation } from './bikeRental'
->>>>>>> master
+import { getBikeRentalStation, getBikeRentalStations } from './bikeRental'
 import getLocationService from './geocoder'
 import { getJourneyPlannerHost, getGeocoderHost } from './config'
 import type { Hosts } from './config'
