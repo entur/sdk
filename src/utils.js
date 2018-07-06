@@ -1,5 +1,4 @@
 /* eslint import/prefer-default-export:0  */
-
 // @flow
 import turf from 'turf'
 import type { Position, Location, Coordinates } from './flow-types'
@@ -35,5 +34,9 @@ export function convertPositionToBbox(coordinates: Coordinates, distance: number
         south.geometry.coordinates,
     ])
 
-    return turf.bbox(line)
+    const [minLng, minLat, maxLng, maxLat] = turf.bbox(line)
+
+    return {
+        minLng, minLat, maxLng, maxLat,
+    }
 }

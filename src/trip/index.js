@@ -127,13 +127,7 @@ export function getStopPlacesByPosition(
 ): Promise<Array<Object>> {
     const url = `${host}/graphql`
 
-    const positionArray = convertPositionToBbox(coordinates, distance)
-    const variables = {
-        minLng: positionArray[0],
-        minLat: positionArray[1],
-        maxLng: positionArray[2],
-        maxLat: positionArray[3],
-    }
+    const variables = convertPositionToBbox(coordinates, distance)
 
     const params = { query: getStopPlacesByBboxProps, variables }
 
