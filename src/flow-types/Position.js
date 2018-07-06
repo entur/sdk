@@ -1,5 +1,5 @@
 // @flow
-import Coordinates from './Coordinates'
+import { Coordinates } from './'
 
 export type Position = {
     name: string,
