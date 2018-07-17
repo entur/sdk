@@ -31,5 +31,5 @@ export function getBikeRentalStations(
     const params = { query: getBikeRentalStationByBoxProps, variables }
 
     return post(url, params, headers)
-        .then(response => response.data.bikeRentalStationsByBbox)
+        .then(response => (response.data || {}).bikeRentalStationsByBbox || [])
 }
