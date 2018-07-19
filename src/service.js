@@ -2,14 +2,9 @@
 import { getTripPatterns, getStopPlaceDepartures, getStopPlaces, getStopPlacesByPosition } from './trip'
 import { getBikeRentalStation, getBikeRentalStations } from './bikeRental'
 import getLocationService from './geocoder'
-import { getJourneyPlannerHost, getGeocoderHost } from './config'
-import type { Hosts } from './config'
+import { getJourneyPlannerHost, getGeocoderHost, setClientName } from './config'
+import type { ServiceConfig, ArgumentConfig } from './config'
 import type { Coordinates } from './flow-types'
-
-type ServiceConfig = {
-    hosts: Hosts,
-    apikeys: Hosts,
-};
 
 const DEFAULT_CONFIG = {
     hosts: {},
@@ -19,7 +14,15 @@ const DEFAULT_CONFIG = {
 class EnturService {
     config: ServiceConfig;
 
-    constructor(config: Object) {
+    constructor(config: ArgumentConfig) {
+        if (!config || !config.clientName) {
+            // eslint-disable-next-line no-console
+            return console.error('ERROR: You must pass a "clientName" to EnturService through the config argument. '
+                + 'See https://www.entur.org/dev/api/header/ for information.\n')
+        }
+
+        setClientName(config.clientName)
+
         this.config = {
             ...DEFAULT_CONFIG,
             ...config,
@@ -61,6 +64,5 @@ class EnturService {
         return getBikeRentalStations(host, coordinates, distance)
     }
 }
-
 
 export default EnturService

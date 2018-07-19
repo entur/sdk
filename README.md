@@ -11,19 +11,24 @@ npm install @entur/sdk --save
 ```javascript
 import EnturService from '@entur/sdk'
 
-const service = new EnturService()
+const service = new EnturService({ clientName: 'awesomecompany-awesomeapp' })
 ```
 
 
 ### Configuration
-|Name|Type|Default|Description|
-|:---|:---|:------|:----------|
-| hosts       | `{object of hosts}` | `{}` | Override default endpoints |
-| apikeys     | `{object of apikeys}` | `{}` | Define apikeys for individual endpoints |
+| Name        | Type                  | Default     | Description                             |
+|:------------|:----------------------|:------------|:----------------------------------------|
+| clientName  | `string`              | `undefined` | The name of your application            |
+| hosts       | `{object of hosts}`   | `{}`        | Override default endpoints              |
+| apikeys     | `{object of apikeys}` | `{}`        | Define apikeys for individual endpoints |
 
 
-### Hosts
-Entur sdk uses multiple endpoints for its services. Each endpoint can be overridden with hosts config (in case you use a proxy or a local instance of the endpoint). Available hosts are:
+#### clientName (required)
+We require that you pass a `clientName` that identifies your application. It should contain the name of your company or organization,
+followed by a hyphen and your application's name. See https://www.entur.org/dev/api/header/ for more information.
+
+#### hosts
+The Entur SDK uses multiple endpoints for its services. Each endpoint can be overridden with hosts config (in case you use a proxy or a local instance of the endpoint). Available hosts are:
 
 ```javascript
 {
@@ -33,8 +38,8 @@ Entur sdk uses multiple endpoints for its services. Each endpoint can be overrid
 ```
 
 
-### ApiKeys
-Api key can be supplied for each endpoint. The key will be added to the http header for all requests.
+#### apikeys
+API key can be supplied for each endpoint. The key will be added to the http header for all requests.
 `geocoder` and `journeyplanner` is publicly available and does not require api keys
 
 ```javascript
