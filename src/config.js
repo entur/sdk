@@ -10,6 +10,18 @@ export type HostConfig = {
     headers?: Object
 }
 
+export type ServiceConfig = {
+    clientName: string,
+    hosts: Hosts,
+    apikeys: Hosts,
+};
+
+export type ArgumentConfig = {
+    clientName: string,
+    hosts?: Hosts,
+    apikeys?: Hosts,
+}
+
 type GetHost = {
     apikeys: Hosts,
     hosts: Hosts
