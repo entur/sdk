@@ -100,6 +100,9 @@ export function getStopPlaceDepartures(
 
     return post(url, params, headers)
         .then((response: Object) => {
+            if (!response || !response.data) {
+                throw new Error(`Entur SDK: Could not fetch departures for ids: ${JSON.stringify(stopPlaceIds)}`)
+            }
             const stopPlaces = response.data.stopPlaces || []
             if (askingForSingleStopPlace) {
                 return stopPlaces.length ? stopPlaces[0].estimatedCalls || [] : []
