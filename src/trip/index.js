@@ -6,7 +6,7 @@ import {
     getStopPlacesProps,
     getStopPlaceDeparturesProps,
     getStopPlacesByBboxProps,
-} from './properties'
+} from './query'
 import type { HostConfig } from '../config'
 import type {
     Coordinates,
@@ -77,7 +77,7 @@ export function getTripPatterns(
 
 export function getStopPlaceDepartures(
     { host, headers }: HostConfig,
-    stopPlaceId: string,
+    stopPlaceIds: string | Array<string>,
     stopPlaceParams?: StopPlaceParams,
 ): Object {
     const {
@@ -86,8 +86,10 @@ export function getStopPlaceDepartures(
 
     const url = `${host}/graphql`
 
+    const askingForSingleStopPlace = typeof stopPlaceIds === 'string'
+
     const variables = {
-        id: stopPlaceId,
+        ids: askingForSingleStopPlace ? [stopPlaceIds] : stopPlaceIds,
         start: new Date().toISOString(),
         range: timeRange,
         departures,
@@ -97,9 +99,20 @@ export function getStopPlaceDepartures(
     const params = { query: getStopPlaceDeparturesProps, variables }
 
     return post(url, params, headers)
-        .then((response: Object) => response.data.stopPlace.estimatedCalls || [])
+        .then((response: Object) => {
+            if (!response || !response.data) {
+                throw new Error(`Entur SDK: Could not fetch departures for ids: ${JSON.stringify(stopPlaceIds)}`)
+            }
+            const stopPlaces = response.data.stopPlaces || []
+            if (askingForSingleStopPlace) {
+                return stopPlaces.length ? stopPlaces[0].estimatedCalls || [] : []
+            }
+            return stopPlaces.map(({ id, estimatedCalls }) => ({
+                id,
+                departures: estimatedCalls,
+            }))
+        })
 }
-
 
 export function getStopPlaces(
     { host, headers }: HostConfig,
