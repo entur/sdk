@@ -143,8 +143,8 @@ export const getStopPlacesByBboxProps = `
 `
 
 export const getStopPlaceDeparturesProps = `
-    query StopPlaceDepartures($id:String!,$start:DateTime!,$range:Int!,$departures:Int!,$onForBoarding:Boolean!) {
-        stopPlace(id:$id) {
+    query StopPlaceDepartures($ids:[String]!,$start:DateTime!,$range:Int!,$departures:Int!,$onForBoarding:Boolean!) {
+        stopPlaces(ids:$ids) {
           id
           estimatedCalls(startTime:$start, timeRange:$range, numberOfDepartures:$departures, omitNonBoarding:$onForBoarding) { ...estimatedCallFields }
         }
