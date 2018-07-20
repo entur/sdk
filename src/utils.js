@@ -1,6 +1,9 @@
 /* eslint import/prefer-default-export:0  */
 // @flow
-import turf from 'turf'
+import lineString from 'turf-linestring'
+import point from 'turf-point'
+import bbox from '@turf/bbox'
+import destination from '@turf/destination'
 import type { Position, Location, Coordinates } from './flow-types'
 
 export function convertLocationToPosition(location: Location): Position {
@@ -20,21 +23,21 @@ export function convertPositionToBbox(coordinates: Coordinates, distance: number
     const { latitude, longitude } = coordinates
     const distanceToKilometer = distance / 1000
 
-    const point = turf.point([longitude, latitude])
+    const position = point([longitude, latitude])
 
-    const east = turf.destination(point, distanceToKilometer, 0)
-    const north = turf.destination(point, distanceToKilometer, 90)
-    const west = turf.destination(point, distanceToKilometer, 180)
-    const south = turf.destination(point, distanceToKilometer, -90)
+    const east = destination(position, distanceToKilometer, 0)
+    const north = destination(position, distanceToKilometer, 90)
+    const west = destination(position, distanceToKilometer, 180)
+    const south = destination(position, distanceToKilometer, -90)
 
-    const line = turf.lineString([
+    const line = lineString([
         east.geometry.coordinates,
         north.geometry.coordinates,
         west.geometry.coordinates,
         south.geometry.coordinates,
     ])
 
-    const [minLng, minLat, maxLng, maxLat] = turf.bbox(line)
+    const [minLng, minLat, maxLng, maxLat] = bbox(line)
 
     return {
         minLng, minLat, maxLng, maxLat,
