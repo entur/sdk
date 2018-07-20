@@ -6,7 +6,7 @@ import {
     getStopPlacesProps,
     getStopPlaceDeparturesProps,
     getStopPlacesByBboxProps,
-} from './properties'
+} from './query'
 import type { HostConfig } from '../config'
 import type {
     Coordinates,
