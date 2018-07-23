@@ -1,4 +1,4 @@
-# Entur sdk
+# Entur SDK
 
 
 ## Install
@@ -56,10 +56,15 @@ API key can be supplied for each endpoint. The key will be added to the http hea
 ```javascript
 service.getTripPatterns(query);
 ```
+Returns: Array<[Itinerary](src/flow-types/Itinerary.js)>
 
+`getTripPatterns` is for searching for itineraries for a trip from some location to a destination at a given time. The method takes one argument `query`, which is an object with search parameters.
 
-|Name|Type|Default|Description|
-|:---|:---|:------|:----------|
+#### Parameters
+
+##### query (Object)
+| Key | Type | Default  | Description |
+|:----|:----|:----------|:------------|
 | searchDate            | `Date`             | | when to calculate patterns |
 | from                  | [`Position`](#position) | | departure location |
 | to                    | [`Position`](#position) | | arrival location |
@@ -86,7 +91,6 @@ service.getTripPatterns({
     }
 })
 ```
-
 
 See [example/get-trip.js](./example/get-trip.js) for a more in depth example
 
