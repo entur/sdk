@@ -50,13 +50,14 @@ API key can be supplied for each endpoint. The key will be added to the http hea
 ```
 
 ## Usage
+
 ### getTripPatterns
 
 
 ```javascript
 service.getTripPatterns(query);
 ```
-Returns: Array<[Itinerary](src/flow-types/Itinerary.js)>
+Returns: Promise<Array<[Itinerary](src/flow-types/Itinerary.js)>>
 
 `getTripPatterns` is for searching for itineraries for a trip from some location to a destination at a given time. The method takes one argument `query`, which is an object with search parameters.
 
@@ -93,6 +94,20 @@ service.getTripPatterns({
 ```
 
 See [example/get-trip.js](./example/get-trip.js) for a more in depth example
+
+### getLocations
+
+```javascript
+service.getLocations(query);
+```
+Returns: Promise<Array<[Location](src/flow-types/Location.js)>>
+
+`getLocation` is for searching for stop places, stations or addresses. The method takes one argument `query`, which is the search string.
+
+#### Parameters
+
+##### query (string)
+The search string that should resemble the name of the desired stop place or address. Examples: `"Oslo S"`, `"Schweigaards gate 23, Oslo"`, `Voss stasjon`.
 
 ## Custom Types
 #### Position
