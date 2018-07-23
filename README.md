@@ -109,6 +109,34 @@ Returns: Promise<Array<[Location](src/flow-types/Location.js)>>
 ##### query (string)
 The search string that should resemble the name of the desired stop place or address. Examples: `"Oslo S"`, `"Schweigaards gate 23, Oslo"`, `Voss stasjon`.
 
+
+### getStopPlaceDepartures
+
+```javascript
+service.getStopPlaceDepartures(stopPlaceIds, params);
+```
+Returns: Promise<Array<[EstimatedCall](src/flow-types/EstimatedCall.js)> | Array<{ id: string, departures: Array<[EstimatedCall](src/flow-types/EstimatedCall.js)>}>>
+
+`getStopPlaceDepartures` finds departures from one or more given stop places.
+
+#### Parameters
+
+##### stopPlaceIds (string | Array<string>)
+The ID or IDs of the stop places you are interested in. If a string is passed, it is interpreted as a single ID. The method will then return a Promise which will resolve to an array of departures for that stop place.
+
+If an array of strings is passed, the method will return an array of objects containing fields for the stop place's `id` and `departures`.
+
+##### params (Object) [Optional]
+An optional object of parameters to pass to the query.
+
+| Key           | Type           | Default | Description |
+|:--------------|:---------------|:--------|:------------|
+| startTime     | ISO8601 string | Now     | DateTime for when to fetch estimated calls from. |
+| range         | `number`       | `86400` | The time range for departures to include in seconds. |
+| departures    | `number`       | `5`     | The number of departures to return for each stop place. |
+| onForBoarding | `boolean`      | `false` | Whether to include departures that do not accept boarding at given stop place. |
+
+
 ## Custom Types
 #### Position
 ```javascript
