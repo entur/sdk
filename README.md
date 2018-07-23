@@ -1,11 +1,9 @@
 # Entur SDK
 
-
 ## Install
 ```bash
 npm install @entur/sdk --save
 ```
-
 
 ## Setup
 ```javascript
@@ -13,7 +11,6 @@ import EnturService from '@entur/sdk'
 
 const service = new EnturService({ clientName: 'awesomecompany-awesomeapp' })
 ```
-
 
 ### Configuration
 | Name        | Type                  | Default     | Description                             |
@@ -53,26 +50,27 @@ API key can be supplied for each endpoint. The key will be added to the http hea
 
 ### getTripPatterns
 
-
 ```javascript
 service.getTripPatterns(query);
 ```
-Returns: Promise<Array<[Itinerary](src/flow-types/Itinerary.js)>>
+Returns: `Promise<Array<Itinerary>>`
+
+Types: [Itinerary](src/flow-types/Itinerary.js)
 
 `getTripPatterns` is for searching for itineraries for a trip from some location to a destination at a given time. The method takes one argument `query`, which is an object with search parameters.
 
 #### Parameters
 
-##### query (Object)
+##### query (`Object`)
 | Key | Type | Default  | Description |
 |:----|:----|:----------|:------------|
-| searchDate            | `Date`             | | when to calculate patterns |
-| from                  | [`Position`](#position) | | departure location |
-| to                    | [`Position`](#position) | | arrival location |
-| arriveBy              | `boolean`          | `false` | depart by `searchDate`, or arrive by `searchDate` |
-| modes                 | [`Array of Modes`](#travel-mode) | `['FOOT', 'BUS', 'TRAM', 'RAIL', 'METRO', 'WATER', 'AIR']` | modes of transport to include in trip |
-| limit                 | `number`           | `5`      | Limit search to |
-| wheelchairAccessible  | `boolean`          | `false`  | include only stops which are wheelchair accessible |
+| `searchDate`            | `Date`             | | when to calculate patterns |
+| `from`                  | [`Position`](#position) | | departure location |
+| `to`                    | [`Position`](#position) | | arrival location |
+| `arriveBy`              | `boolean`          | `false` | depart by `searchDate`, or arrive by `searchDate` |
+| `modes`                 | [`Array of Modes`](#travel-mode) | `['FOOT', 'BUS', 'TRAM', 'RAIL', 'METRO', 'WATER', 'AIR']` | modes of transport to include in trip |
+| `limit`                 | `number`           | `5`      | Limit search to |
+| `wheelchairAccessible`  | `boolean`          | `false`  | include only stops which are wheelchair accessible |
 
 #### example
 
@@ -100,14 +98,16 @@ See [example/get-trip.js](./example/get-trip.js) for a more in depth example
 ```javascript
 service.getLocations(query);
 ```
-Returns: Promise<Array<[Location](src/flow-types/Location.js)>>
+Returns: `Promise<Array<Location>>`
+
+Types: [Location](src/flow-types/Location.js)
 
 `getLocation` is for searching for stop places, stations or addresses. The method takes one argument `query`, which is the search string.
 
 #### Parameters
 
-##### query (string)
-The search string that should resemble the name of the desired stop place or address. Examples: `"Oslo S"`, `"Schweigaards gate 23, Oslo"`, `Voss stasjon`.
+##### query (`string`)
+The search string that should resemble the name of the desired stop place or address. Examples: `"Oslo S"`, `"Schweigaards gate 23, Oslo"`, `"Voss stasjon"`.
 
 
 ### getStopPlaceDepartures
@@ -115,26 +115,28 @@ The search string that should resemble the name of the desired stop place or add
 ```javascript
 service.getStopPlaceDepartures(stopPlaceIds, params);
 ```
-Returns: Promise<Array<[EstimatedCall](src/flow-types/EstimatedCall.js)> | Array<{ id: string, departures: Array<[EstimatedCall](src/flow-types/EstimatedCall.js)>}>>
+Returns: `Promise<Array<EstimatedCall>>` | `Promise<Array<{ id: string, departures: Array<EstimatedCall>}>>`
+
+Types: [EstimatedCall](src/flow-types/EstimatedCall.js)
 
 `getStopPlaceDepartures` finds departures from one or more given stop places.
 
 #### Parameters
 
-##### stopPlaceIds (string | Array<string>)
+##### stopPlaceIds (`string` | `Array<string>`)
 The ID or IDs of the stop places you are interested in. If a string is passed, it is interpreted as a single ID. The method will then return a Promise which will resolve to an array of departures for that stop place.
 
 If an array of strings is passed, the method will return an array of objects containing fields for the stop place's `id` and `departures`.
 
-##### params (Object) [Optional]
+##### params (`Object`) [Optional]
 An optional object of parameters to pass to the query.
 
-| Key           | Type           | Default | Description |
-|:--------------|:---------------|:--------|:------------|
-| startTime     | ISO8601 string | Now     | DateTime for when to fetch estimated calls from. |
-| range         | `number`       | `86400` | The time range for departures to include in seconds. |
-| departures    | `number`       | `5`     | The number of departures to return for each stop place. |
-| onForBoarding | `boolean`      | `false` | Whether to include departures that do not accept boarding at given stop place. |
+| Key             | Type           | Default | Description |
+|:----------------|:---------------|:--------|:------------|
+| `startTime`     | ISO8601 string | Now     | DateTime for when to fetch estimated calls from. |
+| `range`         | `number`       | `86400` | The time range for departures to include in seconds. |
+| `departures`    | `number`       | `5`     | The number of departures to return for each stop place. |
+| `onForBoarding` | `boolean`      | `false` | Whether to include departures that do not accept boarding at given stop place. |
 
 
 ## Custom Types
