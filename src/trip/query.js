@@ -138,8 +138,18 @@ export const getStopPlacesByBboxProps = `
             weighting
             transportMode
             transportSubmode
+            quays { ...quayFields }
         }
+
     }
+
+    fragment quayFields on Quay {
+        id
+        publicCode
+        description
+        ${situationFields}
+    }
+    ${situationFragment}
 `
 
 export const getStopPlaceDeparturesProps = `
