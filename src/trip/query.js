@@ -84,48 +84,6 @@ export const getItinerariesProps = `
     ${situationFragment}
 `
 
-export const getStopPlacesProps = `
-    query StopPlaces($ids:[String]!,$start:DateTime!,$range:Int!,$departures:Int!) {
-        stopPlaces(ids:$ids) {
-          id
-          estimatedCalls(startTime:$start, timeRange:$range, numberOfDepartures:$departures) { ...estimatedCallFields }
-        }
-    }
-
-    fragment estimatedCallFields on EstimatedCall {
-        realtimeState
-        aimedDepartureTime
-        expectedDepartureTime
-        aimedArrivalTime
-        expectedArrivalTime
-        realtime
-        forBoarding
-        forAlighting
-        destinationDisplay { frontText }
-        quay { id publicCode description }
-        serviceJourney { ...serviceJourneyFields }
-    }
-
-    fragment serviceJourneyFields on ServiceJourney {
-      id
-      journeyPattern { ...journeyPatternFields }
-    }
-
-    fragment journeyPatternFields on JourneyPattern {
-      id
-      name
-      line { ...lineFields }
-    }
-
-    fragment lineFields on Line {
-       id
-       publicCode
-       name
-       transportMode
-       authority { id name }
-     }
-`
-
 export const getStopPlacesByBboxProps = `
     query StopPlacesByBboxProps($minLat:Float, $minLng:Float, $maxLng:Float, $maxLat:Float) {
         stopPlacesByBbox(minimumLatitude:$minLat, minimumLongitude:$minLng, maximumLatitude:$maxLat, maximumLongitude:$maxLng) {
