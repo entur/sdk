@@ -49,7 +49,7 @@ class EnturService {
         return getStopPlaces(host, stopPlaceIds)
     }
 
-    getStopPlacesByPosition(position: Coordinates, distance?: number): Promise<Array<Object>> {
+    getStopPlacesByPosition(position: Coordinates, distance?: number) {
         const host = getJourneyPlannerHost(this.config)
         return getStopPlacesByPosition(host, position, distance)
     }

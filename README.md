@@ -177,6 +177,28 @@ Default: `500`
 The "radius" in meters of the surrounding bounding box in which you want to find bike rental stations.
 The width and height of the bounding box are therefore `2 * distance`, and the coordinates given are its centerpoint.
 
+### getStopPlacesByPosition
+
+```javascript
+service.getStopPlacesByPosition(coordinate, distance);
+```
+Returns: `Promise<Array<StopPlace>>`
+
+Types: [StopPlace](src/flow-types/StopPlace.js)
+
+`getStopPlacesByPosition` finds stop places within an area surrounding a coordinate.
+
+#### Parameters
+
+##### coordinates (`{ latitude: number, longitude: number }`)
+The coordinates of which to find bike rental stations around.
+
+##### distance (`number`) [Optional]
+Default: `500`
+
+The "radius" in meters of the surrounding bounding box in which you want to find stop places.
+The width and height of the bounding box are therefore `2 * distance`, and the coordinates given are its centerpoint.
+
 ## Custom Types
 #### Position
 ```javascript
