@@ -1,6 +1,7 @@
 // @flow
 
 export type { Alert } from './Alert'
+export type { BikeRentalStation } from './BikeRentalStation'
 export type { Coordinates } from './Coordinates'
 export type { Itinerary } from './Itinerary'
 export type { Leg, IntermediateStoptime, LegMode } from './Leg'
