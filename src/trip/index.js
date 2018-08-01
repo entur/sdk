@@ -11,6 +11,7 @@ import type {
     Coordinates,
     Itinerary,
     Location,
+    StopPlace,
 } from '../flow-types'
 import { convertPositionToBbox } from '../utils'
 
@@ -117,11 +118,10 @@ export function getStopPlacesByPosition(
     { host, headers }: HostConfig,
     coordinates: Coordinates,
     distance: number = 500,
-): Promise<Array<Object>> {
+): Promise<Array<StopPlace>> {
     const url = `${host}/graphql`
 
     const variables = convertPositionToBbox(coordinates, distance)
-
     const params = { query: getStopPlacesByBboxProps, variables }
 
     return post(url, params, headers)

@@ -44,17 +44,17 @@ class EnturService {
         return getStopPlaceDepartures(host, stopPlaceId, query)
     }
 
-    getStopPlacesByPosition(position: Coordinates, distance?: number): Promise<Array<Object>> {
+    getStopPlacesByPosition(position: Coordinates, distance?: number) {
         const host = getJourneyPlannerHost(this.config)
         return getStopPlacesByPosition(host, position, distance)
     }
 
-    getBikeRentalStation(stationId: string): Promise<Array<Object>> {
+    getBikeRentalStation(stationId: string) {
         const host = getJourneyPlannerHost(this.config)
         return getBikeRentalStation(host, stationId)
     }
 
-    getBikeRentalStations(coordinates: Object, distance?: number): Promise<Array<Object>> {
+    getBikeRentalStations(coordinates: Coordinates, distance?: number) {
         const host = getJourneyPlannerHost(this.config)
         return getBikeRentalStations(host, coordinates, distance)
     }
