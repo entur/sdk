@@ -3,7 +3,6 @@ import { post } from '../api'
 import { FOOT, BUS, TRAM, RAIL, METRO, WATER, AIR } from '../constants/travelModes'
 import {
     getItinerariesProps,
-    getStopPlacesProps,
     getStopPlaceDeparturesProps,
     getStopPlacesByBboxProps,
 } from './query'
@@ -113,25 +112,6 @@ export function getStopPlaceDepartures(
                 departures: estimatedCalls,
             }))
         })
-}
-
-export function getStopPlaces(
-    { host, headers }: HostConfig,
-    stopPlaceIds: Array<string>,
-): Promise<Array<Object>> {
-    const url = `${host}/graphql`
-
-    const variables = {
-        ids: stopPlaceIds,
-        start: new Date().toISOString(),
-        range: 72000,
-        departures: 3,
-    }
-
-    const params = { query: getStopPlacesProps, variables }
-
-    return post(url, params, headers)
-        .then(response => response.data.stopPlaces || [])
 }
 
 export function getStopPlacesByPosition(
