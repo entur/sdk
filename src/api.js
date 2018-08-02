@@ -1,7 +1,7 @@
 // @flow
 import queryParams from 'query-params'
 import cleanDeep from 'clean-deep'
-
+import fetch from './fetch'
 
 const DEFAULT_HEADERS = {
     Accept: 'application/json',
