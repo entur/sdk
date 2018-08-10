@@ -72,7 +72,13 @@ export function getTripPatterns(
     const params = { query: getItinerariesProps, variables }
 
     return post(url, params, headers)
-        .then((response: Object) => response.data.trip.tripPatterns)
+        .then((response: Object) => {
+            try {
+                return response.data.trip.tripPatterns
+            } catch (e) {
+                return []
+            }
+        })
 }
 
 export function getStopPlaceDepartures(
@@ -125,5 +131,11 @@ export function getStopPlacesByPosition(
     const params = { query: getStopPlacesByBboxProps, variables }
 
     return post(url, params, headers)
-        .then(response => response.data.stopPlacesByBbox)
+        .then((response) => {
+            try {
+                return response.data.stopPlacesByBbox
+            } catch (e) {
+                return []
+            }
+        })
 }
