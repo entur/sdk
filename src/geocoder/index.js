@@ -2,7 +2,7 @@
 
 import { get } from '../api'
 import type { HostConfig } from '../config'
-import type { Position } from '../flow-types/Position'
+import type { Position } from '../../flow-types/Position'
 
 type PositionParam = {
     'focus.point.lat'?: number,

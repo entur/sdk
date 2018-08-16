@@ -4,7 +4,7 @@ import { getBikeRentalStation, getBikeRentalStations } from './bikeRental'
 import getLocationService from './geocoder'
 import { getJourneyPlannerHost, getGeocoderHost, setClientName } from './config'
 import type { ServiceConfig, ArgumentConfig } from './config'
-import type { Coordinates } from './flow-types'
+import type { Coordinates } from '../flow-types'
 
 const DEFAULT_CONFIG = {
     hosts: {},

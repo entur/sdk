@@ -3,7 +3,7 @@ import { post } from '../api'
 import type { HostConfig } from '../config'
 import { getBikeRentalStationProp, getBikeRentalStationByBoxProps } from './query'
 import { convertPositionToBbox } from '../utils'
-import type { BikeRentalStation, Coordinates } from '../flow-types'
+import type { BikeRentalStation, Coordinates } from '../../flow-types'
 
 export function getBikeRentalStation(
     { host, headers }: HostConfig,

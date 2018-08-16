@@ -12,7 +12,7 @@ import type {
     TripPattern,
     Location,
     StopPlace,
-} from '../flow-types'
+} from '../../flow-types'
 import { convertPositionToBbox } from '../utils'
 
 type SearchParams = {

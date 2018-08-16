@@ -4,7 +4,7 @@ import lineString from 'turf-linestring'
 import point from 'turf-point'
 import bbox from '@turf/bbox'
 import destination from '@turf/destination'
-import type { Position, Location, Coordinates } from './flow-types'
+import type { Position, Location, Coordinates } from '../flow-types'
 
 export function convertLocationToPosition(location: Location): Position {
     const { properties, geometry } = location
