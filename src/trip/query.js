@@ -36,7 +36,9 @@ export const getItinerariesProps = `
         mode
         aimedStartTime
         aimedEndTime
-        realTime
+        expectedStartTime
+        expectedEndTime
+        realtime
         distance
         duration
         pointsOnLink { points length }

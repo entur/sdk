@@ -9,7 +9,7 @@ import {
 import type { HostConfig } from '../config'
 import type {
     Coordinates,
-    Itinerary,
+    TripPattern,
     Location,
     StopPlace,
 } from '../flow-types'
@@ -54,7 +54,7 @@ function toDateString(date: Date): string {
 export function getTripPatterns(
     { host, headers }: HostConfig,
     searchParams: SearchParams,
-): Promise<Array<Itinerary>> {
+): Promise<Array<TripPattern>> {
     const {
         searchDate, limit, wheelchairAccessible, ...rest
     } = { ...DEFAULT_SEARCH_PARAMS, ...searchParams }

@@ -1,54 +1,40 @@
 // @flow
 
-import type { Alert } from './Alert'
-import type { Trip } from './Trip'
+// import type { DestinationDisplay } from './DestinationDisplay'
+import type { Line } from './Line'
 import type { Place } from './Place'
-
-export type LegMode = 'WALK' | 'BUS' | 'TRAM' | 'RAIL' | 'SUBWAY' | 'FERRY' | 'AIRPLANE'
-
-export type IntermediateStoptime = {
-    stop: {
-        gtfsId: string,
-        name: string,
-        parentStation?: {
-            gtfsId: string,
-        },
-    },
-    dropoffType: string,
-    pickupType: string,
-    realtimeArrival: number,
-    realtimeDeparture: number,
-    scheduledArrival: number,
-    scheduledDeparture: number,
-    serviceDay?: number,
-}
+import type { Authority } from './Authority'
+import type { Quay } from './Quay'
+// import type { Operator } from './Operator'
+import type { ServiceJourney } from './ServiceJourney'
+// import type { Situation } from './Situation'
+import type { PointsOnLink } from './PointsOnLink'
+import type { IntermediateEstimatedCall } from './IntermediateEstimatedCall'
+import type { LegMode } from './Mode'
 
 export type Leg = {
-    agency: {
-        gtfsId: string,
-        id: string,
-        name: string,
-    },
-    arrivalDelay?: number,
-    departureDelay?: number,
+    // id?: string,
+    aimedEndTime: string,
+    aimedStartTime: string,
+    authority?: Authority,
     distance?: number,
     duration?: number,
-    from: Place,
-    intermediateStoptimes: Array<IntermediateStoptime>,
-    legGeometry: {
-        points: string,
-        length: number,
-    },
+    fromPlace: Place,
+    toPlace: Place,
+    intermediateEstimatedCalls: Array<IntermediateEstimatedCall>,
+    intermediateQuays: Array<Quay>,
+    line?: Line,
     mode: LegMode,
-    realTime: boolean,
-    route: {
-        alerts: Array<Alert>,
-        shortName: string,
-        longName?: string,
-    },
-    startTime: number,
-    endTime: number,
-    to: Place,
-    transitLeg: boolean,
-    trip: Trip,
+    pointsOnLink: PointsOnLink,
+    realtime: boolean,
+    ride: boolean,
+    serviceJourney: ServiceJourney,
+    expectedEndTime?: string,
+    expectedStartTime?: string,
+
+    // operator?: Operator,
+    // situations: Array<Situation>,
+    // fromEstimatedCall: ?{
+    //     destinationDisplay: DestinationDisplay
+    // },
 }

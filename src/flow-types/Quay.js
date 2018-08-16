@@ -3,8 +3,14 @@
 import type { Situation } from './Situation'
 
 export type Quay = {
-    id: string,
-    publicCode: string,
-    description: string,
-    situations: Array<Situation>,
+  id: string,
+  name: string,
+  description?: string,
+  // stopPlace?: {
+  //   id: string,
+  //   name: string,
+  //   description?: string,
+  // },
+  publicCode: string,
+  situations?: Array<Situation>,
 }

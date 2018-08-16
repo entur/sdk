@@ -1,20 +1,17 @@
 // @flow
 
-import type { Traveler } from './Traveler'
+import type { Price } from './Price'
+import type { CartItem } from './CartItem'
 
 export type Product = {
     id: string,
     name: string,
+    prices: Array<Price>,
+    serviceJourneyIds: Array<string>,
     totalPrice: number,
-    travelers: Array<Traveler>,
-    offers: Array<any>,
-    validInAllZones: boolean,
-    validZones: Array<{
-        id: string,
-        name: {
-            lang: string,
-            value: string,
-        },
-    }>,
-    minipris: boolean,
+    offerId: string,
+    offers?: Array<Object>, // DEPRECATED!
+    cart: Array<CartItem>,
+    validZones?: Array<string>,
+    descriptions: Array<string>,
 }
