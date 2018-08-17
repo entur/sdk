@@ -7,7 +7,7 @@ import type { Authority } from './Authority'
 import type { Quay } from './Quay'
 // import type { Operator } from './Operator'
 import type { ServiceJourney } from './ServiceJourney'
-// import type { Situation } from './Situation'
+import type { Situation } from './Situation'
 import type { PointsOnLink } from './PointsOnLink'
 import type { IntermediateEstimatedCall } from './IntermediateEstimatedCall'
 import type { LegMode } from './Mode'
@@ -31,9 +31,9 @@ export type Leg = {
     serviceJourney: ServiceJourney,
     expectedEndTime?: string,
     expectedStartTime?: string,
+    situations: Array<Situation>,
 
     // operator?: Operator,
-    // situations: Array<Situation>,
     // fromEstimatedCall: ?{
     //     destinationDisplay: DestinationDisplay
     // },

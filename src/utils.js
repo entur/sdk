@@ -4,20 +4,25 @@ import lineString from 'turf-linestring'
 import point from 'turf-point'
 import bbox from '@turf/bbox'
 import destination from '@turf/destination'
-import type { Position, Location, Coordinates } from '../flow-types'
+import type { Feature } from '../flow-types/Feature'
+import type { Location } from '../flow-types/Location'
+import type { Coordinates } from '../flow-types/Coordinates'
 
-export function convertLocationToPosition(location: Location): Position {
-    const { properties, geometry } = location
+export function convertFeatureToLocation(feature: Feature): Location {
+    const { properties, geometry } = feature
 
     return {
         name: properties.label || properties.name,
         place: properties.id,
         coordinates: {
-            latitude: properties.lat || geometry.coordinates[1],
-            longitude: properties.lon || geometry.coordinates[0],
+            latitude: geometry.coordinates[1],
+            longitude: geometry.coordinates[0],
         },
     }
 }
+
+// To preserve backward compatebility
+export const convertLocationToPosition = convertFeatureToLocation
 
 export function convertPositionToBbox(coordinates: Coordinates, distance: number) {
     const { latitude, longitude } = coordinates
