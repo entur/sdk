@@ -1,36 +1,35 @@
 // @flow
 
 import { get } from '../api'
-import type { HostConfig } from '../config'
-import type { Position } from '../../flow-types/Position'
+import { getGeocoderHost } from '../config'
+import type { Feature } from '../../flow-types/Feature'
+import type { Coordinates } from '../../flow-types/Coordinates'
 
 type PositionParam = {
     'focus.point.lat'?: number,
     'focus.point.lon'?: number
 }
 
-
-function getPositionParamsFromGeolocationResult(geolocation?: Position): PositionParam {
-    if (!geolocation || geolocation.coordinates) {
+function getPositionParamsFromGeolocationResult(coords?: Coordinates): PositionParam {
+    if (!coords) {
         return {}
     }
 
-    const { coordinates = {} } = geolocation
+    const { latitude, longitude } = coords
     return {
-        'focus.point.lat': coordinates.latitude,
-        'focus.point.lon': coordinates.longitude,
+        'focus.point.lat': latitude,
+        'focus.point.lon': longitude,
     }
 }
 
-
 function getLocations(
-    { host, headers }: HostConfig,
     text: string,
-    position?: Position,
+    coords?: Coordinates,
     params?: Object = {},
-): Promise<Array<Location>> {
+): Promise<Array<Feature>> {
+    const { host, headers } = getGeocoderHost(this.config)
     const searchParams = {
-        ...getPositionParamsFromGeolocationResult(position),
+        ...getPositionParamsFromGeolocationResult(coords),
         lang: 'no',
         text,
         ...params,

@@ -11,7 +11,7 @@ import {
 
 
 export const getItinerariesProps = `
-    query tripPatterns($numTripPatterns:Int!,$wheelchair:Boolean!,$from:Location!,$to:Location!,$date:Date!,$dateTime:DateTime!,$arriveBy:Boolean!,$modes:[Mode]!){
+    query tripPatterns($numTripPatterns:Int!,$wheelchair:Boolean!,$from:Location!,$to:Location!,$dateTime:DateTime!,$arriveBy:Boolean!,$modes:[Mode]!){
         trip(
             numTripPatterns: $numTripPatterns
             wheelchair: $wheelchair
@@ -60,28 +60,12 @@ export const getItinerariesProps = `
       privateCode
       linePublicCode
       wheelchairAccessible
-      estimatedCalls(date: $date) { ...estimatedCallFields }
       journeyPattern { notices { text } }
       notices { text }
       ${situationFields}
     }
 
     ${intermediateEstimatedCallFragment}
-
-    fragment estimatedCallFields on EstimatedCall {
-      quay { id name description publicCode }
-      aimedArrivalTime
-      expectedArrivalTime
-      aimedDepartureTime
-      expectedDepartureTime
-      timingPoint
-      realtime
-      realtimeState
-      forBoarding
-      forAlighting
-      date
-      destinationDisplay { frontText }
-    }
 
     ${situationFragment}
 `

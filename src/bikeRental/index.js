@@ -1,14 +1,13 @@
 // @flow
 import { post } from '../api'
-import type { HostConfig } from '../config'
 import { getBikeRentalStationProp, getBikeRentalStationByBoxProps } from './query'
+import { getJourneyPlannerHost } from '../config'
 import { convertPositionToBbox } from '../utils'
 import type { BikeRentalStation, Coordinates } from '../../flow-types'
 
-export function getBikeRentalStation(
-    { host, headers }: HostConfig,
-    stationId: string,
-): Promise<BikeRentalStation> {
+export function getBikeRentalStation(stationId: string): Promise<BikeRentalStation> {
+    const { host, headers } = getJourneyPlannerHost(this.config)
+
     const url = `${host}/graphql`
     const variables = {
         id: stationId,
@@ -20,10 +19,10 @@ export function getBikeRentalStation(
 }
 
 export function getBikeRentalStations(
-    { host, headers }: HostConfig,
     coordinates: Coordinates,
     distance: number = 500,
 ): Promise<Array<BikeRentalStation>> {
+    const { host, headers } = getJourneyPlannerHost(this.config)
     const url = `${host}/graphql`
 
     const variables = convertPositionToBbox(coordinates, distance)
