@@ -1,7 +1,7 @@
 // @flow
 import { getTripPatterns, getStopPlaceDepartures, getStopPlacesByPosition } from './trip'
 import { getBikeRentalStation, getBikeRentalStations } from './bikeRental'
-import getLocations from './geocoder'
+import { getFeatures, getLocationsDEPRECATED } from './geocoder'
 import { getServiceConfig } from './config'
 import type { ServiceConfig, ArgumentConfig } from './config'
 
@@ -13,7 +13,9 @@ class EnturService {
         this.config = getServiceConfig(config)
     }
 
-    getLocations = getLocations
+    getFeatures = getFeatures
+
+    getLocations = getLocationsDEPRECATED
 
     getTripPatterns = getTripPatterns
 

@@ -21,8 +21,12 @@ export function convertFeatureToLocation(feature: Feature): Location {
     }
 }
 
-// To preserve backward compatebility
-export const convertLocationToPosition = convertFeatureToLocation
+// preserve backward compatebility
+export function convertLocationToPositionDEPRECATED(feature: Feature): Location {
+    // eslint-disable-next-line
+    console.info('convertLocationToPosition is depreacted and will be removed in a future version. Use convertFeatureToLocation instead')
+    return convertFeatureToLocation(feature)
+}
 
 export function convertPositionToBbox(coordinates: Coordinates, distance: number) {
     const { latitude, longitude } = coordinates
