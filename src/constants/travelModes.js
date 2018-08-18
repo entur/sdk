@@ -11,6 +11,7 @@ export const BICYCLE = 'bicycle'
 export const BUS = 'bus'
 export const CABLEWAY = 'cableway'
 export const CAR = 'car'
+export const COACH = 'coach'
 export const WATER = 'water'
 export const FUNICULAR = 'funicular'
 export const LIFT = 'lift'
@@ -39,19 +40,19 @@ export const TOURIST_RAILWAY = 'touristRailway'
 
 
 export const TransportMode: {[string]: TransportModeType} = {
-    BUS: 'bus',
-    TRAM: 'tram',
-    RAIL: 'rail',
-    METRO: 'metro',
-    WATER: 'water',
-    AIR: 'air',
+    BUS,
+    TRAM,
+    RAIL,
+    METRO,
+    WATER,
+    AIR,
+    COACH,
 }
 
 export const LegMode: {[string]: LegModeType} = {
     ...TransportMode,
-    FOOT: 'foot',
-    COACH: 'coach',
-    BICYCLE: 'bicycle',
+    FOOT,
+    BICYCLE,
 }
 
 export const TransportSubmode: {[string]: TransportSubmodeType} = {
@@ -72,6 +73,7 @@ export const isBicycle = (mode: string): boolean => mode === BICYCLE
 export const isBus = (mode: string): boolean => mode === BUS
 export const isCableway = (mode: string): boolean => mode === CABLEWAY
 export const isCar = (mode: string): boolean => mode === CAR
+export const isCoach = (mode: string): boolean => mode === COACH
 export const isWater = (mode: string): boolean => mode === WATER
 export const isFunicular = (mode: string): boolean => mode === FUNICULAR
 export const isLift = (mode: string): boolean => mode === LIFT
