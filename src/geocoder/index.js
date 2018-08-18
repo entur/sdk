@@ -22,7 +22,7 @@ function getPositionParamsFromGeolocationResult(coords?: Coordinates): PositionP
     }
 }
 
-function getLocations(
+export function getFeatures(
     text: string,
     coords?: Coordinates,
     params?: Object = {},
@@ -39,4 +39,12 @@ function getLocations(
     return get(url, searchParams, headers).then(data => data.features || [])
 }
 
-export default getLocations
+// preserve backwards compatebility
+export function getLocationsDEPRECATED(
+    text: string,
+    params?: Object = {},
+): Promise<Array<Feature>> {
+    // eslint-disable-next-line
+    console.info('service.getLocations is depreacted and will be removed in a future version. Use service.getFeatures instead')
+    return getFeatures.call(this, text, undefined, params)
+}
