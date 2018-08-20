@@ -1,10 +1,5 @@
 // @flow
 
-export type Hosts = {
-    journeyplanner?: string,
-    geocoder?: string
-}
-
 export type HostConfig = {
     host: string,
     headers?: Object
@@ -12,44 +7,52 @@ export type HostConfig = {
 
 export type ServiceConfig = {
     clientName: string,
-    hosts: Hosts,
-    apikeys: Hosts,
+    hosts: {
+        journeyplanner: string,
+        geocoder: string
+    },
 };
 
 export type ArgumentConfig = {
     clientName: string,
-    hosts?: Hosts,
-    apikeys?: Hosts,
+    hosts?: {
+        journeyplanner?: string,
+        geocoder?: string
+    },
 }
 
-type GetHost = {
-    apikeys: Hosts,
-    hosts: Hosts
+const HOST_CONFIG = {
+    journeyplanner: 'https://api.entur.org/journeyplanner/2.0/index',
+    geocoder: 'https://api.entur.org/api/geocoder/1.1',
 }
 
-const JOURNEY_PLANNER_HOST = 'https://api.entur.org/journeyplanner/2.0/index'
-const GEOCODER_HOST = 'https://api.entur.org/api/geocoder/1.1'
+export function getServiceConfig(config: ArgumentConfig): ServiceConfig {
+    if (!config || !config.clientName) {
+        throw new Error('ERROR: You must pass a "clientName" to EnturService through the config argument. '
+            + 'See https://www.entur.org/dev/api/header/ for information.\n')
+    }
 
-let clientName
+    const { hosts = {}, ...rest } = config
 
-export function setClientName(name: string) {
-    clientName = name
-}
-
-export function getJourneyPlannerHost({ hosts, apikeys }: GetHost): HostConfig {
     return {
-        host: hosts.journeyplanner || JOURNEY_PLANNER_HOST,
+        ...rest,
+        hosts: { ...hosts, ...HOST_CONFIG },
+    }
+}
+
+export function getJourneyPlannerHost({ hosts, clientName }: ServiceConfig): HostConfig {
+    return {
+        host: hosts.journeyplanner,
         headers: {
             'ET-Client-Name': clientName,
-            apikey: apikeys.journeyplanner,
             'extended-info': true,
         },
     }
 }
 
-export function getGeocoderHost({ hosts }: GetHost): HostConfig {
+export function getGeocoderHost({ hosts, clientName }: ServiceConfig): HostConfig {
     return {
-        host: hosts.geocoder || GEOCODER_HOST,
+        host: hosts.geocoder,
         headers: {
             'ET-Client-Name': clientName,
         },

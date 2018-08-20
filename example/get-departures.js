@@ -1,4 +1,6 @@
-const { default: EnturService } = require('../lib')
+/* eslint-disable import/no-unresolved, import/extensions, no-console */
+
+import EnturService from '@entur/sdk'
 
 const service = new EnturService()
 const now = new Date()
@@ -14,14 +16,20 @@ function minutesDifference(date1, date2) {
     return Math.floor(timeDiff / (1000 * 60))
 }
 
-service.getStopPlaceDepartures('NSR:StopPlace:14202').then(departures => departures.forEach((departure) => {
-    const { expectedDepartureTime, destinationDisplay, serviceJourney } = departure
-    const { line } = serviceJourney.journeyPattern
+async function example() {
+    const departures = await service.getStopPlaceDepartures('NSR:StopPlace:14202')
 
-    const departureTime = new Date(expectedDepartureTime)
-    const minDiff = minutesDifference(now, departureTime)
-    const departureLabel = minDiff < 15 ? `${minDiff} min` : toTimeString(departureTime)
+    departures.forEach((departure) => {
+        const { expectedDepartureTime, destinationDisplay, serviceJourney } = departure
+        const { line } = serviceJourney.journeyPattern
 
-    // eslint-disable-next-line no-console
-    console.log(`${departureLabel} ${line.transportMode} ${line.publicCode} ${destinationDisplay.frontText}`)
-}))
+        const departureTime = new Date(expectedDepartureTime)
+        const minDiff = minutesDifference(now, departureTime)
+        const departureLabel = minDiff < 15 ? `${minDiff} min` : toTimeString(departureTime)
+
+        console.log(`${departureLabel} ${line.transportMode} ${line.publicCode} ${destinationDisplay.frontText}`)
+    })
+}
+
+
+example()

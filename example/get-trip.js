@@ -1,18 +1,24 @@
-const { default: EnturService, convertLocationToPosition } = require('../lib')
+/* eslint-disable import/no-unresolved, import/extensions, no-console */
+
+import EnturService, { convertFeatureToLocation } from '@entur/sdk'
 
 const service = new EnturService()
 
 async function example() {
-    const [fromLocation] = await service.getLocations('Ryllikvegen, Lillehammer')
-    const [toLocation] = await service.getLocations('Oslo S')
+    const [fromFeature] = await service.getFeatures('Ryllikvegen, Lillehammer')
+    const [toFeature] = await service.getFeatures('Oslo S')
 
-    if (fromLocation && toLocation) {
-        service.getTripPatterns({
-            searchDate: new Date(),
-            from: convertLocationToPosition(fromLocation),
-            to: convertLocationToPosition(toLocation),
-        }).then(console.log) // eslint-disable-line no-console
+    if (!fromFeature || !toFeature) {
+        return
     }
+
+    const tripPatterns = await service.getTripPatterns({
+        searchDate: new Date(),
+        from: convertFeatureToLocation(fromFeature),
+        to: convertFeatureToLocation(toFeature),
+    })
+
+    console.log(tripPatterns)
 }
 
 example()

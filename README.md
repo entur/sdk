@@ -17,7 +17,6 @@ const service = new EnturService({ clientName: 'awesomecompany-awesomeapp' })
 |:------------|:----------------------|:------------|:----------------------------------------|
 | clientName  | `string`              | `undefined` | The name of your application            |
 | hosts       | `{object of hosts}`   | `{}`        | Override default endpoints              |
-| apikeys     | `{object of apikeys}` | `{}`        | Define apikeys for individual endpoints |
 
 
 #### clientName (required)
@@ -34,18 +33,6 @@ The Entur SDK uses multiple endpoints for its services. Each endpoint can be ove
 }
 ```
 
-
-#### apikeys
-API key can be supplied for each endpoint. The key will be added to the http header for all requests.
-`geocoder` and `journeyplanner` is publicly available and does not require api keys
-
-```javascript
-{
-    journeyplanner: '',
-    geocoder: ''
-}
-```
-
 ## Usage
 
 ### getTripPatterns
@@ -53,9 +40,9 @@ API key can be supplied for each endpoint. The key will be added to the http hea
 ```javascript
 service.getTripPatterns(query);
 ```
-Returns: `Promise<Array<Itinerary>>`
+Returns: `Promise<Array<TripPattern>>`
 
-Types: [Itinerary](src/flow-types/Itinerary.js)
+Types: [TripPattern](flow-types/TripPattern.js)
 
 `getTripPatterns` is for searching for itineraries for a trip from some location to a destination at a given time. The method takes one argument `query`, which is an object with search parameters.
 
@@ -65,10 +52,10 @@ Types: [Itinerary](src/flow-types/Itinerary.js)
 | Key | Type | Default  | Description |
 |:----|:----|:----------|:------------|
 | `searchDate`            | `Date`             | | when to calculate patterns |
-| `from`                  | [`Position`](#position) | | departure location |
-| `to`                    | [`Position`](#position) | | arrival location |
+| `from`                  | [`Location`](#location) | | departure location |
+| `to`                    | [`Location`](#location) | | arrival location |
 | `arriveBy`              | `boolean`          | `false` | depart by `searchDate`, or arrive by `searchDate` |
-| `modes`                 | [`Array of Modes`](#travel-mode) | `['FOOT', 'BUS', 'TRAM', 'RAIL', 'METRO', 'WATER', 'AIR']` | modes of transport to include in trip |
+| `modes`                 | [`Array of Modes`](#leg-mode) | `['foot', 'bus', 'tram', 'rail', 'metro', 'water', 'air']` | modes of transport to include in trip |
 | `limit`                 | `number`           | `5`      | Limit search to |
 | `wheelchairAccessible`  | `boolean`          | `false`  | include only stops which are wheelchair accessible |
 
@@ -93,21 +80,26 @@ service.getTripPatterns({
 
 See [example/get-trip.js](./example/get-trip.js) for a more in depth example
 
-### getLocations
+### getFeatures
 
 ```javascript
-service.getLocations(query);
+service.getFeatures(query);
 ```
-Returns: `Promise<Array<Location>>`
+Returns: `Promise<Array<Feature>>`
 
-Types: [Location](src/flow-types/Location.js)
+Types: [Feature](flow-types/Feature.js), [Coordinates](flow-types/Coordinates.js)
 
-`getLocation` is for searching for stop places, stations or addresses. The method takes one argument `query`, which is the search string.
+`getFeatures` is for searching for stop places, stations or addresses. The method takes two arguments `query`, which is the search string, and `coords` which is an object ([Coordinates](flow-types/Coordinates.js)) consisting of latitude, longitude numbers.
 
 #### Parameters
 
 ##### query (`string`)
 The search string that should resemble the name of the desired stop place or address. Examples: `"Oslo S"`, `"Schweigaards gate 23, Oslo"`, `"Voss stasjon"`.
+
+#### Parameters
+
+##### coords (`Coordinates`)
+A set of coordinates to use when the weighting search results. Examples: `{ latitude: 59.909774, longitude: 10.763712 }`.
 
 
 ### getStopPlaceDepartures
@@ -117,7 +109,7 @@ service.getStopPlaceDepartures(stopPlaceIds, params);
 ```
 Returns: `Promise<Array<EstimatedCall>>` | `Promise<Array<{ id: string, departures: Array<EstimatedCall>}>>`
 
-Types: [EstimatedCall](src/flow-types/EstimatedCall.js)
+Types: [EstimatedCall](flow-types/EstimatedCall.js)
 
 `getStopPlaceDepartures` finds departures from one or more given stop places.
 
@@ -146,14 +138,14 @@ service.getBikeRentalStation(stationId);
 ```
 Returns: `Promise<BikeRentalStation>`
 
-Types: [BikeRentalStation](src/flow-types/BikeRentalStation.js)
+Types: [BikeRentalStation](flow-types/BikeRentalStation.js)
 
 `getBikeRentalStation` finds a single bike rental station by its ID.
 
 #### Parameters
 
 ##### stationId (`string`)
-The ID of the bike rental station you are interested in. The method will return a Promise which will resolve to an object of type [BikeRentalStation](src/flow-types/BikeRentalStation.js).
+The ID of the bike rental station you are interested in. The method will return a Promise which will resolve to an object of type [BikeRentalStation](flow-types/BikeRentalStation.js).
 
 ### getBikeRentalStations
 
@@ -162,7 +154,7 @@ service.getBikeRentalStations(coordinate, distance);
 ```
 Returns: `Promise<Array<BikeRentalStation>>`
 
-Types: [BikeRentalStation](src/flow-types/BikeRentalStation.js)
+Types: [BikeRentalStation](flow-types/BikeRentalStation.js)
 
 `getBikeRentalStations` finds bike rental stations within an area surrounding a coordinate.
 
@@ -184,7 +176,7 @@ service.getStopPlacesByPosition(coordinate, distance);
 ```
 Returns: `Promise<Array<StopPlace>>`
 
-Types: [StopPlace](src/flow-types/StopPlace.js)
+Types: [StopPlace](flow-types/StopPlace.js)
 
 `getStopPlacesByPosition` finds stop places within an area surrounding a coordinate.
 
@@ -200,7 +192,7 @@ The "radius" in meters of the surrounding bounding box in which you want to find
 The width and height of the bounding box are therefore `2 * distance`, and the coordinates given are its centerpoint.
 
 ## Custom Types
-#### Position
+#### Location
 ```javascript
 {
     name: string,
@@ -212,7 +204,7 @@ The width and height of the bounding box are therefore `2 * distance`, and the c
 }
 ```
 
-#### Travel mode
+#### Leg mode
 ```javascript
  'air' | 'bicycle' | 'bus' | 'cableway' | 'car' | 'water' | 'funicular' | 'lift' | 'rail' | 'metro' |
  'tram' | 'transit' | 'foot' | 'car_park' | 'car_pickup'

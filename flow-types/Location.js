@@ -1,7 +1,7 @@
 // @flow
-import type { Coordinates } from './'
+import type { Coordinates } from './Coordinates'
 
-export type Position = {
+export type Location = {
     name: string,
     place?: string,
     coordinates?: Coordinates,

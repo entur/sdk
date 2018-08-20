@@ -6,24 +6,16 @@ import {
     getStopPlaceDeparturesProps,
     getStopPlacesByBboxProps,
 } from './query'
-import type { HostConfig } from '../config'
+import { getJourneyPlannerHost } from '../config'
+
 import type {
     Coordinates,
-    Itinerary,
+    TripPattern,
     Location,
     StopPlace,
-} from '../flow-types'
+} from '../../flow-types'
 import { convertPositionToBbox } from '../utils'
 
-type SearchParams = {
-    searchDate: Date,
-    from: Location,
-    to: Location,
-    arriveBy?: boolean,
-    modes?: Array<string>,
-    limit?: number,
-    wheelchairAccessible?: boolean,
-}
 
 type StopPlaceParams = {
     onForBoarding?: boolean,
@@ -44,27 +36,25 @@ const DEFAULT_STOP_PLACE_PARAMS = {
     timeRange: 72000,
 }
 
-function toDateString(date: Date): string {
-    const year: string = String(date.getFullYear())
-    const month: string = String(date.getMonth() + 1).padStart(2, '0')
-    const day: string = String(date.getDate()).padStart(2, '0')
-    return `${year}-${month}-${day}`
+export type GetTripPatternsParams = {
+    searchDate: Date,
+    from: Location,
+    to: Location,
+    arriveBy?: boolean,
+    modes?: Array<string>,
+    limit?: number,
+    wheelchairAccessible?: boolean,
 }
-
-export function getTripPatterns(
-    { host, headers }: HostConfig,
-    searchParams: SearchParams,
-): Promise<Array<Itinerary>> {
+export function getTripPatterns(searchParams: GetTripPatternsParams): Promise<Array<TripPattern>> {
+    const { host, headers } = getJourneyPlannerHost(this.config)
     const {
         searchDate, limit, wheelchairAccessible, ...rest
     } = { ...DEFAULT_SEARCH_PARAMS, ...searchParams }
-
     const url = `${host}/graphql`
 
     const variables = {
         ...rest,
         dateTime: searchDate.toISOString(),
-        date: toDateString(searchDate),
         numTripPatterns: limit,
         wheelchair: wheelchairAccessible,
     }
@@ -82,10 +72,10 @@ export function getTripPatterns(
 }
 
 export function getStopPlaceDepartures(
-    { host, headers }: HostConfig,
     stopPlaceIds: string | Array<string>,
     stopPlaceParams?: StopPlaceParams,
 ): Object {
+    const { host, headers } = getJourneyPlannerHost(this.config)
     const {
         timeRange, departures, onForBoarding,
     } = { ...DEFAULT_STOP_PLACE_PARAMS, ...stopPlaceParams }
@@ -121,10 +111,10 @@ export function getStopPlaceDepartures(
 }
 
 export function getStopPlacesByPosition(
-    { host, headers }: HostConfig,
     coordinates: Coordinates,
     distance: number = 500,
 ): Promise<Array<StopPlace>> {
+    const { host, headers } = getJourneyPlannerHost(this.config)
     const url = `${host}/graphql`
 
     const variables = convertPositionToBbox(coordinates, distance)

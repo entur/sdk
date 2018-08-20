@@ -1,22 +1,32 @@
-/* eslint import/prefer-default-export:0  */
 // @flow
 import lineString from 'turf-linestring'
 import point from 'turf-point'
 import bbox from '@turf/bbox'
 import destination from '@turf/destination'
-import type { Position, Location, Coordinates } from './flow-types'
+import type { Feature } from '../flow-types/Feature'
+import type { Location } from '../flow-types/Location'
+import type { Coordinates } from '../flow-types/Coordinates'
 
-export function convertLocationToPosition(location: Location): Position {
-    const { properties, geometry } = location
+export function convertFeatureToLocation(feature: Feature): Location {
+    const { properties, geometry } = feature
 
     return {
         name: properties.label || properties.name,
         place: properties.id,
         coordinates: {
-            latitude: properties.lat || geometry.coordinates[1],
-            longitude: properties.lon || geometry.coordinates[0],
+            latitude: geometry.coordinates[1],
+            longitude: geometry.coordinates[0],
         },
     }
+}
+
+// preserve backward compatability
+export function convertLocationToPositionDEPRECATED(feature: Feature): Location {
+    if (process.env !== 'production') {
+        // eslint-disable-next-line
+        console.info('convertLocationToPosition is deprecated and will be removed in a future version. Use convertFeatureToLocation instead')
+    }
+    return convertFeatureToLocation(feature)
 }
 
 export function convertPositionToBbox(coordinates: Coordinates, distance: number) {
