@@ -1,4 +1,3 @@
-/* eslint import/prefer-default-export:0  */
 // @flow
 import lineString from 'turf-linestring'
 import point from 'turf-point'
@@ -21,10 +20,12 @@ export function convertFeatureToLocation(feature: Feature): Location {
     }
 }
 
-// preserve backward compatebility
+// preserve backward compatability
 export function convertLocationToPositionDEPRECATED(feature: Feature): Location {
-    // eslint-disable-next-line
-    console.info('convertLocationToPosition is depreacted and will be removed in a future version. Use convertFeatureToLocation instead')
+    if (process.env !== 'production') {
+        // eslint-disable-next-line
+        console.info('convertLocationToPosition is deprecated and will be removed in a future version. Use convertFeatureToLocation instead')
+    }
     return convertFeatureToLocation(feature)
 }
 
