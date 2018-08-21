@@ -36,7 +36,7 @@ export function getServiceConfig(config: ArgumentConfig): ServiceConfig {
 
     return {
         ...rest,
-        hosts: { ...hosts, ...HOST_CONFIG },
+        hosts: { ...HOST_CONFIG, ...hosts },
     }
 }
 
