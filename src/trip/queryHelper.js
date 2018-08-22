@@ -60,9 +60,11 @@ export const intermediateEstimatedCallFragment = `
 export const situationFields = situationFieldsVal
 export const situationFragment = `
     fragment ${situationFieldsKey} on PtSituationElement {
-      id
+      situationNumber
       summary { value }
       description { value }
       detail { value }
       validityPeriod { startTime endTime }
+      reportType
+      infoLink
     }`
