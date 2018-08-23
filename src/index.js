@@ -9,5 +9,6 @@ export {
 } from './utils'
 
 export * from './constants/travelModes'
+export * from './constants/featureCategory'
 
 export default EnturService

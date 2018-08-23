@@ -2,7 +2,7 @@
 type Latitude = number
 type Longitude = number
 
-type category =
+export type Category =
     | 'onstreetBus'
     | 'onstreetTram'
     | 'airport'
@@ -37,7 +37,7 @@ export type Feature = {
         accuracy: 'point',
         layer: 'venue' | 'address',
         borough_gid: string,
-        category: Array<category>,
+        category: Array<Category>,
         country_gid: string,
         county: string,
         county_gid: string,
