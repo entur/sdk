@@ -1,5 +1,5 @@
 // @flow
-import { getTripPatterns, getStopPlaceDepartures, getStopPlacesByPosition } from './trip'
+import { getTripPatterns, getStopPlaceDepartures, getStopPlace, getStopPlacesByPosition } from './trip'
 import { getBikeRentalStation, getBikeRentalStations } from './bikeRental'
 import { getFeatures, getLocationsDEPRECATED } from './geocoder'
 import { getServiceConfig } from './config'
@@ -20,6 +20,8 @@ class EnturService {
     getTripPatterns = getTripPatterns
 
     getStopPlaceDepartures = getStopPlaceDepartures
+
+    getStopPlace = getStopPlace
 
     getStopPlacesByPosition = getStopPlacesByPosition
 
