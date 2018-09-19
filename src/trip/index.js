@@ -4,6 +4,7 @@ import { FOOT, BUS, TRAM, RAIL, METRO, WATER, AIR } from '../constants/travelMod
 import {
     getItinerariesProps,
     getStopPlaceDeparturesProps,
+    getStopPlaceProps,
     getStopPlacesByBboxProps,
 } from './query'
 import { getJourneyPlannerHost } from '../config'
@@ -107,6 +108,23 @@ export function getStopPlaceDepartures(
                 id,
                 departures: estimatedCalls,
             }))
+        })
+}
+
+export function getStopPlace(id: string): Promise<StopPlace> {
+    const { host, headers } = getJourneyPlannerHost(this.config)
+    const url = `${host}/graphql`
+
+    const variables = { id }
+    const params = { query: getStopPlaceProps, variables }
+
+    return post(url, params, headers)
+        .then((response) => {
+            try {
+                return response.data.stopPlace
+            } catch (e) {
+                throw new Error(`Could not find stop place with ID "${id}"`)
+            }
         })
 }
 
