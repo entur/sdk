@@ -14,7 +14,7 @@
     "lint": "eslint src/ example/",
     "test": "echo 'There are no tests'",
     "flow": "flow",
-    "transpile": "rm -rf lib && babel src --out-dir lib --copy-files && cp libdef.flow.js lib/",
+    "transpile": "rm -rf lib && babel src --out-dir lib --copy-files",
     "prepublishOnly": "npm run transpile"
   },
   "dependencies": {
