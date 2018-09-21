@@ -202,21 +202,11 @@ Default: `500`
 The "radius" in meters of the surrounding bounding box in which you want to find stop places.
 The width and height of the bounding box are therefore `2 * distance`, and the coordinates given are its centerpoint.
 
-## Custom Types
-#### Location
-```javascript
-{
-    name: string,
-    place?: string,
-    coordinates?: {
-        latitude: number,
-        longitude: number
-    }
-}
-```
+## Flow types
 
-#### Leg mode
-```javascript
- 'air' | 'bicycle' | 'bus' | 'cableway' | 'car' | 'water' | 'funicular' | 'lift' | 'rail' | 'metro' |
- 'tram' | 'transit' | 'foot' | 'car_park' | 'car_pickup'
+We provide a library definition for Flow. In order to use this, make sure you include it in your .flowconfig
+
+```
+[libs]
+node_modules/@entur/sdk/lib/libdef.flow.js
 ```

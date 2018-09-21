@@ -4,5 +4,6 @@
       "@babel/preset-stage-2",
       "@babel/preset-flow"
   ],
-  "plugins": ["@babel/plugin-proposal-optional-chaining"]
+  "plugins": ["@babel/plugin-proposal-optional-chaining"],
+  "ignore": ["src/libdef.flow.js"]
 }
