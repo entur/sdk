@@ -19,6 +19,7 @@ import { convertPositionToBbox } from '../utils'
 
 
 type StopPlaceParams = {
+    onForBoarding?: boolean, // deprecated
     includeNonBoarding?: boolean,
     departures?: number,
     timeRange?: number,
