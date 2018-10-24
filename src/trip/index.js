@@ -19,7 +19,8 @@ import { convertPositionToBbox } from '../utils'
 
 
 type StopPlaceParams = {
-    onForBoarding?: boolean,
+    onForBoarding?: boolean, // deprecated
+    includeNonBoarding?: boolean,
     departures?: number,
     timeRange?: number,
 }
@@ -32,7 +33,7 @@ const DEFAULT_SEARCH_PARAMS = {
 }
 
 const DEFAULT_STOP_PLACE_PARAMS = {
-    onForBoarding: false,
+    includeNonBoarding: false,
     departures: 50,
     timeRange: 72000,
 }
@@ -78,8 +79,16 @@ export function getStopPlaceDepartures(
 ): Object {
     const { host, headers } = getJourneyPlannerHost(this.config)
     const {
-        timeRange, departures, onForBoarding,
+        timeRange, departures, onForBoarding, includeNonBoarding,
     } = { ...DEFAULT_STOP_PLACE_PARAMS, ...stopPlaceParams }
+
+    let omitNonBoarding = !includeNonBoarding
+
+    if (onForBoarding !== undefined) {
+        // eslint-disable-next-line no-console
+        console.info('Entur SDK: "onForBoarding" is deprecated, use "includeNonBoarding" instead.')
+        omitNonBoarding = !onForBoarding
+    }
 
     const url = `${host}/graphql`
 
@@ -90,7 +99,7 @@ export function getStopPlaceDepartures(
         start: new Date().toISOString(),
         range: timeRange,
         departures,
-        onForBoarding,
+        omitNonBoarding,
     }
 
     const params = { query: getStopPlaceDeparturesProps, variables }
