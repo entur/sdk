@@ -40,15 +40,19 @@ The Entur SDK uses multiple endpoints for its services. Each endpoint can be ove
 ```javascript
 service.getTripPatterns(query);
 ```
-Returns: `Promise<Array<TripPattern>>`
+Returns: `Promise<Array<TripPattern>> | Promise<Array<TripPattern>>`
 
 Types: [TripPattern](flow-types/TripPattern.js)
 
-`getTripPatterns` is for searching for itineraries for a trip from some location to a destination at a given time. The method takes one argument `query`, which is an object with search parameters.
+`getTripPatterns` is for searching for itineraries for a trip from some location to a destination at a given time. The method takes one argument `query`, which is either an object with search parameters, or an array of those.
+
+When calling this with an array of search queries, the calls will be throttled to adhere with the API's rate limits. The order of the results will be the same as the order of the arguments sent in.
 
 #### Parameters
 
 ##### query (`Object`)
+A search query is an object on the following form. Mind that you can send an array of these to getTripPatterns to do multiple searches.
+
 | Key | Type | Default  | Description |
 |:----|:----|:----------|:------------|
 | `searchDate`            | `Date`             | | when to calculate patterns |

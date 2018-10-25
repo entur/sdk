@@ -15,8 +15,7 @@ import type {
     Location,
     StopPlace,
 } from '../../flow-types'
-import { convertPositionToBbox } from '../utils'
-
+import { convertPositionToBbox, getPromiseThrottler } from '../utils'
 
 type StopPlaceParams = {
     onForBoarding?: boolean, // deprecated
@@ -47,12 +46,14 @@ export type GetTripPatternsParams = {
     limit?: number,
     wheelchairAccessible?: boolean,
 }
-export function getTripPatterns(searchParams: GetTripPatternsParams): Promise<Array<TripPattern>> {
-    const { host, headers } = getJourneyPlannerHost(this.config)
+function getTripPatternsSearch(
+    params: GetTripPatternsParams,
+    url: string,
+    headers?: Object,
+): Promise<Array<TripPattern>> {
     const {
         searchDate, limit, wheelchairAccessible, ...rest
-    } = { ...DEFAULT_SEARCH_PARAMS, ...searchParams }
-    const url = `${host}/graphql`
+    } = { ...DEFAULT_SEARCH_PARAMS, ...params }
 
     const variables = {
         ...rest,
@@ -61,9 +62,7 @@ export function getTripPatterns(searchParams: GetTripPatternsParams): Promise<Ar
         wheelchair: wheelchairAccessible,
     }
 
-    const params = { query: getItinerariesProps, variables }
-
-    return post(url, params, headers)
+    return post(url, { query: getItinerariesProps, variables }, headers)
         .then((response: Object) => {
             try {
                 return response.data.trip.tripPatterns
@@ -71,6 +70,20 @@ export function getTripPatterns(searchParams: GetTripPatternsParams): Promise<Ar
                 return []
             }
         })
+}
+
+// eslint-disable-next-line max-len
+export function getTripPatterns(searchParams: GetTripPatternsParams | Array<GetTripPatternsParams>): Promise<Array<TripPattern>> | Promise<Array<Array<TripPattern>>> {
+    const { host, headers } = getJourneyPlannerHost(this.config)
+    const url = `${host}/graphql`
+    if (!Array.isArray(searchParams)) {
+        return getTripPatternsSearch(searchParams, url, headers)
+    }
+
+    const throttler = getPromiseThrottler(searchParams.length)
+    const searches = searchParams
+        .map(p => throttler.add(getTripPatternsSearch.bind(this, p, url, headers)))
+    return Promise.all(searches)
 }
 
 export function getStopPlaceDepartures(

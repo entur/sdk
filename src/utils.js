@@ -3,6 +3,7 @@ import lineString from 'turf-linestring'
 import point from 'turf-point'
 import bbox from '@turf/bbox'
 import destination from '@turf/destination'
+import PromiseThrottle from 'promise-throttle'
 import type { Feature } from '../flow-types/Feature'
 import type { Location } from '../flow-types/Location'
 import type { Coordinates } from '../flow-types/Coordinates'
@@ -52,4 +53,24 @@ export function convertPositionToBbox(coordinates: Coordinates, distance: number
     return {
         minLng, minLat, maxLng, maxLat,
     }
+}
+
+export function getPromiseThrottler(callCount: number): Object {
+    const maxCallsPerSecond = 50
+    const maxCallsPerMinute = 2000
+    const maxCallsPerHour = 80000
+
+    let requestsPerSecond
+    if (callCount <= maxCallsPerMinute) {
+        requestsPerSecond = maxCallsPerSecond
+    } else if (callCount <= maxCallsPerHour) {
+        requestsPerSecond = maxCallsPerMinute / 60
+    } else {
+        requestsPerSecond = maxCallsPerHour / 3600
+    }
+
+    return new PromiseThrottle({
+        requestsPerSecond,
+        promiseImplementation: Promise,
+    })
 }
