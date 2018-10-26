@@ -7,6 +7,7 @@ import PromiseThrottle from 'promise-throttle'
 import type { Feature } from '../flow-types/Feature'
 import type { Location } from '../flow-types/Location'
 import type { Coordinates } from '../flow-types/Coordinates'
+import { MAX_CALLS_PER_SECOND, MAX_CALLS_PER_MINUTE, MAX_CALLS_PER_HOUR } from './constants/rateLimits'
 
 export function convertFeatureToLocation(feature: Feature): Location {
     const { properties, geometry } = feature
@@ -56,22 +57,17 @@ export function convertPositionToBbox(coordinates: Coordinates, distance: number
 }
 
 export const throttler = (func: Function, args: Array<any>): Promise<any> => {
-    const maxCallsPerSecond = 50
-    const maxCallsPerMinute = 2000
-    const maxCallsPerHour = 80000
+    const argCount = args.length
 
-    const callCount = args.length
-
-    let requestsPerSecond = Math.floor(maxCallsPerHour / 3600)
-    if (callCount <= maxCallsPerMinute) {
-        requestsPerSecond = maxCallsPerSecond
-    } else if (callCount <= maxCallsPerHour) {
-        requestsPerSecond = Math.floor(maxCallsPerMinute / 60)
+    let requestsPerSecond
+    if (argCount <= MAX_CALLS_PER_MINUTE) {
+        requestsPerSecond = MAX_CALLS_PER_SECOND
+    } else if (argCount <= MAX_CALLS_PER_HOUR) {
+        requestsPerSecond = Math.floor(MAX_CALLS_PER_MINUTE / 60)
+    } else {
+        requestsPerSecond = Math.floor(MAX_CALLS_PER_HOUR / 3600)
     }
 
-    const promiseThrottle = new PromiseThrottle({
-        requestsPerSecond,
-    })
-
+    const promiseThrottle = new PromiseThrottle({ requestsPerSecond })
     return Promise.all(args.map(a => promiseThrottle.add(func.bind(this, a))))
 }
