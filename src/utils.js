@@ -55,22 +55,23 @@ export function convertPositionToBbox(coordinates: Coordinates, distance: number
     }
 }
 
-export function getPromiseThrottler(callCount: number): Object {
+export const throttler = (func: Function, args: Array<any>): Promise<any> => {
     const maxCallsPerSecond = 50
     const maxCallsPerMinute = 2000
     const maxCallsPerHour = 80000
 
-    let requestsPerSecond
+    const callCount = args.length
+
+    let requestsPerSecond = Math.floor(maxCallsPerHour / 3600)
     if (callCount <= maxCallsPerMinute) {
         requestsPerSecond = maxCallsPerSecond
     } else if (callCount <= maxCallsPerHour) {
-        requestsPerSecond = maxCallsPerMinute / 60
-    } else {
-        requestsPerSecond = maxCallsPerHour / 3600
+        requestsPerSecond = Math.floor(maxCallsPerMinute / 60)
     }
 
-    return new PromiseThrottle({
+    const promiseThrottle = new PromiseThrottle({
         requestsPerSecond,
-        promiseImplementation: Promise,
     })
+
+    return Promise.all(args.map(a => promiseThrottle.add(func.bind(this, a))))
 }

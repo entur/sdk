@@ -15,7 +15,7 @@ import type {
     Location,
     StopPlace,
 } from '../../flow-types'
-import { convertPositionToBbox, getPromiseThrottler } from '../utils'
+import { convertPositionToBbox } from '../utils'
 
 type StopPlaceParams = {
     onForBoarding?: boolean, // deprecated
@@ -46,14 +46,13 @@ export type GetTripPatternsParams = {
     limit?: number,
     wheelchairAccessible?: boolean,
 }
-function getTripPatternsSearch(
-    params: GetTripPatternsParams,
-    url: string,
-    headers?: Object,
-): Promise<Array<TripPattern>> {
+export function getTripPatterns(searchParams: GetTripPatternsParams): Promise<Array<TripPattern>> {
+    const { host, headers } = getJourneyPlannerHost(this.config)
+    const url = `${host}/graphql`
+
     const {
         searchDate, limit, wheelchairAccessible, ...rest
-    } = { ...DEFAULT_SEARCH_PARAMS, ...params }
+    } = { ...DEFAULT_SEARCH_PARAMS, ...searchParams }
 
     const variables = {
         ...rest,
@@ -70,20 +69,6 @@ function getTripPatternsSearch(
                 return []
             }
         })
-}
-
-// eslint-disable-next-line max-len
-export function getTripPatterns(searchParams: GetTripPatternsParams | Array<GetTripPatternsParams>): Promise<Array<TripPattern>> | Promise<Array<Array<TripPattern>>> {
-    const { host, headers } = getJourneyPlannerHost(this.config)
-    const url = `${host}/graphql`
-    if (!Array.isArray(searchParams)) {
-        return getTripPatternsSearch(searchParams, url, headers)
-    }
-
-    const throttler = getPromiseThrottler(searchParams.length)
-    const searches = searchParams
-        .map(p => throttler.add(getTripPatternsSearch.bind(this, p, url, headers)))
-    return Promise.all(searches)
 }
 
 export function getStopPlaceDepartures(
