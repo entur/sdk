@@ -6,6 +6,7 @@ export {
     convertFeatureToLocation,
     convertPositionToBbox,
     convertLocationToPositionDEPRECATED as convertLocationToPosition,
+    throttler,
 } from './utils'
 
 export * from './constants/travelModes'

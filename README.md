@@ -46,9 +46,13 @@ Types: [TripPattern](flow-types/TripPattern.js)
 
 `getTripPatterns` is for searching for itineraries for a trip from some location to a destination at a given time. The method takes one argument `query`, which is an object with search parameters.
 
+If you are going to do a huge amount of different searches at the same time, consider using our [`throttler`](#throttler) utility.
+
 #### Parameters
 
 ##### query (`Object`)
+A search query is an object on the following form.
+
 | Key | Type | Default  | Description |
 |:----|:----|:----------|:------------|
 | `searchDate`            | `Date`             | | when to calculate patterns |
@@ -201,6 +205,40 @@ Default: `500`
 
 The "radius" in meters of the surrounding bounding box in which you want to find stop places.
 The width and height of the bounding box are therefore `2 * distance`, and the coordinates given are its centerpoint.
+
+## Utils
+
+### `throttler`
+
+If you are going to do a lot of requests at the same time, you are likely to exceed our rate limits.
+To help you with this, we have a `throttler` utility that throttles the requests in order to respect the rate limits.
+
+Example usage:
+
+```
+import EnturService, { throttler, convertFeatureToLocation } from '@entur/sdk'
+
+const service = new EnturService({ clientName: 'myawesomecompany-myawesomeapp' })
+
+async function getTripPatternsForVeryManyDifferentLocations() {
+  const [fromLocation] = await service.getFeatures('Oslo S')
+  const [toLocation] = await service.getFeatures('Drammen stasjon')
+  const params = {
+      searchDate: new Date(),
+      from: convertFeatureToLocation(fromLocation),
+      to: convertFeatureToLocation(toLocation),
+  }
+
+  // A huge array of arguments that we want to call a function with, one by one.
+  const queries = Array(3000).fill(params)
+
+  // We pass the function and the huge list of arguments to the throttler.
+  // The resulting list will be in the same order as the arguments passed.
+  const tripPatterns = await throttler(query => service.getTripPatterns(query), queries)
+  console.log('Done!')
+  return tripPatterns
+}
+
 
 ## Flow types
 

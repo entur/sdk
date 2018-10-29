@@ -17,7 +17,6 @@ import type {
 } from '../../flow-types'
 import { convertPositionToBbox } from '../utils'
 
-
 type StopPlaceParams = {
     onForBoarding?: boolean, // deprecated
     includeNonBoarding?: boolean,
@@ -49,10 +48,11 @@ export type GetTripPatternsParams = {
 }
 export function getTripPatterns(searchParams: GetTripPatternsParams): Promise<Array<TripPattern>> {
     const { host, headers } = getJourneyPlannerHost(this.config)
+    const url = `${host}/graphql`
+
     const {
         searchDate, limit, wheelchairAccessible, ...rest
     } = { ...DEFAULT_SEARCH_PARAMS, ...searchParams }
-    const url = `${host}/graphql`
 
     const variables = {
         ...rest,
@@ -61,9 +61,7 @@ export function getTripPatterns(searchParams: GetTripPatternsParams): Promise<Ar
         wheelchair: wheelchairAccessible,
     }
 
-    const params = { query: getItinerariesProps, variables }
-
-    return post(url, params, headers)
+    return post(url, { query: getItinerariesProps, variables }, headers)
         .then((response: Object) => {
             try {
                 return response.data.trip.tripPatterns

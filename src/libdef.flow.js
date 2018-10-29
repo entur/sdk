@@ -318,4 +318,5 @@ declare module '@entur/sdk' {
         maxLng: number,
         maxLat: number,
     }
+    declare export function throttler(func: Function, args: Array<any>): Array<any>
 }
