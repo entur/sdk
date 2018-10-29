@@ -1,6 +1,4 @@
 // @flow
-import type { Category as CategoryType } from '../../flow-types'
-
 export const ONSTREET_BUS = 'onstreetBus'
 export const ONSTREET_TRAM = 'onstreetTram'
 export const AIRPORT = 'airport'
@@ -22,7 +20,7 @@ export const TETTSTEDDEL = 'tettsteddel'
 export const BYDEL = 'bydel'
 export const OTHER = 'other'
 
-export const FeatureCategory: {[string]: CategoryType} = {
+export const FeatureCategory = {
     ONSTREET_BUS,
     ONSTREET_TRAM,
     AIRPORT,
