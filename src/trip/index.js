@@ -14,6 +14,7 @@ import type {
     TripPattern,
     Location,
     StopPlace,
+    LegMode,
 } from '../../flow-types'
 import { convertPositionToBbox } from '../utils'
 
@@ -42,7 +43,7 @@ export type GetTripPatternsParams = {
     from: Location,
     to: Location,
     arriveBy?: boolean,
-    modes?: Array<string>,
+    modes?: Array<LegMode>,
     limit?: number,
     wheelchairAccessible?: boolean,
 }
