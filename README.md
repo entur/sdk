@@ -238,7 +238,7 @@ async function getTripPatternsForVeryManyDifferentLocations() {
   console.log('Done!')
   return tripPatterns
 }
-
+```
 
 ## Flow types
 
