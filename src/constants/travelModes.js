@@ -42,6 +42,7 @@ export const TransportMode = {
     WATER,
     AIR,
     COACH,
+    CAR,
 }
 
 export const LegMode = {

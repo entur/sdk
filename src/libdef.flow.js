@@ -32,7 +32,7 @@ type $entur$sdk$LegMode =
     | $entur$sdk$TransportMode
     | 'bicycle'
     | 'foot'
-    // | 'car'
+    | 'car'
     // | 'transit'
     // | 'car_park'
     // | 'car_pickup'
@@ -363,6 +363,7 @@ declare module '@entur/sdk' {
         WATER: 'water',
         AIR: 'air',
         COACH: 'coach',
+        CAR: 'car',
     }
 
     declare export var LegMode: {
@@ -373,6 +374,7 @@ declare module '@entur/sdk' {
         WATER: 'water',
         AIR: 'air',
         COACH: 'coach',
+        CAR: 'car',
         FOOT: 'foot',
         BICYCLE: 'bicycle',
     }

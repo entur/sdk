@@ -10,6 +10,7 @@ export type TransportMode =
     | 'metro'
     | 'tram'
     | 'coach'
+    | 'car'
     // | 'unknown'
 
 
@@ -17,7 +18,6 @@ export type LegMode =
     | TransportMode
     | 'bicycle'
     | 'foot'
-    // | 'car'
     // | 'transit'
     // | 'car_park'
     // | 'car_pickup'
