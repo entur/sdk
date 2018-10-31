@@ -13,7 +13,7 @@ export function convertFeatureToLocation(feature: Feature): Location {
     const { properties, geometry } = feature
 
     return {
-        name: properties.label || properties.name,
+        name: properties.name,
         place: properties.id,
         coordinates: {
             latitude: geometry.coordinates[1],
