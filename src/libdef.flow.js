@@ -1,4 +1,5 @@
 // @flow
+/* eslint-disable max-len */
 
 type $entur$sdk$Longitude = number
 type $entur$sdk$Latitude = number
@@ -6,6 +7,12 @@ type $entur$sdk$Latitude = number
 type $entur$sdk$Coordinates = {
     latitude: $entur$sdk$Latitude,
     longitude: $entur$sdk$Longitude,
+}
+
+type $entur$sdk$Location = {
+    name: string,
+    place?: string,
+    coordinates?: $entur$sdk$Coordinates,
 }
 
 type $entur$sdk$TransportMode =
@@ -25,7 +32,7 @@ type $entur$sdk$LegMode =
     | $entur$sdk$TransportMode
     | 'bicycle'
     | 'foot'
-    // | 'car'
+    | 'car'
     // | 'transit'
     // | 'car_park'
     // | 'car_pickup'
@@ -56,8 +63,8 @@ type $entur$sdk$Notice = {|
 
 type $entur$sdk$TripPatternsQuery = {
     searchDate: Date,
-    from: Location,
-    to: Location,
+    from: $entur$sdk$Location,
+    to: $entur$sdk$Location,
     arriveBy?: boolean,
     modes?: Array<$entur$sdk$LegMode>,
     limit?: number,
@@ -274,7 +281,11 @@ declare module '@entur/sdk' {
     declare export default class EnturService {
         constructor(config?: $entur$sdk$Config): EnturService;
 
-        getFeatures(query: string): Promise<Array<$entur$sdk$Feature>>,
+        getFeatures(
+            query: string,
+            coords?: $entur$sdk$Coordinates,
+            params?: Object
+        ): Promise<Array<$entur$sdk$Feature>>,
 
         getTripPatterns(
             query: $entur$sdk$TripPatternsQuery
@@ -309,14 +320,148 @@ declare module '@entur/sdk' {
         ): Promise<Array<$entur$sdk$BikeRentalStation>>,
     }
 
+    // Constants
+
+    // Any for of public transportation
+    declare export var AIR: 'air'
+    declare export var BICYCLE: 'bicycle'
+    declare export var BUS: 'bus'
+    declare export var CABLEWAY: 'cableway'
+    declare export var CAR: 'car'
+    declare export var COACH: 'coach'
+    declare export var WATER: 'water'
+    declare export var FUNICULAR: 'funicular'
+    declare export var LIFT: 'lift'
+    declare export var RAIL: 'rail'
+    declare export var METRO: 'metro'
+    declare export var TRAM: 'tram'
+    declare export var TRANSIT: 'transit'
+    declare export var FOOT: 'foot'
+
+    // Combine with foot and transit for park and ride.
+    declare export var CAR_PARK: 'car_park'
+
+    // Combine with foot and transit for ride and kiss
+    declare export var CAR_PICKUP: 'car_pickup'
+
+    declare export var AIRPORT_LINK_RAIL: 'airportLinkRail'
+    declare export var HIGH_SPEED_PASSENGER_SERVICE: 'highSpeedPassengerService'
+    declare export var HIGH_SPEED_VEHICLE_SERVICE: 'highSpeedVehicleService'
+    declare export var INTERNATIONAL_CAR_FERRY: 'internationalCarFerry'
+    declare export var LOCAL_CAR_FERRY: 'localCarFerry'
+    declare export var LOCAL_PASSENGER_FERRY: 'localPassengerFerry'
+    declare export var NATIONAL_CAR_FERRY: 'nationalCarFerry'
+    declare export var RAIL_REPLACEMENT_BUS: 'railReplacementBus'
+    declare export var REGIONAL_CAR_FERRY: 'regionalCarFerry'
+    declare export var TOURIST_RAILWAY: 'touristRailway'
+
+    declare export var TransportMode: {
+        BUS: 'bus',
+        TRAM: 'tram',
+        RAIL: 'rail',
+        METRO: 'metro',
+        WATER: 'water',
+        AIR: 'air',
+        COACH: 'coach',
+        CAR: 'car',
+    }
+
+    declare export var LegMode: {
+        BUS: 'bus',
+        TRAM: 'tram',
+        RAIL: 'rail',
+        METRO: 'metro',
+        WATER: 'water',
+        AIR: 'air',
+        COACH: 'coach',
+        CAR: 'car',
+        FOOT: 'foot',
+        BICYCLE: 'bicycle',
+    }
+
+    declare export var TransportSubmode: {
+        AIRPORT_LINK_RAIL: 'airportLinkRail',
+        HIGH_SPEED_PASSENGER_SERVICE: 'highSpeedPassengerService',
+        HIGH_SPEED_VEHICLE_SERVICE: 'highSpeedVehicleService',
+        INTERNATIONAL_CAR_FERRY: 'internationalCarFerry',
+        LOCAL_CAR_FERRY: 'localCarFerry',
+        LOCAL_PASSENGER_FERRY: 'localPassengerFerry',
+        NATIONAL_CAR_FERRY: 'nationalCarFerry',
+        RAIL_REPLACEMENT_BUS: 'railReplacementBus',
+        REGIONAL_CAR_FERRY: 'regionalCarFerry',
+        TOURIST_RAILWAY: 'touristRailway',
+    }
+
+    declare export var ONSTREET_BUS: 'onstreetBus'
+    declare export var ONSTREET_TRAM: 'onstreetTram'
+    declare export var AIRPORT: 'airport'
+    declare export var RAIL_STATION: 'railStation'
+    declare export var METRO_STATION: 'metroStation'
+    declare export var BUS_STATION: 'busStation'
+    declare export var COACH_STATION: 'coachStation'
+    declare export var TRAM_STATION: 'tramStation'
+    declare export var HARBOUR_PORT: 'harbourPort'
+    declare export var FERRY_PORT: 'ferryPort'
+    declare export var FERRY_STOP: 'ferryStop'
+    declare export var LIFT_STATION: 'liftStation'
+    declare export var VEHICLE_RAIL_INTERCHANGE: 'vehicleRailInterchange'
+    declare export var GROUP_OF_STOPP_LACES: 'GroupOfStopPlaces'
+    declare export var POI: 'poi'
+    declare export var VEGADRESSE: 'Vegadresse'
+    declare export var STREET: 'street'
+    declare export var TETTSTEDDEL: 'tettsteddel'
+    declare export var BYDEL: 'bydel'
+    declare export var OTHER: 'other'
+
+    declare export var FeatureCategory: {
+        ONSTREET_BUS: 'onstreetBus',
+        ONSTREET_TRAM: 'onstreetTram',
+        AIRPORT: 'airport',
+        RAIL_STATION: 'railStation',
+        METRO_STATION: 'metroStation',
+        BUS_STATION: 'busStation',
+        COACH_STATION: 'coachStation',
+        TRAM_STATION: 'tramStation',
+        HARBOUR_PORT: 'harbourPort',
+        FERRY_PORT: 'ferryPort',
+        FERRY_STOP: 'ferryStop',
+        LIFT_STATION: 'liftStation',
+        VEHICLE_RAIL_INTERCHANGE: 'vehicleRailInterchange',
+        GROUP_OF_STOPP_LACES: 'GroupOfStopPlaces',
+        POI: 'poi',
+        VEGADRESSE: 'Vegadresse',
+        STREET: 'street',
+        TETTSTEDDEL: 'tettsteddel',
+        BYDEL: 'bydel',
+        OTHER: 'other',
+    }
+
     // Utils
-    declare export function convertFeatureToLocation(feature: $entur$sdk$Feature): Location
-    declare export function convertLocationToPosition(feature: $entur$sdk$Feature): Location
+    declare export function convertFeatureToLocation(feature: $entur$sdk$Feature): $entur$sdk$Location
+    declare export function convertLocationToPosition(feature: $entur$sdk$Feature): $entur$sdk$Location
     declare export function convertPositionToBbox(coordinates: Coordinates, distance: number): {
         minLng: number,
         minLat: number,
         maxLng: number,
         maxLat: number,
     }
+
     declare export function throttler(func: Function, args: Array<any>): Array<any>
+
+    declare export function isAir(mode: string): boolean
+    declare export function isBicycle(mode: string): boolean
+    declare export function isBus(mode: string): boolean
+    declare export function isCableway(mode: string): boolean
+    declare export function isCar(mode: string): boolean
+    declare export function isCoach(mode: string): boolean
+    declare export function isWater(mode: string): boolean
+    declare export function isFunicular(mode: string): boolean
+    declare export function isLift(mode: string): boolean
+    declare export function isRail(mode: string): boolean
+    declare export function isMetro(mode: string): boolean
+    declare export function isTram(mode: string): boolean
+    declare export function isTransit(mode: string): boolean
+    declare export function isFoot(mode: string): boolean
+    declare export function isCarPark(mode: string): boolean
+    declare export function isCarPickup(mode: string): boolean
 }

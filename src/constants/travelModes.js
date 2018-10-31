@@ -1,9 +1,4 @@
 // @flow
-import type {
-    LegMode as LegModeType,
-    TransportMode as TransportModeType,
-    TransportSubmode as TransportSubmodeType,
-} from '../../flow-types'
 
 // Any for of public transportation
 export const AIR = 'air'
@@ -39,7 +34,7 @@ export const REGIONAL_CAR_FERRY = 'regionalCarFerry'
 export const TOURIST_RAILWAY = 'touristRailway'
 
 
-export const TransportMode: {[string]: TransportModeType} = {
+export const TransportMode = {
     BUS,
     TRAM,
     RAIL,
@@ -47,15 +42,16 @@ export const TransportMode: {[string]: TransportModeType} = {
     WATER,
     AIR,
     COACH,
+    CAR,
 }
 
-export const LegMode: {[string]: LegModeType} = {
+export const LegMode = {
     ...TransportMode,
     FOOT,
     BICYCLE,
 }
 
-export const TransportSubmode: {[string]: TransportSubmodeType} = {
+export const TransportSubmode = {
     AIRPORT_LINK_RAIL,
     HIGH_SPEED_PASSENGER_SERVICE,
     HIGH_SPEED_VEHICLE_SERVICE,
