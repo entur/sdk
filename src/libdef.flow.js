@@ -82,6 +82,12 @@ type $entur$sdk$Authority = {
     url?: string,
 }
 
+type $entur$sdk$Operator = {
+    id: string,
+    name: string,
+    url?: string,
+}
+
 type $entur$sdk$ValidityPeriod = { startTime: string, endTime: string }
 
 type $entur$sdk$ReportType = 'general' | 'incident' | null
@@ -177,6 +183,7 @@ type $entur$sdk$Leg = {
     aimedEndTime: string,
     aimedStartTime: string,
     authority?: $entur$sdk$Authority,
+    operator?: $entur$sdk$Operator,
     distance?: number,
     duration?: number,
     fromPlace: $entur$sdk$Place,

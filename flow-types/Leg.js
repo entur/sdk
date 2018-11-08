@@ -3,6 +3,7 @@
 import type { Line } from './Line'
 import type { Place } from './Place'
 import type { Authority } from './Authority'
+import type { Operator } from './Operator'
 import type { Quay } from './Quay'
 import type { ServiceJourney } from './ServiceJourney'
 import type { Situation } from './Situation'
@@ -22,6 +23,7 @@ export type Leg = {
     intermediateQuays: Array<Quay>,
     line?: Line,
     mode: LegMode,
+    operator?: Operator,
     pointsOnLink: PointsOnLink,
     realtime: boolean,
     ride: boolean,
