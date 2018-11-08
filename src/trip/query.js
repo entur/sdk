@@ -45,6 +45,7 @@ export const getItinerariesProps = `
         ${placeFields}
         intermediateQuays { id name description publicCode }
         authority { id name }
+        operator { id name url }
         ${lineFields}
         serviceJourney { ...serviceJourneyFields }
         ${intermediateEstimatedCallFields}
