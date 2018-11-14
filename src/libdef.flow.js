@@ -298,6 +298,8 @@ declare module '@entur/sdk' {
             query: $entur$sdk$TripPatternsQuery
         ): Promise<Array<$entur$sdk$TripPattern>>,
 
+        findTrips(from: string, to: string, date?: Date | string | number): Promise<Array<$entur$sdk$TripPattern>>,
+
         getStopPlaceDepartures(stopPlaceId: string, params?: {
             startTime?: string,
             range?: number,

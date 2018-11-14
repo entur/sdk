@@ -16,7 +16,7 @@ import type {
     StopPlace,
     LegMode,
 } from '../../flow-types'
-import { convertPositionToBbox } from '../utils'
+import { convertPositionToBbox, convertFeatureToLocation, isValidDate } from '../utils'
 
 type StopPlaceParams = {
     onForBoarding?: boolean, // deprecated
@@ -70,6 +70,37 @@ export function getTripPatterns(searchParams: GetTripPatternsParams): Promise<Ar
                 return []
             }
         })
+}
+
+export async function findTrips(
+    from: string,
+    to: string,
+    date?: Date | string | number,
+): Promise<Array<TripPattern>> {
+    const searchDate = date ? new Date(date) : new Date()
+
+    if (!isValidDate(searchDate)) {
+        throw new Error(`Entur SDK: Could not parse <date> argument "${date}" to valid Date`)
+    }
+
+    const [fromFeatures, toFeatures] = await Promise.all([
+        this.getFeatures(from),
+        this.getFeatures(to),
+    ])
+
+    if (!fromFeatures || !fromFeatures.length) {
+        throw new Error(`Entur SDK: Could not find any locations matching <from> argument "${from}"`)
+    }
+
+    if (!toFeatures || !toFeatures.length) {
+        throw new Error(`Entur SDK: Could not find any locations matching <to> argument "${to}"`)
+    }
+
+    return this.getTripPatterns({
+        searchDate,
+        from: convertFeatureToLocation(fromFeatures[0]),
+        to: convertFeatureToLocation(toFeatures[0]),
+    })
 }
 
 export function getStopPlaceDepartures(
