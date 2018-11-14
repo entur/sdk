@@ -1,12 +1,13 @@
 # Entur SDK
 
-This SDK simplifies the use of Entur's travel APIs in JavaScript apps. For more information about Entur's APIs, see https://www.entur.org/dev/ 
+This SDK simplifies the use of Entur's travel APIs in JavaScript apps. For more information about Entur's APIs, see https://www.entur.org/dev/
 
 Miss anything? Found a bug? File an [issue](https://github.com/entur/sdk/issues/new) or create a pull request!
 
 * [Installation](#install)
 * [Setup](#setup)
 * [API](#api)
+    * [findTrips](#findtrips)
     * [getTripPatterns](#gettrippatterns)
     * [getFeatures](#getfeatures)
     * [getStopPlaceDepartures](#getstopplacedepartures)
@@ -52,6 +53,27 @@ The Entur SDK uses multiple endpoints for its services. Each endpoint can be ove
 ```
 
 ## API
+
+### findTrips
+
+```javascript
+findTrips: (from: string, to: string, date?: Date | string | number) => Promise<Array<TripPattern>>
+```
+
+Finds up to 5 trip patterns from <from> to <to> at the time specified. This is a convenience method, which first tries to find locations for the given <from> and <to> strings before searching for trips between them. If you need more control, see the [`getTripPatterns`](#gettrippatterns) method.
+
+If no locations are found for either <from> or <to>, or if <date> is invalid, an error will be thrown.
+
+#### Parameters
+
+##### from (`string`)
+The place you want to search from. For instance `"Oslo"`
+
+##### to (`string`)
+The place you want to search from. For instance `"Bergen"`
+
+#### date (`Date | string | number`) [Optional]
+The wanted time of departure. Can be anything that is parseable by `new Date()`. If not provided, the search will be from "now".
 
 ### getTripPatterns
 
