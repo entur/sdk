@@ -1,5 +1,23 @@
 # Entur SDK
 
+This SDK simplifies the use of Entur's travel APIs in JavaScript apps. For more information about Entur's APIs, see https://www.entur.org/dev/ 
+
+Miss anything? Found a bug? File an [issue](https://github.com/entur/sdk/issues/new) or create a pull request!
+
+* [Installation](#install)
+* [Setup](#setup)
+* [API](#api)
+    * [getTripPatterns](#gettrippatterns)
+    * [getFeatures](#getfeatures)
+    * [getStopPlaceDepartures](#getstopplacedepartures)
+    * [getBikeRentalStation](#getbikerentalstation)
+    * [getBikeRentalStations](#getbikerentalstations)
+    * [getStopPlace](#getstopplace)
+    * [getStopPlacesByPosition](#getstopplacesbyposition)
+* [Utils](#utils)
+    * [throttler](#throttler)
+* [Flow Types](#flow-types)
+
 ## Install
 ```bash
 npm install @entur/sdk --save
@@ -33,14 +51,13 @@ The Entur SDK uses multiple endpoints for its services. Each endpoint can be ove
 }
 ```
 
-## Usage
+## API
 
 ### getTripPatterns
 
 ```javascript
-service.getTripPatterns(query);
+getTripPatterns: (query: TripPatternsQuery) => Promise<Array<TripPattern>>
 ```
-Returns: `Promise<Array<TripPattern>>`
 
 Types: [TripPattern](flow-types/TripPattern.js)
 
@@ -50,7 +67,7 @@ If you are going to do a huge amount of different searches at the same time, con
 
 #### Parameters
 
-##### query (`Object`)
+##### query (`TripPatternsQuery`)
 A search query is an object on the following form.
 
 | Key | Type | Default  | Description |
@@ -87,9 +104,8 @@ See [example/get-trip.js](./example/get-trip.js) for a more in depth example
 ### getFeatures
 
 ```javascript
-service.getFeatures(query, coords, params);
+getFeatures: (query: string, coords?: Coordinates, params?: GetFeaturesQuery) => Promise<Array<Feature>>
 ```
-Returns: `Promise<Array<Feature>>`
 
 Types: [Feature](flow-types/Feature.js), [Coordinates](flow-types/Coordinates.js)
 
@@ -106,19 +122,20 @@ A set of coordinates to use when the weighting search results. Examples: `{ lati
 The results closest to the coordinates will be weighted above results with equally good string matches.
 As an example, the street `Dronningens gate` exists both in Oslo and Trondheim. If you call `service.getFeatures('Dronningens gate', { latitude: 63.4305103, longitude: 10.3949874 })` (coordinates of Trondheim city center), the Dronningens gate in Trondheim will be preferred to the one in Oslo.
 
-##### params (`Object`) [Optional]
+##### params (`GetFeaturesQuery`) [Optional]
 An optional object of parameters to pass to the query.
 
 | Key                  | Type     | Default             | Description |
 |:---------------------|:---------|:--------------------|:------------|
-| `layers`             | `string` | `"venue,address"`   | The types of places to search for in a comma-separated string. `venue` means stop places and stations, `address` means postal addresses that might not be connected to public transport. |s
+| `layers`             | `string` | `"venue,address"`   | The types of places to search for in a comma-separated string. `venue` means stop places and stations, `address` means postal addresses that might not be connected to public transport.
 
 ### getStopPlaceDepartures
 
 ```javascript
-service.getStopPlaceDepartures(stopPlaceIds, params);
+getStopPlaceDepartures: (stopPlaceId: string, params?: GetStopPlaceDeparturesParams) => Promise<Array<EstimatedCall>>
+
+getStopPlaceDepartures: (stopPlaceIds: Array<string>, params?: GetStopPlaceDeparturesParams) => `Promise<Array<{ id: string, departures: Array<EstimatedCall>}>>
 ```
-Returns: `Promise<Array<EstimatedCall>>` | `Promise<Array<{ id: string, departures: Array<EstimatedCall>}>>`
 
 Types: [EstimatedCall](flow-types/EstimatedCall.js)
 
@@ -141,13 +158,11 @@ An optional object of parameters to pass to the query.
 | `departures`         | `number`       | `5`     | The number of departures to return for each stop place. |
 | `includeNonBoarding` | `boolean`      | `false` | Whether to include departures that do not accept boarding at given stop place. |
 
-
 ### getBikeRentalStation
 
 ```javascript
-service.getBikeRentalStation(stationId);
+getBikeRentalStation(stationId: string) => Promise<BikeRentalStation>
 ```
-Returns: `Promise<BikeRentalStation>`
 
 Types: [BikeRentalStation](flow-types/BikeRentalStation.js)
 
@@ -161,9 +176,8 @@ The ID of the bike rental station you are interested in. The method will return 
 ### getBikeRentalStations
 
 ```javascript
-service.getBikeRentalStations(coordinate, distance);
+getBikeRentalStations(coordinates: Coordinates, distance?: number) => Promise<Array<BikeRentalStation>>
 ```
-Returns: `Promise<Array<BikeRentalStation>>`
 
 Types: [BikeRentalStation](flow-types/BikeRentalStation.js)
 
@@ -183,9 +197,8 @@ The width and height of the bounding box are therefore `2 * distance`, and the c
 ### getStopPlace
 
 ```javascript
-service.getStopPlace(id);
+getStopPlace: (id: string) => Promise<StopPlace>
 ```
-Returns: `Promise<StopPlace>`
 
 Types: [StopPlace](flow-types/StopPlace.js)
 
@@ -194,9 +207,8 @@ Types: [StopPlace](flow-types/StopPlace.js)
 ### getStopPlacesByPosition
 
 ```javascript
-service.getStopPlacesByPosition(coordinate, distance);
+getStopPlacesByPosition: (coordinates: Coordinates, distance?: number) => Promise<Array<StopPlace>>
 ```
-Returns: `Promise<Array<StopPlace>>`
 
 Types: [StopPlace](flow-types/StopPlace.js)
 
@@ -204,7 +216,7 @@ Types: [StopPlace](flow-types/StopPlace.js)
 
 #### Parameters
 
-##### coordinates (`{ latitude: number, longitude: number }`)
+##### coordinates (`Coordinates`)
 The coordinates of which to find bike rental stations around.
 
 ##### distance (`number`) [Optional]
@@ -247,7 +259,7 @@ async function getTripPatternsForVeryManyDifferentLocations() {
 }
 ```
 
-## Flow types
+## Flow Types
 
 We provide a library definition for Flow. In order to use this, make sure you include it in your .flowconfig
 
