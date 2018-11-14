@@ -80,7 +80,7 @@ export async function findTrips(
     const searchDate = date ? new Date(date) : new Date()
 
     if (!isValidDate(searchDate)) {
-        throw new Error(`Entur SDK: Could not parse <date> argument "${date}" to valid Date`)
+        throw new Error('Entur SDK: Could not parse <date> argument to valid Date')
     }
 
     const [fromFeatures, toFeatures] = await Promise.all([

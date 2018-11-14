@@ -72,6 +72,6 @@ export const throttler = (func: Function, args: Array<any>): Promise<any> => {
     return Promise.all(args.map(a => promiseThrottle.add(func.bind(this, a))))
 }
 
-export function isValidDate(d) {
+export function isValidDate(d: any): boolean {
     return Object.prototype.toString.call(d) === '[object Date]' && !Number.isNaN(d.getTime())
 }
