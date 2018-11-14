@@ -100,7 +100,7 @@ Types: [Feature](flow-types/Feature.js), [Coordinates](flow-types/Coordinates.js
 ##### query (`string`)
 The search string that should resemble the name of the desired stop place or address. Examples: `"Oslo S"`, `"Schweigaards gate 23, Oslo"`, `"Voss stasjon"`.
 
-##### coords (`Coordinates`)
+##### coords (`Coordinates`) [Optional]
 A set of coordinates to use when the weighting search results. Examples: `{ latitude: 59.909774, longitude: 10.763712 }`.
 
 The results closest to the coordinates will be weighted above results with equally good string matches.
