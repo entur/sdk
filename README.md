@@ -87,24 +87,31 @@ See [example/get-trip.js](./example/get-trip.js) for a more in depth example
 ### getFeatures
 
 ```javascript
-service.getFeatures(query);
+service.getFeatures(query, coords, params);
 ```
 Returns: `Promise<Array<Feature>>`
 
 Types: [Feature](flow-types/Feature.js), [Coordinates](flow-types/Coordinates.js)
 
-`getFeatures` is for searching for stop places, stations or addresses. The method takes two arguments `query`, which is the search string, and `coords` which is an object ([Coordinates](flow-types/Coordinates.js)) consisting of latitude, longitude numbers.
+`getFeatures` is for searching for stop places, stations or addresses.
 
 #### Parameters
 
 ##### query (`string`)
 The search string that should resemble the name of the desired stop place or address. Examples: `"Oslo S"`, `"Schweigaards gate 23, Oslo"`, `"Voss stasjon"`.
 
-#### Parameters
-
 ##### coords (`Coordinates`)
 A set of coordinates to use when the weighting search results. Examples: `{ latitude: 59.909774, longitude: 10.763712 }`.
 
+The results closest to the coordinates will be weighted above results with equally good string matches.
+As an example, the street `Dronningens gate` exists both in Oslo and Trondheim. If you call `service.getFeatures('Dronningens gate', { latitude: 63.4305103, longitude: 10.3949874 })` (coordinates of Trondheim city center), the Dronningens gate in Trondheim will be preferred to the one in Oslo.
+
+##### params (`Object`) [Optional]
+An optional object of parameters to pass to the query.
+
+| Key                  | Type     | Default             | Description |
+|:---------------------|:---------|:--------------------|:------------|
+| `layers`             | `string` | `"venue,address"`   | The types of places to search for in a comma-separated string. `venue` means stop places and stations, `address` means postal addresses that might not be connected to public transport. |s
 
 ### getStopPlaceDepartures
 
