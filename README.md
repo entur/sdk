@@ -57,7 +57,7 @@ The Entur SDK uses multiple endpoints for its services. Each endpoint can be ove
 ### findTrips
 
 ```javascript
-findTrips: (from: string, to: string, date?: Date | string | number) => Promise<Array<TripPattern>>
+(from: string, to: string, date?: Date | string | number) => Promise<Array<TripPattern>>
 ```
 
 Finds up to 5 trip patterns from <from> to <to> at the time specified. This is a convenience method, which first tries to find locations for the given <from> and <to> strings before searching for trips between them. If you need more control, see the [`getTripPatterns`](#gettrippatterns) method.
@@ -78,7 +78,7 @@ The wanted time of departure. Can be anything that is parseable by `new Date()`.
 ### getTripPatterns
 
 ```javascript
-getTripPatterns: (query: TripPatternsQuery) => Promise<Array<TripPattern>>
+(query: TripPatternsQuery) => Promise<Array<TripPattern>>
 ```
 
 Types: [TripPattern](flow-types/TripPattern.js)
@@ -126,7 +126,7 @@ See [example/get-trip.js](./example/get-trip.js) for a more in depth example
 ### getFeatures
 
 ```javascript
-getFeatures: (query: string, coords?: Coordinates, params?: GetFeaturesQuery) => Promise<Array<Feature>>
+(query: string, coords?: Coordinates, params?: GetFeaturesQuery) => Promise<Array<Feature>>
 ```
 
 Types: [Feature](flow-types/Feature.js), [Coordinates](flow-types/Coordinates.js)
@@ -154,9 +154,11 @@ An optional object of parameters to pass to the query.
 ### getStopPlaceDepartures
 
 ```javascript
-getStopPlaceDepartures: (stopPlaceId: string, params?: GetStopPlaceDeparturesParams) => Promise<Array<EstimatedCall>>
+(stopPlaceId: string, params?: GetStopPlaceDeparturesParams) => Promise<Array<EstimatedCall>>
+```
 
-getStopPlaceDepartures: (stopPlaceIds: Array<string>, params?: GetStopPlaceDeparturesParams) => `Promise<Array<{ id: string, departures: Array<EstimatedCall>}>>
+```javascript
+(stopPlaceIds: Array<string>, params?: GetStopPlaceDeparturesParams) => Promise<Array<{ id: string, departures: Array<EstimatedCall> }>>
 ```
 
 Types: [EstimatedCall](flow-types/EstimatedCall.js)
@@ -183,7 +185,7 @@ An optional object of parameters to pass to the query.
 ### getBikeRentalStation
 
 ```javascript
-getBikeRentalStation(stationId: string) => Promise<BikeRentalStation>
+(stationId: string) => Promise<BikeRentalStation>
 ```
 
 Types: [BikeRentalStation](flow-types/BikeRentalStation.js)
@@ -198,7 +200,7 @@ The ID of the bike rental station you are interested in. The method will return 
 ### getBikeRentalStations
 
 ```javascript
-getBikeRentalStations(coordinates: Coordinates, distance?: number) => Promise<Array<BikeRentalStation>>
+(coordinates: Coordinates, distance?: number) => Promise<Array<BikeRentalStation>>
 ```
 
 Types: [BikeRentalStation](flow-types/BikeRentalStation.js)
@@ -219,7 +221,7 @@ The width and height of the bounding box are therefore `2 * distance`, and the c
 ### getStopPlace
 
 ```javascript
-getStopPlace: (id: string) => Promise<StopPlace>
+(id: string) => Promise<StopPlace>
 ```
 
 Types: [StopPlace](flow-types/StopPlace.js)
@@ -229,7 +231,7 @@ Types: [StopPlace](flow-types/StopPlace.js)
 ### getStopPlacesByPosition
 
 ```javascript
-getStopPlacesByPosition: (coordinates: Coordinates, distance?: number) => Promise<Array<StopPlace>>
+(coordinates: Coordinates, distance?: number) => Promise<Array<StopPlace>>
 ```
 
 Types: [StopPlace](flow-types/StopPlace.js)
