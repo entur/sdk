@@ -48,6 +48,7 @@ type $entur$sdk$TransportSubmode =
     | 'railReplacementBus'
     | 'regionalCarFerry'
     | 'touristRailway'
+    | 'airportLinkBus'
 
 type $entur$sdk$Config = {
     clientName: string,
