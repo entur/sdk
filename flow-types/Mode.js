@@ -34,3 +34,4 @@ export type TransportSubmode =
     | 'railReplacementBus'
     | 'regionalCarFerry'
     | 'touristRailway'
+    | 'airportLinkBus'
