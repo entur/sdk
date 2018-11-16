@@ -364,6 +364,7 @@ declare module '@entur/sdk' {
     declare export var RAIL_REPLACEMENT_BUS: 'railReplacementBus'
     declare export var REGIONAL_CAR_FERRY: 'regionalCarFerry'
     declare export var TOURIST_RAILWAY: 'touristRailway'
+    declare export var AIRPORT_LINK_BUS: 'airportLinkBus'
 
     declare export var TransportMode: {
         BUS: 'bus',
@@ -400,6 +401,7 @@ declare module '@entur/sdk' {
         RAIL_REPLACEMENT_BUS: 'railReplacementBus',
         REGIONAL_CAR_FERRY: 'regionalCarFerry',
         TOURIST_RAILWAY: 'touristRailway',
+        AIRPORT_LINK_BUS: 'airportLinkBus',
     }
 
     declare export var ONSTREET_BUS: 'onstreetBus'

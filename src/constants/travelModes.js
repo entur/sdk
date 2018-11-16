@@ -32,6 +32,7 @@ export const NATIONAL_CAR_FERRY = 'nationalCarFerry'
 export const RAIL_REPLACEMENT_BUS = 'railReplacementBus'
 export const REGIONAL_CAR_FERRY = 'regionalCarFerry'
 export const TOURIST_RAILWAY = 'touristRailway'
+export const AIRPORT_LINK_BUS = 'airportLinkBus'
 
 
 export const TransportMode = {
@@ -62,6 +63,7 @@ export const TransportSubmode = {
     RAIL_REPLACEMENT_BUS,
     REGIONAL_CAR_FERRY,
     TOURIST_RAILWAY,
+    AIRPORT_LINK_BUS,
 }
 
 export const isAir = (mode: string): boolean => mode === AIR
