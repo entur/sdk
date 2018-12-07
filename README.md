@@ -17,7 +17,7 @@ Miss anything? Found a bug? File an [issue](https://github.com/entur/sdk/issues/
     * [getStopPlacesByPosition](#getstopplacesbyposition)
 * [Utils](#utils)
     * [throttler](#throttler)
-* [Flow Types](#flow-types)
+* [Types](#types)
 
 ## Install
 ```bash
@@ -283,9 +283,9 @@ async function getTripPatternsForVeryManyDifferentLocations() {
 }
 ```
 
-## Flow Types
+## Flow and TypeScript
 
-We provide a library definition for Flow. In order to use this, make sure you include it in your .flowconfig
+We provide library definitions for Flow and TypeScript. TypeScript should work out of the box. For Flow, make sure you include the following in your .flowconfig:
 
 ```
 [libs]
