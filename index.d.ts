@@ -157,44 +157,37 @@ export interface Location {
   coordinates?: Coordinates;
 }
 
-export enum TransportMode {
-  Air = "air",
-  Bus = "bus",
-  // Cableway = 'cableway',
-  Water = "water",
-  // Funicular = 'funicular',
-  // Lift = 'lift',
-  Rail = "rail",
-  Metro = "metro",
-  Tram = "tram",
-  Coach = "coach",
-  Car = "car"
-  // Unknown = 'unknown'
-}
+export type TransportMode =
+  | "air"
+  | "bus"
+  // | 'cableway'
+  | "water"
+  // | 'funicular'
+  // | 'lift'
+  | "rail"
+  | "metro"
+  | "tram"
+  | "coach"
+  | "car";
+// | 'unknown'
 
-export enum NonTransitTransportMode {
-  Bicycle = "bicycle",
-  Foot = "foot"
-}
-
-export type LegMode = TransportMode | NonTransitTransportMode;
+export type LegMode = TransportMode | "bicycle" | "foot";
 // | 'transit'
 // | 'car_park'
 // | 'car_pickup'
 
-export enum TransportSubmode {
-  AirportLinkRail = "airportLinkRail",
-  HighSpeedPassengerService = "highSpeedPassengerService",
-  HighSpeedVehicleService = "highSpeedVehicleService",
-  InternationalCarFerry = "internationalCarFerry",
-  LocalCarFerry = "localCarFerry",
-  LocalPassengerFerry = "localPassengerFerry",
-  NationalCarFerry = "nationalCarFerry",
-  RailReplacementBus = "railReplacementBus",
-  RegionalCarFerry = "regionalCarFerry",
-  TouristRailway = "touristRailway",
-  AirportLinkBus = "airportLinkBus"
-}
+export type TransportSubmode =
+  | "airportLinkRail"
+  | "highSpeedPassengerService"
+  | "highSpeedVehicleService"
+  | "internationalCarFerry"
+  | "localCarFerry"
+  | "localPassengerFerry"
+  | "nationalCarFerry"
+  | "railReplacementBus"
+  | "regionalCarFerry"
+  | "touristRailway"
+  | "airportLinkBus";
 
 export interface MultilingualString {
   lang: string;
