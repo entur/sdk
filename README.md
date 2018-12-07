@@ -17,7 +17,7 @@ Miss anything? Found a bug? File an [issue](https://github.com/entur/sdk/issues/
     * [getStopPlacesByPosition](#getstopplacesbyposition)
 * [Utils](#utils)
     * [throttler](#throttler)
-* [Types](#types)
+* [Types](#flow-and-typescript)
 
 ## Install
 ```bash
