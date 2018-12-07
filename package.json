@@ -10,6 +10,7 @@
   "browser": {
     "./lib/fetch.js": "./lib/fetch.browser.js"
   },
+  "typings": "./index.d.ts",
   "scripts": {
     "lint": "eslint src/ example/",
     "test": "echo 'There are no tests'",
