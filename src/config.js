@@ -22,8 +22,8 @@ export type ArgumentConfig = {
 }
 
 const HOST_CONFIG = {
-    journeyplanner: 'https://api.entur.org/journeyplanner/2.0/index',
-    geocoder: 'https://api.entur.org/api/geocoder/1.1',
+    journeyplanner: 'https://api.entur.io/journey-planner/v2',
+    geocoder: 'https://api.entur.io/geocoder/v1',
 }
 
 export function getServiceConfig(config: ArgumentConfig): ServiceConfig {
@@ -45,7 +45,6 @@ export function getJourneyPlannerHost({ hosts, clientName }: ServiceConfig): Hos
         host: hosts.journeyplanner,
         headers: {
             'ET-Client-Name': clientName,
-            'extended-info': true,
         },
     }
 }
