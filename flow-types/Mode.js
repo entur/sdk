@@ -35,3 +35,4 @@ export type TransportSubmode =
     | 'regionalCarFerry'
     | 'touristRailway'
     | 'airportLinkBus'
+    | 'cityTram'

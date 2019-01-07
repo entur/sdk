@@ -187,7 +187,8 @@ export type TransportSubmode =
   | "railReplacementBus"
   | "regionalCarFerry"
   | "touristRailway"
-  | "airportLinkBus";
+  | "airportLinkBus"
+  | "cityTram";
 
 export interface MultilingualString {
   lang: string;
@@ -238,6 +239,7 @@ export interface ServiceJourney {
   situations: Array<Situation>;
   privateCode?: string;
   linePublicCode?: string;
+  transportSubmode?: TransportSubmode,
   wheelchairAccessible?: "noInformation" | "possible" | "notPossible";
 }
 

@@ -49,6 +49,7 @@ type $entur$sdk$TransportSubmode =
     | 'regionalCarFerry'
     | 'touristRailway'
     | 'airportLinkBus'
+    | 'cityTram'
 
 type $entur$sdk$Config = {
     clientName: string,
@@ -163,6 +164,7 @@ type $entur$sdk$ServiceJourney = {
     situations: Array<$entur$sdk$Situation>,
     privateCode?: string,
     linePublicCode?: string,
+    transportSubmode?: $entur$sdk$TransportSubmode,
     wheelchairAccessible?: 'noInformation' | 'possible' | 'notPossible',
 }
 
