@@ -155,6 +155,7 @@ export const getStopPlaceDeparturesProps = `
       id
       journeyPattern { ...journeyPatternFields }
       notices { text }
+      transportSubmode
       ${situationFields}
     }
 
