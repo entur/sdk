@@ -1,6 +1,6 @@
 // @flow
 
-import { get } from '../api'
+import { get } from '../http'
 import { getGeocoderHost } from '../config'
 import type { Feature } from '../../flow-types/Feature'
 import type { Coordinates } from '../../flow-types/Coordinates'
