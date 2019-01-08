@@ -1,5 +1,5 @@
 // @flow
-import queryParams from 'query-params'
+import qs from 'qs'
 import cleanDeep from 'clean-deep'
 import fetch from './fetch'
 
@@ -21,7 +21,7 @@ export function get(
     headers?: Object,
     config?: Object,
 ): Promise<Object> {
-    return fetch(`${url}?${queryParams.encode(params)}`, {
+    return fetch(`${url}?${qs.stringify(params)}`, {
         method: 'get',
         ...config,
         headers: { ...DEFAULT_HEADERS, ...headers },
