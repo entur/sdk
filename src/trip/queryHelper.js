@@ -1,70 +1,55 @@
-/*
- * Common query fields and fragments used in Journeyplanner queries.
- * Interpolate them into the query strings wherever they are needed.
- */
+// @flow
+export const noticeFields = {
+    text: true,
+}
 
-const placeFieldsKey = 'placeFields'
+export const situationFields = {
+    situationNumber: true,
+    summary: { value: true },
+    description: { value: true },
+    detail: { value: true },
+    validityPeriod: {
+        startTime: true,
+        endTime: true,
+    },
+    reportType: true,
+    infoLink: true,
+}
 
-const lineFieldsKey = 'lineFields'
+export const lineFields = {
+    id: true,
+    publicCode: true,
+    name: true,
+    transportMode: true,
+    description: true,
+    presentation: {
+        colour: true,
+        textColour: true,
+    },
+    authority: {
+        id: true,
+        name: true,
+    },
+    notices: noticeFields,
+    situations: situationFields,
+}
 
-const intEstimatedCallFieldsKey = 'intEstimatedCallFields'
+export const estimatedCallFields = {
+    date: true,
+    forBoarding: true,
+    forAlighting: true,
+}
 
-const situationFieldsKey = 'situationFields'
-const situationFieldsVal = `situations { ...${situationFieldsKey} }`
-
-
-export const placeFields = `
-    fromPlace { ...${placeFieldsKey} }
-    toPlace { ...${placeFieldsKey} }`
-
-export const placeFragment = `
-        fragment ${placeFieldsKey} on Place {
-          name
-          latitude
-          longitude
-          quay {
-            id
-            name
-            description
-            publicCode
-            ${situationFieldsVal}
-          }
-        }`
-export const lineFields = `line { ...${lineFieldsKey} }`
-export const lineFragment = `
-    fragment ${lineFieldsKey} on Line {
-      id
-      publicCode
-      name
-      transportMode
-      description
-      presentation { colour textColour }
-      authority { id name }
-      notices { text }
-      ${situationFieldsVal}
-    }`
-
-export const intermediateEstimatedCallFields = `intermediateEstimatedCalls { ...${intEstimatedCallFieldsKey} }`
-export const intermediateEstimatedCallFragment = `
-    fragment ${intEstimatedCallFieldsKey} on EstimatedCall {
-      quay { id name stopPlace { id } }
-      forAlighting
-      forBoarding
-      expectedArrivalTime
-      expectedDepartureTime
-      aimedArrivalTime
-      aimedDepartureTime
-      date
-    }`
-
-export const situationFields = situationFieldsVal
-export const situationFragment = `
-    fragment ${situationFieldsKey} on PtSituationElement {
-      situationNumber
-      summary { value }
-      description { value }
-      detail { value }
-      validityPeriod { startTime endTime }
-      reportType
-      infoLink
-    }`
+export const intermediateEstimatedCallFields = {
+    quay: {
+        id: true,
+        name: true,
+        stopPlace: {
+            id: true,
+        },
+    },
+    expectedArrivalTime: true,
+    expectedDepartureTime: true,
+    aimedArrivalTime: true,
+    aimedDepartureTime: true,
+}

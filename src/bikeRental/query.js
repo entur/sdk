@@ -1,35 +1,45 @@
-export const getBikeRentalStationByBoxProps = `
-query bikeRentalStationsByBox($minLat:Float, $minLng:Float, $maxLat:Float, $maxLng:Float) {
-  bikeRentalStationsByBbox(minimumLatitude: $minLat, minimumLongitude: $minLng, maximumLatitude: $maxLat , maximumLongitude: $maxLng) {
-    id
-    name
-    bikesAvailable
-    spacesAvailable
-    longitude
-    latitude
-  }
-}`
+// @flow
+import { VariableType } from 'json-to-graphql-query'
 
-export const getBikeRentalStationProp = `
-query bikeRentalStation($id:String!) {
-  bikeRentalStation(id:$id) {
-    id
-    name
-    bikesAvailable
-    spacesAvailable
-    longitude
-    latitude
-  }
-}`
+const bikeRentalStationFields = {
+    id: true,
+    name: true,
+    bikesAvailable: true,
+    spacesAvailable: true,
+    longitude: true,
+    latitude: true,
+}
 
-export const getBikeRentalStationsProps = `
-{
-  bikeRentalStation {
-    id
-    name
-    bikesAvailable
-    spacesAvailable
-    longitude
-    latitude
-  }
-}`
+export const getBikeRentalStationQuery = {
+    query: {
+        __variables: {
+            id: 'String!',
+        },
+        bikeRentalStation: {
+            __args: {
+                id: new VariableType('id'),
+            },
+            ...bikeRentalStationFields,
+        },
+    },
+}
+
+export const getBikeRentalStationByBoxQuery = {
+    query: {
+        __variables: {
+            minLat: 'Float',
+            minLng: 'Float',
+            maxLat: 'Float',
+            maxLng: 'Float',
+        },
+        bikeRentalStationsByBbox: {
+            __args: {
+                minimumLatitude: new VariableType('minLat'),
+                minimumLongitude: new VariableType('minLng'),
+                maximumLatitude: new VariableType('maxLat'),
+                maximumLongitude: new VariableType('maxLng'),
+            },
+            ...bikeRentalStationFields,
+        },
+    },
+}
