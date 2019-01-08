@@ -28,7 +28,7 @@ export function get(
     })
         .then(responseHandler)
         .then(res => res.json())
-        .then(cleanDeep)
+        .then(data => cleanDeep(data, { emptyArrays: false }))
 }
 
 export function post(
@@ -45,5 +45,5 @@ export function post(
     })
         .then(responseHandler)
         .then(res => res.json())
-        .then(cleanDeep)
+        .then(data => cleanDeep(data, { emptyArrays: false }))
 }
