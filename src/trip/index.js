@@ -1,6 +1,8 @@
 // @flow
 import { post } from '../api'
-import { FOOT, BUS, TRAM, RAIL, METRO, WATER, AIR } from '../constants/travelModes'
+import {
+    FOOT, BUS, TRAM, RAIL, METRO, WATER, AIR,
+} from '../constants/travelModes'
 import {
     getItinerariesProps,
     getStopPlaceDeparturesProps,
