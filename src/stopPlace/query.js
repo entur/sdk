@@ -58,3 +58,57 @@ export const getStopPlacesByBboxQuery = {
         },
     },
 }
+
+export const getStopPlaceFacilitiesQuery = {
+    query: {
+        __variables: {
+            id: 'String!',
+        },
+        stopPlace: {
+            __args: {
+                id: new VariableType('id'),
+            },
+            id: true,
+            name: {
+                value: true,
+            },
+            accessibilityAssessment: {
+                limitations: {
+                    wheelchairAccess: true,
+                    stepFreeAccess: true,
+                },
+            },
+            placeEquipments: {
+                waitingRoomEquipment: {
+                    id: true,
+                },
+                shelterEquipment: {
+                    id: true,
+                },
+                sanitaryEquipment: {
+                    id: true,
+                    numberOfToilets: true,
+                    gender: true,
+                },
+                ticketingEquipment: {
+                    numberOfMachines: true,
+                    ticketMachines: true,
+                    ticketOffice: true,
+                },
+            },
+        },
+        parking: {
+            __args: {
+                stopPlaceId: new VariableType('id'),
+            },
+            name: {
+                value: true,
+                lang: true,
+            },
+            parentSiteRef: true,
+            totalCapacity: true,
+            principalCapacity: true,
+            parkingVehicleTypes: true,
+        },
+    },
+}

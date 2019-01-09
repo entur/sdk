@@ -3,7 +3,11 @@ import { journeyPlannerQuery, nsrQuery } from './api'
 import {
     getTripPatterns, getStopPlaceDepartures, findTrips,
 } from './trip'
-import { getStopPlace, getStopPlacesByPosition } from './stopPlace'
+import {
+    getStopPlace,
+    getStopPlacesByPosition,
+    getStopPlaceFacilities,
+} from './stopPlace'
 import { getBikeRentalStation, getBikeRentalStations } from './bikeRental'
 import { getFeatures, getLocationsDEPRECATED } from './geocoder'
 import { getServiceConfig } from './config'
@@ -34,6 +38,8 @@ class EnturService {
     getStopPlace = getStopPlace
 
     getStopPlacesByPosition = getStopPlacesByPosition
+
+    getStopPlaceFacilities = getStopPlaceFacilities
 
     getBikeRentalStation = getBikeRentalStation
 

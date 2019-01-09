@@ -1,7 +1,11 @@
 // @flow
-import { journeyPlannerQuery } from '../api'
+import { journeyPlannerQuery, nsrQuery } from '../api'
 
-import { getStopPlaceQuery, getStopPlacesByBboxQuery } from './query'
+import {
+    getStopPlaceQuery,
+    getStopPlacesByBboxQuery,
+    getStopPlaceFacilitiesQuery,
+} from './query'
 
 import { convertPositionToBbox } from '../utils'
 
@@ -32,4 +36,10 @@ export function getStopPlacesByPosition(
             }
             return response.data.stopPlacesByBbox
         })
+}
+
+export function getStopPlaceFacilities(stopPlaceId: string) {
+    return nsrQuery(getStopPlaceFacilitiesQuery, {
+        id: stopPlaceId,
+    })
 }
