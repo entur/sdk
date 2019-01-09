@@ -1,5 +1,5 @@
 // @flow
-import { journeyPlannerQuery } from './api'
+import { journeyPlannerQuery, nsrQuery } from './api'
 import {
     getTripPatterns, getStopPlaceDepartures, findTrips,
 } from './trip'
@@ -18,6 +18,8 @@ class EnturService {
     }
 
     journeyPlannerQuery = journeyPlannerQuery
+
+    nsrQuery = nsrQuery
 
     getFeatures = getFeatures
 

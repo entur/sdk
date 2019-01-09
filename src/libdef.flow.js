@@ -306,6 +306,13 @@ declare module '@entur/sdk' {
             config?: $entur$sdk$ServiceConfig,
         ): Promise<$entur$sdk$journeyPlannerResponse>,
 
+        nsrQuery<$entur$sdk$nsrResponse>(
+            queryObj: Object | string,
+            variables?: Object,
+            ignoreFields?: Array<string>,
+            config?: $entur$sdk$ServiceConfig,
+        ): Promise<$entur$sdk$nsrResponse>,
+
         getFeatures(
             query: string,
             coords?: $entur$sdk$Coordinates,

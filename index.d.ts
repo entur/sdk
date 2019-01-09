@@ -326,6 +326,12 @@ declare class EnturService {
       ignoreFields?: Array<string>,
       config?: ServiceConfig,
   ): Promise<journeyPlannerResponse>;
+  nsrQuery<nsrResponse>(
+      queryObj: Object | string,
+      variables?: Object,
+      ignoreFields?: Array<string>,
+      config?: ServiceConfig,
+  ): Promise<nsrResponse>;
   findTrips(
     from: string,
     to: string,
