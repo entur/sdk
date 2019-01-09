@@ -1,7 +1,8 @@
 // @flow
 import { journeyPlannerQuery } from '../api'
 
-import { getBikeRentalStationProp, getBikeRentalStationByBoxProps } from './query'
+import { getBikeRentalStationQuery, getBikeRentalStationByBoxQuery } from './query'
+
 import { convertPositionToBbox } from '../utils'
 import type { BikeRentalStation, Coordinates } from '../../flow-types'
 
@@ -10,7 +11,7 @@ export function getBikeRentalStation(stationId: string): Promise<BikeRentalStati
         id: stationId,
     }
 
-    return journeyPlannerQuery(getBikeRentalStationProp, variables, this.config)
+    return journeyPlannerQuery(getBikeRentalStationQuery, variables, undefined, this.config)
         .then(response => response.data.bikeRentalStation)
 }
 
@@ -20,6 +21,6 @@ export function getBikeRentalStations(
 ): Promise<Array<BikeRentalStation>> {
     const variables = convertPositionToBbox(coordinates, distance)
 
-    return journeyPlannerQuery(getBikeRentalStationByBoxProps, variables, this.config)
+    return journeyPlannerQuery(getBikeRentalStationByBoxQuery, variables, undefined, this.config)
         .then((response: Object = {}) => response?.data?.bikeRentalStationsByBbox || [])
 }

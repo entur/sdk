@@ -1,8 +1,12 @@
 // @flow
+import { jsonToGraphQLQuery } from 'json-to-graphql-query'
+
 import { post } from './http'
 
 import { getJourneyPlannerHost } from './config'
 import type { ServiceConfig } from './config'
+
+const pretty = process.env.NODE_ENV !== 'production'
 
 function errorHandler(response: Object): Object {
     if (response.errors && response.errors[0]) {
@@ -13,16 +17,18 @@ function errorHandler(response: Object): Object {
 }
 
 export function journeyPlannerQuery<T>(
-    query: string,
-    variables: Object,
+    queryObj: Object | string,
+    variables?: Object,
+    ignoreFields?: Array<string>,
     config?: ServiceConfig,
 ): Promise<T> {
     const { host, headers } = getJourneyPlannerHost((this && this.config) || config)
     const url = `${host}/graphql`
 
-    return post(url, {
-        query,
-        variables,
-    }, headers)
+    const query = typeof queryObj === 'string'
+        ? queryObj
+        : jsonToGraphQLQuery(queryObj, { pretty, ignoreFields })
+
+    return post(url, { query, variables }, headers)
         .then(errorHandler)
 }

@@ -1,121 +1,170 @@
 // @flow
+import { VariableType } from 'json-to-graphql-query'
+
 import {
-    placeFields,
-    lineFields,
-    intermediateEstimatedCallFields,
-    placeFragment,
-    lineFragment,
+    noticeFields,
     situationFields,
-    intermediateEstimatedCallFragment,
-    situationFragment,
+    lineFields,
+    estimatedCallFields,
+    intermediateEstimatedCallFields,
 } from './queryHelper'
 
+const journeyPatternFields = {
+    id: true,
+    name: true,
+    line: lineFields,
+    notices: noticeFields,
+}
 
-export const getItinerariesProps = `
-    query tripPatterns($numTripPatterns:Int!,$wheelchair:Boolean!,$from:Location!,$to:Location!,$dateTime:DateTime!,$arriveBy:Boolean!,$modes:[Mode]!){
-        trip(
-            numTripPatterns: $numTripPatterns
-            wheelchair: $wheelchair
-            from: $from
-            to: $to
-            dateTime: $dateTime
-            arriveBy: $arriveBy
-            modes: $modes
-        ) {
-            tripPatterns {
-                startTime
-                endTime
-                duration
-                waitingTime
-                walkDistance
-                legs { ...legFields }
-            }
-        }
-    }
+const serviceJourneyFields = {
+    id: true,
+    privateCode: true,
+    linePublicCode: true,
+    wheelchairAccessible: true,
+    journeyPattern: journeyPatternFields,
+    notices: noticeFields,
+    situations: situationFields,
+}
 
-    fragment legFields on Leg {
-        mode
-        aimedStartTime
-        aimedEndTime
-        expectedStartTime
-        expectedEndTime
-        realtime
-        distance
-        duration
-        pointsOnLink { points length }
-        ${placeFields}
-        intermediateQuays { id name description publicCode }
-        authority { id name }
-        operator { id name url }
-        ${lineFields}
-        serviceJourney { ...serviceJourneyFields }
-        ${intermediateEstimatedCallFields}
-        ride
-    }
+const quayFields = {
+    id: true,
+    publicCode: true,
+    description: true,
+}
 
-    ${placeFragment}
+const placeFields = {
+    name: true,
+    latitude: true,
+    longitude: true,
+    quay: {
+        ...quayFields,
+        name: true,
+        situations: situationFields,
+    },
+}
 
-    ${lineFragment}
+const legFields = {
+    mode: true,
+    aimedStartTime: true,
+    aimedEndTime: true,
+    expectedStartTime: true,
+    expectedEndTime: true,
+    realtime: true,
+    distance: true,
+    duration: true,
+    ride: true,
 
-    fragment serviceJourneyFields on ServiceJourney {
-      id
-      privateCode
-      linePublicCode
-      wheelchairAccessible
-      journeyPattern { notices { text } }
-      notices { text }
-      ${situationFields}
-    }
+    fromPlace: placeFields,
+    toPlace: placeFields,
+    serviceJourney: serviceJourneyFields,
+    line: lineFields,
+    intermediateQuays: {
+        id: true,
+        name: true,
+        description: true,
+        publicCode: true,
+    },
+    intermediateEstimatedCalls: {
+        ...estimatedCallFields,
+        ...intermediateEstimatedCallFields,
+    },
 
-    ${intermediateEstimatedCallFragment}
+    pointsOnLink: {
+        points: true,
+        length: true,
+    },
+    authority: {
+        id: true,
+        name: true,
+    },
+    operator: {
+        id: true,
+        name: true,
+        url: true,
+    },
+}
 
-    ${situationFragment}
-`
+export const getTripPatternQuery = {
+    query: {
+        __variables: {
+            numTripPatterns: 'Int!',
+            from: 'Location!',
+            to: 'Location!',
+            dateTime: 'DateTime!',
+            arriveBy: 'Boolean!',
+            wheelchair: 'Boolean!',
+            modes: '[Mode]!',
 
-export const getStopPlaceDeparturesProps = `
-    query StopPlaceDepartures($ids:[String]!,$start:DateTime!,$range:Int!,$departures:Int!,$omitNonBoarding:Boolean!) {
-        stopPlaces(ids:$ids) {
-          id
-          estimatedCalls(startTime:$start, timeRange:$range, numberOfDepartures:$departures, omitNonBoarding:$omitNonBoarding) { ...estimatedCallFields }
-        }
-    }
+        },
+        trip: {
+            __args: {
+                numTripPatterns: new VariableType('numTripPatterns'),
+                from: new VariableType('from'),
+                to: new VariableType('to'),
+                dateTime: new VariableType('dateTime'),
+                arriveBy: new VariableType('arriveBy'),
+                wheelchair: new VariableType('wheelchair'),
+                modes: new VariableType('modes'),
+            },
+            tripPatterns: {
+                startTime: true,
+                endTime: true,
+                duration: true,
+                waitingTime: true,
+                walkDistance: true,
+                legs: legFields,
+            },
+        },
+    },
+}
 
-    fragment estimatedCallFields on EstimatedCall {
-        aimedDepartureTime
-        expectedDepartureTime
-        realtime
-        forBoarding
-        forAlighting
-        date
-        destinationDisplay { frontText }
-        notices { text }
-        quay { ...quayFields }
-        serviceJourney { ...serviceJourneyFields }
-    }
-
-    fragment quayFields on Quay {
-        id
-        publicCode
-        description
-        ${situationFields}
-    }
-
-    fragment serviceJourneyFields on ServiceJourney {
-      id
-      journeyPattern { ...journeyPatternFields }
-      notices { text }
-      transportSubmode
-      ${situationFields}
-    }
-
-    fragment journeyPatternFields on JourneyPattern {
-      id
-      name
-      ${lineFields}
-      notices { text }
-    }
-
-    ${lineFragment}
-
-    ${situationFragment}
-`
+export const getStopPlaceDeparturesQuery = {
+    query: {
+        __variables: {
+            ids: '[String]!',
+            start: 'DateTime!',
+            range: 'Int!',
+            departures: 'Int!',
+            omitNonBoarding: 'Boolean!',
+        },
+        stopPlaces: {
+            __args: {
+                ids: new VariableType('ids'),
+            },
+            id: true,
+            estimatedCalls: {
+                __args: {
+                    startTime: new VariableType('start'),
+                    timeRange: new VariableType('range'),
+                    numberOfDepartures: new VariableType('departures'),
+                    omitNonBoarding: new VariableType('omitNonBoarding'),
+                },
+                aimedDepartureTime: true,
+                expectedDepartureTime: true,
+                realtime: true,
+                forBoarding: true,
+                forAlighting: true,
+                date: true,
+                destinationDisplay: {
+                    frontText: true,
+                },
+                notices: noticeFields,
+                quay: {
+                    ...quayFields,
+                    situations: situationFields,
+                },
+                serviceJourney: {
+                    id: true,
+                    journeyPattern: {
+                        id: true,
+                        name: true,
+                        line: lineFields,
+                        notices: noticeFields,
+                    },
+                    notices: noticeFields,
+                    transportSubmode: true,
+                },
+            },
+        },
+    },
+}

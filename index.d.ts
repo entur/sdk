@@ -1,3 +1,19 @@
+export interface Config = {
+    clientName: string,
+    hosts?: {
+        journeyPlanner?: string,
+        geocoder?: string,
+    }
+}
+
+export interface ServiceConfig = {
+    clientName: string,
+    hosts: {
+        journeyplanner: string,
+        geocoder: string,
+    },
+}
+
 export interface Alert {
   id?: string;
   alertDescriptionText: string;
@@ -303,7 +319,13 @@ export interface GetStopPlaceDeparturesParams {
 }
 
 declare class EnturService {
-  constructor(args: { clientName: string });
+  constructor(args: Config);
+  journeyPlannerQuery<journeyPlannerResponse>(
+      queryObj: Object | string,
+      variables?: Object,
+      ignoreFields?: Array<string>,
+      config?: ServiceConfig,
+  ): Promise<journeyPlannerResponse>;
   findTrips(
     from: string,
     to: string,

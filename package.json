@@ -22,6 +22,7 @@
     "@turf/bbox": "^6.0.1",
     "@turf/destination": "^6.0.1",
     "clean-deep": "^3.0.2",
+    "json-to-graphql-query": "^1.9.0",
     "node-fetch": "^2.3.0",
     "promise-throttle": "^1.0.0",
     "qs": "^6.6.0",

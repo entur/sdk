@@ -3,9 +3,10 @@ import { journeyPlannerQuery } from '../api'
 import {
     FOOT, BUS, TRAM, RAIL, METRO, WATER, AIR,
 } from '../constants/travelModes'
+
 import {
-    getItinerariesProps,
-    getStopPlaceDeparturesProps,
+    getTripPatternQuery,
+    getStopPlaceDeparturesQuery,
 } from './query'
 
 import type {
@@ -25,6 +26,7 @@ type StopPlaceParams = {
 const DEFAULT_SEARCH_PARAMS = {
     arriveBy: false,
     modes: [FOOT, BUS, TRAM, RAIL, METRO, WATER, AIR],
+    transportSubmode: [],
     limit: 5,
     wheelchairAccessible: false,
 }
@@ -44,7 +46,9 @@ export type GetTripPatternsParams = {
     limit?: number,
     wheelchairAccessible?: boolean,
 }
-export function getTripPatterns(searchParams: GetTripPatternsParams): Promise<Array<TripPattern>> {
+export function getTripPatterns(
+    searchParams: GetTripPatternsParams,
+): Promise<Array<TripPattern>> {
     const {
         searchDate, limit, wheelchairAccessible, ...rest
     } = { ...DEFAULT_SEARCH_PARAMS, ...searchParams }
@@ -56,7 +60,7 @@ export function getTripPatterns(searchParams: GetTripPatternsParams): Promise<Ar
         wheelchair: wheelchairAccessible,
     }
 
-    return journeyPlannerQuery(getItinerariesProps, variables, this.config)
+    return journeyPlannerQuery(getTripPatternQuery, variables, undefined, this.config)
         .then((response: Object = {}) => response?.data?.trip?.tripPatterns || [])
 }
 
@@ -117,7 +121,7 @@ export function getStopPlaceDepartures(
         omitNonBoarding,
     }
 
-    return journeyPlannerQuery(getStopPlaceDeparturesProps, variables, this.config)
+    return journeyPlannerQuery(getStopPlaceDeparturesQuery, variables, undefined, this.config)
         .then((response: Object = {}) => {
             if (!response || !response.data) {
                 throw new Error(`Entur SDK: Could not fetch departures for ids: ${JSON.stringify(stopPlaceIds)}`)
