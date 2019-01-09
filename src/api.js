@@ -6,6 +6,8 @@ import { post } from './http'
 import { getJourneyPlannerHost } from './config'
 import type { ServiceConfig } from './config'
 
+const pretty = process.env.NODE_ENV !== 'production'
+
 function errorHandler(response: Object): Object {
     if (response.errors && response.errors[0]) {
         throw new Error(`GraphQL: ${response.errors[0].message}`)
@@ -15,22 +17,18 @@ function errorHandler(response: Object): Object {
 }
 
 export function journeyPlannerQuery<T>(
-    queryObj: Object,
-    variables: Object,
+    queryObj: Object | string,
+    variables?: Object,
     ignoreFields?: Array<string>,
     config?: ServiceConfig,
 ): Promise<T> {
     const { host, headers } = getJourneyPlannerHost((this && this.config) || config)
     const url = `${host}/graphql`
 
-    const query = jsonToGraphQLQuery(queryObj, {
-        pretty: true,
-        ignoreFields,
-    })
+    const query = typeof queryObj === 'string'
+        ? queryObj
+        : jsonToGraphQLQuery(queryObj, { pretty, ignoreFields })
 
-    return post(url, {
-        query,
-        variables,
-    }, headers)
+    return post(url, { query, variables }, headers)
         .then(errorHandler)
 }

@@ -321,7 +321,7 @@ export interface GetStopPlaceDeparturesParams {
 declare class EnturService {
   constructor(args: Config);
   journeyPlannerQuery<journeyPlannerResponse>(
-      queryObj: Object,
+      queryObj: Object | string,
       variables?: Object,
       ignoreFields?: Array<string>,
       config?: ServiceConfig,

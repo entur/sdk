@@ -300,7 +300,7 @@ declare module '@entur/sdk' {
         constructor(config?: $entur$sdk$Config): EnturService;
 
         journeyPlannerQuery<$entur$sdk$journeyPlannerResponse>(
-            queryObj: Object,
+            queryObj: Object | string,
             variables?: Object,
             ignoreFields?: Array<string>,
             config?: $entur$sdk$ServiceConfig,
