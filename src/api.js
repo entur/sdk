@@ -1,49 +1,28 @@
 // @flow
-import qs from 'qs'
-import cleanDeep from 'clean-deep'
-import fetch from './fetch'
+import { post } from './http'
 
-const DEFAULT_HEADERS = {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
-}
+import { getJourneyPlannerHost } from './config'
+import type { ServiceConfig } from './config'
 
-function responseHandler(response) {
-    if (!response.ok) {
-        throw Error(response.statusText)
+function errorHandler(response: Object): Object {
+    if (response.errors && response.errors[0]) {
+        throw new Error(`GraphQL: ${response.errors[0].message}`)
     }
+
     return response
 }
 
-export function get(
-    url: string,
-    params?: Object,
-    headers?: Object,
-    config?: Object,
-): Promise<Object> {
-    return fetch(`${url}?${qs.stringify(params)}`, {
-        method: 'get',
-        ...config,
-        headers: { ...DEFAULT_HEADERS, ...headers },
-    })
-        .then(responseHandler)
-        .then(res => res.json())
-        .then(cleanDeep)
-}
+export function journeyPlannerQuery<T>(
+    query: string,
+    variables: Object,
+    config?: ServiceConfig,
+): Promise<T> {
+    const { host, headers } = getJourneyPlannerHost((this && this.config) || config)
+    const url = `${host}/graphql`
 
-export function post(
-    url: string,
-    params?: Object,
-    headers?: Object,
-    config?: Object,
-): Promise<Object> {
-    return fetch(url, {
-        method: 'post',
-        ...config,
-        headers: { ...DEFAULT_HEADERS, ...headers },
-        body: JSON.stringify(params),
-    })
-        .then(responseHandler)
-        .then(res => res.json())
-        .then(cleanDeep)
+    return post(url, {
+        query,
+        variables,
+    }, headers)
+        .then(errorHandler)
 }

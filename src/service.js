@@ -1,7 +1,8 @@
 // @flow
 import {
-    getTripPatterns, getStopPlaceDepartures, getStopPlace, getStopPlacesByPosition, findTrips,
+    getTripPatterns, getStopPlaceDepartures, findTrips,
 } from './trip'
+import { getStopPlace, getStopPlacesByPosition } from './stopPlace'
 import { getBikeRentalStation, getBikeRentalStations } from './bikeRental'
 import { getFeatures, getLocationsDEPRECATED } from './geocoder'
 import { getServiceConfig } from './config'
