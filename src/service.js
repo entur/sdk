@@ -1,4 +1,5 @@
 // @flow
+import { journeyPlannerQuery } from './api'
 import {
     getTripPatterns, getStopPlaceDepartures, findTrips,
 } from './trip'
@@ -15,6 +16,8 @@ class EnturService {
     constructor(config: ArgumentConfig) {
         this.config = getServiceConfig(config)
     }
+
+    journeyPlannerQuery = journeyPlannerQuery
 
     getFeatures = getFeatures
 

@@ -59,6 +59,14 @@ type $entur$sdk$Config = {
     }
 }
 
+type $entur$sdk$ServiceConfig = {
+    clientName: string,
+    hosts: {
+        journeyplanner: string,
+        geocoder: string,
+    },
+}
+
 type $entur$sdk$Notice = {|
     text: string,
 |}
@@ -290,6 +298,13 @@ type $entur$sdk$BikeRentalStation = {
 declare module '@entur/sdk' {
     declare export default class EnturService {
         constructor(config?: $entur$sdk$Config): EnturService;
+
+        journeyPlannerQuery<$entur$sdk$journeyPlannerResponse>(
+            queryObj: Object,
+            variables?: Object,
+            ignoreFields?: Array<string>,
+            config?: $entur$sdk$ServiceConfig,
+        ): Promise<$entur$sdk$journeyPlannerResponse>,
 
         getFeatures(
             query: string,
