@@ -161,7 +161,29 @@ export const getDeparturesForStopPlacesQuery = {
         },
     },
 }
+
+export const getDeparturesForQuayQuery = {
+    query: {
+        __variables: {
+            ids: '[String]!',
+            start: 'DateTime!',
+            timeRange: 'Int!',
+            limit: 'Int!',
+            omitNonBoarding: 'Boolean!',
+        },
+        quays: {
+            __args: {
+                ids: new VariableType('ids'),
+            },
+            id: true,
+            estimatedCalls: {
+                __args: {
+                    startTime: new VariableType('start'),
+                    timeRange: new VariableType('timeRange'),
+                    numberOfDepartures: new VariableType('limit'),
+                    omitNonBoarding: new VariableType('omitNonBoarding'),
                 },
+                ...departureFields,
             },
         },
     },

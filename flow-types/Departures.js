@@ -33,3 +33,8 @@ export type StopPlaceDepartures = {
     id: string,
     estimatedCalls: Array<Departure>
 }
+
+export type QuayDepartures = {
+    id: string,
+    estimatedCalls: Array<Departure>
+}

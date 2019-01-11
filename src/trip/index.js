@@ -7,6 +7,7 @@ import {
 import {
     getTripPatternQuery,
     getDeparturesForStopPlacesQuery,
+    getDeparturesForQuayQuery,
 } from './query'
 
 import { legMapper } from './mapper'
@@ -16,7 +17,7 @@ import type {
     Location,
     LegMode,
 } from '../../flow-types'
-import type { StopPlaceDepartures, Departure } from '../../flow-types/Departures'
+import type { StopPlaceDepartures, QuayDepartures, Departure } from '../../flow-types/Departures'
 import { convertFeatureToLocation, isValidDate } from '../utils'
 
 type StopPlaceParams = {
@@ -139,6 +140,29 @@ export function getDeparturesForStopPlace(
 ): Promise<Array<Departure>> {
     return getDeparturesForStopPlaces.call(this, [stopPlaceId], estimatedCallParams)
         .then((stopPlaces: Array<StopPlaceDepartures>) => stopPlaces?.[0]?.estimatedCalls || [])
+}
+
+export function getDeparturesForQuays(
+    quayIds: Array<string>,
+    estimatedCallParams?: EstimatedCallParams = {},
+): Promise<Array<QuayDepartures>> {
+    const {
+        limit = 30,
+        timeRange = 72000,
+        includeNonBoarding = false,
+        ...rest
+    } = estimatedCallParams
+
+    const variables = {
+        ids: quayIds,
+        start: new Date().toISOString(),
+        omitNonBoarding: !includeNonBoarding,
+        timeRange,
+        limit,
+        ...rest,
+    }
+    return journeyPlannerQuery(getDeparturesForQuayQuery, variables, undefined, this.config)
+        .then((data: Object = {}) => data?.quays || [])
 }
 
 export function getStopPlaceDeparturesDEPRECATED() {
