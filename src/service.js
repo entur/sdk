@@ -9,7 +9,7 @@ import {
     getStopPlaceFacilities,
 } from './stopPlace'
 import { getBikeRentalStation, getBikeRentalStations } from './bikeRental'
-import { getFeatures, getLocationsDEPRECATED } from './geocoder'
+import { getFeatures } from './geocoder'
 import { getServiceConfig } from './config'
 import type { ServiceConfig, ArgumentConfig } from './config'
 
@@ -26,8 +26,6 @@ class EnturService {
     nsrQuery = nsrQuery
 
     getFeatures = getFeatures
-
-    getLocations = getLocationsDEPRECATED
 
     getTripPatterns = getTripPatterns
 

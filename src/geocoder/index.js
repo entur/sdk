@@ -38,15 +38,3 @@ export function getFeatures(
     const url = `${host}/autocomplete`
     return get(url, searchParams, headers).then(data => data.features || [])
 }
-
-// preserve backwards compatability
-export function getLocationsDEPRECATED(
-    text: string,
-    params?: Object = {},
-): Promise<Array<Feature>> {
-    if (process.env !== 'production') {
-        // eslint-disable-next-line
-        console.info('service.getLocations is deprecated and will be removed in a future version. Use service.getFeatures instead')
-    }
-    return getFeatures.call(this, text, undefined, params)
-}

@@ -5,7 +5,6 @@ import EnturService from './service'
 export {
     convertFeatureToLocation,
     convertPositionToBbox,
-    convertLocationToPositionDEPRECATED as convertLocationToPosition,
     throttler,
 } from './utils'
 
