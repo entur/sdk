@@ -15,12 +15,7 @@ export function getStopPlace(id: string): Promise<StopPlace> {
     const variables = { id }
 
     return journeyPlannerQuery(getStopPlaceQuery, variables, undefined, this.config)
-        .then((response: Object = {}) => {
-            if (!response?.data?.stopPlace) {
-                throw new Error(`Could not find stop place with ID "${id}"`)
-            }
-            return response.data.stopPlace
-        })
+        .then((data: Object = {}) => data?.stopPlace)
 }
 
 export function getStopPlacesByPosition(
@@ -30,16 +25,11 @@ export function getStopPlacesByPosition(
     const variables = convertPositionToBbox(coordinates, distance)
 
     return journeyPlannerQuery(getStopPlacesByBboxQuery, variables, undefined, this.config)
-        .then((response: Object = {}) => {
-            if (!response?.data?.stopPlacesByBbox) {
-                return []
-            }
-            return response.data.stopPlacesByBbox
-        })
+        .then((data: Object = {}) => data?.stopPlacesByBbox || [])
 }
 
 export function getStopPlaceFacilities(stopPlaceId: string) {
-    return nsrQuery(getStopPlaceFacilitiesQuery, {
-        id: stopPlaceId,
-    })
+    const variables = { id: stopPlaceId }
+    return nsrQuery(getStopPlaceFacilitiesQuery, variables, undefined, this.config)
+}
 }

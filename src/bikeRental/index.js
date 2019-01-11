@@ -12,7 +12,7 @@ export function getBikeRentalStation(stationId: string): Promise<BikeRentalStati
     }
 
     return journeyPlannerQuery(getBikeRentalStationQuery, variables, undefined, this.config)
-        .then(response => response.data.bikeRentalStation)
+        .then((data: Object = {}) => data?.bikeRentalStation)
 }
 
 export function getBikeRentalStations(
@@ -22,5 +22,5 @@ export function getBikeRentalStations(
     const variables = convertPositionToBbox(coordinates, distance)
 
     return journeyPlannerQuery(getBikeRentalStationByBoxQuery, variables, undefined, this.config)
-        .then((response: Object = {}) => response?.data?.bikeRentalStationsByBbox || [])
+        .then((data: Object = {}) => data?.bikeRentalStationsByBbox || [])
 }

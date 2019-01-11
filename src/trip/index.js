@@ -61,7 +61,7 @@ export function getTripPatterns(
     }
 
     return journeyPlannerQuery(getTripPatternQuery, variables, undefined, this.config)
-        .then((response: Object = {}) => response?.data?.trip?.tripPatterns || [])
+        .then((data: Object = {}) => data?.trip?.tripPatterns || [])
 }
 
 export async function findTrips(
@@ -122,11 +122,8 @@ export function getStopPlaceDepartures(
     }
 
     return journeyPlannerQuery(getStopPlaceDeparturesQuery, variables, undefined, this.config)
-        .then((response: Object = {}) => {
-            if (!response || !response.data) {
-                throw new Error(`Entur SDK: Could not fetch departures for ids: ${JSON.stringify(stopPlaceIds)}`)
-            }
-            const stopPlaces = response.data.stopPlaces || []
+        .then((data: Object = {}) => {
+            const stopPlaces = data?.stopPlaces || []
             if (askingForSingleStopPlace) {
                 return stopPlaces.length ? stopPlaces[0].estimatedCalls || [] : []
             }

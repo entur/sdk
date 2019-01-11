@@ -8,12 +8,16 @@ import type { ServiceConfig } from './config'
 
 const pretty = process.env.NODE_ENV !== 'production'
 
-function errorHandler(response: Object): Object {
-    if (response.errors && response.errors[0]) {
+function errorHandler(response: Object = {}): Object {
+    if (response?.errors?.[0]) {
         throw new Error(`GraphQL: ${response.errors[0].message}`)
     }
 
-    return response
+    if (!response?.data) {
+        throw new Error('Entur SDK: No data available')
+    }
+
+    return response.data
 }
 
 export function journeyPlannerQuery<T>(
