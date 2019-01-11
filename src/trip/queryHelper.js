@@ -18,38 +18,35 @@ export const situationFields = {
 
 export const lineFields = {
     id: true,
-    publicCode: true,
     name: true,
-    transportMode: true,
-    description: true,
-    presentation: {
-        colour: true,
-        textColour: true,
-    },
-    authority: {
-        id: true,
-        name: true,
-    },
+    publicCode: true,
     notices: noticeFields,
-    situations: situationFields,
+}
+
+export const quayFields = {
+    id: true,
+    name: true,
+    publicCode: true,
+    description: true,
 }
 
 export const estimatedCallFields = {
     date: true,
     forBoarding: true,
+    requestStop: true,
     forAlighting: true,
+    destinationDisplay: { frontText: true },
+    notices: noticeFields,
 }
 
 export const intermediateEstimatedCallFields = {
-    quay: {
-        id: true,
-        name: true,
-        stopPlace: {
-            id: true,
-        },
-    },
-    expectedArrivalTime: true,
-    expectedDepartureTime: true,
-    aimedArrivalTime: true,
+    ...estimatedCallFields,
+    quay: quayFields,
+    cancellation: true,
+    actualDepartureTime: true,
+    actualArrivalTime: true,
     aimedDepartureTime: true,
+    aimedArrivalTime: true,
+    expectedDepartureTime: true,
+    expectedArrivalTime: true,
 }

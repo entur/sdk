@@ -5,31 +5,24 @@ import {
     noticeFields,
     situationFields,
     lineFields,
+    quayFields,
     estimatedCallFields,
     intermediateEstimatedCallFields,
 } from './queryHelper'
 
 const journeyPatternFields = {
-    id: true,
-    name: true,
-    line: lineFields,
+    line: {
+        notices: noticeFields,
+    },
     notices: noticeFields,
 }
 
 const serviceJourneyFields = {
     id: true,
-    privateCode: true,
-    linePublicCode: true,
-    wheelchairAccessible: true,
+    publicCode: true,
+    transportSubmode: true,
     journeyPattern: journeyPatternFields,
     notices: noticeFields,
-    situations: situationFields,
-}
-
-const quayFields = {
-    id: true,
-    publicCode: true,
-    description: true,
 }
 
 const placeFields = {
@@ -38,13 +31,18 @@ const placeFields = {
     longitude: true,
     quay: {
         ...quayFields,
-        name: true,
-        situations: situationFields,
+        stopPlace: {
+            id: true,
+            name: true,
+            description: true,
+            tariffZones: { id: true },
+        },
     },
 }
 
 const legFields = {
     mode: true,
+    transportSubmode: true,
     aimedStartTime: true,
     aimedEndTime: true,
     expectedStartTime: true,
@@ -53,21 +51,14 @@ const legFields = {
     distance: true,
     duration: true,
     ride: true,
-
     fromPlace: placeFields,
     toPlace: placeFields,
     serviceJourney: serviceJourneyFields,
+
     line: lineFields,
-    intermediateQuays: {
-        id: true,
-        name: true,
-        description: true,
-        publicCode: true,
-    },
-    intermediateEstimatedCalls: {
-        ...estimatedCallFields,
-        ...intermediateEstimatedCallFields,
-    },
+    toEstimatedCall: estimatedCallFields,
+    fromEstimatedCall: estimatedCallFields,
+    intermediateEstimatedCalls: intermediateEstimatedCallFields,
 
     pointsOnLink: {
         points: true,
@@ -76,12 +67,14 @@ const legFields = {
     authority: {
         id: true,
         name: true,
+        url: true,
     },
     operator: {
         id: true,
         name: true,
         url: true,
     },
+    situations: situationFields,
 }
 
 export const getTripPatternQuery = {
@@ -94,6 +87,8 @@ export const getTripPatternQuery = {
             arriveBy: 'Boolean!',
             wheelchair: 'Boolean!',
             modes: '[Mode]!',
+            transportSubmodes: '[TransportSubmodeFilter]',
+            maxPreTransitWalkDistance: 'Float',
 
         },
         trip: {
@@ -105,12 +100,14 @@ export const getTripPatternQuery = {
                 arriveBy: new VariableType('arriveBy'),
                 wheelchair: new VariableType('wheelchair'),
                 modes: new VariableType('modes'),
+                transportSubmodes: new VariableType('transportSubmodes'),
+                maxPreTransitWalkDistance: new VariableType('maxPreTransitWalkDistance'),
             },
             tripPatterns: {
                 startTime: true,
                 endTime: true,
                 duration: true,
-                waitingTime: true,
+                distance: true,
                 walkDistance: true,
                 legs: legFields,
             },

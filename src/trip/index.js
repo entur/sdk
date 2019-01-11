@@ -16,29 +16,10 @@ import type {
     TripPattern,
     Location,
     LegMode,
+    TransportSubmode,
 } from '../../flow-types'
 import type { StopPlaceDepartures, QuayDepartures, Departure } from '../../flow-types/Departures'
 import { convertFeatureToLocation, isValidDate } from '../utils'
-
-type StopPlaceParams = {
-    includeNonBoarding?: boolean,
-    departures?: number,
-    timeRange?: number,
-}
-
-const DEFAULT_SEARCH_PARAMS = {
-    arriveBy: false,
-    modes: [FOOT, BUS, TRAM, RAIL, METRO, WATER, AIR],
-    transportSubmode: [],
-    limit: 5,
-    wheelchairAccessible: false,
-}
-
-const DEFAULT_STOP_PLACE_PARAMS = {
-    includeNonBoarding: false,
-    departures: 50,
-    timeRange: 72000,
-}
 
 export type GetTripPatternsParams = {
     searchDate: Date,
@@ -46,25 +27,61 @@ export type GetTripPatternsParams = {
     to: Location,
     arriveBy?: boolean,
     modes?: Array<LegMode>,
+    transportSubmode?: Array<TransportSubmode>,
     limit?: number,
     wheelchairAccessible?: boolean,
 }
+
+const DEFAULT_GET_TRIP_PATTERN_IGNORE_FIELDS = [
+    'notices',
+    'situations',
+    'journeyPattern',
+    'fromEstimatedCall',
+    'toEstimatedCall',
+    'intermediateEstimatedCalls',
+    'pointsOnLink',
+    'authority',
+    'operator',
+    'quay',
+]
+
 export function getTripPatterns(
     searchParams: GetTripPatternsParams,
+    ignoreFields?: Array<string> = DEFAULT_GET_TRIP_PATTERN_IGNORE_FIELDS,
 ): Promise<Array<TripPattern>> {
     const {
-        searchDate, limit, wheelchairAccessible, ...rest
-    } = { ...DEFAULT_SEARCH_PARAMS, ...searchParams }
+        arriveBy = false,
+        modes = [FOOT, BUS, TRAM, RAIL, METRO, WATER, AIR],
+        transportSubmode = [],
+        limit = 5,
+        wheelchairAccessible = false,
+        searchDate,
+        ...rest
+    } = { ...searchParams }
 
     const variables = {
-        ...rest,
+        arriveBy,
+        modes,
+        transportSubmode,
+        limit,
+        wheelchairAccessible,
         dateTime: searchDate.toISOString(),
         numTripPatterns: limit,
         wheelchair: wheelchairAccessible,
+        ...rest,
     }
 
-    return journeyPlannerQuery(getTripPatternQuery, variables, undefined, this.config)
-        .then((data: Object = {}) => data?.trip?.tripPatterns || [])
+    return journeyPlannerQuery(getTripPatternQuery, variables, ignoreFields, this.config)
+        .then((data: Object = {}) => {
+            if (!data?.trip?.tripPatterns) {
+                return []
+            }
+
+            return data.trip.tripPatterns.map(trip => ({
+                ...trip,
+                legs: trip.legs.map(legMapper),
+            }))
+        })
 }
 
 export async function findTrips(
