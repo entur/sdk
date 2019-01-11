@@ -1,13 +1,7 @@
 // @flow
 import { VariableType } from 'json-to-graphql-query'
 
-import { situationFields } from '../trip/queryHelper'
-
-const quayFields = {
-    id: true,
-    publicCode: true,
-    description: true,
-}
+import { situationFields, quayFields } from '../trip/queryHelper'
 
 const stopPlaceFields = {
     id: true,
@@ -109,6 +103,26 @@ export const getStopPlaceFacilitiesQuery = {
             totalCapacity: true,
             principalCapacity: true,
             parkingVehicleTypes: true,
+        },
+    },
+}
+
+export const getQuaysForStopPlaceQuery = {
+    query: {
+        __variables: {
+            id: 'String!',
+            filterByInUse: 'Boolean',
+        },
+        stopPlace: {
+            __args: {
+                id: new VariableType('id'),
+            },
+            quays: {
+                __args: {
+                    filterByInUse: new VariableType('filterByInUse'),
+                },
+                ...quayFields,
+            },
         },
     },
 }

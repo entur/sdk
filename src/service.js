@@ -7,6 +7,7 @@ import {
     getStopPlace,
     getStopPlacesByPosition,
     getStopPlaceFacilities,
+    getQuaysForStopPlace,
 } from './stopPlace'
 import { getBikeRentalStation, getBikeRentalStations } from './bikeRental'
 import { getFeatures } from './geocoder'
@@ -38,6 +39,8 @@ class EnturService {
     getStopPlacesByPosition = getStopPlacesByPosition
 
     getStopPlaceFacilities = getStopPlaceFacilities
+
+    getQuaysForStopPlace = getQuaysForStopPlace
 
     getBikeRentalStation = getBikeRentalStation
 

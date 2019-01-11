@@ -5,11 +5,12 @@ import {
     getStopPlaceQuery,
     getStopPlacesByBboxQuery,
     getStopPlaceFacilitiesQuery,
+    getQuaysForStopPlaceQuery,
 } from './query'
 
 import { convertPositionToBbox } from '../utils'
 
-import type { Coordinates, StopPlace } from '../../flow-types'
+import type { Quay, Coordinates, StopPlace } from '../../flow-types'
 
 export function getStopPlace(id: string): Promise<StopPlace> {
     const variables = { id }
@@ -32,4 +33,13 @@ export function getStopPlaceFacilities(stopPlaceId: string) {
     const variables = { id: stopPlaceId }
     return nsrQuery(getStopPlaceFacilitiesQuery, variables, undefined, this.config)
 }
+
+type QuayParams = { filterByInUse?: boolean }
+export function getQuaysForStopPlace(
+    stopPlaceId: string,
+    quayParams?: QuayParams,
+): Promise<Array<Quay>> {
+    const variables = { id: stopPlaceId, ...quayParams }
+    return journeyPlannerQuery(getQuaysForStopPlaceQuery, variables, undefined, this.config)
+        .then((data: Object = {}) => data?.stopPlace?.quays || [])
 }
