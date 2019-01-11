@@ -6,14 +6,17 @@ import {
 
 import {
     getTripPatternQuery,
-    getStopPlaceDeparturesQuery,
+    getDeparturesForStopPlacesQuery,
 } from './query'
+
+import { legMapper } from './mapper'
 
 import type {
     TripPattern,
     Location,
     LegMode,
 } from '../../flow-types'
+import type { StopPlaceDepartures, Departure } from '../../flow-types/Departures'
 import { convertFeatureToLocation, isValidDate } from '../utils'
 
 type StopPlaceParams = {
@@ -94,41 +97,50 @@ export async function findTrips(
     })
 }
 
-export function getStopPlaceDepartures(
-    stopPlaceIds: string | Array<string>,
-    stopPlaceParams?: StopPlaceParams,
-): Object {
+type EstimatedCallParams = {
+    includeNonBoarding?: boolean,
+    limit?: number,
+    departures?: number,
+    timeRange?: number,
+}
+export function getDeparturesForStopPlaces(
+    stopPlaceIds: Array<string>,
+    estimatedCallParams?: EstimatedCallParams = {},
+): Promise<Array<StopPlaceDepartures>> {
     const {
-        timeRange, departures, onForBoarding, includeNonBoarding,
-    } = { ...DEFAULT_STOP_PLACE_PARAMS, ...stopPlaceParams }
+        limit = 50,
+        departures,
+        timeRange = 72000,
+        includeNonBoarding = false,
+        ...rest
+    } = estimatedCallParams
 
-    let omitNonBoarding = !includeNonBoarding
-
-    if (onForBoarding !== undefined) {
+    if (departures !== undefined) {
         // eslint-disable-next-line no-console
-        console.info('Entur SDK: "onForBoarding" is deprecated, use "includeNonBoarding" instead.')
-        omitNonBoarding = !onForBoarding
+        console.info('Entur SDK: "departures" is deprecated, use "limit" instead.')
     }
-
-    const askingForSingleStopPlace = typeof stopPlaceIds === 'string'
 
     const variables = {
-        ids: askingForSingleStopPlace ? [stopPlaceIds] : stopPlaceIds,
+        ids: stopPlaceIds,
         start: new Date().toISOString(),
-        range: timeRange,
-        departures,
-        omitNonBoarding,
+        omitNonBoarding: !includeNonBoarding,
+        timeRange,
+        limit: departures || limit,
+        ...rest,
     }
 
-    return journeyPlannerQuery(getStopPlaceDeparturesQuery, variables, undefined, this.config)
-        .then((data: Object = {}) => {
-            const stopPlaces = data?.stopPlaces || []
-            if (askingForSingleStopPlace) {
-                return stopPlaces.length ? stopPlaces[0].estimatedCalls || [] : []
-            }
-            return stopPlaces.map(({ id, estimatedCalls }) => ({
-                id,
-                departures: estimatedCalls,
-            }))
-        })
+    return journeyPlannerQuery(getDeparturesForStopPlacesQuery, variables, undefined, this.config)
+        .then((data: Object = {}) => data?.stopPlaces || [])
+}
+
+export function getDeparturesForStopPlace(
+    stopPlaceId: string,
+    estimatedCallParams?: EstimatedCallParams,
+): Promise<Array<Departure>> {
+    return getDeparturesForStopPlaces.call(this, [stopPlaceId], estimatedCallParams)
+        .then((stopPlaces: Array<StopPlaceDepartures>) => stopPlaces?.[0]?.estimatedCalls || [])
+}
+
+export function getStopPlaceDeparturesDEPRECATED() {
+    throw new Error('Entur SDK: "getStopPlaceDepartures" is deprecated, use "getDeparturesForStopPlace" or getDeparturesForStopPlaces instead.')
 }

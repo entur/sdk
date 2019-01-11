@@ -1,7 +1,11 @@
 // @flow
 import { journeyPlannerQuery, nsrQuery } from './api'
 import {
-    getTripPatterns, getStopPlaceDepartures, findTrips,
+    findTrips,
+    getTripPatterns,
+    getDeparturesForStopPlace,
+    getDeparturesForStopPlaces,
+    getStopPlaceDeparturesDEPRECATED,
 } from './trip'
 import {
     getStopPlace,
@@ -32,7 +36,11 @@ class EnturService {
 
     findTrips = findTrips
 
-    getStopPlaceDepartures = getStopPlaceDepartures
+    getStopPlaceDepartures = getStopPlaceDeparturesDEPRECATED
+
+    getDeparturesForStopPlace = getDeparturesForStopPlace
+
+    getDeparturesForStopPlaces = getDeparturesForStopPlaces
 
     getStopPlace = getStopPlace
 

@@ -118,13 +118,30 @@ export const getTripPatternQuery = {
     },
 }
 
-export const getStopPlaceDeparturesQuery = {
+const departureFields = {
+    ...estimatedCallFields,
+    aimedDepartureTime: true,
+    expectedDepartureTime: true,
+    realtime: true,
+    situations: situationFields,
+    quay: quayFields,
+    serviceJourney: {
+        ...serviceJourneyFields,
+        line: {
+            ...lineFields,
+            transportMode: true,
+            description: true,
+        },
+    },
+}
+
+export const getDeparturesForStopPlacesQuery = {
     query: {
         __variables: {
             ids: '[String]!',
             start: 'DateTime!',
-            range: 'Int!',
-            departures: 'Int!',
+            timeRange: 'Int!',
+            limit: 'Int!',
             omitNonBoarding: 'Boolean!',
         },
         stopPlaces: {
@@ -135,34 +152,15 @@ export const getStopPlaceDeparturesQuery = {
             estimatedCalls: {
                 __args: {
                     startTime: new VariableType('start'),
-                    timeRange: new VariableType('range'),
-                    numberOfDepartures: new VariableType('departures'),
+                    timeRange: new VariableType('timeRange'),
+                    numberOfDepartures: new VariableType('limit'),
                     omitNonBoarding: new VariableType('omitNonBoarding'),
                 },
-                aimedDepartureTime: true,
-                expectedDepartureTime: true,
-                realtime: true,
-                forBoarding: true,
-                forAlighting: true,
-                date: true,
-                destinationDisplay: {
-                    frontText: true,
-                },
-                notices: noticeFields,
-                quay: {
-                    ...quayFields,
-                    situations: situationFields,
-                },
-                serviceJourney: {
-                    id: true,
-                    journeyPattern: {
-                        id: true,
-                        name: true,
-                        line: lineFields,
-                        notices: noticeFields,
-                    },
-                    notices: noticeFields,
-                    transportSubmode: true,
+                ...departureFields,
+            },
+        },
+    },
+}
                 },
             },
         },
