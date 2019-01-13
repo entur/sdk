@@ -10,10 +10,11 @@ import {
 
 import { convertPositionToBbox } from '../utils'
 
-import type { Quay, Coordinates, StopPlace } from '../../flow-types'
+import type { Quay, Coordinates } from '../../flow-types'
+import type { StopPlaceDetails, StopPlaceFacilities } from '../../flow-types/StopPlace'
 
-export function getStopPlace(id: string): Promise<StopPlace> {
-    const variables = { id }
+export function getStopPlace(stopPlaceId: string): Promise<StopPlaceDetails> {
+    const variables = { id: stopPlaceId }
 
     return journeyPlannerQuery(getStopPlaceQuery, variables, undefined, this.config)
         .then((data: Object = {}) => data?.stopPlace)
@@ -21,15 +22,15 @@ export function getStopPlace(id: string): Promise<StopPlace> {
 
 export function getStopPlacesByPosition(
     coordinates: Coordinates,
-    distance: number = 500,
-): Promise<Array<StopPlace>> {
+    distance?: number = 500,
+): Promise<Array<StopPlaceDetails>> {
     const variables = convertPositionToBbox(coordinates, distance)
 
     return journeyPlannerQuery(getStopPlacesByBboxQuery, variables, undefined, this.config)
         .then((data: Object = {}) => data?.stopPlacesByBbox || [])
 }
 
-export function getStopPlaceFacilities(stopPlaceId: string) {
+export function getStopPlaceFacilities(stopPlaceId: string): Promise<StopPlaceFacilities> {
     const variables = { id: stopPlaceId }
     return nsrQuery(getStopPlaceFacilitiesQuery, variables, undefined, this.config)
 }

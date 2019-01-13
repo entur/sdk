@@ -64,6 +64,7 @@ export const getStopPlaceFacilitiesQuery = {
             },
             id: true,
             name: {
+                lang: true,
                 value: true,
             },
             accessibilityAssessment: {
@@ -85,6 +86,7 @@ export const getStopPlaceFacilitiesQuery = {
                     gender: true,
                 },
                 ticketingEquipment: {
+                    id: true,
                     numberOfMachines: true,
                     ticketMachines: true,
                     ticketOffice: true,
@@ -96,8 +98,8 @@ export const getStopPlaceFacilitiesQuery = {
                 stopPlaceId: new VariableType('id'),
             },
             name: {
-                value: true,
                 lang: true,
+                value: true,
             },
             parentSiteRef: true,
             totalCapacity: true,

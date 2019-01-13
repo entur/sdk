@@ -1,10 +1,14 @@
 // @flow
 
 import type { Quay } from './Quay'
+import type { StopPlace } from './StopPlace'
 
 export type Place = {
-  name: string,
   latitude: number,
   longitude: number,
-  quay: Quay,
+  name: string,
+  quay?: {
+      ...Quay,
+      stopPlace: StopPlace
+  },
 }

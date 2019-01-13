@@ -115,7 +115,7 @@ export async function findTrips(
     )
 }
 
-type EstimatedCallParams = {
+type GetDeparturesParams = {
     includeNonBoarding?: boolean,
     limit?: number,
     departures?: number, // deprecated
@@ -123,7 +123,7 @@ type EstimatedCallParams = {
 }
 export function getDeparturesForStopPlaces(
     stopPlaceIds: Array<string>,
-    params?: EstimatedCallParams = {},
+    params?: GetDeparturesParams = {},
 ): Promise<Array<StopPlaceDepartures>> {
     const {
         limit = 50,
@@ -153,7 +153,7 @@ export function getDeparturesForStopPlaces(
 
 export function getDeparturesForStopPlace(
     stopPlaceId: string,
-    params?: EstimatedCallParams,
+    params?: GetDeparturesParams,
 ): Promise<Array<Departure>> {
     return getDeparturesForStopPlaces.call(this, [stopPlaceId], params)
         .then((stopPlaces: Array<StopPlaceDepartures>) => stopPlaces?.[0]?.estimatedCalls || [])
@@ -161,7 +161,7 @@ export function getDeparturesForStopPlace(
 
 export function getDeparturesForQuays(
     quayIds: Array<string>,
-    params?: EstimatedCallParams = {},
+    params?: GetDeparturesParams = {},
 ): Promise<Array<QuayDepartures>> {
     const {
         limit = 30,

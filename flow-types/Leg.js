@@ -1,34 +1,39 @@
 // @flow
-
 import type { Line } from './Line'
 import type { Place } from './Place'
 import type { Authority } from './Authority'
 import type { Operator } from './Operator'
-import type { Quay } from './Quay'
 import type { ServiceJourney } from './ServiceJourney'
 import type { Situation } from './Situation'
+import type { Notice } from './Notice'
 import type { PointsOnLink } from './PointsOnLink'
-import type { IntermediateEstimatedCall } from './IntermediateEstimatedCall'
-import type { LegMode } from './Mode'
+import type {
+    EstimatedCall,
+    IntermediateEstimatedCall,
+} from './EstimatedCall'
+import type { LegMode, TransportSubmode } from './Mode'
 
 export type Leg = {
     aimedEndTime: string,
     aimedStartTime: string,
     authority?: Authority,
-    distance?: number,
-    duration?: number,
+    distance: number,
+    duration: number,
+    expectedEndTime: string,
+    expectedStartTime: string,
+    fromEstimatedCall?: EstimatedCall,
     fromPlace: Place,
-    toPlace: Place,
-    intermediateEstimatedCalls: Array<IntermediateEstimatedCall>,
-    intermediateQuays: Array<Quay>,
+    intermediateEstimatedCalls?: Array<IntermediateEstimatedCall>,
     line?: Line,
     mode: LegMode,
+    notices?: Array<Notice>,
     operator?: Operator,
-    pointsOnLink: PointsOnLink,
+    pointsOnLink?: PointsOnLink,
     realtime: boolean,
     ride: boolean,
     serviceJourney: ServiceJourney,
-    expectedEndTime?: string,
-    expectedStartTime?: string,
-    situations: Array<Situation>,
+    situations?: Array<Situation>,
+    toEstimatedCall?: EstimatedCall,
+    toPlace: Place,
+    transportSubmode: TransportSubmode,
 }

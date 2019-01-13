@@ -17,14 +17,14 @@ export type Departure = {
     aimedDepartureTime: string,
     expectedDepartureTime: string,
     realtime: boolean,
-    situations: Array<Situation>,
+    situations?: Array<Situation>,
     quay: Quay,
     serviceJourney: {
         ...ServiceJourney,
         line: {
             ...Line,
             transportMode: TransportMode,
-            description: string
+            description?: string
         }
     }
 }

@@ -1,22 +1,33 @@
 // @flow
-
-import type { DestinationDisplay } from './DestinationDisplay'
-import type { Quay } from './Quay'
-import type { IntermediateEstimatedCall } from './IntermediateEstimatedCall'
-import type { ServiceJourney } from './ServiceJourney'
-import type { Situation } from './Situation'
 import type { Notice } from './Notice'
+import type { Quay } from './Quay'
+
+export type DestinationDisplay = {
+    frontText: string,
+}
+
+export type IntermediateEstimatedCall = {
+    actualArrivalTime?: string, // Only available AFTER arrival has taken place
+    actualDepartureTime?: string, // Only available AFTER departure has taken place
+    aimedArrivalTime: string,
+    aimedDepartureTime: string,
+    cancellation: boolean,
+    date: string,
+    destinationDisplay: DestinationDisplay,
+    expectedArrivalTime?: string, // Only available BEFORE arrival has taken place
+    expectedDepartureTime?: string, // Only available BEFORE departure has taken place
+    forAlighting: boolean,
+    forBoarding: boolean,
+    notices?: Array<Notice>,
+    quay?: Quay,
+    requestStop: boolean
+}
 
 export type EstimatedCall = {
-    realtime: boolean,
-    quay: Quay,
-    forAlighting?: boolean,
-    forBoarding?: boolean,
-    aimedDepartureTime: string,
-    expectedDepartureTime: string,
-    destinationDisplay?: DestinationDisplay,
-    serviceJourney: ServiceJourney,
-    intermediateEstimatedCalls: Array<IntermediateEstimatedCall>,
-    situations: Array<Situation>,
+    date: string,
+    destinationDisplay: DestinationDisplay,
+    forAlighting: boolean,
+    forBoarding: boolean,
     notices?: Array<Notice>,
+    requestStop: boolean
 }
