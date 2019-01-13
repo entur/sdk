@@ -22,9 +22,7 @@ import type { StopPlaceDepartures, QuayDepartures, Departure } from '../../flow-
 import { convertFeatureToLocation, isValidDate } from '../utils'
 
 export type GetTripPatternsParams = {
-    searchDate: Date,
-    from: Location,
-    to: Location,
+    searchDate?: Date,
     arriveBy?: boolean,
     modes?: Array<LegMode>,
     transportSubmode?: Array<TransportSubmode>,
@@ -46,28 +44,30 @@ const DEFAULT_GET_TRIP_PATTERN_IGNORE_FIELDS = [
 ]
 
 export function getTripPatterns(
+    from: Location,
+    to: Location,
     params?: GetTripPatternsParams = {},
     ignoreFields?: Array<string> = DEFAULT_GET_TRIP_PATTERN_IGNORE_FIELDS,
 ): Promise<Array<TripPattern>> {
     const {
+        searchDate = new Date(),
         arriveBy = false,
         modes = [FOOT, BUS, TRAM, RAIL, METRO, WATER, AIR],
         transportSubmode = [],
-        limit = 5,
         wheelchairAccessible = false,
-        searchDate,
+        limit = 5,
         ...rest
     } = params
 
     const variables = {
+        from,
+        to,
+        dateTime: searchDate.toISOString(),
         arriveBy,
         modes,
         transportSubmode,
-        limit,
-        wheelchairAccessible,
-        dateTime: searchDate.toISOString(),
-        numTripPatterns: limit,
         wheelchair: wheelchairAccessible,
+        numTripPatterns: limit,
         ...rest,
     }
 
@@ -108,17 +108,17 @@ export async function findTrips(
         throw new Error(`Entur SDK: Could not find any locations matching <to> argument "${to}"`)
     }
 
-    return this.getTripPatterns({
+    return this.getTripPatterns(
+        convertFeatureToLocation(fromFeatures[0]),
+        convertFeatureToLocation(toFeatures[0]),
         searchDate,
-        from: convertFeatureToLocation(fromFeatures[0]),
-        to: convertFeatureToLocation(toFeatures[0]),
-    })
+    )
 }
 
 type EstimatedCallParams = {
     includeNonBoarding?: boolean,
     limit?: number,
-    departures?: number,
+    departures?: number, // deprecated
     timeRange?: number,
 }
 export function getDeparturesForStopPlaces(
