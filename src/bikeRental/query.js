@@ -24,7 +24,7 @@ export const getBikeRentalStationQuery = {
     },
 }
 
-export const getBikeRentalStationByBoxQuery = {
+export const getBikeRentalStationsByPositionQuery = {
     query: {
         __variables: {
             minLat: 'Float',

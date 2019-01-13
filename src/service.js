@@ -14,7 +14,11 @@ import {
     getStopPlaceFacilities,
     getQuaysForStopPlace,
 } from './stopPlace'
-import { getBikeRentalStation, getBikeRentalStations } from './bikeRental'
+import {
+    getBikeRentalStation,
+    getBikeRentalStationsByPosition,
+    getBikeRentalStationsDEPRECATED,
+} from './bikeRental'
 import { getFeatures } from './geocoder'
 import { getServiceConfig } from './config'
 import type { ServiceConfig, ArgumentConfig } from './config'
@@ -55,7 +59,9 @@ class EnturService {
 
     getBikeRentalStation = getBikeRentalStation
 
-    getBikeRentalStations= getBikeRentalStations
+    getBikeRentalStationsByPosition = getBikeRentalStationsByPosition
+
+    getBikeRentalStations = getBikeRentalStationsDEPRECATED
 }
 
 export default EnturService
