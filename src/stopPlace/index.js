@@ -37,9 +37,9 @@ export function getStopPlaceFacilities(stopPlaceId: string) {
 type QuayParams = { filterByInUse?: boolean }
 export function getQuaysForStopPlace(
     stopPlaceId: string,
-    quayParams?: QuayParams,
+    params?: QuayParams,
 ): Promise<Array<Quay>> {
-    const variables = { id: stopPlaceId, ...quayParams }
+    const variables = { id: stopPlaceId, ...params }
     return journeyPlannerQuery(getQuaysForStopPlaceQuery, variables, undefined, this.config)
         .then((data: Object = {}) => data?.stopPlace?.quays || [])
 }

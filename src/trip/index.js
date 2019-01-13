@@ -46,7 +46,7 @@ const DEFAULT_GET_TRIP_PATTERN_IGNORE_FIELDS = [
 ]
 
 export function getTripPatterns(
-    searchParams: GetTripPatternsParams,
+    params?: GetTripPatternsParams = {},
     ignoreFields?: Array<string> = DEFAULT_GET_TRIP_PATTERN_IGNORE_FIELDS,
 ): Promise<Array<TripPattern>> {
     const {
@@ -57,7 +57,7 @@ export function getTripPatterns(
         wheelchairAccessible = false,
         searchDate,
         ...rest
-    } = { ...searchParams }
+    } = params
 
     const variables = {
         arriveBy,
@@ -123,7 +123,7 @@ type EstimatedCallParams = {
 }
 export function getDeparturesForStopPlaces(
     stopPlaceIds: Array<string>,
-    estimatedCallParams?: EstimatedCallParams = {},
+    params?: EstimatedCallParams = {},
 ): Promise<Array<StopPlaceDepartures>> {
     const {
         limit = 50,
@@ -131,7 +131,7 @@ export function getDeparturesForStopPlaces(
         timeRange = 72000,
         includeNonBoarding = false,
         ...rest
-    } = estimatedCallParams
+    } = params
 
     if (departures !== undefined) {
         // eslint-disable-next-line no-console
@@ -153,22 +153,22 @@ export function getDeparturesForStopPlaces(
 
 export function getDeparturesForStopPlace(
     stopPlaceId: string,
-    estimatedCallParams?: EstimatedCallParams,
+    params?: EstimatedCallParams,
 ): Promise<Array<Departure>> {
-    return getDeparturesForStopPlaces.call(this, [stopPlaceId], estimatedCallParams)
+    return getDeparturesForStopPlaces.call(this, [stopPlaceId], params)
         .then((stopPlaces: Array<StopPlaceDepartures>) => stopPlaces?.[0]?.estimatedCalls || [])
 }
 
 export function getDeparturesForQuays(
     quayIds: Array<string>,
-    estimatedCallParams?: EstimatedCallParams = {},
+    params?: EstimatedCallParams = {},
 ): Promise<Array<QuayDepartures>> {
     const {
         limit = 30,
         timeRange = 72000,
         includeNonBoarding = false,
         ...rest
-    } = estimatedCallParams
+    } = params
 
     const variables = {
         ids: quayIds,
