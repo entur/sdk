@@ -156,8 +156,7 @@ export interface Quay {
     id: string;
     name: string;
     description?: string;
-    publicCode: string;
-    situations?: Array<Situation>;
+    publicCode?: string;
 }
 
 export interface StopPlace {
@@ -185,7 +184,7 @@ export type TransportMode =
     | "metro"
     | "tram"
     | "coach"
-    | "car";
+    | "car"
     // | "unknown"
 
 export type LegMode = TransportMode | "bicycle" | "foot";
@@ -452,7 +451,7 @@ export interface StopPlaceFacilities {
     parking: Array<StopPlaceFacilitiesParking>;
 }
 
-export interface GetQuaysForStopPlace {
+export interface GetQuaysForStopPlaceParams {
     filterByInUse?: boolean;
 }
 
@@ -518,7 +517,7 @@ declare class EnturService {
 
   getQuaysForStopPlace(
       stopPlaceId: string,
-      params?: GetQuaysForStopPlace,
+      params?: GetQuaysForStopPlaceParams,
   ): Promise<Quay[]>;
 
   getBikeRentalStation(stationId: string): Promise<BikeRentalStation>;

@@ -35,10 +35,10 @@ export function getStopPlaceFacilities(stopPlaceId: string): Promise<StopPlaceFa
     return nsrQuery(getStopPlaceFacilitiesQuery, variables, undefined, this.config)
 }
 
-type QuayParams = { filterByInUse?: boolean }
+type GetQuaysForStopPlaceParams = { filterByInUse?: boolean }
 export function getQuaysForStopPlace(
     stopPlaceId: string,
-    params?: QuayParams,
+    params?: GetQuaysForStopPlaceParams,
 ): Promise<Array<Quay>> {
     const variables = { id: stopPlaceId, ...params }
     return journeyPlannerQuery(getQuaysForStopPlaceQuery, variables, undefined, this.config)

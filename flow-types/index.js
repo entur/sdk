@@ -18,5 +18,3 @@ export type { JourneyPattern, ServiceJourney } from './ServiceJourney'
 export type { Situation, ReportType } from './Situation'
 export type { StopPlace } from './StopPlace'
 export type { TripPattern } from './TripPattern'
-
-export type { GetTripPatternsParams } from '../src/trip'

@@ -157,8 +157,7 @@ type $entur$sdk$Quay = {
     id: string,
     name: string,
     description?: string,
-    publicCode: string,
-    situations?: Array<$entur$sdk$Situation>,
+    publicCode?: string,
 }
 
 type $entur$sdk$StopPlace = {
@@ -194,13 +193,13 @@ type $entur$sdk$TransportMode =
     | 'metro'
     | 'tram'
     | 'coach'
+    | 'car'
     // | 'unknown'
 
 type $entur$sdk$LegMode =
     | $entur$sdk$TransportMode
     | 'bicycle'
     | 'foot'
-    | 'car'
     // | 'transit'
     // | 'car_park'
     // | 'car_pickup'
@@ -464,7 +463,7 @@ type $entur$sdk$StopPlaceFacilities = {
     parking: Array<$entur$sdk$StopPlaceFacilitiesParking>,
 }
 
-type $entur$sdk$GetQuaysForStopPlace = {
+type $entur$sdk$GetQuaysForStopPlaceParams = {
     filterByInUse?: boolean
 }
 
@@ -531,7 +530,7 @@ declare module '@entur/sdk' {
 
         getQuaysForStopPlace(
             stopPlaceId: string,
-            params?: $entur$sdk$GetQuaysForStopPlace,
+            params?: $entur$sdk$GetQuaysForStopPlaceParams,
         ): Promise<Array<$entur$sdk$Quay>>,
 
         getBikeRentalStation(stationId: string): Promise<$entur$sdk$BikeRentalStation>,
