@@ -178,8 +178,7 @@ type $entur$sdk$Place = {
     latitude: number,
     longitude: number,
     name: string,
-    quay?: {
-        ...$entur$sdk$Quay,
+    quay?: $entur$sdk$Quay & {
         stopPlace: $entur$sdk$StopPlace
     },
 }
@@ -332,10 +331,8 @@ type $entur$sdk$Departure = {
     realtime: boolean,
     situations?: Array<$entur$sdk$Situation>,
     quay: $entur$sdk$Quay,
-    serviceJourney: {
-        ...$entur$sdk$ServiceJourney,
-        line: {
-            ...$entur$sdk$Line,
+    serviceJourney: $entur$sdk$ServiceJourney & {
+        line: $entur$sdk$Line & {
             transportMode: $entur$sdk$TransportMode,
             description?: string
         }
@@ -374,7 +371,7 @@ type $entur$sdk$StopPlaceDetails = {
     weighting: 'preferredInterchange' | 'recommendedInterchange' | 'interchangeAllowed' | 'noInterchange',
     transportMode: $entur$sdk$TransportMode,
     transportSubmode?: $entur$sdk$TransportSubmode,
-    quays?: Array<{ ...$entur$sdk$Quay, situations?: Array<$entur$sdk$Situation> }>
+    quays?: Array<$entur$sdk$Quay & { situations?: Array<$entur$sdk$Situation> }>
 }
 
 type $entur$sdk$LimitationStatusType = 'FALSE' | 'TRUE' | 'PARTIAL' | 'UNKNOWN'

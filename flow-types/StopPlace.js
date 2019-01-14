@@ -21,7 +21,7 @@ export type StopPlaceDetails = {
     weighting: 'preferredInterchange' | 'recommendedInterchange' | 'interchangeAllowed' | 'noInterchange',
     transportMode: TransportMode,
     transportSubmode?: TransportSubmode,
-    quays?: Array<{ ...Quay, situations?: Array<Situation> }>
+    quays?: Array<Quay & { situations?: Array<Situation> }>
 }
 
 type LimitationStatusType = 'FALSE' | 'TRUE' | 'PARTIAL' | 'UNKNOWN'
