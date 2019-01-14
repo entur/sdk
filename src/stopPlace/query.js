@@ -1,13 +1,7 @@
 // @flow
 import { VariableType } from 'json-to-graphql-query'
 
-import { situationFields } from '../trip/queryHelper'
-
-const quayFields = {
-    id: true,
-    publicCode: true,
-    description: true,
-}
+import { situationFields, quayFields } from '../trip/queryHelper'
 
 const stopPlaceFields = {
     id: true,
@@ -55,6 +49,82 @@ export const getStopPlacesByBboxQuery = {
                 maximumLongitude: new VariableType('maxLng'),
             },
             ...stopPlaceFields,
+        },
+    },
+}
+
+export const getStopPlaceFacilitiesQuery = {
+    query: {
+        __variables: {
+            id: 'String!',
+        },
+        stopPlace: {
+            __args: {
+                id: new VariableType('id'),
+            },
+            id: true,
+            name: {
+                lang: true,
+                value: true,
+            },
+            accessibilityAssessment: {
+                limitations: {
+                    wheelchairAccess: true,
+                    stepFreeAccess: true,
+                },
+            },
+            placeEquipments: {
+                waitingRoomEquipment: {
+                    id: true,
+                },
+                shelterEquipment: {
+                    id: true,
+                },
+                sanitaryEquipment: {
+                    id: true,
+                    numberOfToilets: true,
+                    gender: true,
+                },
+                ticketingEquipment: {
+                    id: true,
+                    numberOfMachines: true,
+                    ticketMachines: true,
+                    ticketOffice: true,
+                },
+            },
+        },
+        parking: {
+            __args: {
+                stopPlaceId: new VariableType('id'),
+            },
+            name: {
+                lang: true,
+                value: true,
+            },
+            parentSiteRef: true,
+            totalCapacity: true,
+            principalCapacity: true,
+            parkingVehicleTypes: true,
+        },
+    },
+}
+
+export const getQuaysForStopPlaceQuery = {
+    query: {
+        __variables: {
+            id: 'String!',
+            filterByInUse: 'Boolean',
+        },
+        stopPlace: {
+            __args: {
+                id: new VariableType('id'),
+            },
+            quays: {
+                __args: {
+                    filterByInUse: new VariableType('filterByInUse'),
+                },
+                ...quayFields,
+            },
         },
     },
 }

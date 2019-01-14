@@ -22,15 +22,6 @@ export function convertFeatureToLocation(feature: Feature): Location {
     }
 }
 
-// preserve backward compatability
-export function convertLocationToPositionDEPRECATED(feature: Feature): Location {
-    if (process.env !== 'production') {
-        // eslint-disable-next-line
-        console.info('convertLocationToPosition is deprecated and will be removed in a future version. Use convertFeatureToLocation instead')
-    }
-    return convertFeatureToLocation(feature)
-}
-
 export function convertPositionToBbox(coordinates: Coordinates, distance: number) {
     const { latitude, longitude } = coordinates
     const distanceToKilometer = distance / 1000

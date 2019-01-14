@@ -1,7 +1,4 @@
 // @flow
-type Latitude = number
-type Longitude = number
-
 export type Category =
     | 'onstreetBus'
     | 'onstreetTram'
@@ -26,7 +23,7 @@ export type Category =
 
 export type Feature = {
     geometry: {
-        coordinates: [Longitude, Latitude],
+        coordinates: [number, number], // longitude, latitude
         type: 'Point',
     },
     properties: {
@@ -43,10 +40,8 @@ export type Feature = {
         county_gid: string,
         gid: string,
         housenumber?: string,
-        id: string,
         locality: string,
         locality_gid: string,
-        name: string,
         postalcode: string,
         source: string,
         source_id: string,

@@ -6,62 +6,82 @@ import {
 
 import {
     getTripPatternQuery,
-    getStopPlaceDeparturesQuery,
+    getDeparturesForStopPlacesQuery,
+    getDeparturesForQuayQuery,
 } from './query'
+
+import { legMapper } from './mapper'
 
 import type {
     TripPattern,
     Location,
     LegMode,
+    TransportSubmode,
 } from '../../flow-types'
+import type { StopPlaceDepartures, QuayDepartures, Departure } from '../../flow-types/Departures'
 import { convertFeatureToLocation, isValidDate } from '../utils'
 
-type StopPlaceParams = {
-    onForBoarding?: boolean, // deprecated
-    includeNonBoarding?: boolean,
-    departures?: number,
-    timeRange?: number,
-}
-
-const DEFAULT_SEARCH_PARAMS = {
-    arriveBy: false,
-    modes: [FOOT, BUS, TRAM, RAIL, METRO, WATER, AIR],
-    transportSubmode: [],
-    limit: 5,
-    wheelchairAccessible: false,
-}
-
-const DEFAULT_STOP_PLACE_PARAMS = {
-    includeNonBoarding: false,
-    departures: 50,
-    timeRange: 72000,
-}
-
 export type GetTripPatternsParams = {
-    searchDate: Date,
-    from: Location,
-    to: Location,
+    searchDate?: Date,
     arriveBy?: boolean,
     modes?: Array<LegMode>,
+    transportSubmode?: Array<TransportSubmode>,
     limit?: number,
     wheelchairAccessible?: boolean,
 }
+
+const DEFAULT_GET_TRIP_PATTERN_IGNORE_FIELDS = [
+    'notices',
+    'situations',
+    'journeyPattern',
+    'fromEstimatedCall',
+    'toEstimatedCall',
+    'intermediateEstimatedCalls',
+    'pointsOnLink',
+    'authority',
+    'operator',
+    'quay',
+]
+
 export function getTripPatterns(
-    searchParams: GetTripPatternsParams,
+    from: Location,
+    to: Location,
+    params?: GetTripPatternsParams = {},
+    ignoreFields?: Array<string> = DEFAULT_GET_TRIP_PATTERN_IGNORE_FIELDS,
 ): Promise<Array<TripPattern>> {
     const {
-        searchDate, limit, wheelchairAccessible, ...rest
-    } = { ...DEFAULT_SEARCH_PARAMS, ...searchParams }
+        searchDate = new Date(),
+        arriveBy = false,
+        modes = [FOOT, BUS, TRAM, RAIL, METRO, WATER, AIR],
+        transportSubmode = [],
+        wheelchairAccessible = false,
+        limit = 5,
+        ...rest
+    } = params
 
     const variables = {
-        ...rest,
+        from,
+        to,
         dateTime: searchDate.toISOString(),
-        numTripPatterns: limit,
+        arriveBy,
+        modes,
+        transportSubmode,
         wheelchair: wheelchairAccessible,
+        numTripPatterns: limit,
+        ...rest,
     }
 
-    return journeyPlannerQuery(getTripPatternQuery, variables, undefined, this.config)
-        .then((response: Object = {}) => response?.data?.trip?.tripPatterns || [])
+    return journeyPlannerQuery(getTripPatternQuery, variables, ignoreFields, this.config)
+        .then((data: Object = {}) => {
+            if (!data?.trip?.tripPatterns) {
+                return []
+            }
+
+            return data.trip.tripPatterns.map(trip => ({
+                ...trip,
+                legs: trip.legs.map(legMapper),
+            }))
+        })
 }
 
 export async function findTrips(
@@ -88,51 +108,80 @@ export async function findTrips(
         throw new Error(`Entur SDK: Could not find any locations matching <to> argument "${to}"`)
     }
 
-    return this.getTripPatterns({
+    return this.getTripPatterns(
+        convertFeatureToLocation(fromFeatures[0]),
+        convertFeatureToLocation(toFeatures[0]),
         searchDate,
-        from: convertFeatureToLocation(fromFeatures[0]),
-        to: convertFeatureToLocation(toFeatures[0]),
-    })
+    )
 }
 
-export function getStopPlaceDepartures(
-    stopPlaceIds: string | Array<string>,
-    stopPlaceParams?: StopPlaceParams,
-): Object {
+type GetDeparturesParams = {
+    includeNonBoarding?: boolean,
+    limit?: number,
+    departures?: number, // deprecated
+    timeRange?: number,
+}
+export function getDeparturesForStopPlaces(
+    stopPlaceIds: Array<string>,
+    params?: GetDeparturesParams = {},
+): Promise<Array<StopPlaceDepartures>> {
     const {
-        timeRange, departures, onForBoarding, includeNonBoarding,
-    } = { ...DEFAULT_STOP_PLACE_PARAMS, ...stopPlaceParams }
+        limit = 50,
+        departures,
+        timeRange = 72000,
+        includeNonBoarding = false,
+        ...rest
+    } = params
 
-    let omitNonBoarding = !includeNonBoarding
-
-    if (onForBoarding !== undefined) {
+    if (departures !== undefined) {
         // eslint-disable-next-line no-console
-        console.info('Entur SDK: "onForBoarding" is deprecated, use "includeNonBoarding" instead.')
-        omitNonBoarding = !onForBoarding
+        console.info('Entur SDK: "departures" is deprecated, use "limit" instead.')
     }
-
-    const askingForSingleStopPlace = typeof stopPlaceIds === 'string'
 
     const variables = {
-        ids: askingForSingleStopPlace ? [stopPlaceIds] : stopPlaceIds,
+        ids: stopPlaceIds,
         start: new Date().toISOString(),
-        range: timeRange,
-        departures,
-        omitNonBoarding,
+        omitNonBoarding: !includeNonBoarding,
+        timeRange,
+        limit: departures || limit,
+        ...rest,
     }
 
-    return journeyPlannerQuery(getStopPlaceDeparturesQuery, variables, undefined, this.config)
-        .then((response: Object = {}) => {
-            if (!response || !response.data) {
-                throw new Error(`Entur SDK: Could not fetch departures for ids: ${JSON.stringify(stopPlaceIds)}`)
-            }
-            const stopPlaces = response.data.stopPlaces || []
-            if (askingForSingleStopPlace) {
-                return stopPlaces.length ? stopPlaces[0].estimatedCalls || [] : []
-            }
-            return stopPlaces.map(({ id, estimatedCalls }) => ({
-                id,
-                departures: estimatedCalls,
-            }))
-        })
+    return journeyPlannerQuery(getDeparturesForStopPlacesQuery, variables, undefined, this.config)
+        .then((data: Object = {}) => data?.stopPlaces || [])
+}
+
+export function getDeparturesForStopPlace(
+    stopPlaceId: string,
+    params?: GetDeparturesParams,
+): Promise<Array<Departure>> {
+    return getDeparturesForStopPlaces.call(this, [stopPlaceId], params)
+        .then((stopPlaces: Array<StopPlaceDepartures>) => stopPlaces?.[0]?.estimatedCalls || [])
+}
+
+export function getDeparturesForQuays(
+    quayIds: Array<string>,
+    params?: GetDeparturesParams = {},
+): Promise<Array<QuayDepartures>> {
+    const {
+        limit = 30,
+        timeRange = 72000,
+        includeNonBoarding = false,
+        ...rest
+    } = params
+
+    const variables = {
+        ids: quayIds,
+        start: new Date().toISOString(),
+        omitNonBoarding: !includeNonBoarding,
+        timeRange,
+        limit,
+        ...rest,
+    }
+    return journeyPlannerQuery(getDeparturesForQuayQuery, variables, undefined, this.config)
+        .then((data: Object = {}) => data?.quays || [])
+}
+
+export function getStopPlaceDeparturesDEPRECATED() {
+    throw new Error('Entur SDK: "getStopPlaceDepartures" is deprecated, use "getDeparturesForStopPlace" or getDeparturesForStopPlaces instead.')
 }

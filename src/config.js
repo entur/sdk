@@ -9,7 +9,8 @@ export type ServiceConfig = {
     clientName: string,
     hosts: {
         journeyplanner: string,
-        geocoder: string
+        geocoder: string,
+        nsr: string,
     },
 };
 
@@ -17,13 +18,15 @@ export type ArgumentConfig = {
     clientName: string,
     hosts?: {
         journeyplanner?: string,
-        geocoder?: string
+        geocoder?: string,
+        nsr?: string,
     },
 }
 
 const HOST_CONFIG = {
     journeyplanner: 'https://api.entur.io/journey-planner/v2',
     geocoder: 'https://api.entur.io/geocoder/v1',
+    nsr: 'https://api.entur.io/stop-places/v1',
 }
 
 export function getServiceConfig(config: ArgumentConfig): ServiceConfig {
@@ -52,6 +55,15 @@ export function getJourneyPlannerHost({ hosts, clientName }: ServiceConfig): Hos
 export function getGeocoderHost({ hosts, clientName }: ServiceConfig): HostConfig {
     return {
         host: hosts.geocoder,
+        headers: {
+            'ET-Client-Name': clientName,
+        },
+    }
+}
+
+export function getNSRHost({ hosts, clientName }: ServiceConfig): HostConfig {
+    return {
+        host: hosts.nsr,
         headers: {
             'ET-Client-Name': clientName,
         },

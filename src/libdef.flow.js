@@ -1,18 +1,187 @@
 // @flow
 /* eslint-disable max-len */
 
-type $entur$sdk$Longitude = number
-type $entur$sdk$Latitude = number
+/**
+ * Commons
+ */
+
+type $entur$sdk$Config = {
+    clientName: string,
+    hosts?: {
+        journeyPlanner?: string,
+        geocoder?: string,
+        nsr?: string,
+    }
+}
 
 type $entur$sdk$Coordinates = {
-    latitude: $entur$sdk$Latitude,
-    longitude: $entur$sdk$Longitude,
+    latitude: number,
+    longitude: number,
+}
+
+type $entur$sdk$MultilingualString = {
+    lang: string,
+    value: string,
+}
+
+type $entur$sdk$Notice = {|
+    text: string,
+|}
+
+type $entur$sdk$ReportType = 'general' | 'incident' | null
+
+type $entur$sdk$ServiceConfig = {
+    clientName: string,
+    hosts: {
+        journeyplanner: string,
+        geocoder: string,
+        nsr: string,
+    },
+}
+
+type $entur$sdk$ValidityPeriod = { startTime: string, endTime: string }
+
+type $entur$sdk$Situation = {|
+    situationNumber: string,
+    summary: Array<$entur$sdk$MultilingualString>,
+    description: Array<$entur$sdk$MultilingualString>,
+    detail: Array<$entur$sdk$MultilingualString>,
+    validityPeriod: $entur$sdk$ValidityPeriod,
+    reportType: $entur$sdk$ReportType,
+|}
+
+
+/**
+ * Bike rental
+ */
+
+type $entur$sdk$BikeRentalStation = {
+     id: string,
+     name: string,
+     bikesAvailable: number,
+     spacesAvailable: number,
+     longitude: number,
+     latitude: number,
+ }
+
+
+/**
+ * Geocoder
+ */
+
+type $entur$sdk$Category =
+    | 'onstreetBus'
+    | 'onstreetTram'
+    | 'airport'
+    | 'railStation'
+    | 'metroStation'
+    | 'busStation'
+    | 'coachStation'
+    | 'tramStation'
+    | 'harbourPort'
+    | 'ferryPort'
+    | 'ferryStop'
+    | 'liftStation'
+    | 'vehicleRailInterchange'
+    | 'other'
+    | 'GroupOfStopPlaces'
+    | 'poi'
+    | 'Vegadresse'
+    | 'street'
+    | 'tettsteddel'
+    | 'bydel'
+
+type $entur$sdk$GetFeaturesParams = {
+    'boundary.rect.min_lon'?: number,
+    'boundary.rect.max_lon'?: number,
+    'boundary.rect.min_lat'?: number,
+    'boundary.rect.max_lat'?: number,
+    'boundary.country'?: string,
+    sources?: Array<string>,
+    layers?: Array<string>,
+    limit?: number,
+}
+
+type $entur$sdk$Feature = {
+    geometry: {
+        coordinates: [number, number], // longitude, latitude
+        type: 'Point',
+    },
+    properties: {
+        id: string,
+        name: string,
+        label?: string,
+        borough: string,
+        accuracy: 'point',
+        layer: 'venue' | 'address',
+        borough_gid: string,
+        category: Array<$entur$sdk$Category>,
+        country_gid: string,
+        county: string,
+        county_gid: string,
+        gid: string,
+        housenumber?: string,
+        locality: string,
+        locality_gid: string,
+        postalcode: string,
+        source: string,
+        source_id: string,
+        street: string,
+    }
 }
 
 type $entur$sdk$Location = {
     name: string,
     place?: string,
     coordinates?: $entur$sdk$Coordinates,
+}
+
+
+/**
+ * Trip
+ */
+
+type $entur$sdk$Authority = {
+    id: string,
+    name: string,
+    url?: string,
+}
+
+type $entur$sdk$Operator = {
+    id: string,
+    name: string,
+    url?: string,
+}
+
+type $entur$sdk$Quay = {
+    id: string,
+    name: string,
+    description?: string,
+    publicCode: string,
+    situations?: Array<$entur$sdk$Situation>,
+}
+
+type $entur$sdk$StopPlace = {
+    id: string,
+    name: string,
+    latitude: number,
+    longitude: number,
+    description: string,
+    wheelchairBoarding: boolean,
+    weighting: any,
+    transportMode: Array<string>,
+    transportSubmode: string,
+    quays: Array<$entur$sdk$Quay>,
+}
+
+type $entur$sdk$Place = {
+    latitude: number,
+    longitude: number,
+    name: string,
+    quay?: {
+        ...$entur$sdk$Quay,
+        stopPlace: $entur$sdk$StopPlace
+    },
 }
 
 type $entur$sdk$TransportMode =
@@ -51,102 +220,41 @@ type $entur$sdk$TransportSubmode =
     | 'airportLinkBus'
     | 'cityTram'
 
-type $entur$sdk$Config = {
-    clientName: string,
-    hosts?: {
-        journeyPlanner?: string,
-        geocoder?: string,
-    }
+type $entur$sdk$DestinationDisplay = {
+    frontText: string
 }
 
-type $entur$sdk$ServiceConfig = {
-    clientName: string,
-    hosts: {
-        journeyplanner: string,
-        geocoder: string,
-    },
-}
-
-type $entur$sdk$Notice = {|
-    text: string,
-|}
-
-type $entur$sdk$TripPatternsQuery = {
-    searchDate: Date,
-    from: $entur$sdk$Location,
-    to: $entur$sdk$Location,
-    arriveBy?: boolean,
-    modes?: Array<$entur$sdk$LegMode>,
-    limit?: number,
-    wheelchairAccessible?: boolean,
-}
-
-type $entur$sdk$MultilingualString = {
-    lang: string,
-    value: string,
-}
-
-type $entur$sdk$Authority = {
-    id: string,
-    name: string,
-    url?: string,
-}
-
-type $entur$sdk$Operator = {
-    id: string,
-    name: string,
-    url?: string,
-}
-
-type $entur$sdk$ValidityPeriod = { startTime: string, endTime: string }
-
-type $entur$sdk$ReportType = 'general' | 'incident' | null
-
-type $entur$sdk$Situation = {|
-    situationNumber: string,
-    summary: Array<$entur$sdk$MultilingualString>,
-    description: Array<$entur$sdk$MultilingualString>,
-    detail: Array<$entur$sdk$MultilingualString>,
-    validityPeriod: $entur$sdk$ValidityPeriod,
-    reportType: $entur$sdk$ReportType,
-|}
-
-type $entur$sdk$Quay = {
-  id: string,
-  name: string,
-  description?: string,
-  publicCode: string,
-  situations?: Array<$entur$sdk$Situation>,
-}
-
-type $entur$sdk$Place = {
-  name: string,
-  latitude: number,
-  longitude: number,
-  quay: $entur$sdk$Quay,
+type $entur$sdk$EstimatedCall = {
+    date: string,
+    destinationDisplay: $entur$sdk$DestinationDisplay,
+    forAlighting: boolean,
+    forBoarding: boolean,
+    notices?: Array<$entur$sdk$Notice>,
+    requestStop: boolean
 }
 
 type $entur$sdk$IntermediateEstimatedCall = {
-    quay: { id: string, name: string },
-    forAlighting?: boolean,
-    forBoarding?: boolean,
+    actualArrivalTime?: string, // Only available AFTER arrival has taken place
+    actualDepartureTime?: string, // Only available AFTER departure has taken place
+    aimedArrivalTime: string,
     aimedDepartureTime: string,
+    cancellation: boolean,
+    date: string,
+    destinationDisplay: $entur$sdk$DestinationDisplay,
+    expectedArrivalTime?: string, // Only available BEFORE arrival has taken place
     expectedDepartureTime?: string, // Only available BEFORE departure has taken place
-    actualDepartureTime?: string // Only available AFTER departure has taken place
+    forAlighting: boolean,
+    forBoarding: boolean,
+    notices?: Array<$entur$sdk$Notice>,
+    quay?: $entur$sdk$Quay,
+    requestStop: boolean
 }
 
 type $entur$sdk$Line = {
     id: string,
-    publicCode: string,
     name: string,
-    transportMode: $entur$sdk$LegMode,
-    transportSubmode: $entur$sdk$TransportSubmode,
-    description?: string,
     notices?: Array<$entur$sdk$Notice>,
-    presentation: {
-        colour: string,
-        textColour: string
-    }
+    publicCode: string,
 }
 
 type $entur$sdk$PointsOnLink = {
@@ -154,145 +262,213 @@ type $entur$sdk$PointsOnLink = {
     length: number,
 }
 
-type $entur$sdk$DestinationDisplay = {
-    frontText: string
-}
-
 type $entur$sdk$JourneyPattern = {
-    id: string,
-    line: $entur$sdk$Line,
-    name: string,
-    notices: Array<$entur$sdk$Notice>,
+    line: {
+        notices?: Array<$entur$sdk$Notice>,
+    },
+    notices?: Array<$entur$sdk$Notice>,
 }
 
 type $entur$sdk$ServiceJourney = {
     id: string,
-    journeyPattern: $entur$sdk$JourneyPattern,
-    notices: Array<$entur$sdk$Notice>,
-    situations: Array<$entur$sdk$Situation>,
-    privateCode?: string,
-    linePublicCode?: string,
-    transportSubmode?: $entur$sdk$TransportSubmode,
-    wheelchairAccessible?: 'noInformation' | 'possible' | 'notPossible',
-}
-
-type $entur$sdk$EstimatedCall = {
-    realtime: boolean,
-    quay: $entur$sdk$Quay,
-    forAlighting?: boolean,
-    forBoarding?: boolean,
-    aimedDepartureTime: string,
-    expectedDepartureTime: string,
-    destinationDisplay?: $entur$sdk$DestinationDisplay,
-    serviceJourney: $entur$sdk$ServiceJourney,
-    intermediateEstimatedCalls: Array<$entur$sdk$IntermediateEstimatedCall>,
-    situations: Array<$entur$sdk$Situation>,
+    journeyPattern?: $entur$sdk$JourneyPattern,
     notices?: Array<$entur$sdk$Notice>,
+    publicCode?: string,
+    transportSubmode?: $entur$sdk$TransportSubmode,
 }
 
 type $entur$sdk$Leg = {
     aimedEndTime: string,
     aimedStartTime: string,
     authority?: $entur$sdk$Authority,
-    operator?: $entur$sdk$Operator,
-    distance?: number,
-    duration?: number,
+    distance: number,
+    duration: number,
+    expectedEndTime: string,
+    expectedStartTime: string,
+    fromEstimatedCall?: $entur$sdk$EstimatedCall,
     fromPlace: $entur$sdk$Place,
-    toPlace: $entur$sdk$Place,
     intermediateEstimatedCalls: Array<$entur$sdk$IntermediateEstimatedCall>,
-    intermediateQuays: Array<$entur$sdk$Quay>,
     line?: $entur$sdk$Line,
     mode: $entur$sdk$LegMode,
+    notices?: Array<$entur$sdk$Notice>,
+    operator?: $entur$sdk$Operator,
     pointsOnLink: $entur$sdk$PointsOnLink,
     realtime: boolean,
     ride: boolean,
     serviceJourney: $entur$sdk$ServiceJourney,
-    expectedEndTime?: string,
-    expectedStartTime?: string,
-    situations: Array<$entur$sdk$Situation>,
+    situations?: Array<$entur$sdk$Situation>,
+    toEstimatedCall?: $entur$sdk$EstimatedCall,
+    toPlace: $entur$sdk$Place,
+    transportSubmode: $entur$sdk$TransportSubmode,
+}
+
+type $entur$sdk$GetTripPatternsParams = {
+    searchDate?: Date,
+    arriveBy?: boolean,
+    modes?: Array<$entur$sdk$LegMode>,
+    transportSubmode?: Array<$entur$sdk$TransportSubmode>,
+    limit?: number,
+    wheelchairAccessible?: boolean,
 }
 
 type $entur$sdk$TripPattern = {
+    distance: number,
     duration: number,
     endTime: string,
     legs: Array<$entur$sdk$Leg>,
     startTime: string,
-    waitingTime: number,
-    walkDistance: number
+    walkDistance: number,
 }
 
-type $entur$sdk$Category =
-    | 'onstreetBus'
-    | 'onstreetTram'
-    | 'airport'
-    | 'railStation'
-    | 'metroStation'
-    | 'busStation'
-    | 'coachStation'
-    | 'tramStation'
-    | 'harbourPort'
-    | 'ferryPort'
-    | 'ferryStop'
-    | 'liftStation'
-    | 'vehicleRailInterchange'
-    | 'other'
-    | 'GroupOfStopPlaces'
-    | 'poi'
-    | 'Vegadresse'
-    | 'street'
-    | 'tettsteddel'
-    | 'bydel'
-
-type $entur$sdk$Feature = {
-    geometry: {
-        coordinates: [$entur$sdk$Longitude, $entur$sdk$Latitude],
-        type: 'Point',
-    },
-    properties: {
-        id: string,
-        name: string,
-        label?: string,
-        borough: string,
-        accuracy: 'point',
-        layer: 'venue' | 'address',
-        borough_gid: string,
-        category: Array<$entur$sdk$Category>,
-        country_gid: string,
-        county: string,
-        county_gid: string,
-        gid: string,
-        housenumber?: string,
-        id: string,
-        locality: string,
-        locality_gid: string,
-        name: string,
-        postalcode: string,
-        source: string,
-        source_id: string,
-        street: string,
+type $entur$sdk$Departure = {
+    date: string,
+    forBoarding: boolean,
+    requestStop: boolean,
+    forAlighting: boolean,
+    destinationDisplay: $entur$sdk$DestinationDisplay,
+    notices?: Array<$entur$sdk$Notice>,
+    aimedDepartureTime: string,
+    expectedDepartureTime: string,
+    realtime: boolean,
+    situations?: Array<$entur$sdk$Situation>,
+    quay: $entur$sdk$Quay,
+    serviceJourney: {
+        ...$entur$sdk$ServiceJourney,
+        line: {
+            ...$entur$sdk$Line,
+            transportMode: $entur$sdk$TransportMode,
+            description?: string
+        }
     }
 }
 
-type $entur$sdk$StopPlace = {
+type $entur$sdk$QuayDepartures = {
     id: string,
-    name: string,
-    latitude: number,
-    longitude: number,
-    description: string,
-    wheelchairBoarding: boolean,
-    weighting: any,
-    transportMode: Array<string>,
-    transportSubmode: string,
-    quays: Array<$entur$sdk$Quay>,
+    estimatedCalls: Array<$entur$sdk$Departure>
 }
 
-type $entur$sdk$BikeRentalStation = {
+type $entur$sdk$StopPlaceDepartures = {
+    id: string,
+    estimatedCalls: Array<$entur$sdk$Departure>
+}
+
+type $entur$sdk$GetDeparturesParams = {
+    includeNonBoarding?: boolean,
+    limit?: number,
+    departures?: number, // deprecated
+    timeRange?: number,
+}
+
+
+/**
+ * Stop Place
+ */
+
+type $entur$sdk$StopPlaceDetails = {
     id: string,
     name: string,
-    bikesAvailable: number,
-    spacesAvailable: number,
-    longitude: number,
+    description?: string,
     latitude: number,
+    longitude: number,
+    wheelchairBoarding: 'noInformation' | 'possible' | 'notPossible',
+    weighting: 'preferredInterchange' | 'recommendedInterchange' | 'interchangeAllowed' | 'noInterchange',
+    transportMode: $entur$sdk$TransportMode,
+    transportSubmode?: $entur$sdk$TransportSubmode,
+    quays?: Array<{ ...$entur$sdk$Quay, situations?: Array<$entur$sdk$Situation> }>
+}
+
+type $entur$sdk$LimitationStatusType = 'FALSE' | 'TRUE' | 'PARTIAL' | 'UNKNOWN'
+
+type $entur$sdk$WaitingRoomEquipment = {
+    id: string,
+}
+
+type $entur$sdk$ShelterEquipment = {
+    id: string,
+}
+
+type $entur$sdk$SanitaryEquipment = {
+    id: string,
+    numberOfToilets: number,
+    gender: 'both' | 'femaleOnly' | 'maleOnly' | 'sameSexOnly',
+}
+
+type $entur$sdk$TicketingEquipment = {
+    id: string,
+    ticketOffice: boolean,
+    ticketMachines: boolean,
+    numberOfMachines: number,
+}
+
+type $entur$sdk$ParkingVehicle =
+    | 'pedalCycle'
+    | 'moped'
+    | 'motorcycle'
+    | 'motorcycleWithSidecar'
+    | 'motorScooter'
+    | 'twoWheeledVehicle'
+    | 'threeWheeledVehicle'
+    | 'car'
+    | 'smallCar'
+    | 'passengerCar'
+    | 'largeCar'
+    | 'fourWheelDrive'
+    | 'taxi'
+    | 'camperCar'
+    | 'carWithTrailer'
+    | 'carWithCaravan'
+    | 'minibus'
+    | 'bus'
+    | 'van'
+    | 'largeVan'
+    | 'highSidedVehicle'
+    | 'lightGoodsVehicle'
+    | 'heavyGoodsVehicle'
+    | 'truck'
+    | 'agriculturalVehicle'
+    | 'tanker'
+    | 'tram'
+    | 'articulatedVehicle'
+    | 'vehicleWithTrailer'
+    | 'lightGoodsVehicleWithTrailer'
+    | 'heavyGoodsVehicleWithTrailer'
+    | 'undefined'
+    | 'other'
+    | 'allPassengerVehicles'
+    | 'all'
+
+type $entur$sdk$StopPlaceFacilitiesStopPlace = {
+    id: string,
+    name: $entur$sdk$MultilingualString,
+    accessibilityAssessment: {
+        limitations: {
+            wheelchairAccess: $entur$sdk$LimitationStatusType,
+            stepFreeAccess: $entur$sdk$LimitationStatusType,
+        }
+    },
+    placeEquipments: {
+        waitingRoomEquipment?: Array<$entur$sdk$WaitingRoomEquipment>,
+        shelterEquipment?: Array<$entur$sdk$ShelterEquipment>,
+        sanitaryEquipment?: Array<$entur$sdk$SanitaryEquipment>,
+        ticketingEquipment?: Array<$entur$sdk$TicketingEquipment>,
+    }
+}
+
+type $entur$sdk$StopPlaceFacilitiesParking = {
+    name: $entur$sdk$MultilingualString,
+    parentSiteRef: string,
+    totalCapacity?: number,
+    principalCapacity?: number,
+    parkingVehicleTypes: Array<$entur$sdk$ParkingVehicle>
+}
+
+type $entur$sdk$StopPlaceFacilities = {
+    stopPlace: Array<$entur$sdk$StopPlaceFacilitiesStopPlace>,
+    parking: Array<$entur$sdk$StopPlaceFacilitiesParking>,
+}
+
+type $entur$sdk$GetQuaysForStopPlace = {
+    filterByInUse?: boolean
 }
 
 declare module '@entur/sdk' {
@@ -306,48 +482,72 @@ declare module '@entur/sdk' {
             config?: $entur$sdk$ServiceConfig,
         ): Promise<$entur$sdk$journeyPlannerResponse>,
 
+        nsrQuery<$entur$sdk$nsrResponse>(
+            queryObj: Object | string,
+            variables?: Object,
+            ignoreFields?: Array<string>,
+            config?: $entur$sdk$ServiceConfig,
+        ): Promise<$entur$sdk$nsrResponse>,
+
         getFeatures(
             query: string,
             coords?: $entur$sdk$Coordinates,
-            params?: Object
+            params?: $entur$sdk$GetFeaturesParams,
         ): Promise<Array<$entur$sdk$Feature>>,
 
         getTripPatterns(
-            query: $entur$sdk$TripPatternsQuery
+            from: $entur$sdk$Location,
+            to: $entur$sdk$Location,
+            params?: $entur$sdk$GetTripPatternsParams,
+            ignoreFields?: Array<string>,
         ): Promise<Array<$entur$sdk$TripPattern>>,
 
-        findTrips(from: string, to: string, date?: Date | string | number): Promise<Array<$entur$sdk$TripPattern>>,
+        findTrips(
+            from: string,
+            to: string,
+            date?: Date | string | number
+        ): Promise<Array<$entur$sdk$TripPattern>>,
 
-        getStopPlaceDepartures(stopPlaceId: string, params?: {
-            startTime?: string,
-            range?: number,
-            departures?: number,
-            includeNonBoarding?: boolean,
-        }): Promise<Array<$entur$sdk$EstimatedCall>>,
+        getDeparturesForStopPlaces(
+            stopPlaceIds: Array<string>,
+            params?: $entur$sdk$GetDeparturesParams,
+        ): Promise<Array<$entur$sdk$StopPlaceDepartures>>,
 
-        getStopPlaceDepartures(stopPlaceIds: Array<string>, params?: {
-            startTime?: string,
-            range?: number,
-            departures?: number,
-            includeNonBoarding?: boolean,
-        }): Promise<Array<{ id: string, departures: Array<$entur$sdk$EstimatedCall>}>>,
+        getDeparturesForStopPlace(
+            stopPlaceId: string,
+            params?: $entur$sdk$GetDeparturesParams,
+        ): Promise<Array<$entur$sdk$Departure>>,
 
-        getStopPlace(id: string): Promise<$entur$sdk$StopPlace>,
+        getDeparturesForQuays(
+            quayIds: Array<string>,
+            params?: $entur$sdk$GetDeparturesParams,
+        ): Promise<Array<$entur$sdk$QuayDepartures>>,
+
+        getStopPlace(stopPlaceId: string): Promise<$entur$sdk$StopPlaceDetails>,
 
         getStopPlacesByPosition(
             coordinates: $entur$sdk$Coordinates,
             distance?: number
-        ): Promise<Array<$entur$sdk$StopPlace>>,
+        ): Promise<Array<$entur$sdk$StopPlaceDetails>>,
 
-        getBikeRentalStation(id: string): Promise<$entur$sdk$BikeRentalStation>,
+        getStopPlaceFacilities(stopPlaceId: string): Promise<$entur$sdk$StopPlaceFacilities>,
 
-        getBikeRentalStations(
+        getQuaysForStopPlace(
+            stopPlaceId: string,
+            params?: $entur$sdk$GetQuaysForStopPlace,
+        ): Promise<Array<$entur$sdk$Quay>>,
+
+        getBikeRentalStation(stationId: string): Promise<$entur$sdk$BikeRentalStation>,
+
+        getBikeRentalStationsByPosition(
             coordinates: $entur$sdk$Coordinates,
             distance?: number
         ): Promise<Array<$entur$sdk$BikeRentalStation>>,
     }
 
-    // Constants
+    /**
+     * Constants
+     */
 
     // Any for of public transportation
     declare export var AIR: 'air'
@@ -465,7 +665,10 @@ declare module '@entur/sdk' {
         OTHER: 'other',
     }
 
-    // Utils
+    /**
+     * Utils
+     */
+
     declare export function convertFeatureToLocation(feature: $entur$sdk$Feature): $entur$sdk$Location
     declare export function convertLocationToPosition(feature: $entur$sdk$Feature): $entur$sdk$Location
     declare export function convertPositionToBbox(coordinates: Coordinates, distance: number): {

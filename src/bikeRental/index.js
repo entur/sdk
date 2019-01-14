@@ -1,7 +1,7 @@
 // @flow
 import { journeyPlannerQuery } from '../api'
 
-import { getBikeRentalStationQuery, getBikeRentalStationByBoxQuery } from './query'
+import { getBikeRentalStationQuery, getBikeRentalStationsByPositionQuery } from './query'
 
 import { convertPositionToBbox } from '../utils'
 import type { BikeRentalStation, Coordinates } from '../../flow-types'
@@ -12,15 +12,24 @@ export function getBikeRentalStation(stationId: string): Promise<BikeRentalStati
     }
 
     return journeyPlannerQuery(getBikeRentalStationQuery, variables, undefined, this.config)
-        .then(response => response.data.bikeRentalStation)
+        .then((data: Object = {}) => data?.bikeRentalStation)
 }
 
-export function getBikeRentalStations(
+export function getBikeRentalStationsByPosition(
     coordinates: Coordinates,
-    distance: number = 500,
+    distance?: number = 500,
 ): Promise<Array<BikeRentalStation>> {
     const variables = convertPositionToBbox(coordinates, distance)
 
-    return journeyPlannerQuery(getBikeRentalStationByBoxQuery, variables, undefined, this.config)
-        .then((response: Object = {}) => response?.data?.bikeRentalStationsByBbox || [])
+    return journeyPlannerQuery(
+        getBikeRentalStationsByPositionQuery,
+        variables,
+        undefined,
+        this.config,
+    )
+        .then((data: Object = {}) => data?.bikeRentalStationsByBbox || [])
+}
+
+export function getBikeRentalStationsDEPRECATED() {
+    throw new Error('Entur SDK: "getBikeRentalStations" is deprecated, use "getBikeRentalStationsByPosition" instead.')
 }
