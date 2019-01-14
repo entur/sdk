@@ -7,8 +7,7 @@ export type Place = {
   latitude: number,
   longitude: number,
   name: string,
-  quay?: {
-      ...Quay,
+  quay?: Quay & {
       stopPlace: StopPlace
   },
 }

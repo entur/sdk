@@ -19,10 +19,8 @@ export type Departure = {
     realtime: boolean,
     situations?: Array<Situation>,
     quay: Quay,
-    serviceJourney: {
-        ...ServiceJourney,
-        line: {
-            ...Line,
+    serviceJourney: ServiceJourney & {
+        line: Line & {
             transportMode: TransportMode,
             description?: string
         }
