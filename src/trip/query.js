@@ -89,7 +89,7 @@ export const getTripPatternQuery = {
             modes: '[Mode]!',
             transportSubmodes: '[TransportSubmodeFilter]',
             maxPreTransitWalkDistance: 'Float',
-
+            walkSpeed: 'Float',
         },
         trip: {
             __args: {
@@ -102,6 +102,7 @@ export const getTripPatternQuery = {
                 modes: new VariableType('modes'),
                 transportSubmodes: new VariableType('transportSubmodes'),
                 maxPreTransitWalkDistance: new VariableType('maxPreTransitWalkDistance'),
+                walkSpeed: new VariableType('walkSpeed'),
             },
             tripPatterns: {
                 startTime: true,

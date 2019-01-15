@@ -289,11 +289,16 @@ export interface Leg {
     transportSubmode: TransportSubmode;
 }
 
+export interface TransportSubmodeParam {
+    transportMode: TransportMode;
+    transportSubmodes: Array<TransportSubmode>;
+}
+
 export interface GetTripPatternsParams {
     searchDate?: Date;
     arriveBy?: boolean;
     modes?: Array<LegMode>;
-    transportSubmode?: Array<TransportSubmode>;
+    transportSubmodes?: Array<TransportSubmodeParam>;
     limit?: number;
     wheelchairAccessible?: boolean;
 }

@@ -300,11 +300,16 @@ type $entur$sdk$Leg = {
     transportSubmode: $entur$sdk$TransportSubmode,
 }
 
+type $entur$sdk$TransportSubmodeParam = {
+    transportMode: $entur$sdk$TransportMode,
+    transportSubmodes: Array<$entur$sdk$TransportSubmode>,
+}
+
 type $entur$sdk$GetTripPatternsParams = {
     searchDate?: Date,
     arriveBy?: boolean,
     modes?: Array<$entur$sdk$LegMode>,
-    transportSubmode?: Array<$entur$sdk$TransportSubmode>,
+    transportSubmodes?: Array<$entur$sdk$TransportSubmodeParam>,
     limit?: number,
     wheelchairAccessible?: boolean,
 }

@@ -16,18 +16,26 @@ import type {
     TripPattern,
     Location,
     LegMode,
+    TransportMode,
     TransportSubmode,
 } from '../../flow-types'
 import type { StopPlaceDepartures, QuayDepartures, Departure } from '../../flow-types/Departures'
 import { convertFeatureToLocation, isValidDate } from '../utils'
 
+
+type TransportSubmodeParam = {
+    transportMode: TransportMode,
+    transportSubmodes: Array<TransportSubmode>,
+}
+
 export type GetTripPatternsParams = {
     searchDate?: Date,
     arriveBy?: boolean,
     modes?: Array<LegMode>,
-    transportSubmode?: Array<TransportSubmode>,
+    transportSubmodes?: Array<TransportSubmodeParam>,
     limit?: number,
     wheelchairAccessible?: boolean,
+    walkSpeed?: number,
 }
 
 const DEFAULT_GET_TRIP_PATTERN_IGNORE_FIELDS = [
@@ -53,7 +61,7 @@ export function getTripPatterns(
         searchDate = new Date(),
         arriveBy = false,
         modes = [FOOT, BUS, TRAM, RAIL, METRO, WATER, AIR],
-        transportSubmode = [],
+        transportSubmodes = [],
         wheelchairAccessible = false,
         limit = 5,
         ...rest
@@ -65,7 +73,7 @@ export function getTripPatterns(
         dateTime: searchDate.toISOString(),
         arriveBy,
         modes,
-        transportSubmode,
+        transportSubmodes,
         wheelchair: wheelchairAccessible,
         numTripPatterns: limit,
         ...rest,
