@@ -460,7 +460,7 @@ type $entur$sdk$StopPlaceFacilitiesParking = {
     parentSiteRef: string,
     totalCapacity?: number,
     principalCapacity?: number,
-    parkingVehicleTypes: Array<$entur$sdk$ParkingVehicle>
+    parkingVehicleTypes?: Array<$entur$sdk$ParkingVehicle>
 }
 
 type $entur$sdk$StopPlaceFacilities = {

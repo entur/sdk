@@ -448,7 +448,7 @@ export interface StopPlaceFacilitiesParking {
     parentSiteRef: string;
     totalCapacity?: number;
     principalCapacity?: number;
-    parkingVehicleTypes: Array<ParkingVehicle>;
+    parkingVehicleTypes?: Array<ParkingVehicle>;
 }
 
 export interface StopPlaceFacilities {
