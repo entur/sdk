@@ -13,8 +13,18 @@ import { convertPositionToBbox } from '../utils'
 import type { Quay, Coordinates } from '../../flow-types'
 import type { StopPlaceDetails, StopPlaceFacilities } from '../../flow-types/StopPlace'
 
-export function getStopPlace(stopPlaceId: string): Promise<StopPlaceDetails> {
-    const variables = { id: stopPlaceId }
+type StopPlaceParams = { includeUnusedQuays?: boolean }
+
+export function getStopPlace(
+    stopPlaceId: string,
+    params: StopPlaceParams = {},
+): Promise<StopPlaceDetails> {
+    const { includeUnusedQuays = true, ...rest } = params
+    const variables = {
+        id: stopPlaceId,
+        filterByInUse: !includeUnusedQuays,
+        ...rest,
+    }
 
     return journeyPlannerQuery(getStopPlaceQuery, variables, undefined, this.config)
         .then((data: Object = {}) => data?.stopPlace)
@@ -23,8 +33,14 @@ export function getStopPlace(stopPlaceId: string): Promise<StopPlaceDetails> {
 export function getStopPlacesByPosition(
     coordinates: Coordinates,
     distance?: number = 500,
+    params: StopPlaceParams = {},
 ): Promise<Array<StopPlaceDetails>> {
-    const variables = convertPositionToBbox(coordinates, distance)
+    const { includeUnusedQuays = true, ...rest } = params
+    const variables = {
+        ...convertPositionToBbox(coordinates, distance),
+        filterByInUse: !includeUnusedQuays,
+        ...rest,
+    }
 
     return journeyPlannerQuery(getStopPlacesByBboxQuery, variables, undefined, this.config)
         .then((data: Object = {}) => data?.stopPlacesByBbox || [])
@@ -35,12 +51,18 @@ export function getStopPlaceFacilities(stopPlaceId: string): Promise<StopPlaceFa
     return nsrQuery(getStopPlaceFacilitiesQuery, variables, undefined, this.config)
 }
 
-type GetQuaysForStopPlaceParams = { filterByInUse?: boolean }
+type GetQuaysForStopPlaceParams = { includeUnusedQuays?: boolean }
 export function getQuaysForStopPlace(
     stopPlaceId: string,
-    params?: GetQuaysForStopPlaceParams,
+    params?: GetQuaysForStopPlaceParams = {},
 ): Promise<Array<Quay>> {
-    const variables = { id: stopPlaceId, ...params }
+    const { includeUnusedQuays = true, ...rest } = params
+    const variables = {
+        id: stopPlaceId,
+        filterByInUse: !includeUnusedQuays,
+        ...rest,
+    }
+
     return journeyPlannerQuery(getQuaysForStopPlaceQuery, variables, undefined, this.config)
         .then((data: Object = {}) => data?.stopPlace?.quays || [])
 }

@@ -14,6 +14,9 @@ const stopPlaceFields = {
     transportMode: true,
     transportSubmode: true,
     quays: {
+        __args: {
+            filterByInUse: new VariableType('filterByInUse'),
+        },
         ...quayFields,
         situations: situationFields,
     },
@@ -23,6 +26,7 @@ export const getStopPlaceQuery = {
     query: {
         __variables: {
             id: 'String!',
+            filterByInUse: 'Boolean',
         },
         stopPlace: {
             __args: {
@@ -40,6 +44,7 @@ export const getStopPlacesByBboxQuery = {
             minLng: 'Float',
             maxLng: 'Float',
             maxLat: 'Float',
+            filterByInUse: 'Boolean',
         },
         stopPlacesByBbox: {
             __args: {
