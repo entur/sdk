@@ -25,6 +25,8 @@ function getMetodToRun(name) {
             return service.getQuaysForStopPlace('NSR:StopPlace:58366')
         case 'getBikeRentalStation':
             return service.getBikeRentalStation('470')
+        case 'getDeparturesForStopPlace':
+            return service.getDeparturesForStopPlace('NSR:StopPlace:58366')
         default:
             // eslint-disable-next-line prefer-promise-reject-errors
             return Promise.reject(`Error: method ${name} is not defined`)

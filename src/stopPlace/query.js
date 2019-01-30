@@ -1,7 +1,7 @@
 // @flow
 import { VariableType } from 'json-to-graphql-query'
 
-import { situationFields, quayFields } from '../trip/queryHelper'
+import { situationFields, quayFields } from '../trip/query'
 
 const stopPlaceFields = {
     id: true,

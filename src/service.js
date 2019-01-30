@@ -3,11 +3,13 @@ import { journeyPlannerQuery, nsrQuery } from './api'
 import {
     findTrips,
     getTripPatterns,
+} from './trip'
+import {
     getDeparturesForStopPlace,
     getDeparturesForStopPlaces,
     getDeparturesForQuays,
     getStopPlaceDeparturesDEPRECATED,
-} from './trip'
+} from './departure'
 import {
     getStopPlace,
     getStopPlacesByPosition,
