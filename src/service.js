@@ -8,6 +8,7 @@ import {
     getDeparturesFromStopPlace,
     getDeparturesFromStopPlaces,
     getDeparturesFromQuays,
+    getDeparturesBetweenStopPlaces,
     getStopPlaceDeparturesDEPRECATED,
 } from './departure'
 import {
@@ -51,6 +52,8 @@ class EnturService {
     getDeparturesFromStopPlaces = getDeparturesFromStopPlaces
 
     getDeparturesFromQuays = getDeparturesFromQuays
+
+    getDeparturesBetweenStopPlaces = getDeparturesBetweenStopPlaces
 
     getStopPlace = getStopPlace
 

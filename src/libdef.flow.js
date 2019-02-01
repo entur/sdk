@@ -361,6 +361,10 @@ type $entur$sdk$GetDeparturesParams = {
     timeRange?: number,
 }
 
+type $entur$sdk$GetDeparturesBetweenStopPlacesParams = {
+    limit?: number,
+    start?: Date
+}
 
 /**
  * Stop Place
@@ -523,6 +527,12 @@ declare module '@entur/sdk' {
             quayIds: Array<string>,
             params?: $entur$sdk$GetDeparturesParams,
         ): Promise<Array<$entur$sdk$QuayDepartures>>,
+
+        getDeparturesBetweenStopPlaces(
+            fromStopPlaceId: string,
+            toStopPlaceId: string,
+            params?: $entur$sdk$GetDeparturesBetweenStopPlacesParams,
+        ): Promise<Array<$entur$sdk$Departure>>,
 
         getStopPlace(
             stopPlaceId: string,

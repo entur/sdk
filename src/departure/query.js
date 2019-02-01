@@ -80,3 +80,52 @@ export const getDeparturesFromQuayQuery = {
         },
     },
 }
+
+export const getDeparturesBetweenStopPlacesQuery = {
+    query: {
+        __variables: {
+            from: 'Location!',
+            to: 'Location!',
+            limit: 'Int!',
+            dateTime: 'DateTime!',
+            arriveBy: 'Boolean!',
+            modes: '[Mode]!',
+            transportSubmodes: '[TransportSubmodeFilter]',
+
+        },
+        trip: {
+            __args: {
+                from: new VariableType('from'),
+                to: new VariableType('to'),
+                numTripPatterns: new VariableType('limit'),
+                dateTime: new VariableType('dateTime'),
+                arriveBy: new VariableType('arriveBy'),
+                modes: new VariableType('modes'),
+                transportSubmodes: new VariableType('transportSubmodes'),
+                wheelchair: false,
+                maximumTransfers: 0,
+            },
+
+            tripPatterns: {
+                legs: {
+                    aimedStartTime: true,
+                    expectedStartTime: true,
+                    realtime: true,
+                    fromEstimatedCall: estimatedCallFields,
+                    situations: situationFields,
+                    fromPlace: {
+                        quay: quayFields,
+                    },
+                    serviceJourney: {
+                        ...serviceJourneyFields,
+                        line: {
+                            ...lineFields,
+                            transportMode: true,
+                            description: true,
+                        },
+                    },
+                },
+            },
+        },
+    },
+}
