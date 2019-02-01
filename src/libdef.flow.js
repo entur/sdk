@@ -536,18 +536,18 @@ declare module '@entur/sdk' {
 
         getStopPlace(
             stopPlaceId: string,
-            params: $entur$sdk$StopPlaceParams,
+            params?: $entur$sdk$StopPlaceParams,
         ): Promise<$entur$sdk$StopPlaceDetails>,
 
         getStopPlaces(
             stopPlaceIds: Array<string>,
-            params: $entur$sdk$StopPlaceParams,
+            params?: $entur$sdk$StopPlaceParams,
         ): Promise<Array<$entur$sdk$StopPlaceDetails>>,
 
         getStopPlacesByPosition(
             coordinates: $entur$sdk$Coordinates,
             distance?: number,
-            params: $entur$sdk$StopPlaceParams,
+            params?: $entur$sdk$StopPlaceParams,
         ): Promise<Array<$entur$sdk$StopPlaceDetails>>,
 
         getStopPlaceFacilities(stopPlaceId: string): Promise<$entur$sdk$StopPlaceFacilities>,

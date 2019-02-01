@@ -37,11 +37,6 @@ export function getDeparturesFromStopPlaces(
         ...rest
     } = params
 
-    if (departures !== undefined) {
-        // eslint-disable-next-line no-console
-        console.info('Entur SDK: "departures" is deprecated, use "limit" instead.')
-    }
-
     const variables = {
         ids: stopPlaceIds,
         start: start.toISOString(),

@@ -18,7 +18,7 @@ type StopPlaceParams = { includeUnusedQuays?: boolean }
 
 export function getStopPlace(
     stopPlaceId: string,
-    params: StopPlaceParams = {},
+    params?: StopPlaceParams = {},
 ): Promise<StopPlaceDetails> {
     const { includeUnusedQuays = true, ...rest } = params
     const variables = {
@@ -33,7 +33,7 @@ export function getStopPlace(
 
 export function getStopPlaces(
     stopPlaceIds: Array<string>,
-    params: StopPlaceParams = {},
+    params?: StopPlaceParams = {},
 ): Promise<Array<StopPlaceDetails>> {
     const { includeUnusedQuays = true, ...rest } = params
     const variables = {
@@ -49,7 +49,7 @@ export function getStopPlaces(
 export function getStopPlacesByPosition(
     coordinates: Coordinates,
     distance?: number = 500,
-    params: StopPlaceParams = {},
+    params?: StopPlaceParams = {},
 ): Promise<Array<StopPlaceDetails>> {
     const { includeUnusedQuays = true, ...rest } = params
     const variables = {
