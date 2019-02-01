@@ -52,7 +52,16 @@ export function getDeparturesFromStopPlaces(
     }
 
     return journeyPlannerQuery(getDeparturesFromStopPlacesQuery, variables, undefined, this.config)
-        .then((data: Object = {}) => data?.stopPlaces || [])
+        .then((data: Object = {}) => {
+            if (!data?.stopPlaces) {
+                return []
+            }
+
+            return data.stopPlaces.map(({ estimatedCalls, ...stopPlace }) => ({
+                ...stopPlace,
+                departures: estimatedCalls,
+            }))
+        })
 }
 
 export function getDeparturesFromStopPlace(
@@ -60,7 +69,7 @@ export function getDeparturesFromStopPlace(
     params?: GetDeparturesParams,
 ): Promise<Array<Departure>> {
     return getDeparturesFromStopPlaces.call(this, [stopPlaceId], params)
-        .then((stopPlaces: Array<StopPlaceDepartures>) => stopPlaces?.[0]?.estimatedCalls || [])
+        .then((stopPlaces: Array<StopPlaceDepartures>) => stopPlaces?.[0]?.departures || [])
 }
 
 export function getDeparturesFromQuays(
@@ -84,7 +93,16 @@ export function getDeparturesFromQuays(
         ...rest,
     }
     return journeyPlannerQuery(getDeparturesFromQuayQuery, variables, undefined, this.config)
-        .then((data: Object = {}) => data?.quays || [])
+        .then((data: Object = {}) => {
+            if (!data?.quays) {
+                return []
+            }
+
+            return data.quays.map(({ estimatedCalls, ...stopPlace }) => ({
+                ...stopPlace,
+                departures: estimatedCalls,
+            }))
+        })
 }
 
 export type GetDeparturesBetweenStopPlacesParams = {
