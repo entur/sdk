@@ -3,6 +3,7 @@ import { journeyPlannerQuery, nsrQuery } from '../api'
 
 import {
     getStopPlaceQuery,
+    getStopPlacesQuery,
     getStopPlacesByBboxQuery,
     getStopPlaceFacilitiesQuery,
     getQuaysForStopPlaceQuery,
@@ -30,6 +31,21 @@ export function getStopPlace(
         .then((data: Object = {}) => data?.stopPlace)
 }
 
+export function getStopPlaces(
+    stopPlaceIds: Array<string>,
+    params: StopPlaceParams = {},
+): Promise<Array<StopPlaceDetails>> {
+    const { includeUnusedQuays = true, ...rest } = params
+    const variables = {
+        ids: stopPlaceIds,
+        filterByInUse: !includeUnusedQuays,
+        ...rest,
+    }
+
+    return journeyPlannerQuery(getStopPlacesQuery, variables, undefined, this.config)
+        .then((data: Object) => data?.stopPlaces || [])
+}
+
 export function getStopPlacesByPosition(
     coordinates: Coordinates,
     distance?: number = 500,
@@ -51,10 +67,9 @@ export function getStopPlaceFacilities(stopPlaceId: string): Promise<StopPlaceFa
     return nsrQuery(getStopPlaceFacilitiesQuery, variables, undefined, this.config)
 }
 
-type GetQuaysForStopPlaceParams = { includeUnusedQuays?: boolean }
 export function getQuaysForStopPlace(
     stopPlaceId: string,
-    params?: GetQuaysForStopPlaceParams = {},
+    params?: StopPlaceParams = {},
 ): Promise<Array<Quay>> {
     const { includeUnusedQuays = true, ...rest } = params
     const variables = {

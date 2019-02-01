@@ -468,8 +468,7 @@ type $entur$sdk$StopPlaceFacilities = {
     stopPlace: Array<$entur$sdk$StopPlaceFacilitiesStopPlace>,
     parking: Array<$entur$sdk$StopPlaceFacilitiesParking>,
 }
-
-type $entur$sdk$GetQuaysForStopPlaceParams = {
+type $entur$sdk$StopPlaceParams = {
     filterByInUse?: boolean
 }
 
@@ -525,18 +524,27 @@ declare module '@entur/sdk' {
             params?: $entur$sdk$GetDeparturesParams,
         ): Promise<Array<$entur$sdk$QuayDepartures>>,
 
-        getStopPlace(stopPlaceId: string): Promise<$entur$sdk$StopPlaceDetails>,
+        getStopPlace(
+            stopPlaceId: string,
+            params: $entur$sdk$StopPlaceParams,
+        ): Promise<$entur$sdk$StopPlaceDetails>,
+
+        getStopPlaces(
+            stopPlaceIds: Array<string>,
+            params: $entur$sdk$StopPlaceParams,
+        ): Promise<Array<$entur$sdk$StopPlaceDetails>>,
 
         getStopPlacesByPosition(
             coordinates: $entur$sdk$Coordinates,
-            distance?: number
+            distance?: number,
+            params: $entur$sdk$StopPlaceParams,
         ): Promise<Array<$entur$sdk$StopPlaceDetails>>,
 
         getStopPlaceFacilities(stopPlaceId: string): Promise<$entur$sdk$StopPlaceFacilities>,
 
         getQuaysForStopPlace(
             stopPlaceId: string,
-            params?: $entur$sdk$GetQuaysForStopPlaceParams,
+            params?: $entur$sdk$StopPlaceParams,
         ): Promise<Array<$entur$sdk$Quay>>,
 
         getBikeRentalStation(stationId: string): Promise<$entur$sdk$BikeRentalStation>,
