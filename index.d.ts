@@ -320,6 +320,11 @@ export interface GetDeparturesParams {
     timeRange?: number;
 }
 
+export interface GetDeparturesBetweenStopPlacesParams = {
+    limit?: number,
+    start?: Date
+}
+
 /**
  * Stop Place
  */
@@ -457,7 +462,7 @@ export interface StopPlaceFacilities {
     parking: Array<StopPlaceFacilitiesParking>;
 }
 
-export interface GetQuaysForStopPlaceParams {
+export interface StopPlaceParams {
     filterByInUse?: boolean;
 }
 
@@ -497,22 +502,36 @@ declare class EnturService {
     date?: Date | string | number,
   ): Promise<TripPattern[]>;
 
-  getDeparturesForStopPlaces(
+  getDeparturesFromStopPlaces(
       stopPlaceIds: Array<string>,
       params?: GetDeparturesParams,
   ): Promise<StopPlaceDepartures[]>;
 
-  getDeparturesForStopPlace(
+  getDeparturesFromStopPlace(
       stopPlaceId: string,
       params?: GetDeparturesParams,
   ): Promise<Departure[]>;
 
-  getDeparturesForQuays(
+  getDeparturesFromQuays(
       quayIds: Array<string>,
       params?: GetDeparturesParams,
   ): Promise<QuayDepartures[]>;
 
-  getStopPlace(id: string): Promise<StopPlaceDetails>;
+  getDeparturesBetweenStopPlaces(
+      fromStopPlaceId: string,
+      toStopPlaceId: string,
+      params?: GetDeparturesBetweenStopPlacesParams,
+  ): Promise<Departure[]>,
+
+  getStopPlace(
+      id: string,
+      params?: StopPlaceParams,
+  ): Promise<StopPlaceDetails>;
+
+  getStopPlaces(
+      stopPlaceId: Array<string>,
+      params?: StopPlaceParams,
+  ): Promise<StopPlaceDetails>;
 
   getStopPlacesByPosition(
     coordinates: Coordinates,
@@ -523,7 +542,7 @@ declare class EnturService {
 
   getQuaysForStopPlace(
       stopPlaceId: string,
-      params?: GetQuaysForStopPlaceParams,
+      params?: StopPlaceParams,
   ): Promise<Quay[]>;
 
   getBikeRentalStation(stationId: string): Promise<BikeRentalStation>;
