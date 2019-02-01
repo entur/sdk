@@ -130,7 +130,7 @@ export function getDeparturesBetweenStopPlaces(
         this.config,
     )
         .then((data: Object) => {
-            if (data?.trip?.tripPatterns) {
+            if (!data?.trip?.tripPatterns) {
                 return []
             }
 
