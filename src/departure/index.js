@@ -2,8 +2,8 @@
 import { journeyPlannerQuery } from '../api'
 
 import {
-    getDeparturesForStopPlacesQuery,
-    getDeparturesForQuayQuery,
+    getDeparturesFromStopPlacesQuery,
+    getDeparturesFromQuayQuery,
 } from './query'
 
 import type {
@@ -17,9 +17,10 @@ type GetDeparturesParams = {
     includeNonBoarding?: boolean,
     limit?: number,
     departures?: number, // deprecated
+    start?: Date,
     timeRange?: number,
 }
-export function getDeparturesForStopPlaces(
+export function getDeparturesFromStopPlaces(
     stopPlaceIds: Array<string>,
     params?: GetDeparturesParams = {},
 ): Promise<Array<StopPlaceDepartures>> {
@@ -27,6 +28,7 @@ export function getDeparturesForStopPlaces(
         limit = 50,
         departures,
         timeRange = 72000,
+        start = new Date(),
         includeNonBoarding = false,
         ...rest
     } = params
@@ -38,26 +40,26 @@ export function getDeparturesForStopPlaces(
 
     const variables = {
         ids: stopPlaceIds,
-        start: new Date().toISOString(),
+        start: start.toISOString(),
         omitNonBoarding: !includeNonBoarding,
         timeRange,
         limit: departures || limit,
         ...rest,
     }
 
-    return journeyPlannerQuery(getDeparturesForStopPlacesQuery, variables, undefined, this.config)
+    return journeyPlannerQuery(getDeparturesFromStopPlacesQuery, variables, undefined, this.config)
         .then((data: Object = {}) => data?.stopPlaces || [])
 }
 
-export function getDeparturesForStopPlace(
+export function getDeparturesFromStopPlace(
     stopPlaceId: string,
     params?: GetDeparturesParams,
 ): Promise<Array<Departure>> {
-    return getDeparturesForStopPlaces.call(this, [stopPlaceId], params)
+    return getDeparturesFromStopPlaces.call(this, [stopPlaceId], params)
         .then((stopPlaces: Array<StopPlaceDepartures>) => stopPlaces?.[0]?.estimatedCalls || [])
 }
 
-export function getDeparturesForQuays(
+export function getDeparturesFromQuays(
     quayIds: Array<string>,
     params?: GetDeparturesParams = {},
 ): Promise<Array<QuayDepartures>> {
@@ -65,18 +67,19 @@ export function getDeparturesForQuays(
         limit = 30,
         timeRange = 72000,
         includeNonBoarding = false,
+        start = new Date(),
         ...rest
     } = params
 
     const variables = {
         ids: quayIds,
-        start: new Date().toISOString(),
+        start: start.toISOString(),
         omitNonBoarding: !includeNonBoarding,
         timeRange,
         limit,
         ...rest,
     }
-    return journeyPlannerQuery(getDeparturesForQuayQuery, variables, undefined, this.config)
+    return journeyPlannerQuery(getDeparturesFromQuayQuery, variables, undefined, this.config)
         .then((data: Object = {}) => data?.quays || [])
 }
 

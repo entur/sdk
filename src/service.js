@@ -5,9 +5,9 @@ import {
     getTripPatterns,
 } from './trip'
 import {
-    getDeparturesForStopPlace,
-    getDeparturesForStopPlaces,
-    getDeparturesForQuays,
+    getDeparturesFromStopPlace,
+    getDeparturesFromStopPlaces,
+    getDeparturesFromQuays,
     getStopPlaceDeparturesDEPRECATED,
 } from './departure'
 import {
@@ -45,11 +45,11 @@ class EnturService {
 
     getStopPlaceDepartures = getStopPlaceDeparturesDEPRECATED
 
-    getDeparturesForStopPlace = getDeparturesForStopPlace
+    getDeparturesFromStopPlace = getDeparturesFromStopPlace
 
-    getDeparturesForStopPlaces = getDeparturesForStopPlaces
+    getDeparturesFromStopPlaces = getDeparturesFromStopPlaces
 
-    getDeparturesForQuays = getDeparturesForQuays
+    getDeparturesFromQuays = getDeparturesFromQuays
 
     getStopPlace = getStopPlace
 

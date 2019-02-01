@@ -510,17 +510,17 @@ declare module '@entur/sdk' {
             date?: Date | string | number
         ): Promise<Array<$entur$sdk$TripPattern>>,
 
-        getDeparturesForStopPlaces(
+        getDeparturesFromStopPlaces(
             stopPlaceIds: Array<string>,
             params?: $entur$sdk$GetDeparturesParams,
         ): Promise<Array<$entur$sdk$StopPlaceDepartures>>,
 
-        getDeparturesForStopPlace(
+        getDeparturesFromStopPlace(
             stopPlaceId: string,
             params?: $entur$sdk$GetDeparturesParams,
         ): Promise<Array<$entur$sdk$Departure>>,
 
-        getDeparturesForQuays(
+        getDeparturesFromQuays(
             quayIds: Array<string>,
             params?: $entur$sdk$GetDeparturesParams,
         ): Promise<Array<$entur$sdk$QuayDepartures>>,

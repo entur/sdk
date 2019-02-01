@@ -27,7 +27,7 @@ const departureFields = {
     },
 }
 
-export const getDeparturesForStopPlacesQuery = {
+export const getDeparturesFromStopPlacesQuery = {
     query: {
         __variables: {
             ids: '[String]!',
@@ -54,7 +54,7 @@ export const getDeparturesForStopPlacesQuery = {
     },
 }
 
-export const getDeparturesForQuayQuery = {
+export const getDeparturesFromQuayQuery = {
     query: {
         __variables: {
             ids: '[String]!',
