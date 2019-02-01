@@ -3,13 +3,17 @@ import { journeyPlannerQuery, nsrQuery } from './api'
 import {
     findTrips,
     getTripPatterns,
-    getDeparturesForStopPlace,
-    getDeparturesForStopPlaces,
-    getDeparturesForQuays,
-    getStopPlaceDeparturesDEPRECATED,
 } from './trip'
 import {
+    getDeparturesFromStopPlace,
+    getDeparturesFromStopPlaces,
+    getDeparturesFromQuays,
+    getDeparturesBetweenStopPlaces,
+    getStopPlaceDeparturesDEPRECATED,
+} from './departure'
+import {
     getStopPlace,
+    getStopPlaces,
     getStopPlacesByPosition,
     getStopPlaceFacilities,
     getQuaysForStopPlace,
@@ -43,13 +47,17 @@ class EnturService {
 
     getStopPlaceDepartures = getStopPlaceDeparturesDEPRECATED
 
-    getDeparturesForStopPlace = getDeparturesForStopPlace
+    getDeparturesFromStopPlace = getDeparturesFromStopPlace
 
-    getDeparturesForStopPlaces = getDeparturesForStopPlaces
+    getDeparturesFromStopPlaces = getDeparturesFromStopPlaces
 
-    getDeparturesForQuays = getDeparturesForQuays
+    getDeparturesFromQuays = getDeparturesFromQuays
+
+    getDeparturesBetweenStopPlaces = getDeparturesBetweenStopPlaces
 
     getStopPlace = getStopPlace
+
+    getStopPlaces = getStopPlaces
 
     getStopPlacesByPosition = getStopPlacesByPosition
 

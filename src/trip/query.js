@@ -1,14 +1,57 @@
 // @flow
 import { VariableType } from 'json-to-graphql-query'
 
-import {
-    noticeFields,
-    situationFields,
-    lineFields,
-    quayFields,
-    estimatedCallFields,
-    intermediateEstimatedCallFields,
-} from './queryHelper'
+export const noticeFields = {
+    text: true,
+}
+
+export const situationFields = {
+    situationNumber: true,
+    summary: { value: true },
+    description: { value: true },
+    detail: { value: true },
+    validityPeriod: {
+        startTime: true,
+        endTime: true,
+    },
+    reportType: true,
+    infoLink: true,
+}
+
+export const lineFields = {
+    id: true,
+    name: true,
+    publicCode: true,
+    notices: noticeFields,
+}
+
+export const quayFields = {
+    id: true,
+    name: true,
+    publicCode: true,
+    description: true,
+}
+
+export const estimatedCallFields = {
+    date: true,
+    forBoarding: true,
+    requestStop: true,
+    forAlighting: true,
+    destinationDisplay: { frontText: true },
+    notices: noticeFields,
+}
+
+export const intermediateEstimatedCallFields = {
+    ...estimatedCallFields,
+    quay: quayFields,
+    cancellation: true,
+    actualDepartureTime: true,
+    actualArrivalTime: true,
+    aimedDepartureTime: true,
+    aimedArrivalTime: true,
+    expectedDepartureTime: true,
+    expectedArrivalTime: true,
+}
 
 const journeyPatternFields = {
     line: {
@@ -17,7 +60,7 @@ const journeyPatternFields = {
     notices: noticeFields,
 }
 
-const serviceJourneyFields = {
+export const serviceJourneyFields = {
     id: true,
     publicCode: true,
     transportSubmode: true,
@@ -111,77 +154,6 @@ export const getTripPatternQuery = {
                 distance: true,
                 walkDistance: true,
                 legs: legFields,
-            },
-        },
-    },
-}
-
-const departureFields = {
-    ...estimatedCallFields,
-    aimedDepartureTime: true,
-    expectedDepartureTime: true,
-    realtime: true,
-    situations: situationFields,
-    quay: quayFields,
-    serviceJourney: {
-        ...serviceJourneyFields,
-        line: {
-            ...lineFields,
-            transportMode: true,
-            description: true,
-        },
-    },
-}
-
-export const getDeparturesForStopPlacesQuery = {
-    query: {
-        __variables: {
-            ids: '[String]!',
-            start: 'DateTime!',
-            timeRange: 'Int!',
-            limit: 'Int!',
-            omitNonBoarding: 'Boolean!',
-        },
-        stopPlaces: {
-            __args: {
-                ids: new VariableType('ids'),
-            },
-            id: true,
-            estimatedCalls: {
-                __args: {
-                    startTime: new VariableType('start'),
-                    timeRange: new VariableType('timeRange'),
-                    numberOfDepartures: new VariableType('limit'),
-                    omitNonBoarding: new VariableType('omitNonBoarding'),
-                },
-                ...departureFields,
-            },
-        },
-    },
-}
-
-export const getDeparturesForQuayQuery = {
-    query: {
-        __variables: {
-            ids: '[String]!',
-            start: 'DateTime!',
-            timeRange: 'Int!',
-            limit: 'Int!',
-            omitNonBoarding: 'Boolean!',
-        },
-        quays: {
-            __args: {
-                ids: new VariableType('ids'),
-            },
-            id: true,
-            estimatedCalls: {
-                __args: {
-                    startTime: new VariableType('start'),
-                    timeRange: new VariableType('timeRange'),
-                    numberOfDepartures: new VariableType('limit'),
-                    omitNonBoarding: new VariableType('omitNonBoarding'),
-                },
-                ...departureFields,
             },
         },
     },

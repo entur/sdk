@@ -1,7 +1,7 @@
 // @flow
 import { VariableType } from 'json-to-graphql-query'
 
-import { situationFields, quayFields } from '../trip/queryHelper'
+import { situationFields, quayFields } from '../trip/query'
 
 const stopPlaceFields = {
     id: true,
@@ -14,6 +14,9 @@ const stopPlaceFields = {
     transportMode: true,
     transportSubmode: true,
     quays: {
+        __args: {
+            filterByInUse: new VariableType('filterByInUse'),
+        },
         ...quayFields,
         situations: situationFields,
     },
@@ -23,10 +26,26 @@ export const getStopPlaceQuery = {
     query: {
         __variables: {
             id: 'String!',
+            filterByInUse: 'Boolean',
         },
         stopPlace: {
             __args: {
                 id: new VariableType('id'),
+            },
+            ...stopPlaceFields,
+        },
+    },
+}
+
+export const getStopPlacesQuery = {
+    query: {
+        __variables: {
+            ids: '[String]!',
+            filterByInUse: 'Boolean',
+        },
+        stopPlaces: {
+            __args: {
+                ids: new VariableType('ids'),
             },
             ...stopPlaceFields,
         },
@@ -40,6 +59,7 @@ export const getStopPlacesByBboxQuery = {
             minLng: 'Float',
             maxLng: 'Float',
             maxLat: 'Float',
+            filterByInUse: 'Boolean',
         },
         stopPlacesByBbox: {
             __args: {

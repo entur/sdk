@@ -22,17 +22,17 @@ export type Departure = {
     serviceJourney: ServiceJourney & {
         line: Line & {
             transportMode: TransportMode,
-            description?: string
+            description?: string,
         }
     }
 }
 
 export type StopPlaceDepartures = {
     id: string,
-    estimatedCalls: Array<Departure>
+    departures: Array<Departure>
 }
 
 export type QuayDepartures = {
     id: string,
-    estimatedCalls: Array<Departure>
+    departures: Array<Departure>
 }
