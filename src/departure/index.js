@@ -154,6 +154,7 @@ export function getDeparturesBetweenStopPlaces(
                     realtime: leg.realtime,
                     situations: leg.situations,
                     quay: leg.fromPlace.quay,
+                    destinationQuay: leg.toPlace.quay,
                     serviceJourney: leg.serviceJourney,
                 }
             }).filter(Boolean)

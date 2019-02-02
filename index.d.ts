@@ -331,6 +331,7 @@ export interface GetDeparturesBetweenStopPlacesParams = {
 
 export interface Departure {
     date: string;
+    destinationQuay?: Quay;
     forBoarding: boolean;
     requestStop: boolean;
     forAlighting: boolean;

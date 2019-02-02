@@ -326,6 +326,7 @@ type $entur$sdk$TripPattern = {
 
 type $entur$sdk$Departure = {
     date: string,
+    destinationQuay?: $entur$sdk$Quay,
     forBoarding: boolean,
     requestStop: boolean,
     forAlighting: boolean,

@@ -9,6 +9,7 @@ import type { ServiceJourney } from './ServiceJourney'
 
 export type Departure = {
     date: string,
+    destinationQuay?: Quay,
     forBoarding: boolean,
     requestStop: boolean,
     forAlighting: boolean,

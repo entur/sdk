@@ -116,6 +116,9 @@ export const getDeparturesBetweenStopPlacesQuery = {
                     fromPlace: {
                         quay: quayFields,
                     },
+                    toPlace: {
+                        quay: quayFields,
+                    },
                     serviceJourney: {
                         ...serviceJourneyFields,
                         line: {
