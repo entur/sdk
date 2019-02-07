@@ -182,7 +182,7 @@ An optional object of parameters to pass to the query.
 | Key                  | Type           | Default | Description |
 |:---------------------|:---------------|:--------|:------------|
 | `startTime`          | ISO8601 string | Now     | DateTime for when to fetch estimated calls from. |
-| `range`              | `number`       | `86400` | The time range for departures to include in seconds. |
+| `timeRange`              | `number`       | `86400` | The time range for departures to include in seconds. |
 | `departures`         | `number`       | `5`     | The number of departures to return for each stop place. |
 | `includeNonBoarding` | `boolean`      | `false` | Whether to include departures that do not accept boarding at given stop place. |
 
