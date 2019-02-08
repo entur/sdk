@@ -313,7 +313,7 @@ export interface GetFeaturesQuery {
 
 export interface GetStopPlaceDeparturesParams {
   startTime?: string;
-  range?: number;
+  timeRange?: number;
   departures?: number;
   includeNonBoarding?: boolean;
 }

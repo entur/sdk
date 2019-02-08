@@ -320,14 +320,14 @@ declare module '@entur/sdk' {
 
         getStopPlaceDepartures(stopPlaceId: string, params?: {
             startTime?: string,
-            range?: number,
+            timeRange?: number,
             departures?: number,
             includeNonBoarding?: boolean,
         }): Promise<Array<$entur$sdk$EstimatedCall>>,
 
         getStopPlaceDepartures(stopPlaceIds: Array<string>, params?: {
             startTime?: string,
-            range?: number,
+            timeRange?: number,
             departures?: number,
             includeNonBoarding?: boolean,
         }): Promise<Array<{ id: string, departures: Array<$entur$sdk$EstimatedCall>}>>,
