@@ -1,4 +1,4 @@
-export interface Config = {
+export interface Config {
     clientName: string,
     hosts?: {
         journeyPlanner?: string,
@@ -6,7 +6,7 @@ export interface Config = {
     }
 }
 
-export interface ServiceConfig = {
+export interface ServiceConfig {
     clientName: string,
     hosts: {
         journeyplanner: string,
@@ -104,10 +104,8 @@ export interface Feature {
     county_gid: string;
     gid: string;
     housenumber?: string;
-    id: string;
     locality: string;
     locality_gid: string;
-    name: string;
     postalcode: string;
     source: string;
     source_id: string;
