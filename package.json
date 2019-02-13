@@ -15,8 +15,9 @@
     "lint": "eslint src/ example/",
     "test": "echo 'There are no tests'",
     "flow": "flow",
+    "ts": "tsc index.d.ts --noEmit",
     "transpile": "rm -rf lib && babel src --out-dir lib --copy-files",
-    "prepublishOnly": "npm run transpile"
+    "prepublishOnly": "npm run ts && npm run transpile"
   },
   "dependencies": {
     "@turf/bbox": "^6.0.1",
@@ -41,6 +42,7 @@
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-flowtype": "^3.2.1",
     "eslint-plugin-import": "^2.14.0",
-    "flow-bin": "^0.89.0"
+    "flow-bin": "^0.89.0",
+    "typescript": "^3.3.3"
   }
 }
