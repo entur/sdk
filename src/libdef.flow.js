@@ -20,7 +20,7 @@ type $entur$sdk$Coordinates = {
 }
 
 type $entur$sdk$MultilingualString = {
-    lang: string,
+    lang: 'eng' | 'nob' | 'nno',
     value: string,
 }
 
