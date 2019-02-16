@@ -29,7 +29,6 @@ export function getDeparturesFromStopPlaces(
 ): Promise<Array<StopPlaceDepartures>> {
     const {
         limit = 50,
-        departures,
         timeRange = 72000,
         start = new Date(),
         includeNonBoarding = false,
