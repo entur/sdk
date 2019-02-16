@@ -66,3 +66,15 @@ export const throttler = (func: Function, args: Array<any>): Promise<any> => {
 export function isValidDate(d: any): boolean {
     return Object.prototype.toString.call(d) === '[object Date]' && !Number.isNaN(d.getTime())
 }
+
+export function uniqBy<T>(arr: Array<T>, predicate: (T) => any): Array<T> {
+    return [...arr.reduce((map, item) => {
+        const key = predicate(item)
+
+        if (!map.has(key)) {
+            map.set(key, item)
+        }
+
+        return map
+    }, new Map()).values()]
+}
