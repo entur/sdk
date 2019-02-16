@@ -48,6 +48,7 @@ type $entur$sdk$Situation = {|
     detail: Array<$entur$sdk$MultilingualString>,
     validityPeriod: $entur$sdk$ValidityPeriod,
     reportType: $entur$sdk$ReportType,
+    infoLink?: string,
 |}
 
 

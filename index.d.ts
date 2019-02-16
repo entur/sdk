@@ -48,6 +48,7 @@ export interface Situation {
     detail: Array<MultilingualString>;
     validityPeriod: ValidityPeriod;
     reportType: ReportType;
+    infoLink?: string;
 }
 
 /**
