@@ -17,7 +17,7 @@ export interface Coordinates {
 }
 
 export interface MultilingualString {
-    lang: string;
+    lang: 'eng' | 'nob' | 'nno';
     value: string;
 }
 

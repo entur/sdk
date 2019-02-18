@@ -1,6 +1,6 @@
 // @flow
 
 export type MultilingualString = {
-    lang: string,
+    lang: 'eng' | 'nob' | 'nno',
     value: string,
 }

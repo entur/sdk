@@ -2,6 +2,8 @@
 import type { Situation } from './Situation'
 import type { Notice } from './Notice'
 import type { DestinationDisplay } from './DestinationDisplay'
+import type { Place } from './Place'
+import type { EstimatedCall } from './EstimatedCall'
 import type { Quay } from './Quay'
 import type { TransportMode } from './Mode'
 import type { Line } from './Line'
@@ -26,6 +28,22 @@ export type Departure = {
             description?: string,
         }
     }
+}
+
+export type LegDeparture = {
+    aimedStartTime: string,
+    expectedStartTime: string,
+    fromEstimatedCall: EstimatedCall,
+    fromPlace: Place,
+    realtime: boolean,
+    serviceJourney: ServiceJourney & {
+        line: Line & {
+            transportMode: TransportMode,
+            description?: string,
+        }
+    },
+    situations?: Array<Situation>,
+    toPlace: Place,
 }
 
 export type StopPlaceDepartures = {

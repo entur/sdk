@@ -10,6 +10,10 @@ import {
     getDeparturesBetweenStopPlacesQuery,
 } from './query'
 
+import {
+    destinationMapper,
+    legToDepartureMapper,
+} from './mapper'
 import type {
     StopPlaceDepartures,
     QuayDepartures,
@@ -52,7 +56,7 @@ export function getDeparturesFromStopPlaces(
 
             return data.stopPlaces.map(({ estimatedCalls, ...stopPlace }) => ({
                 ...stopPlace,
-                departures: estimatedCalls,
+                departures: estimatedCalls.map(destinationMapper),
             }))
         })
 }
@@ -93,7 +97,7 @@ export function getDeparturesFromQuays(
 
             return data.quays.map(({ estimatedCalls, ...stopPlace }) => ({
                 ...stopPlace,
-                departures: estimatedCalls,
+                departures: estimatedCalls.map(destinationMapper),
             }))
         })
 }
@@ -129,33 +133,14 @@ export function getDeparturesBetweenStopPlaces(
         this.config,
     )
         .then((data: Object) => {
-            if (!data?.trip?.tripPatterns) {
-                return []
-            }
+            if (!data?.trip?.tripPatterns) return []
 
             return data.trip.tripPatterns.map((trip) => {
                 const [leg] = trip.legs
-                if (!leg) {
-                    return
-                }
-                const { fromEstimatedCall } = leg
+                if (!leg) return
 
                 // eslint-disable-next-line consistent-return
-                return {
-                    date: fromEstimatedCall.date,
-                    forBoarding: fromEstimatedCall.forBoarding,
-                    requestStop: fromEstimatedCall.requestStop,
-                    forAlighting: fromEstimatedCall.forAlighting,
-                    destinationDisplay: fromEstimatedCall.destinationDisplay,
-                    notices: fromEstimatedCall.notices,
-                    aimedDepartureTime: leg.aimedStartTime,
-                    expectedDepartureTime: leg.expectedStartTime,
-                    realtime: leg.realtime,
-                    situations: leg.situations,
-                    quay: leg.fromPlace.quay,
-                    destinationQuay: leg.toPlace.quay,
-                    serviceJourney: leg.serviceJourney,
-                }
+                return legToDepartureMapper(leg)
             }).filter(Boolean)
         })
 }
