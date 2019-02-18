@@ -518,7 +518,7 @@ declare module '@entur/sdk' {
         getDeparturesFromStopPlaces(
             stopPlaceIds: Array<string>,
             params?: $entur$sdk$GetDeparturesParams,
-        ): Promise<Array<$entur$sdk$StopPlaceDepartures>>,
+        ): Promise<Array<$entur$sdk$StopPlaceDepartures | void>>,
 
         getDeparturesFromStopPlace(
             stopPlaceId: string,
@@ -528,7 +528,7 @@ declare module '@entur/sdk' {
         getDeparturesFromQuays(
             quayIds: Array<string>,
             params?: $entur$sdk$GetDeparturesParams,
-        ): Promise<Array<$entur$sdk$QuayDepartures>>,
+        ): Promise<Array<$entur$sdk$QuayDepartures | void>>,
 
         getDeparturesBetweenStopPlaces(
             fromStopPlaceId: string,
@@ -544,7 +544,7 @@ declare module '@entur/sdk' {
         getStopPlaces(
             stopPlaceIds: Array<string>,
             params?: $entur$sdk$StopPlaceParams,
-        ): Promise<Array<$entur$sdk$StopPlaceDetails>>,
+        ): Promise<Array<$entur$sdk$StopPlaceDetails | void>>,
 
         getStopPlacesByPosition(
             coordinates: $entur$sdk$Coordinates,

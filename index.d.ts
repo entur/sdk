@@ -507,7 +507,7 @@ declare class EnturService {
   getDeparturesFromStopPlaces(
       stopPlaceIds: Array<string>,
       params?: GetDeparturesParams,
-  ): Promise<StopPlaceDepartures[]>;
+  ): Promise<Array<StopPlaceDepartures | undefined>>;
 
   getDeparturesFromStopPlace(
       stopPlaceId: string,
@@ -517,7 +517,7 @@ declare class EnturService {
   getDeparturesFromQuays(
       quayIds: Array<string>,
       params?: GetDeparturesParams,
-  ): Promise<QuayDepartures[]>;
+  ): Promise<Array<QuayDepartures | undefined>>;
 
   getDeparturesBetweenStopPlaces(
       fromStopPlaceId: string,
@@ -533,7 +533,7 @@ declare class EnturService {
   getStopPlaces(
       stopPlaceId: Array<string>,
       params?: StopPlaceParams,
-  ): Promise<StopPlaceDetails>;
+  ): Promise<Array<StopPlaceDetails undefined>>;
 
   getStopPlacesByPosition(
     coordinates: Coordinates,

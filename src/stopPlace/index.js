@@ -9,7 +9,7 @@ import {
     getQuaysForStopPlaceQuery,
 } from './query'
 
-import { convertPositionToBbox } from '../utils'
+import { convertPositionToBbox, forceOrder } from '../utils'
 
 import type { Quay, Coordinates } from '../../flow-types'
 import type { StopPlaceDetails, StopPlaceFacilities } from '../../flow-types/StopPlace'
@@ -34,7 +34,7 @@ export function getStopPlace(
 export function getStopPlaces(
     stopPlaceIds: Array<string>,
     params?: StopPlaceParams = {},
-): Promise<Array<StopPlaceDetails>> {
+): Promise<Array<StopPlaceDetails | void>> {
     const { includeUnusedQuays = true, ...rest } = params
     const variables = {
         ids: stopPlaceIds,
@@ -44,6 +44,9 @@ export function getStopPlaces(
 
     return journeyPlannerQuery(getStopPlacesQuery, variables, undefined, this.config)
         .then((data: Object) => data?.stopPlaces || [])
+        .then((stopPlaceDetails: Array<StopPlaceDetails>) => {
+            return forceOrder<StopPlaceDetails>(stopPlaceDetails, stopPlaceIds, ({ id }) => id)
+        })
 }
 
 export function getStopPlacesByPosition(

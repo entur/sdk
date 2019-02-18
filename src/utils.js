@@ -78,3 +78,19 @@ export function uniqBy<T>(arr: Array<T>, predicate: (T) => any): Array<T> {
         return map
     }, new Map()).values()]
 }
+
+export function forceOrder<T>(
+    list: Array<T>,
+    sequence: Array<any>,
+    predicate?: (T) => any = item => item,
+): Array<T | void> {
+    return list.reduce((arr: Array<T | void>, item: T) => {
+        const index = sequence.indexOf(predicate(item))
+        if (index > -1) {
+            // eslint-disable-next-line no-param-reassign
+            arr[index] = item
+        }
+
+        return arr
+    }, new Array(sequence.length).fill(undefined))
+}

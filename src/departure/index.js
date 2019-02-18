@@ -4,6 +4,8 @@ import {
     BUS, TRAM, RAIL, METRO, WATER, AIR, COACH, CAR,
 } from '../constants/travelModes'
 
+import { forceOrder } from '../utils'
+
 import {
     getDeparturesFromStopPlacesQuery,
     getDeparturesFromQuayQuery,
@@ -30,7 +32,7 @@ type GetDeparturesParams = {
 export function getDeparturesFromStopPlaces(
     stopPlaceIds: Array<string>,
     params?: GetDeparturesParams = {},
-): Promise<Array<StopPlaceDepartures>> {
+): Promise<Array<StopPlaceDepartures | void>> {
     const {
         limit = 50,
         timeRange = 72000,
@@ -59,6 +61,9 @@ export function getDeparturesFromStopPlaces(
                 departures: estimatedCalls.map(destinationMapper),
             }))
         })
+        .then((stopPlaces: Array<StopPlaceDepartures>) => {
+            return forceOrder<StopPlaceDepartures>(stopPlaces, stopPlaceIds, ({ id }) => id)
+        })
 }
 
 export function getDeparturesFromStopPlace(
@@ -66,13 +71,13 @@ export function getDeparturesFromStopPlace(
     params?: GetDeparturesParams,
 ): Promise<Array<Departure>> {
     return getDeparturesFromStopPlaces.call(this, [stopPlaceId], params)
-        .then((stopPlaces: Array<StopPlaceDepartures>) => stopPlaces?.[0]?.departures || [])
+        .then((stopPlaces: Array<StopPlaceDepartures | void>) => stopPlaces[0]?.departures || [])
 }
 
 export function getDeparturesFromQuays(
     quayIds: Array<string>,
     params?: GetDeparturesParams = {},
-): Promise<Array<QuayDepartures>> {
+): Promise<Array<QuayDepartures | void>> {
     const {
         limit = 30,
         timeRange = 72000,
@@ -99,6 +104,9 @@ export function getDeparturesFromQuays(
                 ...stopPlace,
                 departures: estimatedCalls.map(destinationMapper),
             }))
+        })
+        .then((quayDepartures: Array<QuayDepartures>) => {
+            return forceOrder<QuayDepartures>(quayDepartures, quayIds, ({ id }) => id)
         })
 }
 
