@@ -5,6 +5,7 @@
         "fetch": false
     },
     "rules": {
+        "arrow-body-style": 0,
         "import/prefer-default-export": "off",
         "indent": ["error", 4, {"SwitchCase": 1}],
         "semi": ["error", "never"]

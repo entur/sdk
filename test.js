@@ -15,6 +15,7 @@ const LILLEHAMMER_STASJON = 'NSR:StopPlace:420'
 const HAMAR_STASJON = 'NSR:StopPlace:219'
 const JERNBANETORGET = 'NSR:StopPlace:58366'
 const OSLO_S = 'NSR:StopPlace:59872'
+const MISSING = 'NSR:StopPlace:5483957348574389'
 
 const { default: EnturService } = require('./src')
 
@@ -29,6 +30,7 @@ function getMetodToRun(name) {
         case 'getStopPlaces':
             return service.getStopPlaces([
                 OSLO_S,
+                MISSING,
                 JERNBANETORGET,
                 HAMAR_STASJON,
                 LILLEHAMMER_STASJON,
