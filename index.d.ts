@@ -62,7 +62,7 @@ export interface BikeRentalStation {
     spacesAvailable: number;
     longitude: number;
     latitude: number;
-    networks: Array<string>
+    networks: Array<string>;
 }
 
 
