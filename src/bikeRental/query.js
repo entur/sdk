@@ -8,6 +8,7 @@ const bikeRentalStationFields = {
     spacesAvailable: true,
     longitude: true,
     latitude: true,
+    networks: true,
 }
 
 export const getBikeRentalStationQuery = {
