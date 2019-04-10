@@ -536,6 +536,11 @@ declare class EnturService {
       params?: StopPlaceParams,
   ): Promise<Array<StopPlaceDetails undefined>>;
 
+  getParentStopPlace(
+    id: string,
+    params?: StopPlaceParams,
+): Promise<StopPlaceDetails | null>;
+
   getStopPlacesByPosition(
     coordinates: Coordinates,
     distance?: number,

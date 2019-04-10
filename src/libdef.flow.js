@@ -547,6 +547,11 @@ declare module '@entur/sdk' {
             params?: $entur$sdk$StopPlaceParams,
         ): Promise<Array<$entur$sdk$StopPlaceDetails | void>>,
 
+        getParentStopPlace(
+            stopPlaceId: string,
+            params?: $entur$sdk$StopPlaceParams,
+        ): Promise<$entur$sdk$StopPlaceDetails | null>,
+
         getStopPlacesByPosition(
             coordinates: $entur$sdk$Coordinates,
             distance?: number,
