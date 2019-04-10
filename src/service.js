@@ -14,6 +14,7 @@ import {
 import {
     getStopPlace,
     getStopPlaces,
+    getParentStopPlace,
     getStopPlacesByPosition,
     getStopPlaceFacilities,
     getQuaysForStopPlace,
@@ -58,6 +59,8 @@ class EnturService {
     getStopPlace = getStopPlace
 
     getStopPlaces = getStopPlaces
+
+    getParentStopPlace = getParentStopPlace
 
     getStopPlacesByPosition = getStopPlacesByPosition
 

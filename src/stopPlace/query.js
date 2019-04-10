@@ -52,6 +52,21 @@ export const getStopPlacesQuery = {
     },
 }
 
+export const getParentStopPlaceQuery = {
+    query: {
+        __variables: {
+            id: 'String!',
+            filterByInUse: 'Boolean',
+        },
+        stopPlace: {
+            __args: {
+                id: new VariableType('id'),
+            },
+            parent: stopPlaceFields,
+        },
+    },
+}
+
 export const getStopPlacesByBboxQuery = {
     query: {
         __variables: {

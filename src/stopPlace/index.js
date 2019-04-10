@@ -4,6 +4,7 @@ import { journeyPlannerQuery, nsrQuery } from '../api'
 import {
     getStopPlaceQuery,
     getStopPlacesQuery,
+    getParentStopPlaceQuery,
     getStopPlacesByBboxQuery,
     getStopPlaceFacilitiesQuery,
     getQuaysForStopPlaceQuery,
@@ -47,6 +48,21 @@ export function getStopPlaces(
         .then((stopPlaceDetails: Array<StopPlaceDetails>) => {
             return forceOrder<StopPlaceDetails>(stopPlaceDetails, stopPlaceIds, ({ id }) => id)
         })
+}
+
+export function getParentStopPlace(
+    stopPlaceId: string,
+    params?: StopPlaceParams = {},
+): Promise<StopPlaceDetails> {
+    const { includeUnusedQuays = true, ...rest } = params
+    const variables = {
+        id: stopPlaceId,
+        filterByInUse: !includeUnusedQuays,
+        ...rest,
+    }
+
+    return journeyPlannerQuery(getParentStopPlaceQuery, variables, undefined, this.config)
+        .then((data: Object = {}) => data?.stopPlace?.parent)
 }
 
 export function getStopPlacesByPosition(
