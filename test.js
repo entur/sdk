@@ -9,6 +9,24 @@ require('@babel/register')({
     ignore: [/node_modules/],
 })
 
+const MOMOEN_LOCATION = {
+    name: 'Momoen',
+    place: 'NSR:StopPlace:3867',
+    coordinates: {
+        latitude: 59.804883,
+        longitude: 11.391951,
+    },
+}
+
+const LILLESTROM_LEGESENTER_LOCATION = {
+    name: 'Lillestrøm legesenter',
+    place: 'OSM:TopographicPlace:5921083879',
+    coordinates: {
+        latitude: 59.962737,
+        longitude: 11.062501,
+    },
+}
+
 const JERNBANETORGET_BIKE_STOP = '272'
 
 const LILLEHAMMER_STASJON = 'NSR:StopPlace:420'
@@ -23,8 +41,15 @@ const service = new EnturService({
     clientName: 'SDK cli-test',
 })
 
-function getMetodToRun(name) {
+function getMethodToRun(name) {
     switch (name) {
+        case 'getTripPatterns':
+            return service.getTripPatterns(
+                MOMOEN_LOCATION,
+                LILLESTROM_LEGESENTER_LOCATION,
+                undefined,
+                [],
+            )
         case 'getStopPlace':
             return service.getStopPlace(JERNBANETORGET)
         case 'getStopPlaces':
@@ -61,6 +86,6 @@ function getMetodToRun(name) {
     }
 }
 
-getMetodToRun(nameOfMethodToRun)
+getMethodToRun(nameOfMethodToRun)
     // eslint-disable-next-line no-console
     .then(data => console.log(JSON.stringify(data, undefined, 4)), console.error)
