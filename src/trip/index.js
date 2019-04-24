@@ -42,6 +42,8 @@ const DEFAULT_GET_TRIP_PATTERN_IGNORE_FIELDS = [
     'fromEstimatedCall',
     'toEstimatedCall',
     'intermediateEstimatedCalls',
+    'interchangeFrom',
+    'interchangeTo',
     'pointsOnLink',
     'authority',
     'operator',

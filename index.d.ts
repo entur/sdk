@@ -246,6 +246,11 @@ export interface Line {
     publicCode: string;
 }
 
+export interface Interchange = {
+    guaranteed: boolean;
+    staySeated: boolean;
+}
+
 export interface PointsOnLink {
   points: string;
   length: number;
@@ -276,6 +281,8 @@ export interface Leg {
     expectedStartTime: string;
     fromEstimatedCall?: EstimatedCall;
     fromPlace: Place;
+    interchangeFrom?: Interchange,
+    interchangeTo?: Interchange,
     intermediateEstimatedCalls: Array<IntermediateEstimatedCall>;
     line?: Line;
     mode: LegMode;

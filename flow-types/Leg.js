@@ -6,6 +6,7 @@ import type { Operator } from './Operator'
 import type { ServiceJourney } from './ServiceJourney'
 import type { Situation } from './Situation'
 import type { Notice } from './Notice'
+import type { Interchange } from './Interchange'
 import type { PointsOnLink } from './PointsOnLink'
 import type {
     EstimatedCall,
@@ -23,6 +24,8 @@ export type Leg = {
     expectedStartTime: string,
     fromEstimatedCall?: EstimatedCall,
     fromPlace: Place,
+    interchangeFrom?: Interchange,
+    interchangeTo?: Interchange,
     intermediateEstimatedCalls?: Array<IntermediateEstimatedCall>,
     line?: Line,
     mode: LegMode,

@@ -68,6 +68,11 @@ export const serviceJourneyFields = {
     notices: noticeFields,
 }
 
+const interchangeFields = {
+    staySeated: true,
+    guaranteed: true,
+}
+
 const placeFields = {
     name: true,
     latitude: true,
@@ -101,6 +106,10 @@ const legFields = {
     line: lineFields,
     toEstimatedCall: estimatedCallFields,
     fromEstimatedCall: estimatedCallFields,
+
+    interchangeFrom: interchangeFields,
+    interchangeTo: interchangeFields,
+
     intermediateEstimatedCalls: intermediateEstimatedCallFields,
 
     pointsOnLink: {

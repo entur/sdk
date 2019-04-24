@@ -257,6 +257,11 @@ type $entur$sdk$Line = {
     publicCode: string,
 }
 
+type $entur$sdk$Interchange = {
+    guaranteed: boolean,
+    staySeated: boolean,
+}
+
 type $entur$sdk$PointsOnLink = {
     points: string,
     length: number,
@@ -287,6 +292,8 @@ type $entur$sdk$Leg = {
     expectedStartTime: string,
     fromEstimatedCall?: $entur$sdk$EstimatedCall,
     fromPlace: $entur$sdk$Place,
+    interchangeFrom?: $entur$sdk$Interchange,
+    interchangeTo?: $entur$sdk$Interchange,
     intermediateEstimatedCalls: Array<$entur$sdk$IntermediateEstimatedCall>,
     line?: $entur$sdk$Line,
     mode: $entur$sdk$LegMode,
