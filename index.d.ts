@@ -644,6 +644,7 @@ export var TransportSubmode: {
     REGIONAL_CAR_FERRY: 'regionalCarFerry',
     TOURIST_RAILWAY: 'touristRailway',
     AIRPORT_LINK_BUS: 'airportLinkBus',
+    CITY_TRAM: 'cityTram',
 };
 
 export var ONSTREET_BUS: 'onstreetBus';

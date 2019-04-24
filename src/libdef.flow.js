@@ -654,6 +654,7 @@ declare module '@entur/sdk' {
         REGIONAL_CAR_FERRY: 'regionalCarFerry',
         TOURIST_RAILWAY: 'touristRailway',
         AIRPORT_LINK_BUS: 'airportLinkBus',
+        CITY_TRAM: 'cityTram',
     }
 
     declare export var ONSTREET_BUS: 'onstreetBus'
