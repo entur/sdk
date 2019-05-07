@@ -1,4 +1,5 @@
 // @flow
+import '@babel/polyfill'
 
 import EnturService from './service'
 
