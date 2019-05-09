@@ -41,6 +41,11 @@ interface ValidityPeriod {
     endTime: string;
 }
 
+interface InfoLink {
+  uri: string;
+  label: string;
+}
+
 export interface Situation {
     situationNumber: string;
     summary: Array<MultilingualString>;
@@ -48,7 +53,7 @@ export interface Situation {
     detail: Array<MultilingualString>;
     validityPeriod: ValidityPeriod;
     reportType: ReportType;
-    infoLink?: string;
+    infoLinks: Array<InfoLink>;
 }
 
 /**

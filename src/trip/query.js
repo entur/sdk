@@ -15,7 +15,10 @@ export const situationFields = {
         endTime: true,
     },
     reportType: true,
-    infoLink: true,
+    infoLinks: {
+        uri: true,
+        label: true,
+    },
 }
 
 export const lineFields = {
