@@ -2,9 +2,17 @@
 
 import type { MultilingualString } from './MultilingualString'
 
-type ValidityPeriod = { startTime: string, endTime: string }
+type ValidityPeriod = {
+    startTime: string,
+    endTime: string,
+}
 
 export type ReportType = 'general' | 'incident' | null
+
+type InfoLink = {
+    uri: string,
+    label: string,
+}
 
 export type Situation = {|
     situationNumber: string,
@@ -13,5 +21,5 @@ export type Situation = {|
     detail: Array<MultilingualString>,
     validityPeriod: ValidityPeriod,
     reportType: ReportType,
-    infoLink: ?string,
+    infoLinks: Array<InfoLink>,
 |}

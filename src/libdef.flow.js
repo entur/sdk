@@ -41,6 +41,11 @@ type $entur$sdk$ServiceConfig = {
 
 type $entur$sdk$ValidityPeriod = { startTime: string, endTime: string }
 
+type $entur$sdk$InfoLink = {
+    uri: string,
+    label: string,
+}
+
 type $entur$sdk$Situation = {|
     situationNumber: string,
     summary: Array<$entur$sdk$MultilingualString>,
@@ -48,7 +53,7 @@ type $entur$sdk$Situation = {|
     detail: Array<$entur$sdk$MultilingualString>,
     validityPeriod: $entur$sdk$ValidityPeriod,
     reportType: $entur$sdk$ReportType,
-    infoLink?: string,
+    infoLinks: Array<$entur$sdk$InfoLink>,
 |}
 
 
