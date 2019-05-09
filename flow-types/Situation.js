@@ -13,4 +13,8 @@ export type Situation = {|
     detail: Array<MultilingualString>,
     validityPeriod: ValidityPeriod,
     reportType: ReportType,
+    infoLinks: Array<{
+        uri: string,
+        label: string,
+    }>
 |}

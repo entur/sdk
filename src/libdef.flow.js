@@ -109,6 +109,10 @@ type $entur$sdk$Situation = {|
     detail: Array<$entur$sdk$MultilingualString>,
     validityPeriod: $entur$sdk$ValidityPeriod,
     reportType: $entur$sdk$ReportType,
+    infoLinks: Array<{
+        uri: string,
+        label: string,
+    }>
 |}
 
 type $entur$sdk$Quay = {

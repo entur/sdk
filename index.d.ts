@@ -271,6 +271,10 @@ export interface Situation {
   detail: Array<MultilingualString>;
   validityPeriod: ValidityPeriod;
   reportType: ReportType;
+  infoLinks: Array<{
+    uri: string,
+    label: string,
+  }>;
 }
 
 export interface StopPlace {
