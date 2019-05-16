@@ -355,6 +355,7 @@ export interface Departure {
     expectedDepartureTime: string;
     realtime: boolean;
     situations?: Array<Situation>;
+    cancellation: boolean;
     quay: Quay;
     serviceJourney: ServiceJourney & {
         line: Line & {

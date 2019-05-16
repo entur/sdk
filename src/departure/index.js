@@ -29,6 +29,7 @@ type GetDeparturesParams = {
     start?: Date,
     timeRange?: number,
 }
+
 export function getDeparturesFromStopPlaces(
     stopPlaceIds: Array<string>,
     params?: GetDeparturesParams = {},
