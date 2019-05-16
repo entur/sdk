@@ -137,7 +137,7 @@ export interface Feature {
 }
 
 export interface Location {
-    name: string;
+    name?: string;
     place?: string;
     coordinates?: Coordinates;
 }

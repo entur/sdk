@@ -2,7 +2,7 @@
 import type { Coordinates } from './Coordinates'
 
 export type Location = {
-    name: string,
+    name?: string,
     place?: string,
     coordinates?: Coordinates,
 }
