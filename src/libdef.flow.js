@@ -138,7 +138,7 @@ type $entur$sdk$Feature = {
 }
 
 type $entur$sdk$Location = {
-    name: string,
+    name?: string,
     place?: string,
     coordinates?: $entur$sdk$Coordinates,
 }
