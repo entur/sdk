@@ -16,6 +16,7 @@ const departureFields = {
     expectedDepartureTime: true,
     realtime: true,
     situations: situationFields,
+    cancellation: true,
     quay: quayFields,
     serviceJourney: {
         ...serviceJourneyFields,

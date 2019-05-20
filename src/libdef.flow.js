@@ -346,6 +346,7 @@ type $entur$sdk$Departure = {
     forAlighting: boolean,
     destinationDisplay: $entur$sdk$DestinationDisplay,
     notices?: Array<$entur$sdk$Notice>,
+    cancellation?: boolean,
     aimedDepartureTime: string,
     expectedDepartureTime: string,
     realtime: boolean,
