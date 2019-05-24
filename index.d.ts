@@ -350,6 +350,8 @@ export interface GetDeparturesParams {
     limit?: number;
     start?: Date;
     timeRange?: number;
+    whiteListedLines?: Array<string>;
+    whiteListedAuthorities?: Array<string>;
 }
 
 export interface GetDeparturesBetweenStopPlacesParams = {
