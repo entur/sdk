@@ -48,6 +48,7 @@ const DEFAULT_GET_TRIP_PATTERN_IGNORE_FIELDS = [
     'authority',
     'operator',
     'quay',
+    'bookingArrangements',
 ]
 
 export function getTripPatterns(

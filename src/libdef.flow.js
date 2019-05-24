@@ -255,11 +255,30 @@ type $entur$sdk$IntermediateEstimatedCall = {
     requestStop: boolean
 }
 
+type $entur$sdk$BookingMethod = 'callOffice' | 'online'
+
+type $entur$sdk$BookingContact = {
+    phone: string,
+    url: string,
+}
+
+type $entur$sdk$BookingArrangement = {
+    bookingAccess: boolean,
+    bookingContact: $entur$sdk$BookingContact,
+    latestBookingTime: string,
+    bookingMethods?: Array<$entur$sdk$BookingMethod>,
+    bookWhen?: string,
+    minimumBookingPeriod?: string,
+    bookingNote?: string,
+    buyWhen: string,
+}
+
 type $entur$sdk$Line = {
     id: string,
     name: string,
     notices?: Array<$entur$sdk$Notice>,
     publicCode: string,
+    bookingArrangements?: $entur$sdk$BookingArrangement,
 }
 
 type $entur$sdk$Interchange = {

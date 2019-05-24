@@ -21,11 +21,22 @@ export const situationFields = {
     },
 }
 
+export const bookingArrangementsFields = {
+    bookingMethods: true,
+    bookingNote: true,
+    minimumBookingPeriod: true,
+    bookingContact: {
+        phone: true,
+        url: true,
+    },
+}
+
 export const lineFields = {
     id: true,
     name: true,
     publicCode: true,
     notices: noticeFields,
+    bookingArrangements: bookingArrangementsFields,
 }
 
 export const quayFields = {

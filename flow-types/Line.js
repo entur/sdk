@@ -1,5 +1,6 @@
 // @flow
 
+import type { BookingArrangement } from './BookingArrangement'
 import type { Notice } from './Notice'
 
 export type Line = {
@@ -7,4 +8,5 @@ export type Line = {
     name: string,
     notices?: Array<Notice>,
     publicCode: string,
+    bookingArrangements?: BookingArrangement,
 }

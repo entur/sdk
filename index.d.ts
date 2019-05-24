@@ -226,7 +226,6 @@ export interface EstimatedCall {
     requestStop: boolean;
 }
 
-
 export interface IntermediateEstimatedCall {
     actualArrivalTime?: string; // Only available AFTER arrival has taken place
     actualDepartureTime?: string; // Only available AFTER departure has taken place
@@ -244,11 +243,30 @@ export interface IntermediateEstimatedCall {
     requestStop: boolean;
 }
 
+export type BookingMethod = 'callOffice' | 'online';
+
+export interface BookingContact {
+    phone: string;
+    url: string;
+}
+
+export interface BookingArrangement = {
+    bookingAccess: boolean;
+    bookingContact: BookingContact;
+    latestBookingTime: string;
+    bookingMethods?: Array<BookingMethod>;
+    bookWhen?: string;
+    minimumBookingPeriod?: string;
+    bookingNote?: string;
+    buyWhen: string;
+}
+
 export interface Line {
     id: string;
     name: string;
     notices?: Array<Notice>;
     publicCode: string;
+    bookingArrangements?: BookingArrangement;
 }
 
 export interface Interchange = {
