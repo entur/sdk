@@ -36,6 +36,8 @@ export const getDeparturesFromStopPlacesQuery = {
             timeRange: 'Int!',
             limit: 'Int!',
             omitNonBoarding: 'Boolean!',
+            whiteListedLines: '[String!]',
+            whiteListedAuthorities: '[String!]',
         },
         stopPlaces: {
             __args: {
@@ -48,6 +50,10 @@ export const getDeparturesFromStopPlacesQuery = {
                     timeRange: new VariableType('timeRange'),
                     numberOfDepartures: new VariableType('limit'),
                     omitNonBoarding: new VariableType('omitNonBoarding'),
+                    whiteListed: {
+                        lines: new VariableType('whiteListedLines'),
+                        authorities: new VariableType('whiteListedAuthorities'),
+                    },
                 },
                 ...departureFields,
             },

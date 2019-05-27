@@ -394,6 +394,8 @@ type $entur$sdk$GetDeparturesParams = {
     limit?: number,
     departures?: number, // deprecated
     timeRange?: number,
+    whiteListedLines?: Array<string>,
+    whiteListedAuthorities?: Array<string>,
 }
 
 type $entur$sdk$GetDeparturesBetweenStopPlacesParams = {

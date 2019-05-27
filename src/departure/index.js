@@ -28,6 +28,8 @@ type GetDeparturesParams = {
     limit?: number,
     start?: Date,
     timeRange?: number,
+    whiteListedLines?: Array<string>,
+    whiteListedAuthorities?: Array<string>,
 }
 
 export function getDeparturesFromStopPlaces(
@@ -39,6 +41,8 @@ export function getDeparturesFromStopPlaces(
         timeRange = 72000,
         start = new Date(),
         includeNonBoarding = false,
+        whiteListedLines,
+        whiteListedAuthorities,
         ...rest
     } = params
 
@@ -48,6 +52,8 @@ export function getDeparturesFromStopPlaces(
         omitNonBoarding: !includeNonBoarding,
         timeRange,
         limit,
+        whiteListedLines,
+        whiteListedAuthorities,
         ...rest,
     }
 
