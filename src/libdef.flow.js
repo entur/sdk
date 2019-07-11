@@ -327,6 +327,7 @@ type $entur$sdk$Leg = {
     pointsOnLink: $entur$sdk$PointsOnLink,
     realtime: boolean,
     ride: boolean,
+    rentedBike?: boolean,
     serviceJourney: $entur$sdk$ServiceJourney,
     situations?: Array<$entur$sdk$Situation>,
     toEstimatedCall?: $entur$sdk$EstimatedCall,

@@ -113,6 +113,7 @@ const legFields = {
     distance: true,
     duration: true,
     ride: true,
+    rentedBike: true,
     fromPlace: placeFields,
     toPlace: placeFields,
     serviceJourney: serviceJourneyFields,

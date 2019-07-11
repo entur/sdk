@@ -34,6 +34,7 @@ export type Leg = {
     pointsOnLink?: PointsOnLink,
     realtime: boolean,
     ride: boolean,
+    rentedBike?: boolean,
     serviceJourney: ServiceJourney,
     situations?: Array<Situation>,
     toEstimatedCall?: EstimatedCall,

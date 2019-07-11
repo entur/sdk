@@ -49,6 +49,7 @@ const DEFAULT_GET_TRIP_PATTERN_IGNORE_FIELDS = [
     'operator',
     'quay',
     'bookingArrangements',
+    'rentedBike',
 ]
 
 export function getTripPatterns(
