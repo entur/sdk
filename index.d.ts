@@ -389,12 +389,12 @@ export interface Departure {
 
 export interface QuayDepartures {
     id: string;
-    estimatedCalls: Array<Departure>;
+    departures: Array<Departure>;
 }
 
 export interface StopPlaceDepartures {
     id: string;
-    estimatedCalls: Array<Departure>;
+    departures: Array<Departure>;
 }
 
 export interface StopPlaceDetails {

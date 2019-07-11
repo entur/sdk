@@ -383,12 +383,12 @@ type $entur$sdk$Departure = {
 
 type $entur$sdk$QuayDepartures = {
     id: string,
-    estimatedCalls: Array<$entur$sdk$Departure>
+    departures: Array<$entur$sdk$Departure>
 }
 
 type $entur$sdk$StopPlaceDepartures = {
     id: string,
-    estimatedCalls: Array<$entur$sdk$Departure>
+    departures: Array<$entur$sdk$Departure>
 }
 
 type $entur$sdk$GetDeparturesParams = {
