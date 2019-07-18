@@ -1,6 +1,6 @@
 # Entur SDK
 
-This SDK simplifies the use of Entur's travel APIs in JavaScript apps. For more information about Entur's APIs, see https://www.entur.org/dev/
+This SDK simplifies the use of Entur's travel APIs in JavaScript apps. For more information about Entur's APIs, see https://developer.entur.org
 
 Miss anything? Found a bug? File an [issue](https://github.com/entur/sdk/issues/new) or create a pull request!
 
@@ -40,7 +40,7 @@ const service = new EnturService({ clientName: 'awesomecompany-awesomeapp' })
 
 #### clientName (required)
 We require that you pass a `clientName` that identifies your application. It should contain the name of your company or organization,
-followed by a hyphen and your application's name. See https://www.entur.org/dev/api/header/ for more information.
+followed by a hyphen and your application's name. See https://developer.entur.org/pages-intro-authentication for more information.
 
 #### hosts
 The Entur SDK uses multiple endpoints for its services. Each endpoint can be overridden with hosts config (in case you use a proxy or a local instance of the endpoint). Available hosts are:
@@ -78,7 +78,7 @@ The wanted time of departure. Can be anything that is parseable by `new Date()`.
 ### getTripPatterns
 
 ```javascript
-(query: TripPatternsQuery) => Promise<Array<TripPattern>>
+(from: Location, to: Location, params?: GetTripPatternsParams, ignoreFields?: Array<string>) => Promise<Array<TripPattern>>
 ```
 
 Types: [TripPattern](flow-types/TripPattern.js)
@@ -89,34 +89,65 @@ If you are going to do a huge amount of different searches at the same time, con
 
 #### Parameters
 
-##### query (`TripPatternsQuery`)
-A search query is an object on the following form.
+##### from (`Location`)
+The location to search for travels from.
 
-| Key | Type | Default  | Description |
-|:----|:----|:----------|:------------|
+##### to (`Location`)
+The destination location to search for travels to.
+
+##### params (`GetTripPatternsParams`) [Optional]
+An object of search parameters.
+
+| Key                     | Type               | Default   | Description |
+|:------------------------|:-------------------|:----------|:------------|
 | `searchDate`            | `Date`             | | when to calculate patterns |
-| `from`                  | [`Location`](#location) | | departure location |
-| `to`                    | [`Location`](#location) | | arrival location |
 | `arriveBy`              | `boolean`          | `false` | depart by `searchDate`, or arrive by `searchDate` |
 | `modes`                 | [`Array of Modes`](#leg-mode) | `['foot', 'bus', 'tram', 'rail', 'metro', 'water', 'air']` | modes of transport to include in trip |
-| `limit`                 | `number`           | `5`      | Limit search to |
+| `limit`                 | `number`           | `5`      | Limit result to this number of trip patterns |
 | `wheelchairAccessible`  | `boolean`          | `false`  | include only stops which are wheelchair accessible |
+| `walkSpeed`             | `number`           | `1.3`    | the walk speed to use in searches in meters per second |
 
-#### example
+
+##### ignoreFields  [Optional]
+A list of keys to exclude from the resulting trip patterns.
+
+Default:
+```
+[
+    'notices',
+    'situations',
+    'journeyPattern',
+    'fromEstimatedCall',
+    'toEstimatedCall',
+    'intermediateEstimatedCalls',
+    'interchangeFrom',
+    'interchangeTo',
+    'pointsOnLink',
+    'authority',
+    'operator',
+    'quay',
+    'bookingArrangements',
+    'rentedBike',
+]
+```
+
+#### Example
 
 ```javascript
-service.getTripPatterns({
-    searchDate: new Date(),
-    from: {
+service.getTripPatterns(
+    {
         name: 'Ryllikvegen, Lillehammer',
         coordinates: {
             latitude: 61.102848368937416,
             longitude: 10.51613308426234
         },
     },
-    to: {
+    {
         place: 'NSR:StopPlace:337',
         name: 'Oslo S, Oslo'
+    },
+    {
+        searchDate: new Date(),
     }
 })
 ```
@@ -151,36 +182,53 @@ An optional object of parameters to pass to the query.
 |:---------------------|:---------|:--------------------|:------------|
 | `layers`             | `string` | `"venue,address"`   | The types of places to search for in a comma-separated string. `venue` means stop places and stations, `address` means postal addresses that might not be connected to public transport.
 
-### getStopPlaceDepartures
+### getDeparturesFromStopPlace
 
 ```javascript
-(stopPlaceId: string, params?: GetStopPlaceDeparturesParams) => Promise<Array<EstimatedCall>>
+(stopPlaceId: string, params?: GetDeparturesParams) => Promise<Array<EstimatedCall>>
 ```
 
-```javascript
-(stopPlaceIds: Array<string>, params?: GetStopPlaceDeparturesParams) => Promise<Array<{ id: string, departures: Array<EstimatedCall> }>>
-```
-
-Types: [EstimatedCall](flow-types/EstimatedCall.js)
-
-`getStopPlaceDepartures` finds departures from one or more given stop places.
+`getDeparturesFromStopPlace` finds departures from one given stop place. Also see `getDeparturesFromStopPlaces` for fetching for multiple stops simultaneously.
+The method will return a Promise which will resolve to an array of departures for that stop place.
 
 #### Parameters
 
-##### stopPlaceIds (`string` | `Array<string>`)
-The ID or IDs of the stop places you are interested in. If a string is passed, it is interpreted as a single ID. The method will then return a Promise which will resolve to an array of departures for that stop place.
-
-If an array of strings is passed, the method will return an array of objects containing fields for the stop place's `id` and `departures`.
+##### stopPlaceId (`string`)
+The ID of the stop place you are interested in.
 
 ##### params (`Object`) [Optional]
 An optional object of parameters to pass to the query.
 
-| Key                  | Type           | Default | Description |
-|:---------------------|:---------------|:--------|:------------|
-| `startTime`          | ISO8601 string | Now     | DateTime for when to fetch estimated calls from. |
-| `range`              | `number`       | `86400` | The time range for departures to include in seconds. |
-| `departures`         | `number`       | `5`     | The number of departures to return for each stop place. |
-| `includeNonBoarding` | `boolean`      | `false` | Whether to include departures that do not accept boarding at given stop place. |
+| Key                      | Type           | Default      | Description |
+|:-------------------------|:---------------|:-------------|:------------|
+| `start`                  | `Date`         | `new Date()` | DateTime for when to fetch estimated calls from. |
+| `timeRange`              | `number`       | `72000`      | The time range for departures to include in seconds. |
+| `departures`             | `number`       | `5`          | The number of departures to return for each stop place. |
+| `includeNonBoarding`     | `boolean`      | `false`      | Whether to include departures that do not accept boarding at given stop place. |
+| `limit`                  | `number`       | `50`         | The maximum number of departures to fetch. |
+| `whiteListedLines`       | `Array<string>` | `undefined` | A list of line IDs to include. All others will be excluded. |
+| `whiteListedAuthorities` | `Array<string>` | `undefined` | A list of authority IDs to include. All others will be excluded. |
+
+### getDeparturesFromStopPlaces
+
+```javascript
+(stopPlaceIds: Array<string>, params?: GetDeparturesParams) => Promise<Array<{ id: string, departures: Array<EstimatedCall> }>>
+```
+
+Types: [EstimatedCall](flow-types/EstimatedCall.js)
+
+`getDeparturesFromStopPlaces` finds departures from one or more given stop places. Also see `getDeparturesFromStopPlace` for a simpler interface for fetching departures for a single stop.
+
+The method will return an array of objects containing fields for the stop place's `id` and `departures`.
+
+#### Parameters
+
+##### stopPlaceIds (`Array<string>`)
+The IDs of the stop places you are interested in.
+
+##### params (`Object`) [Optional]
+
+See the `params` parameter for `getDeparturesForStopPlace`.
 
 ### getBikeRentalStation
 
