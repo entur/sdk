@@ -38,6 +38,7 @@ export const getDeparturesFromStopPlacesQuery = {
             omitNonBoarding: 'Boolean!',
             whiteListedLines: '[String!]',
             whiteListedAuthorities: '[String!]',
+            whiteListedModes: '[Mode]',
         },
         stopPlaces: {
             __args: {
@@ -54,6 +55,7 @@ export const getDeparturesFromStopPlacesQuery = {
                         lines: new VariableType('whiteListedLines'),
                         authorities: new VariableType('whiteListedAuthorities'),
                     },
+                    whiteListedModes: new VariableType('whiteListedModes'),
                 },
                 ...departureFields,
             },
