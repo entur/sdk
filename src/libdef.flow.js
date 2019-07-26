@@ -49,12 +49,12 @@ type $entur$sdk$InfoLink = {
 
 type $entur$sdk$Situation = {|
     situationNumber: string,
-    summary: Array<$entur$sdk$MultilingualString>,
-    description: Array<$entur$sdk$MultilingualString>,
-    detail: Array<$entur$sdk$MultilingualString>,
-    validityPeriod: $entur$sdk$ValidityPeriod,
-    reportType: $entur$sdk$ReportType,
-    infoLinks: Array<$entur$sdk$InfoLink>,
+        summary: Array < $entur$sdk$MultilingualString >,
+            description: Array < $entur$sdk$MultilingualString >,
+                detail: Array < $entur$sdk$MultilingualString >,
+                    validityPeriod: $entur$sdk$ValidityPeriod,
+                        reportType: $entur$sdk$ReportType,
+                            infoLinks: Array < $entur$sdk$InfoLink >,
 |}
 
 
@@ -63,14 +63,14 @@ type $entur$sdk$Situation = {|
  */
 
 type $entur$sdk$BikeRentalStation = {
-     id: string,
-     name: string,
-     bikesAvailable: number,
-     spacesAvailable: number,
-     longitude: number,
-     latitude: number,
-     networks: Array<string>,
- }
+    id: string,
+    name: string,
+    bikesAvailable: number,
+    spacesAvailable: number,
+    longitude: number,
+    latitude: number,
+    networks: Array<string>,
+}
 
 
 /**
@@ -202,15 +202,15 @@ type $entur$sdk$TransportMode =
     | 'tram'
     | 'coach'
     | 'car'
-    // | 'unknown'
+// | 'unknown'
 
 type $entur$sdk$LegMode =
     | $entur$sdk$TransportMode
     | 'bicycle'
     | 'foot'
-    // | 'transit'
-    // | 'car_park'
-    // | 'car_pickup'
+// | 'transit'
+// | 'car_park'
+// | 'car_pickup'
 
 type $entur$sdk$TransportSubmode =
     | 'airportLinkRail'
@@ -235,6 +235,7 @@ type $entur$sdk$EstimatedCall = {
     destinationDisplay: $entur$sdk$DestinationDisplay,
     forAlighting: boolean,
     forBoarding: boolean,
+    situations: Array<$entur$sdk$Situation>,
     notices?: Array<$entur$sdk$Notice>,
     requestStop: boolean
 }
