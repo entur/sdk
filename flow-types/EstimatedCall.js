@@ -1,7 +1,7 @@
 // @flow
 import type { Notice } from './Notice'
 import type { Quay } from './Quay'
-import type { Situation } './Situation'
+import type { Situation } from './Situation'
 
 export type DestinationDisplay = {
     frontText: string,
