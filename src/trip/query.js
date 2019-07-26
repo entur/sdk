@@ -51,6 +51,7 @@ export const estimatedCallFields = {
     forBoarding: true,
     requestStop: true,
     forAlighting: true,
+    situations: true,
     destinationDisplay: { frontText: true },
     notices: noticeFields,
 }
