@@ -235,6 +235,7 @@ type $entur$sdk$EstimatedCall = {
     destinationDisplay: $entur$sdk$DestinationDisplay,
     forAlighting: boolean,
     forBoarding: boolean,
+    situations: Array<$entur$sdk$Situation>,
     notices?: Array<$entur$sdk$Notice>,
     requestStop: boolean
 }
@@ -251,6 +252,7 @@ type $entur$sdk$IntermediateEstimatedCall = {
     expectedDepartureTime?: string, // Only available BEFORE departure has taken place
     forAlighting: boolean,
     forBoarding: boolean,
+    situations: Array<$entur$sdk$Situation>,
     notices?: Array<$entur$sdk$Notice>,
     quay?: $entur$sdk$Quay,
     requestStop: boolean

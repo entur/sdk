@@ -223,6 +223,7 @@ export interface EstimatedCall {
     destinationDisplay: DestinationDisplay;
     forAlighting: boolean;
     forBoarding: boolean;
+    situations: Array<Situation>;
     notices?: Array<Notice>;
     requestStop: boolean;
 }
@@ -239,6 +240,7 @@ export interface IntermediateEstimatedCall {
     expectedDepartureTime?: string; // Only available BEFORE departure has taken place
     forAlighting: boolean;
     forBoarding: boolean;
+    situations: Array<Situation>;
     notices?: Array<Notice>;
     quay?: Quay;
     requestStop: boolean;
