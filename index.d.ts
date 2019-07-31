@@ -571,7 +571,7 @@ declare class EnturService {
   getStopPlaces(
       stopPlaceId: Array<string>,
       params?: StopPlaceParams,
-  ): Promise<Array<StopPlaceDetails undefined>>;
+  ): Promise<Array<StopPlaceDetails | undefined>>;
 
   getParentStopPlace(
     id: string,
