@@ -25,7 +25,7 @@ export function getNotices(leg: Leg): Array<Notice> {
 }
 
 function authorityMapper(authority?: Authority): Authority | void {
-    if (!authority) return
+    if (!authority) return undefined
 
     return {
         id: authority.id,
