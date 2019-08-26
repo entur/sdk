@@ -151,6 +151,7 @@ export interface Location {
 export interface Authority {
     id: string;
     name: string;
+    codeSpace: string,
     url?: string;
 }
 
