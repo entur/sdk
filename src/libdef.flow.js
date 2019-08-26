@@ -89,6 +89,7 @@ type $entur$sdk$MultilingualString = {
 type $entur$sdk$Authority = {
     id: string,
     name: string,
+    codeSpace: string,
     url?: string,
 }
 
