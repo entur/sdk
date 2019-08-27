@@ -1,5 +1,5 @@
 // @flow
-import type { Leg, Notice } from '../../flow-types'
+import type { Authority, Leg, Notice } from '../../flow-types'
 import type { IntermediateEstimatedCall } from '../../flow-types/EstimatedCall'
 import { uniqBy } from '../utils'
 
@@ -24,9 +24,21 @@ export function getNotices(leg: Leg): Array<Notice> {
     return uniqBy(notices, notice => notice.text)
 }
 
+function authorityMapper(authority?: Authority): Authority | void {
+    if (!authority) return undefined
+
+    return {
+        id: authority.id,
+        name: authority.name,
+        codeSpace: authority.id.split(':')[0],
+        url: authority.url,
+    }
+}
+
 export function legMapper(leg: Leg): Leg {
     return {
         ...leg,
+        authority: authorityMapper(leg.authority),
         notices: getNotices(leg),
     }
 }
