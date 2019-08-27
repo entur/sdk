@@ -294,7 +294,7 @@ Types: [BikeRentalStation](flow-types/BikeRentalStation.js)
 ##### stationId (`string`)
 The ID of the bike rental station you are interested in. The method will return a Promise which will resolve to an object of type [BikeRentalStation](flow-types/BikeRentalStation.js).
 
-### getBikeRentalStations
+### getBikeRentalStationsByPosition
 
 ```javascript
 (coordinates: Coordinates, distance?: number) => Promise<Array<BikeRentalStation>>
@@ -318,17 +318,67 @@ The width and height of the bounding box are therefore `2 * distance`, and the c
 ### getStopPlace
 
 ```javascript
-(id: string) => Promise<StopPlace>
+(id: string, params?: StopPlaceParams) => Promise<StopPlaceDetails>
 ```
 
-Types: [StopPlace](flow-types/StopPlace.js)
+Types: [StopPlaceDetails](flow-types/StopPlace.js)
 
 `getStopPlace` finds the stop place with the given ID.
+
+#### Parameters
+
+##### id (`string`)
+
+The ID of the stop place to get.
+
+##### params (`Object`) [Optional]
+
+| Key                      | Type           | Default      | Description |
+|:-------------------------|:---------------|:-------------|:------------|
+| `includeUnusedQuays`     | `boolean`      | `true`       | Whether to include quays no longer in use or not. |
+
+### getStopPlaces
+
+```javascript
+(ids: Array<string>, params?: StopPlaceParams) => Promise<Array<StopPlaceDetails | void>>
+```
+
+Types: [StopPlaceDetails](flow-types/StopPlace.js)
+
+`getStopPlaces` finds multiple stop places according to an array of IDs. The returned array will have the same order as the input array, and may contain undefined values if the corresponding ID didn't produce a result.
+
+#### Parameters
+
+##### ids (`Array<string>`)
+
+The IDs of the stop places to get.
+
+##### params (`Object`) [Optional]
+
+See the `params` parameter for `getStopPlace`.
+
+### getParentStopPlace
+
+```javascript
+(id: string, params?: StopPlaceParams) => Promise<StopPlaceDetails>>
+```
+
+Types: [StopPlaceDetails](flow-types/StopPlace.js)
+
+#### Parameters
+
+##### id (`string`)
+
+The ID of the stop place to get the parent stop place of.
+
+##### params (`Object`) [Optional]
+
+See the `params` parameter for `getStopPlace`.
 
 ### getStopPlacesByPosition
 
 ```javascript
-(coordinates: Coordinates, distance?: number) => Promise<Array<StopPlace>>
+(coordinates: Coordinates, distance?: number, params?: StopPlaceParams) => Promise<Array<StopPlaceDetails>>
 ```
 
 Types: [StopPlace](flow-types/StopPlace.js)
@@ -345,6 +395,10 @@ Default: `500`
 
 The "radius" in meters of the surrounding bounding box in which you want to find stop places.
 The width and height of the bounding box are therefore `2 * distance`, and the coordinates given are its centerpoint.
+
+##### params (`Object`) [Optional]
+
+See the `params` parameter for `getStopPlace`.
 
 ## Utils
 
