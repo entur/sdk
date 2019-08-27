@@ -206,8 +206,9 @@ An optional object of parameters to pass to the query.
 | `departures`             | `number`       | `5`          | The number of departures to return for each stop place. |
 | `includeNonBoarding`     | `boolean`      | `false`      | Whether to include departures that do not accept boarding at given stop place. |
 | `limit`                  | `number`       | `50`         | The maximum number of departures to fetch. |
-| `whiteListedLines`       | `Array<string>` | `undefined` | A list of line IDs to include. All others will be excluded. |
-| `whiteListedAuthorities` | `Array<string>` | `undefined` | A list of authority IDs to include. All others will be excluded. |
+| `whiteListedLines`       | `Array<string>` | `undefined` | A list of line IDs to include. All others will be excluded. If omitted, all are included. |
+| `whiteListedAuthorities` | `Array<string>` | `undefined` | A list of authority IDs to include. All others will be excluded. If omitted, all are included. |
+| `whiteListedModes`       | `Array<string>` | `undefined` | A list of transport modes to include. All others will be excluded. If omitted, all are included. |
 
 ### getDeparturesFromStopPlaces
 
