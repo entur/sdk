@@ -185,8 +185,10 @@ An optional object of parameters to pass to the query.
 ### getDeparturesFromStopPlace
 
 ```javascript
-(stopPlaceId: string, params?: GetDeparturesParams) => Promise<Array<EstimatedCall>>
+(stopPlaceId: string, params?: GetDeparturesParams) => Promise<Array<Departure>>
 ```
+
+Types: [Departure](flow-types/Departures.js)
 
 `getDeparturesFromStopPlace` finds departures from one given stop place. Also see `getDeparturesFromStopPlaces` for fetching for multiple stops simultaneously.
 The method will return a Promise which will resolve to an array of departures for that stop place.
@@ -213,10 +215,10 @@ An optional object of parameters to pass to the query.
 ### getDeparturesFromStopPlaces
 
 ```javascript
-(stopPlaceIds: Array<string>, params?: GetDeparturesParams) => Promise<Array<{ id: string, departures: Array<EstimatedCall> }>>
+(stopPlaceIds: Array<string>, params?: GetDeparturesParams) => Promise<Array<{ id: string, departures: Array<Departure> }>>
 ```
 
-Types: [EstimatedCall](flow-types/EstimatedCall.js)
+Types: [Departure](flow-types/Departures.js)
 
 `getDeparturesFromStopPlaces` finds departures from one or more given stop places. Also see `getDeparturesFromStopPlace` for a simpler interface for fetching departures for a single stop.
 
@@ -230,6 +232,52 @@ The IDs of the stop places you are interested in.
 ##### params (`Object`) [Optional]
 
 See the `params` parameter for `getDeparturesForStopPlace`.
+
+### getDeparturesFromQuays
+
+```javascript
+(quayIds: Array<string>, params?: GetDeparturesParams) => Promise<Array<{ id: string, departures: Array<Departure | void> }>>
+```
+
+Types: [Departure](flow-types/Departures.js)
+
+`getDeparturesFromQuays` finds departures from one or more given quays.
+
+The method will return an array of objects containing fields for the quay's `id` and its corresponding `departures`.
+
+#### Parameters
+
+##### quayIds (`Array<string>`)
+The IDs of the quays you are interested in.
+
+##### params (`Object`) [Optional]
+
+See the `params` parameter for `getDeparturesForStopPlace`.
+
+### getDeparturesBetweenStopPlaces
+
+```javascript
+(fromStopPlaceId: string, toStopPlaceId: string, params?: GetDeparturesBetweenStopPlacesParams) => Promise<Array<Departure>>
+```
+
+Types: [Departure](flow-types/Departures.js)
+
+`getDeparturesBetweenStopPlaces` finds departures from a stop place, but only departures that will go to the destination stop place.
+
+#### Parameters
+
+##### fromStopPlaceId (`string`)
+The ID of the stop place to get departures _from_.
+
+##### toStopPlaceId (`string`)
+The ID of the stop place to get departures _to_.
+
+##### params (`Object`) [Optional]
+
+| Key                      | Type           | Default      | Description |
+|:-------------------------|:---------------|:-------------|:------------|
+| `start`                  | `Date`         | `new Date()` | DateTime for when to fetch estimated calls from. |
+| `limit`                  | `number`       | `20`         | The maximum number of departures to fetch. |
 
 ### getBikeRentalStation
 
