@@ -37,6 +37,7 @@ export const lineFields = {
     publicCode: true,
     notices: noticeFields,
     bookingArrangements: bookingArrangementsFields,
+    flexibleLineType: true,
 }
 
 export const quayFields = {
