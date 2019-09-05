@@ -1,6 +1,6 @@
 # Entur SDK
 
-This SDK simplifies the use of Entur's travel APIs in JavaScript apps. For more information about Entur's APIs, see https://www.entur.org/dev/
+This SDK simplifies the use of Entur's travel APIs in JavaScript apps. For more information about Entur's APIs, see https://developer.entur.org
 
 Miss anything? Found a bug? File an [issue](https://github.com/entur/sdk/issues/new) or create a pull request!
 
@@ -10,11 +10,17 @@ Miss anything? Found a bug? File an [issue](https://github.com/entur/sdk/issues/
     * [findTrips](#findtrips)
     * [getTripPatterns](#gettrippatterns)
     * [getFeatures](#getfeatures)
-    * [getStopPlaceDepartures](#getstopplacedepartures)
+    * [getDeparturesFromStopPlace](#getdeparturesfromstopplace)
+    * [getDeparturesFromStopPlaces](#getdeparturesfromstopplaces)
+    * [getDeparturesFromQuays](#getdeparturesfromquays)
+    * [getDeparturesBetweenStopPlaces](#getdeparturesbetweenstopplaces)
     * [getBikeRentalStation](#getbikerentalstation)
-    * [getBikeRentalStations](#getbikerentalstations)
+    * [getBikeRentalStationsByPosition](#getbikerentalstationsbyposition)
     * [getStopPlace](#getstopplace)
+    * [getStopPlaces](#getstopplaces)
+    * [getParentStopPlace](#getparentstopplace)
     * [getStopPlacesByPosition](#getstopplacesbyposition)
+    * [getQuaysForStopPlace](#getquaysforstopplace)
 * [Utils](#utils)
     * [throttler](#throttler)
 * [Types](#flow-and-typescript)
@@ -40,7 +46,7 @@ const service = new EnturService({ clientName: 'awesomecompany-awesomeapp' })
 
 #### clientName (required)
 We require that you pass a `clientName` that identifies your application. It should contain the name of your company or organization,
-followed by a hyphen and your application's name. See https://www.entur.org/dev/api/header/ for more information.
+followed by a hyphen and your application's name. See https://developer.entur.org/pages-intro-authentication for more information.
 
 #### hosts
 The Entur SDK uses multiple endpoints for its services. Each endpoint can be overridden with hosts config (in case you use a proxy or a local instance of the endpoint). Available hosts are:
@@ -78,7 +84,7 @@ The wanted time of departure. Can be anything that is parseable by `new Date()`.
 ### getTripPatterns
 
 ```javascript
-(query: TripPatternsQuery) => Promise<Array<TripPattern>>
+(from: Location, to: Location, params?: GetTripPatternsParams, ignoreFields?: Array<string>) => Promise<Array<TripPattern>>
 ```
 
 Types: [TripPattern](flow-types/TripPattern.js)
@@ -89,34 +95,65 @@ If you are going to do a huge amount of different searches at the same time, con
 
 #### Parameters
 
-##### query (`TripPatternsQuery`)
-A search query is an object on the following form.
+##### from (`Location`)
+The location to search for travels from.
 
-| Key | Type | Default  | Description |
-|:----|:----|:----------|:------------|
+##### to (`Location`)
+The destination location to search for travels to.
+
+##### params (`GetTripPatternsParams`) [Optional]
+An object of search parameters.
+
+| Key                     | Type               | Default   | Description |
+|:------------------------|:-------------------|:----------|:------------|
 | `searchDate`            | `Date`             | | when to calculate patterns |
-| `from`                  | [`Location`](#location) | | departure location |
-| `to`                    | [`Location`](#location) | | arrival location |
 | `arriveBy`              | `boolean`          | `false` | depart by `searchDate`, or arrive by `searchDate` |
 | `modes`                 | [`Array of Modes`](#leg-mode) | `['foot', 'bus', 'tram', 'rail', 'metro', 'water', 'air']` | modes of transport to include in trip |
-| `limit`                 | `number`           | `5`      | Limit search to |
+| `limit`                 | `number`           | `5`      | Limit result to this number of trip patterns |
 | `wheelchairAccessible`  | `boolean`          | `false`  | include only stops which are wheelchair accessible |
+| `walkSpeed`             | `number`           | `1.3`    | the walk speed to use in searches in meters per second |
 
-#### example
+
+##### ignoreFields  [Optional]
+A list of keys to exclude from the resulting trip patterns.
+
+Default:
+```
+[
+    'notices',
+    'situations',
+    'journeyPattern',
+    'fromEstimatedCall',
+    'toEstimatedCall',
+    'intermediateEstimatedCalls',
+    'interchangeFrom',
+    'interchangeTo',
+    'pointsOnLink',
+    'authority',
+    'operator',
+    'quay',
+    'bookingArrangements',
+    'rentedBike',
+]
+```
+
+#### Example
 
 ```javascript
-service.getTripPatterns({
-    searchDate: new Date(),
-    from: {
+service.getTripPatterns(
+    {
         name: 'Ryllikvegen, Lillehammer',
         coordinates: {
             latitude: 61.102848368937416,
             longitude: 10.51613308426234
         },
     },
-    to: {
+    {
         place: 'NSR:StopPlace:337',
         name: 'Oslo S, Oslo'
+    },
+    {
+        searchDate: new Date(),
     }
 })
 ```
@@ -151,36 +188,102 @@ An optional object of parameters to pass to the query.
 |:---------------------|:---------|:--------------------|:------------|
 | `layers`             | `string` | `"venue,address"`   | The types of places to search for in a comma-separated string. `venue` means stop places and stations, `address` means postal addresses that might not be connected to public transport.
 
-### getStopPlaceDepartures
+### getDeparturesFromStopPlace
 
 ```javascript
-(stopPlaceId: string, params?: GetStopPlaceDeparturesParams) => Promise<Array<EstimatedCall>>
+(stopPlaceId: string, params?: GetDeparturesParams) => Promise<Array<Departure>>
 ```
 
-```javascript
-(stopPlaceIds: Array<string>, params?: GetStopPlaceDeparturesParams) => Promise<Array<{ id: string, departures: Array<EstimatedCall> }>>
-```
+Types: [Departure](flow-types/Departures.js)
 
-Types: [EstimatedCall](flow-types/EstimatedCall.js)
-
-`getStopPlaceDepartures` finds departures from one or more given stop places.
+`getDeparturesFromStopPlace` finds departures from one given stop place. Also see `getDeparturesFromStopPlaces` for fetching for multiple stops simultaneously.
+The method will return a Promise which will resolve to an array of departures for that stop place.
 
 #### Parameters
 
-##### stopPlaceIds (`string` | `Array<string>`)
-The ID or IDs of the stop places you are interested in. If a string is passed, it is interpreted as a single ID. The method will then return a Promise which will resolve to an array of departures for that stop place.
-
-If an array of strings is passed, the method will return an array of objects containing fields for the stop place's `id` and `departures`.
+##### stopPlaceId (`string`)
+The ID of the stop place you are interested in.
 
 ##### params (`Object`) [Optional]
 An optional object of parameters to pass to the query.
 
-| Key                  | Type           | Default | Description |
-|:---------------------|:---------------|:--------|:------------|
-| `startTime`          | ISO8601 string | Now     | DateTime for when to fetch estimated calls from. |
-| `range`              | `number`       | `86400` | The time range for departures to include in seconds. |
-| `departures`         | `number`       | `5`     | The number of departures to return for each stop place. |
-| `includeNonBoarding` | `boolean`      | `false` | Whether to include departures that do not accept boarding at given stop place. |
+| Key                      | Type           | Default      | Description |
+|:-------------------------|:---------------|:-------------|:------------|
+| `start`                  | `Date`         | `new Date()` | DateTime for when to fetch estimated calls from. |
+| `timeRange`              | `number`       | `72000`      | The time range for departures to include in seconds. |
+| `departures`             | `number`       | `5`          | The number of departures to return for each stop place. |
+| `includeNonBoarding`     | `boolean`      | `false`      | Whether to include departures that do not accept boarding at given stop place. |
+| `limit`                  | `number`       | `50`         | The maximum number of departures to fetch. |
+| `whiteListedLines`       | `Array<string>` | `undefined` | A list of line IDs to include. All others will be excluded. If omitted, all are included. |
+| `whiteListedAuthorities` | `Array<string>` | `undefined` | A list of authority IDs to include. All others will be excluded. If omitted, all are included. |
+| `whiteListedModes`       | `Array<string>` | `undefined` | A list of transport modes to include. All others will be excluded. If omitted, all are included. |
+
+### getDeparturesFromStopPlaces
+
+```javascript
+(stopPlaceIds: Array<string>, params?: GetDeparturesParams) => Promise<Array<{ id: string, departures: Array<Departure> }>>
+```
+
+Types: [Departure](flow-types/Departures.js)
+
+`getDeparturesFromStopPlaces` finds departures from one or more given stop places. Also see `getDeparturesFromStopPlace` for a simpler interface for fetching departures for a single stop.
+
+The method will return an array of objects containing fields for the stop place's `id` and `departures`.
+
+#### Parameters
+
+##### stopPlaceIds (`Array<string>`)
+The IDs of the stop places you are interested in.
+
+##### params (`Object`) [Optional]
+
+See the `params` parameter for `getDeparturesForStopPlace`.
+
+### getDeparturesFromQuays
+
+```javascript
+(quayIds: Array<string>, params?: GetDeparturesParams) => Promise<Array<{ id: string, departures: Array<Departure | void> }>>
+```
+
+Types: [Departure](flow-types/Departures.js)
+
+`getDeparturesFromQuays` finds departures from one or more given quays.
+
+The method will return an array of objects containing fields for the quay's `id` and its corresponding `departures`.
+
+#### Parameters
+
+##### quayIds (`Array<string>`)
+The IDs of the quays you are interested in.
+
+##### params (`Object`) [Optional]
+
+See the `params` parameter for `getDeparturesForStopPlace`.
+
+### getDeparturesBetweenStopPlaces
+
+```javascript
+(fromStopPlaceId: string, toStopPlaceId: string, params?: GetDeparturesBetweenStopPlacesParams) => Promise<Array<Departure>>
+```
+
+Types: [Departure](flow-types/Departures.js)
+
+`getDeparturesBetweenStopPlaces` finds departures from a stop place, but only departures that will go to the destination stop place.
+
+#### Parameters
+
+##### fromStopPlaceId (`string`)
+The ID of the stop place to get departures _from_.
+
+##### toStopPlaceId (`string`)
+The ID of the stop place to get departures _to_.
+
+##### params (`Object`) [Optional]
+
+| Key                      | Type           | Default      | Description |
+|:-------------------------|:---------------|:-------------|:------------|
+| `start`                  | `Date`         | `new Date()` | DateTime for when to fetch estimated calls from. |
+| `limit`                  | `number`       | `20`         | The maximum number of departures to fetch. |
 
 ### getBikeRentalStation
 
@@ -197,7 +300,7 @@ Types: [BikeRentalStation](flow-types/BikeRentalStation.js)
 ##### stationId (`string`)
 The ID of the bike rental station you are interested in. The method will return a Promise which will resolve to an object of type [BikeRentalStation](flow-types/BikeRentalStation.js).
 
-### getBikeRentalStations
+### getBikeRentalStationsByPosition
 
 ```javascript
 (coordinates: Coordinates, distance?: number) => Promise<Array<BikeRentalStation>>
@@ -221,17 +324,67 @@ The width and height of the bounding box are therefore `2 * distance`, and the c
 ### getStopPlace
 
 ```javascript
-(id: string) => Promise<StopPlace>
+(id: string, params?: StopPlaceParams) => Promise<StopPlaceDetails>
 ```
 
-Types: [StopPlace](flow-types/StopPlace.js)
+Types: [StopPlaceDetails](flow-types/StopPlace.js)
 
 `getStopPlace` finds the stop place with the given ID.
+
+#### Parameters
+
+##### id (`string`)
+
+The ID of the stop place to get.
+
+##### params (`Object`) [Optional]
+
+| Key                      | Type           | Default      | Description |
+|:-------------------------|:---------------|:-------------|:------------|
+| `includeUnusedQuays`     | `boolean`      | `true`       | Whether to include quays no longer in use or not. |
+
+### getStopPlaces
+
+```javascript
+(ids: Array<string>, params?: StopPlaceParams) => Promise<Array<StopPlaceDetails | void>>
+```
+
+Types: [StopPlaceDetails](flow-types/StopPlace.js)
+
+`getStopPlaces` finds multiple stop places according to an array of IDs. The returned array will have the same order as the input array, and may contain undefined values if the corresponding ID didn't produce a result.
+
+#### Parameters
+
+##### ids (`Array<string>`)
+
+The IDs of the stop places to get.
+
+##### params (`Object`) [Optional]
+
+See the `params` parameter for `getStopPlace`.
+
+### getParentStopPlace
+
+```javascript
+(id: string, params?: StopPlaceParams) => Promise<StopPlaceDetails>>
+```
+
+Types: [StopPlaceDetails](flow-types/StopPlace.js)
+
+#### Parameters
+
+##### id (`string`)
+
+The ID of the stop place to get the parent stop place of.
+
+##### params (`Object`) [Optional]
+
+See the `params` parameter for `getStopPlace`.
 
 ### getStopPlacesByPosition
 
 ```javascript
-(coordinates: Coordinates, distance?: number) => Promise<Array<StopPlace>>
+(coordinates: Coordinates, distance?: number, params?: StopPlaceParams) => Promise<Array<StopPlaceDetails>>
 ```
 
 Types: [StopPlace](flow-types/StopPlace.js)
@@ -248,6 +401,50 @@ Default: `500`
 
 The "radius" in meters of the surrounding bounding box in which you want to find stop places.
 The width and height of the bounding box are therefore `2 * distance`, and the coordinates given are its centerpoint.
+
+##### params (`Object`) [Optional]
+
+See the `params` parameter for `getStopPlace`.
+
+### getStopPlaceFacilities
+
+```
+(stopPlaceId: string) => Promise<StopPlaceFacilities>
+```
+
+Types: [StopPlaceFacilities](flow-types/StopPlace.js)
+
+`getStopPlaceFacilities` returns information about the available facilities at a given stop place.
+Facilities can be accessibility assessments like is the stop place wheelchair accessible? Or other things, like is there a waiting room, sanitary or ticketing equipment, etc.
+
+#### Parameters
+
+##### stopPlaceId (`string`)
+The ID of the stop place to find facilities for. Example: `"NSR:StopPlace:59616"`.
+
+
+### getQuaysForStopPlace
+
+```javascript
+(stopPlaceId: string, params?: StopPlaceParams) => Promise<Array<Quay>>
+```
+
+Types:
+* [StopPlaceFacilities](flow-types/StopPlace.js)
+* [Quay](flow-types/Quay.js)
+
+Returns all the quays that belong to a stop place.
+
+#### Parameters
+
+##### stopPlaceId (`string`)
+The ID of the stop place to find quays for. Example: `"NSR:StopPlace:59616"`.
+
+##### params (`Object`) [Optional]
+
+| Key                      | Type           | Default      | Description |
+|:-------------------------|:---------------|:-------------|:------------|
+| `includeUnusedQuays`     | `boolean`      | `true`       | Whether to include quays no longer in use or not. |
 
 ## Utils
 
