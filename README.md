@@ -400,6 +400,46 @@ The width and height of the bounding box are therefore `2 * distance`, and the c
 
 See the `params` parameter for `getStopPlace`.
 
+### getStopPlaceFacilities
+
+```
+(stopPlaceId: string) => Promise<StopPlaceFacilities>
+```
+
+Types: [StopPlaceFacilities](flow-types/StopPlace.js)
+
+`getStopPlaceFacilities` returns information about the available facilities at a given stop place.
+Facilities can be accessibility assessments like is the stop place wheelchair accessible? Or other things, like is there a waiting room, sanitary or ticketing equipment, etc.
+
+#### Parameters
+
+##### stopPlaceId (`string`)
+The ID of the stop place to find facilities for. Example: `"NSR:StopPlace:59616"`.
+
+
+### getQuaysForStopPlace
+
+```javascript
+(stopPlaceId: string, params?: StopPlaceParams) => Promise<Array<Quay>>
+```
+
+Types:
+* [StopPlaceFacilities](flow-types/StopPlace.js)
+* [Quay](flow-types/Quay.js)
+
+Returns all the quays that belong to a stop place.
+
+#### Parameters
+
+##### stopPlaceId (`string`)
+The ID of the stop place to find quays for. Example: `"NSR:StopPlace:59616"`.
+
+##### params (`Object`) [Optional]
+
+| Key                      | Type           | Default      | Description |
+|:-------------------------|:---------------|:-------------|:------------|
+| `includeUnusedQuays`     | `boolean`      | `true`       | Whether to include quays no longer in use or not. |
+
 ## Utils
 
 ### `throttler`
