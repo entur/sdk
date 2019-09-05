@@ -1,8 +1,11 @@
-/* eslint-disable import/no-unresolved, import/extensions, no-console */
+/* eslint-disable import/no-unresolved, import/extensions, no-console, import/no-extraneous-dependencies */
 
 import EnturService from '@entur/sdk'
 
-const service = new EnturService()
+const service = new EnturService({
+    clientName: 'awesomecompany-awesomeapp',
+})
+
 const now = new Date()
 
 function toTimeString(date) {
@@ -16,12 +19,25 @@ function minutesDifference(date1, date2) {
     return Math.floor(timeDiff / (1000 * 60))
 }
 
-async function example() {
-    const departures = await service.getStopPlaceDepartures('NSR:StopPlace:14202')
+/**
+An example of how to find the next departures from a stop place.
+
+In this case, we will find departures from Rødsildrevegen (NSR:StopPlace:14202)
+and print them like so:
+
+4 min bus B4 Høgskolen Storhove
+15:55 bus B4 Høgskolen Storhove
+16:10 bus B4 Høgskolen Storhove
+16:25 bus B4 Høgskolen Storhove
+16:40 bus B4 Skysstasjonen
+16:55 bus B4 Skysstasjonen
+*/
+async function getDeparturesFromStopPlaceExample() {
+    const departures = await service.getDeparturesFromStopPlace('NSR:StopPlace:14202')
 
     departures.forEach((departure) => {
         const { expectedDepartureTime, destinationDisplay, serviceJourney } = departure
-        const { line } = serviceJourney.journeyPattern
+        const { line } = serviceJourney
 
         const departureTime = new Date(expectedDepartureTime)
         const minDiff = minutesDifference(now, departureTime)
@@ -31,5 +47,4 @@ async function example() {
     })
 }
 
-
-example()
+getDeparturesFromStopPlaceExample()
