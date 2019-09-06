@@ -277,12 +277,25 @@ type $entur$sdk$BookingArrangement = {
     buyWhen: string,
 }
 
+type $entur$sdk$FlexibleLineType =
+    | 'corridorService'
+    | 'mainRouteWithFlexibleEnds'
+    | 'flexibleAreasOnly'
+    | 'hailAndRideSections'
+    | 'fixedStopAreaWide'
+    | 'freeAreaAreaWide'
+    | 'mixedFlexible'
+    | 'mixedFlexibleAndFixed'
+    | 'fixed'
+    | 'other'
+
 type $entur$sdk$Line = {
     id: string,
     name: string,
     notices?: Array<$entur$sdk$Notice>,
     publicCode: string,
     bookingArrangements?: $entur$sdk$BookingArrangement,
+    flexibleLineType?: $entur$sdk$FlexibleLineType,
 }
 
 type $entur$sdk$Interchange = {

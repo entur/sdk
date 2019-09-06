@@ -271,7 +271,20 @@ export interface Line {
     notices?: Array<Notice>;
     publicCode: string;
     bookingArrangements?: BookingArrangement;
+    flexibleLineType?: FlexibleLineType;
 }
+
+export type FlexibleLineType =
+    | 'corridorService'
+    | 'mainRouteWithFlexibleEnds'
+    | 'flexibleAreasOnly'
+    | 'hailAndRideSections'
+    | 'fixedStopAreaWide'
+    | 'freeAreaAreaWide'
+    | 'mixedFlexible'
+    | 'mixedFlexibleAndFixed'
+    | 'fixed'
+    | 'other'
 
 export interface Interchange = {
     guaranteed: boolean;
