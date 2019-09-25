@@ -5,5 +5,5 @@ export type Authority = {
     name: string,
     codeSpace: string,
     url?: string,
-    county?: string,
+    description?: string,
 }

@@ -154,7 +154,7 @@ type $entur$sdk$Authority = {
     name: string,
     codeSpace: string,
     url?: string,
-    county?: string,
+    description?: string,
 }
 
 type $entur$sdk$Operator = {
