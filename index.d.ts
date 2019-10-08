@@ -1,7 +1,7 @@
 export interface Config {
     clientName: string,
     hosts?: {
-        journeyPlanner?: string,
+        journeyplanner?: string,
         geocoder?: string,
     }
 }

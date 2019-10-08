@@ -54,7 +54,7 @@ type $entur$sdk$TransportSubmode =
 type $entur$sdk$Config = {
     clientName: string,
     hosts?: {
-        journeyPlanner?: string,
+        journeyplanner?: string,
         geocoder?: string,
     }
 }
