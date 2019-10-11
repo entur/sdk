@@ -10,7 +10,7 @@ export type StopPlace = {
     description: string,
     wheelchairBoarding: boolean,
     weighting: any,
-    transportMode: Array<string>,
+    transportMode: string,
     transportSubmode: string,
     quays: Array<Quay>,
 }

@@ -285,7 +285,7 @@ type $entur$sdk$StopPlace = {
     description: string,
     wheelchairBoarding: boolean,
     weighting: any,
-    transportMode: Array<string>,
+    transportMode: string,
     transportSubmode: string,
     quays: Array<$entur$sdk$Quay>,
 }
