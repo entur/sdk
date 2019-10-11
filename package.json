@@ -13,9 +13,11 @@
   "typings": "./index.d.ts",
   "scripts": {
     "lint": "eslint src/ example/",
-    "test": "echo 'There are no tests'",
+    "test": "npm run ts",
+    "ts": "tsc index.d.ts --noEmit",
     "flow": "flow",
-    "transpile": "rm -rf lib && babel src --out-dir lib --copy-files",
+    "pretranspile": "npm test && rm -rf lib",
+    "transpile": "babel src --out-dir lib --copy-files",
     "prepublishOnly": "npm run transpile"
   },
   "dependencies": {
@@ -42,6 +44,7 @@
     "eslint-config-airbnb": "^17.1.1",
     "eslint-plugin-flowtype": "^3.11.1",
     "eslint-plugin-import": "^2.18.0",
-    "flow-bin": "^0.89.0"
+    "flow-bin": "^0.89.0",
+    "typescript": "^3.6.4"
   }
 }

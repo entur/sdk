@@ -255,7 +255,7 @@ export interface BookingContact {
     url: string;
 }
 
-export interface BookingArrangement = {
+export interface BookingArrangement {
     bookingAccess: boolean;
     bookingContact: BookingContact;
     latestBookingTime: string;
@@ -287,7 +287,7 @@ export type FlexibleLineType =
     | 'fixed'
     | 'other'
 
-export interface Interchange = {
+export interface Interchange {
     guaranteed: boolean;
     staySeated: boolean;
 }
@@ -373,7 +373,7 @@ export interface GetDeparturesParams {
     whiteListedAuthorities?: Array<string>;
 }
 
-export interface GetDeparturesBetweenStopPlacesParams = {
+export interface GetDeparturesBetweenStopPlacesParams {
     limit?: number;
     start?: Date;
 }
@@ -576,7 +576,7 @@ declare class EnturService {
       fromStopPlaceId: string,
       toStopPlaceId: string,
       params?: GetDeparturesBetweenStopPlacesParams,
-  ): Promise<Departure[]>,
+  ): Promise<Departure[]>;
 
   getStopPlace(
       id: string,
