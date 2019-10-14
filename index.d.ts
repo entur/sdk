@@ -607,6 +607,8 @@ declare class EnturService {
 
   getBikeRentalStation(stationId: string): Promise<BikeRentalStation>;
 
+  getBikeRentalStations(stationIds: Array<string>): Promise<Array<BikeRentalStation | undefined>>;
+
   getBikeRentalStationsByPosition(
     coordinates: Coordinates,
     distance?: number,

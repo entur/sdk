@@ -1,9 +1,13 @@
 // @flow
 import { journeyPlannerQuery } from '../api'
 
-import { getBikeRentalStationQuery, getBikeRentalStationsByPositionQuery } from './query'
+import {
+    getBikeRentalStationQuery,
+    getBikeRentalStationsQuery,
+    getBikeRentalStationsByPositionQuery,
+} from './query'
 
-import { convertPositionToBbox } from '../utils'
+import { convertPositionToBbox, forceOrder } from '../utils'
 import type { BikeRentalStation, Coordinates } from '../../flow-types'
 
 export function getBikeRentalStation(stationId: string): Promise<BikeRentalStation> {
@@ -13,6 +17,22 @@ export function getBikeRentalStation(stationId: string): Promise<BikeRentalStati
 
     return journeyPlannerQuery(getBikeRentalStationQuery, variables, undefined, this.config)
         .then((data: Object = {}) => data?.bikeRentalStation)
+}
+
+export function getBikeRentalStations(
+    stationIds: Array<string>,
+): Promise<Array<BikeRentalStation | void>> {
+    const variables = {
+        ids: stationIds,
+    }
+
+    return journeyPlannerQuery(getBikeRentalStationsQuery, variables, undefined, this.config)
+        .then((data: Object = {}) => data?.bikeRentalStations || [])
+        // TODO: JourneyPlanner does not support filtering yet, so we filter on ID ourselves.
+        .then(stations => stations.filter(({ id }) => stationIds.includes(id)))
+        .then((stations: Array<BikeRentalStation>) => {
+            return forceOrder<BikeRentalStation>(stations, stationIds, ({ id }) => id)
+        })
 }
 
 export function getBikeRentalStationsByPosition(
@@ -28,8 +48,4 @@ export function getBikeRentalStationsByPosition(
         this.config,
     )
         .then((data: Object = {}) => data?.bikeRentalStationsByBbox || [])
-}
-
-export function getBikeRentalStationsDEPRECATED() {
-    throw new Error('Entur SDK: "getBikeRentalStations" is deprecated, use "getBikeRentalStationsByPosition" instead.')
 }

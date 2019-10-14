@@ -620,6 +620,8 @@ declare module '@entur/sdk' {
 
         getBikeRentalStation(stationId: string): Promise<$entur$sdk$BikeRentalStation>,
 
+        getBikeRentalStations(stationId: Array<string>): Promise<Array<$entur$sdk$BikeRentalStation | void>>,
+
         getBikeRentalStationsByPosition(
             coordinates: $entur$sdk$Coordinates,
             distance?: number

@@ -15,6 +15,7 @@ Miss anything? Found a bug? File an [issue](https://github.com/entur/sdk/issues/
     * [getDeparturesFromQuays](#getdeparturesfromquays)
     * [getDeparturesBetweenStopPlaces](#getdeparturesbetweenstopplaces)
     * [getBikeRentalStation](#getbikerentalstation)
+    * [getBikeRentalStations](#getbikerentalstations)
     * [getBikeRentalStationsByPosition](#getbikerentalstationsbyposition)
     * [getStopPlace](#getstopplace)
     * [getStopPlaces](#getstopplaces)
@@ -299,6 +300,21 @@ Types: [BikeRentalStation](flow-types/BikeRentalStation.js)
 
 ##### stationId (`string`)
 The ID of the bike rental station you are interested in. The method will return a Promise which will resolve to an object of type [BikeRentalStation](flow-types/BikeRentalStation.js).
+
+### getBikeRentalStations
+
+```javascript
+(stationIds: Array<string>) => Promise<Array<BikeRentalStation>>
+```
+
+Types: [BikeRentalStation](flow-types/BikeRentalStation.js)
+
+`getBikeRentalStations` finds multiple bike rental stations according to an array of IDs. The returned array will have the same order as the input array, and may contain undefined values if the corresponding ID didn't produce a result.
+
+#### Parameters
+
+##### stationIds (`Array<string>`)
+The IDs of the bike rental stations you are interested in. The method will return a Promise which will resolve to an array of objects of type [BikeRentalStation](flow-types/BikeRentalStation.js).
 
 ### getBikeRentalStationsByPosition
 
