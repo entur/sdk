@@ -1,9 +1,11 @@
 // @flow
 import { journeyPlannerQuery, nsrQuery } from './api'
+
 import {
     findTrips,
     getTripPatterns,
 } from './trip'
+
 import {
     getDeparturesFromStopPlace,
     getDeparturesFromStopPlaces,
@@ -11,6 +13,11 @@ import {
     getDeparturesBetweenStopPlaces,
     getStopPlaceDeparturesDEPRECATED,
 } from './departure'
+
+import {
+    getNearestPlaces,
+} from './nearest'
+
 import {
     getStopPlace,
     getStopPlaces,
@@ -19,15 +26,16 @@ import {
     getStopPlaceFacilities,
     getQuaysForStopPlace,
 } from './stopPlace'
+
 import {
     getBikeRentalStation,
     getBikeRentalStationsByPosition,
     getBikeRentalStationsDEPRECATED,
 } from './bikeRental'
+
 import { getFeatures } from './geocoder'
 import { getServiceConfig } from './config'
 import type { ServiceConfig, ArgumentConfig } from './config'
-
 
 class EnturService {
     config: ServiceConfig;
@@ -55,6 +63,8 @@ class EnturService {
     getDeparturesFromQuays = getDeparturesFromQuays
 
     getDeparturesBetweenStopPlaces = getDeparturesBetweenStopPlaces
+
+    getNearestPlaces = getNearestPlaces
 
     getStopPlace = getStopPlace
 

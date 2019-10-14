@@ -285,6 +285,33 @@ The ID of the stop place to get departures _to_.
 | `start`                  | `Date`         | `new Date()` | DateTime for when to fetch estimated calls from. |
 | `limit`                  | `number`       | `20`         | The maximum number of departures to fetch. |
 
+
+### getNearestPlaces
+
+```javascript
+(coordinates: { latitude: number, longitude: number }, params?: NearestPlacesParams) => Promise<Array<NearestPlace>>
+```
+
+Types: [NearestPlace](flow-types/NearestPlace.js)
+
+Finds the nearest places to a given coordinate.
+
+#### Parameters
+
+##### coordinates (`{ latitude: number, longitude: number }`)
+The latitude and longitude for the point you want to find places close to.
+
+##### params (`Object`) [Optional]
+
+| Key                      | Type           | Default      | Description |
+|:-------------------------|:---------------|:-------------|:------------|
+| `maximumDistance`        | `number`       | `2000`       | Maximum distance (in meters) to search for from the specified location. |
+| `maximumResults`         | `number`       | `20`         | The maximum number of results to return. |
+| `filterByPlaceTypes`     | `'BikePark' | 'BikeRentalStation' | 'CarPark' | 'Quay' | 'StopPlace'` | No restrictions. | Only include places of given types if set. |
+| `filterByModes`          | `TransportMode` | No restrictions. | Only include places that include this mode. Only checked for places with mode i.e. quays, departures. |
+| `filterByInUse`          | `boolean` | `false`. | Only affects queries for quays and stop places. If true only quays and stop places with at least one visiting line are included. |
+| `multiModalMode`          | `'parent' | 'child' | 'all'` | `'parent'`. | MultiModalMode for query. To control whether multi modal parent stop places, their mono modal children or both are included in the response. Does not affect mono modal stop places that do not belong to a multi modal stop place. Only applicable for placeType StopPlace |
+
 ### getBikeRentalStation
 
 ```javascript

@@ -423,6 +423,25 @@ type $entur$sdk$GetDeparturesBetweenStopPlacesParams = {
 }
 
 /**
+ * Nearest
+ */
+
+type $entur$sdk$TypeName =
+    | 'BikePark'
+    | 'BikeRentalStation'
+    | 'CarPark'
+    | 'Quay'
+    | 'StopPlace'
+
+type $entur$sdk$NearestPlace = {
+    id: string,
+    type: $entur$sdk$TypeName,
+    distance: number,
+    latitude: number,
+    longitude: number,
+}
+
+/**
  * Stop Place
  */
 
@@ -589,6 +608,18 @@ declare module '@entur/sdk' {
             toStopPlaceId: string,
             params?: $entur$sdk$GetDeparturesBetweenStopPlacesParams,
         ): Promise<Array<$entur$sdk$Departure>>,
+
+        getNearestPlaces(
+            coordinates: $entur$sdk$Coordinates,
+            params?: {
+                maximumDistance?: number,
+                maximumResults?: number,
+                filterByPlaceTypes?: Array<$entur$sdk$TypeName>,
+                filterByModes?: Array<$entur$sdk$TransportMode>,
+                filterByInUse?: boolean,
+                multiModalMode?: 'parent' | 'child' | 'all',
+            },
+        ): Promise<Array<$entur$sdk$NearestPlace>>,
 
         getStopPlace(
             stopPlaceId: string,

@@ -379,6 +379,25 @@ export interface GetDeparturesBetweenStopPlacesParams {
 }
 
 /**
+ * Nearest
+ */
+
+export type TypeName =
+    | 'BikePark'
+    | 'BikeRentalStation'
+    | 'CarPark'
+    | 'Quay'
+    | 'StopPlace'
+
+export interface NearestPlace {
+    id: string,
+    type: TypeName,
+    distance: number,
+    latitude: number,
+    longitude: number,
+}
+
+/**
  * Stop Place
  */
 
@@ -577,6 +596,18 @@ declare class EnturService {
       toStopPlaceId: string,
       params?: GetDeparturesBetweenStopPlacesParams,
   ): Promise<Departure[]>;
+
+  getNearestPlaces(
+      coordinates: Coordinates,
+      params?: {
+          maximumDistance?: number,
+          maximumResults?: number,
+          filterByPlaceTypes?: Array<TypeName>,
+          filterByModes?: Array<TransportMode>,
+          filterByInUse?: boolean,
+          multiModalMode?: 'parent' | 'child' | 'all',
+      },
+  ): Promise<Array<NearestPlace>>;
 
   getStopPlace(
       id: string,
