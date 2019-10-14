@@ -187,7 +187,7 @@ An optional object of parameters to pass to the query.
 
 | Key                  | Type     | Default             | Description |
 |:---------------------|:---------|:--------------------|:------------|
-| `layers`             | `string` | `"venue,address"`   | The types of places to search for in a comma-separated string. `venue` means stop places and stations, `address` means postal addresses that might not be connected to public transport.
+| `layers`             | `Array<string>` | `["venue", "address"]`   | The types of places to search for. `venue` means stop places and stations, `address` means postal addresses that might not be connected to public transport.
 
 ### getDeparturesFromStopPlace
 
