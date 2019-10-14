@@ -25,6 +25,14 @@ export const getBikeRentalStationQuery = {
     },
 }
 
+export const getBikeRentalStationsQuery = {
+    query: {
+        bikeRentalStations: {
+            ...bikeRentalStationFields,
+        },
+    },
+}
+
 export const getBikeRentalStationsByPositionQuery = {
     query: {
         __variables: {
