@@ -52,7 +52,9 @@ export function getNearestPlaces(
         maximumDistance = 2000,
         maximumResults = 20,
         filterByInUse = false,
+        filterByModes,
         filterByPlaceTypes = ALL_PLACE_TYPES,
+        multiModalMode = 'parent',
     } = params
 
     const variables = {
@@ -61,7 +63,9 @@ export function getNearestPlaces(
         maximumDistance,
         maximumResults,
         filterByInUse,
+        filterByModes,
         filterByPlaceTypes,
+        multiModalMode,
     }
 
     if (params.filterByPlaceTypes) {
