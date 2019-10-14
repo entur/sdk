@@ -36,6 +36,14 @@ export function getStopPlaces(
     stopPlaceIds: Array<string>,
     params?: StopPlaceParams = {},
 ): Promise<Array<StopPlaceDetails | void>> {
+    if (!stopPlaceIds || !Array.isArray(stopPlaceIds)) {
+        throw new Error(`getStopPlaces takes an an array of strings, but got ${typeof stopPlaceIds}`)
+    }
+
+    if (stopPlaceIds.length === 0) {
+        return Promise.resolve([])
+    }
+
     const { includeUnusedQuays = true, ...rest } = params
     const variables = {
         ids: stopPlaceIds,
