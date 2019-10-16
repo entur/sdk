@@ -84,13 +84,17 @@ export function forceOrder<T>(
     sequence: Array<any>,
     predicate?: (T) => any = item => item,
 ): Array<T | void> {
-    return list.reduce((arr: Array<T | void>, item: T) => {
-        const index = sequence.indexOf(predicate(item))
-        if (index > -1) {
-            // eslint-disable-next-line no-param-reassign
-            arr[index] = item
-        }
+    let queue = [...list]
+    const result = []
 
-        return arr
-    }, new Array(sequence.length).fill(undefined))
+    sequence.forEach((sequenceIdentifier) => {
+        const item = queue.find(t => predicate(t) === sequenceIdentifier)
+        if (item) {
+            result.push(item)
+            queue = queue.filter(q => q !== item)
+        } else {
+            result.push(undefined)
+        }
+    })
+    return result
 }
