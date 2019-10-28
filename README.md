@@ -212,7 +212,6 @@ An optional object of parameters to pass to the query.
 |:-------------------------|:---------------|:-------------|:------------|
 | `start`                  | `Date`         | `new Date()` | DateTime for when to fetch estimated calls from. |
 | `timeRange`              | `number`       | `72000`      | The time range for departures to include in seconds. |
-| `departures`             | `number`       | `5`          | The number of departures to return for each stop place. |
 | `includeNonBoarding`     | `boolean`      | `false`      | Whether to include departures that do not accept boarding at given stop place. |
 | `limit`                  | `number`       | `50`         | The maximum number of departures to fetch. |
 | `limitPerLine`           | `number`       | No limit     | The maximum number of departures to fetch per line and destination display. |
