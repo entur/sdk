@@ -35,6 +35,7 @@ export const getDeparturesFromStopPlacesQuery = {
             start: 'DateTime!',
             timeRange: 'Int!',
             limit: 'Int!',
+            limitPerLine: 'Int',
             omitNonBoarding: 'Boolean!',
             whiteListedLines: '[String!]',
             whiteListedAuthorities: '[String!]',
@@ -50,6 +51,7 @@ export const getDeparturesFromStopPlacesQuery = {
                     startTime: new VariableType('start'),
                     timeRange: new VariableType('timeRange'),
                     numberOfDepartures: new VariableType('limit'),
+                    numberOfDeparturesPerLineAndDestinationDisplay: new VariableType('limitPerLine'),
                     omitNonBoarding: new VariableType('omitNonBoarding'),
                     whiteListed: {
                         lines: new VariableType('whiteListedLines'),

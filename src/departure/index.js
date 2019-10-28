@@ -26,6 +26,7 @@ import type {
 type GetDeparturesParams = {
     includeNonBoarding?: boolean,
     limit?: number,
+    limitPerLine?: number,
     start?: Date,
     timeRange?: number,
     whiteListedLines?: Array<string>,
@@ -41,6 +42,7 @@ export function getDeparturesFromStopPlaces(
         limit = 50,
         timeRange = 72000,
         start = new Date(),
+        limitPerLine,
         includeNonBoarding = false,
         whiteListedLines,
         whiteListedAuthorities,
@@ -54,6 +56,7 @@ export function getDeparturesFromStopPlaces(
         omitNonBoarding: !includeNonBoarding,
         timeRange,
         limit,
+        limitPerLine,
         whiteListedLines,
         whiteListedAuthorities,
         whiteListedModes,
@@ -90,6 +93,7 @@ export function getDeparturesFromQuays(
 ): Promise<Array<QuayDepartures | void>> {
     const {
         limit = 30,
+        limitPerLine,
         timeRange = 72000,
         includeNonBoarding = false,
         start = new Date(),
@@ -102,6 +106,7 @@ export function getDeparturesFromQuays(
         omitNonBoarding: !includeNonBoarding,
         timeRange,
         limit,
+        limitPerLine,
         ...rest,
     }
     return journeyPlannerQuery(getDeparturesFromQuayQuery, variables, undefined, this.config)

@@ -367,6 +367,7 @@ export interface TripPattern {
 export interface GetDeparturesParams {
     includeNonBoarding?: boolean;
     limit?: number;
+    limitPerLine?: number;
     start?: Date;
     timeRange?: number;
     whiteListedLines?: Array<string>;
