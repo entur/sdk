@@ -329,6 +329,7 @@ type $entur$sdk$Leg = {
     aimedStartTime: string,
     authority?: $entur$sdk$Authority,
     distance: number,
+    directDuration: number,
     duration: number,
     expectedEndTime: string,
     expectedStartTime: string,
