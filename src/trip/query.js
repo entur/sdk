@@ -113,6 +113,7 @@ const legFields = {
     expectedEndTime: true,
     realtime: true,
     distance: true,
+    directDuration: true,
     duration: true,
     ride: true,
     rentedBike: true,

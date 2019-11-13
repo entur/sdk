@@ -19,6 +19,7 @@ export type Leg = {
     aimedStartTime: string,
     authority?: Authority,
     distance: number,
+    directDuration: number,
     duration: number,
     expectedEndTime: string,
     expectedStartTime: string,
