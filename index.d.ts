@@ -357,6 +357,7 @@ export interface GetTripPatternsParams {
 
 export interface TripPattern {
     distance: number;
+    directDuration: number,
     duration: number;
     endTime: string;
     id?: string,

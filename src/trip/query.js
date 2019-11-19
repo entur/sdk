@@ -177,6 +177,7 @@ export const getTripPatternQuery = {
             tripPatterns: {
                 startTime: true,
                 endTime: true,
+                directDuration: true,
                 duration: true,
                 distance: true,
                 walkDistance: true,

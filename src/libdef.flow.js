@@ -369,6 +369,7 @@ type $entur$sdk$GetTripPatternsParams = {
 
 type $entur$sdk$TripPattern = {
     distance: number,
+    directDuration: number,
     duration: number,
     endTime: string,
     id?: string,
