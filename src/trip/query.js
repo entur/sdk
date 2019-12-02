@@ -7,9 +7,9 @@ export const noticeFields = {
 
 export const situationFields = {
     situationNumber: true,
-    summary: { value: true },
-    description: { value: true },
-    detail: { value: true },
+    summary: { language: true, value: true },
+    description: { language: true, value: true },
+    detail: { language: true, value: true },
     validityPeriod: {
         startTime: true,
         endTime: true,
