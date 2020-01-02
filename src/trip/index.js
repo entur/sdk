@@ -16,12 +16,13 @@ import type {
 } from '../../flow-types'
 import { convertFeatureToLocation, isValidDate } from '../utils'
 
-type StopPlaceParams = {
+type GetStopPlaceDeparturesParams = {|
     onForBoarding?: boolean, // deprecated
     includeNonBoarding?: boolean,
     departures?: number,
+    startTime?: string,
     timeRange?: number,
-}
+|}
 
 const DEFAULT_SEARCH_PARAMS = {
     arriveBy: false,
@@ -97,10 +98,14 @@ export async function findTrips(
 
 export function getStopPlaceDepartures(
     stopPlaceIds: string | Array<string>,
-    stopPlaceParams?: StopPlaceParams,
+    stopPlaceParams?: GetStopPlaceDeparturesParams,
 ): Object {
     const {
-        timeRange, departures, onForBoarding, includeNonBoarding,
+        timeRange,
+        departures,
+        onForBoarding,
+        includeNonBoarding,
+        startTime = new Date().toISOString(),
     } = { ...DEFAULT_STOP_PLACE_PARAMS, ...stopPlaceParams }
 
     let omitNonBoarding = !includeNonBoarding
@@ -115,7 +120,7 @@ export function getStopPlaceDepartures(
 
     const variables = {
         ids: askingForSingleStopPlace ? [stopPlaceIds] : stopPlaceIds,
-        start: new Date().toISOString(),
+        start: startTime,
         range: timeRange,
         departures,
         omitNonBoarding,
