@@ -21,10 +21,8 @@ Miss anything? Found a bug? File an [issue](https://github.com/entur/sdk/issues/
 
 ## Install
 ```bash
-npm install @entur/sdk@^0.11.3 --save
+npm install @entur/sdk
 ```
-
-:warning: The `v1.0.0-next.x` versions are still experimental, and we recommend installing the latest v0.x release.
 
 ## Setup
 ```javascript
@@ -55,8 +53,6 @@ The Entur SDK uses multiple endpoints for its services. Each endpoint can be ove
 ```
 
 ## API
-
-:warning: These docs are for v0.10.x. The v1.0.0 docs are still not ready, as the API is not completely finished yet.
 
 ### findTrips
 
