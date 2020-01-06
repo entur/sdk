@@ -298,9 +298,7 @@ export interface PointsOnLink {
 }
 
 export interface JourneyPattern {
-    line: {
-        notices?: Array<Notice>;
-    };
+    line: Line;
     notices?: Array<Notice>;
 }
 
