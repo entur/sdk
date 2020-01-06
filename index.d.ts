@@ -243,6 +243,8 @@ export interface EstimatedCall {
 
 export type IntermediateEstimatedCall = EstimatedCall
 
+export type Departure = EstimatedCall
+
 export type BookingMethod = 'callOffice' | 'online';
 
 export interface BookingContact {
@@ -404,7 +406,7 @@ export interface NearestPlace {
 
 export interface DeparturesById {
     id: string;
-    departures: Array<EstimatedCall>;
+    departures: Array<Departure>;
 }
 
 export interface StopPlaceDetails {
@@ -558,7 +560,7 @@ declare class EnturService {
   getDeparturesFromStopPlace(
       stopPlaceId: string,
       params?: GetDeparturesParams,
-  ): Promise<DeparturesById[]>;
+  ): Promise<Departure[]>;
 
   getDeparturesFromQuays(
       quayIds: Array<string>,
@@ -569,7 +571,7 @@ declare class EnturService {
       fromStopPlaceId: string,
       toStopPlaceId: string,
       params?: GetDeparturesBetweenStopPlacesParams,
-  ): Promise<EstimatedCall[]>;
+  ): Promise<Departure[]>;
 
   getNearestPlaces(
       coordinates: Coordinates,

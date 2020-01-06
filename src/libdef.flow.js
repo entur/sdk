@@ -312,6 +312,8 @@ type $entur$sdk$EstimatedCall = {
 
 type $entur$sdk$IntermediateEstimatedCall = $entur$sdk$EstimatedCall
 
+type $entur$sdk$Departure = $entur$sdk$EstimatedCall
+
 type $entur$sdk$Interchange = {
     guaranteed: boolean,
     staySeated: boolean,
@@ -378,7 +380,7 @@ type $entur$sdk$TripPattern = {
 
 type $entur$sdk$DeparturesById = {
     id: string,
-    departures: Array<$entur$sdk$EstimatedCall>
+    departures: Array<$entur$sdk$Departure>
 }
 
 type $entur$sdk$GetDeparturesParams = {
@@ -570,7 +572,7 @@ declare module '@entur/sdk' {
         getDeparturesFromStopPlace(
             stopPlaceId: string,
             params?: $entur$sdk$GetDeparturesParams,
-        ): Promise<Array<$entur$sdk$EstimatedCall>>,
+        ): Promise<Array<$entur$sdk$Departure>>,
 
         getDeparturesFromQuays(
             quayIds: Array<string>,
@@ -581,7 +583,7 @@ declare module '@entur/sdk' {
             fromStopPlaceId: string,
             toStopPlaceId: string,
             params?: $entur$sdk$GetDeparturesBetweenStopPlacesParams,
-        ): Promise<Array<$entur$sdk$EstimatedCall>>,
+        ): Promise<Array<$entur$sdk$Departure>>,
 
         getNearestPlaces(
             coordinates: $entur$sdk$Coordinates,
