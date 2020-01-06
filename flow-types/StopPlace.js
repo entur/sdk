@@ -1,8 +1,9 @@
 // @flow
 import type { MultilingualString } from './MultilingualString'
-import type { Situation } from './Situation'
 import type { TransportMode, TransportSubmode } from './Mode'
-import type { Quay } from './Quay'
+
+import type { Situation } from '../src/fields/Situation'
+import type { Quay } from '../src/fields/Quay'
 
 export type StopPlace = {
     description?: string,
@@ -21,7 +22,7 @@ export type StopPlaceDetails = {
     weighting: 'preferredInterchange' | 'recommendedInterchange' | 'interchangeAllowed' | 'noInterchange',
     transportMode: TransportMode,
     transportSubmode?: TransportSubmode,
-    quays?: Array<Quay & { situations?: Array<Situation> }>
+    quays?: Array<Quay>
 }
 
 type LimitationStatusType = 'FALSE' | 'TRUE' | 'PARTIAL' | 'UNKNOWN'

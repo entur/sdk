@@ -11,8 +11,9 @@ import {
 } from './query'
 
 import { convertPositionToBbox, forceOrder } from '../utils'
+import type { Quay } from '../fields/Quay'
 
-import type { Quay, Coordinates } from '../../flow-types'
+import type { Coordinates } from '../../flow-types'
 import type { StopPlaceDetails, StopPlaceFacilities } from '../../flow-types/StopPlace'
 
 type StopPlaceParams = { includeUnusedQuays?: boolean }

@@ -1,6 +1,10 @@
 // @flow
-import type { Authority, Leg, Notice } from '../../flow-types'
-import type { IntermediateEstimatedCall } from '../../flow-types/EstimatedCall'
+import type { IntermediateEstimatedCall } from '../fields/EstimatedCall'
+
+import type { Authority } from '../fields/Authority'
+import type { Leg } from '../fields/Leg'
+import type { Notice } from '../fields/Notice'
+
 import { uniqBy } from '../utils'
 
 function getNoticesFromIntermediateEstimatedCalls(

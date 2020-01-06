@@ -40,7 +40,10 @@ type $entur$sdk$ServiceConfig = {
     },
 }
 
-type $entur$sdk$ValidityPeriod = { startTime: string, endTime: string }
+type $entur$sdk$ValidityPeriod = {
+    startTime: string,
+    endTime: string,
+}
 
 type $entur$sdk$InfoLink = {
     uri: string,
@@ -154,7 +157,6 @@ type $entur$sdk$Authority = {
     name: string,
     codeSpace: string,
     url?: string,
-    description?: string,
 }
 
 type $entur$sdk$Operator = {
@@ -166,8 +168,9 @@ type $entur$sdk$Operator = {
 type $entur$sdk$Quay = {
     id: string,
     name: string,
-    description?: string,
-    publicCode?: string,
+    description: string,
+    publicCode: string,
+    situations: Array<$entur$sdk$Situation>,
 }
 
 type $entur$sdk$StopPlace = {
@@ -232,34 +235,6 @@ type $entur$sdk$DestinationDisplay = {
     frontText: string
 }
 
-type $entur$sdk$EstimatedCall = {
-    date: string,
-    destinationDisplay: $entur$sdk$DestinationDisplay,
-    forAlighting: boolean,
-    forBoarding: boolean,
-    situations: Array<$entur$sdk$Situation>,
-    notices?: Array<$entur$sdk$Notice>,
-    requestStop: boolean
-}
-
-type $entur$sdk$IntermediateEstimatedCall = {
-    actualArrivalTime?: string, // Only available AFTER arrival has taken place
-    actualDepartureTime?: string, // Only available AFTER departure has taken place
-    aimedArrivalTime: string,
-    aimedDepartureTime: string,
-    cancellation: boolean,
-    date: string,
-    destinationDisplay: $entur$sdk$DestinationDisplay,
-    expectedArrivalTime?: string, // Only available BEFORE arrival has taken place
-    expectedDepartureTime?: string, // Only available BEFORE departure has taken place
-    forAlighting: boolean,
-    forBoarding: boolean,
-    situations: Array<$entur$sdk$Situation>,
-    notices?: Array<$entur$sdk$Notice>,
-    quay?: $entur$sdk$Quay,
-    requestStop: boolean
-}
-
 type $entur$sdk$BookingMethod = 'callOffice' | 'online'
 
 type $entur$sdk$BookingContact = {
@@ -291,28 +266,19 @@ type $entur$sdk$FlexibleLineType =
     | 'other'
 
 type $entur$sdk$Line = {
+    bookingArrangements?: $entur$sdk$BookingArrangement,
+    description?: string,
+    flexibleLineType?: $entur$sdk$FlexibleLineType,
     id: string,
     name: string,
-    notices?: Array<$entur$sdk$Notice>,
+    notices: Array<$entur$sdk$Notice>,
     publicCode: string,
-    bookingArrangements?: $entur$sdk$BookingArrangement,
-    flexibleLineType?: $entur$sdk$FlexibleLineType,
-}
-
-type $entur$sdk$Interchange = {
-    guaranteed: boolean,
-    staySeated: boolean,
-}
-
-type $entur$sdk$PointsOnLink = {
-    points: string,
-    length: number,
+    transportMode: $entur$sdk$TransportMode,
+    transportSubmode: $entur$sdk$TransportSubmode,
 }
 
 type $entur$sdk$JourneyPattern = {
-    line: {
-        notices?: Array<$entur$sdk$Notice>,
-    },
+    line: $entur$sdk$Line,
     notices?: Array<$entur$sdk$Notice>,
 }
 
@@ -322,6 +288,38 @@ type $entur$sdk$ServiceJourney = {
     notices?: Array<$entur$sdk$Notice>,
     publicCode?: string,
     transportSubmode?: $entur$sdk$TransportSubmode,
+}
+
+type $entur$sdk$EstimatedCall = {
+    actualArrivalTime?: string, // Only available AFTER arrival has taken place
+    actualDepartureTime?: string, // Only available AFTER departure has taken place
+    aimedArrivalTime: string,
+    aimedDepartureTime: string,
+    cancellation: boolean,
+    date: string,
+    destinationDisplay: $entur$sdk$DestinationDisplay,
+    expectedArrivalTime?: string, // Only available BEFORE arrival has taken place
+    expectedDepartureTime?: string, // Only available BEFORE departure has taken place
+    forAlighting: boolean,
+    forBoarding: boolean,
+    notices?: Array<$entur$sdk$Notice>,
+    quay?: $entur$sdk$Quay,
+    realtime: boolean,
+    requestStop: boolean,
+    serviceJourney: $entur$sdk$ServiceJourney,
+    situations: Array<$entur$sdk$Situation>,
+}
+
+type $entur$sdk$IntermediateEstimatedCall = $entur$sdk$EstimatedCall
+
+type $entur$sdk$Interchange = {
+    guaranteed: boolean,
+    staySeated: boolean,
+}
+
+type $entur$sdk$PointsOnLink = {
+    points: string,
+    length: number,
 }
 
 type $entur$sdk$Leg = {
@@ -378,36 +376,9 @@ type $entur$sdk$TripPattern = {
     walkDistance: number,
 }
 
-type $entur$sdk$Departure = {
-    date: string,
-    destinationQuay?: $entur$sdk$Quay,
-    forBoarding: boolean,
-    requestStop: boolean,
-    forAlighting: boolean,
-    destinationDisplay: $entur$sdk$DestinationDisplay,
-    notices?: Array<$entur$sdk$Notice>,
-    cancellation?: boolean,
-    aimedDepartureTime: string,
-    expectedDepartureTime: string,
-    realtime: boolean,
-    situations?: Array<$entur$sdk$Situation>,
-    quay: $entur$sdk$Quay,
-    serviceJourney: $entur$sdk$ServiceJourney & {
-        line: $entur$sdk$Line & {
-            transportMode: $entur$sdk$TransportMode,
-            description?: string
-        }
-    }
-}
-
-type $entur$sdk$QuayDepartures = {
+type $entur$sdk$DeparturesById = {
     id: string,
-    departures: Array<$entur$sdk$Departure>
-}
-
-type $entur$sdk$StopPlaceDepartures = {
-    id: string,
-    departures: Array<$entur$sdk$Departure>
+    departures: Array<$entur$sdk$EstimatedCall>
 }
 
 type $entur$sdk$GetDeparturesParams = {
@@ -458,7 +429,7 @@ type $entur$sdk$StopPlaceDetails = {
     weighting: 'preferredInterchange' | 'recommendedInterchange' | 'interchangeAllowed' | 'noInterchange',
     transportMode: $entur$sdk$TransportMode,
     transportSubmode?: $entur$sdk$TransportSubmode,
-    quays?: Array<$entur$sdk$Quay & { situations?: Array<$entur$sdk$Situation> }>
+    quays?: Array<$entur$sdk$Quay>
 }
 
 type $entur$sdk$LimitationStatusType = 'FALSE' | 'TRUE' | 'PARTIAL' | 'UNKNOWN'
@@ -594,23 +565,23 @@ declare module '@entur/sdk' {
         getDeparturesFromStopPlaces(
             stopPlaceIds: Array<string>,
             params?: $entur$sdk$GetDeparturesParams,
-        ): Promise<Array<$entur$sdk$StopPlaceDepartures | void>>,
+        ): Promise<Array<$entur$sdk$DeparturesById | void>>,
 
         getDeparturesFromStopPlace(
             stopPlaceId: string,
             params?: $entur$sdk$GetDeparturesParams,
-        ): Promise<Array<$entur$sdk$Departure>>,
+        ): Promise<Array<$entur$sdk$EstimatedCall>>,
 
         getDeparturesFromQuays(
             quayIds: Array<string>,
             params?: $entur$sdk$GetDeparturesParams,
-        ): Promise<Array<$entur$sdk$QuayDepartures | void>>,
+        ): Promise<Array<$entur$sdk$DeparturesById | void>>,
 
         getDeparturesBetweenStopPlaces(
             fromStopPlaceId: string,
             toStopPlaceId: string,
             params?: $entur$sdk$GetDeparturesBetweenStopPlacesParams,
-        ): Promise<Array<$entur$sdk$Departure>>,
+        ): Promise<Array<$entur$sdk$EstimatedCall>>,
 
         getNearestPlaces(
             coordinates: $entur$sdk$Coordinates,

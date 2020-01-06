@@ -1,32 +1,8 @@
 // @flow
 import { VariableType } from 'json-to-graphql-query'
 
-import {
-    situationFields,
-    lineFields,
-    quayFields,
-    estimatedCallFields,
-    serviceJourneyFields,
-} from '../trip/query'
-
-
-const departureFields = {
-    ...estimatedCallFields,
-    aimedDepartureTime: true,
-    expectedDepartureTime: true,
-    realtime: true,
-    situations: situationFields,
-    cancellation: true,
-    quay: quayFields,
-    serviceJourney: {
-        ...serviceJourneyFields,
-        line: {
-            ...lineFields,
-            transportMode: true,
-            description: true,
-        },
-    },
-}
+import legFields from '../fields/Leg'
+import estimatedCallFields from '../fields/EstimatedCall'
 
 export const getDeparturesFromStopPlacesQuery = {
     query: {
@@ -59,7 +35,7 @@ export const getDeparturesFromStopPlacesQuery = {
                     },
                     whiteListedModes: new VariableType('whiteListedModes'),
                 },
-                ...departureFields,
+                ...estimatedCallFields,
             },
         },
     },
@@ -86,7 +62,7 @@ export const getDeparturesFromQuayQuery = {
                     numberOfDepartures: new VariableType('limit'),
                     omitNonBoarding: new VariableType('omitNonBoarding'),
                 },
-                ...departureFields,
+                ...estimatedCallFields,
             },
         },
     },
@@ -118,27 +94,7 @@ export const getDeparturesBetweenStopPlacesQuery = {
             },
 
             tripPatterns: {
-                legs: {
-                    aimedStartTime: true,
-                    expectedStartTime: true,
-                    realtime: true,
-                    fromEstimatedCall: estimatedCallFields,
-                    situations: situationFields,
-                    fromPlace: {
-                        quay: quayFields,
-                    },
-                    toPlace: {
-                        quay: quayFields,
-                    },
-                    serviceJourney: {
-                        ...serviceJourneyFields,
-                        line: {
-                            ...lineFields,
-                            transportMode: true,
-                            description: true,
-                        },
-                    },
-                },
+                legs: legFields,
             },
         },
     },

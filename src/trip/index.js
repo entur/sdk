@@ -11,7 +11,6 @@ import {
 import { legMapper } from './mapper'
 
 import type {
-    TripPattern,
     Location,
     LegMode,
     TransportMode,
@@ -19,6 +18,18 @@ import type {
 } from '../../flow-types'
 import { convertFeatureToLocation, isValidDate } from '../utils'
 
+import type { Leg } from '../fields/Leg'
+
+type TripPattern = {
+    distance: number,
+    directDuration: number,
+    duration: number,
+    endTime: string,
+    id?: string,
+    legs: Array<Leg>,
+    startTime: string,
+    walkDistance: number
+}
 
 type TransportSubmodeParam = {
     transportMode: TransportMode,

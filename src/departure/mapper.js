@@ -1,9 +1,11 @@
 // @flow
-import type { Departure, LegDeparture } from '../../flow-types/Departures'
-import type { Notice } from '../../flow-types/Notice'
+import type { EstimatedCall } from '../fields/EstimatedCall'
+import type { Leg } from '../fields/Leg'
+import type { Notice } from '../fields/Notice'
+
 import { uniqBy } from '../utils'
 
-function getNoticesFromLeg(leg: LegDeparture): Array<Notice> {
+function getNoticesFromLeg(leg: Leg): Array<Notice> {
     const notices = [
         ...leg.serviceJourney?.notices || [],
         ...leg.serviceJourney?.journeyPattern?.notices || [],
@@ -13,7 +15,7 @@ function getNoticesFromLeg(leg: LegDeparture): Array<Notice> {
     return uniqBy(notices, notice => notice.text)
 }
 
-function getNotices(departure: Departure): Array<Notice> {
+function getNotices(departure: EstimatedCall): Array<Notice> {
     const notices = [
         ...departure.notices || [],
         ...departure.serviceJourney?.notices || [],
@@ -23,18 +25,26 @@ function getNotices(departure: Departure): Array<Notice> {
     return uniqBy(notices, notice => notice.text)
 }
 
-
-export function destinationMapper(departure: Departure): Departure {
+export function destinationMapper(departure: EstimatedCall): EstimatedCall {
     return {
         ...departure,
         notices: getNotices(departure),
     }
 }
 
-export function legToDepartureMapper(leg: LegDeparture): Departure {
+export function legToDepartureMapper(leg: Leg): EstimatedCall | void {
     const { fromEstimatedCall } = leg
 
+    if (!fromEstimatedCall) {
+        return undefined
+    }
+
     return {
+        actualArrivalTime: fromEstimatedCall.actualArrivalTime,
+        actualDepartureTime: fromEstimatedCall.actualDepartureTime,
+        aimedArrivalTime: fromEstimatedCall.aimedArrivalTime,
+        cancellation: fromEstimatedCall.cancellation,
+        expectedArrivalTime: fromEstimatedCall.expectedArrivalTime,
         date: fromEstimatedCall.date,
         forBoarding: fromEstimatedCall.forBoarding,
         requestStop: fromEstimatedCall.requestStop,
@@ -44,9 +54,8 @@ export function legToDepartureMapper(leg: LegDeparture): Departure {
         aimedDepartureTime: leg.aimedStartTime,
         expectedDepartureTime: leg.expectedStartTime,
         realtime: leg.realtime,
-        situations: leg.situations,
-        quay: leg.fromPlace.quay || { id: '', name: '' },
-        destinationQuay: leg.toPlace.quay,
+        situations: leg.situations || [],
+        quay: leg.fromPlace.quay,
         serviceJourney: leg.serviceJourney,
     }
 }
