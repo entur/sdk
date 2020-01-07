@@ -165,8 +165,9 @@ export interface Operator {
 export interface Quay {
     id: string;
     name: string;
-    description?: string;
-    publicCode?: string;
+    description: string;
+    publicCode: string;
+    situations: Array<Situation>;
 }
 
 export interface StopPlace {
@@ -221,16 +222,6 @@ export interface DestinationDisplay {
 }
 
 export interface EstimatedCall {
-    date: string;
-    destinationDisplay: DestinationDisplay;
-    forAlighting: boolean;
-    forBoarding: boolean;
-    situations: Array<Situation>;
-    notices?: Array<Notice>;
-    requestStop: boolean;
-}
-
-export interface IntermediateEstimatedCall {
     actualArrivalTime?: string; // Only available AFTER arrival has taken place
     actualDepartureTime?: string; // Only available AFTER departure has taken place
     aimedArrivalTime: string;
@@ -242,11 +233,17 @@ export interface IntermediateEstimatedCall {
     expectedDepartureTime?: string; // Only available BEFORE departure has taken place
     forAlighting: boolean;
     forBoarding: boolean;
-    situations: Array<Situation>;
     notices?: Array<Notice>;
     quay?: Quay;
+    realtime: boolean;
     requestStop: boolean;
+    serviceJourney: ServiceJourney;
+    situations: Array<Situation>;
 }
+
+export type IntermediateEstimatedCall = EstimatedCall
+
+export type Departure = EstimatedCall
 
 export type BookingMethod = 'callOffice' | 'online';
 
@@ -267,12 +264,15 @@ export interface BookingArrangement {
 }
 
 export interface Line {
+    bookingArrangements?: BookingArrangement;
+    description?: string;
+    flexibleLineType?: FlexibleLineType;
     id: string;
     name: string;
     notices?: Array<Notice>;
     publicCode: string;
-    bookingArrangements?: BookingArrangement;
-    flexibleLineType?: FlexibleLineType;
+    transportMode: TransportMode;
+    transportSubmode: TransportSubmode;
 }
 
 export type FlexibleLineType =
@@ -298,9 +298,7 @@ export interface PointsOnLink {
 }
 
 export interface JourneyPattern {
-    line: {
-        notices?: Array<Notice>;
-    };
+    line: Line;
     notices?: Array<Notice>;
 }
 
@@ -404,34 +402,7 @@ export interface NearestPlace {
  * Stop Place
  */
 
-export interface Departure {
-    date: string;
-    destinationQuay?: Quay;
-    forBoarding: boolean;
-    requestStop: boolean;
-    forAlighting: boolean;
-    destinationDisplay: DestinationDisplay;
-    notices?: Array<Notice>;
-    aimedDepartureTime: string;
-    expectedDepartureTime: string;
-    realtime: boolean;
-    situations?: Array<Situation>;
-    cancellation: boolean;
-    quay: Quay;
-    serviceJourney: ServiceJourney & {
-        line: Line & {
-            transportMode: TransportMode;
-            description?: string;
-        };
-    };
-}
-
-export interface QuayDepartures {
-    id: string;
-    departures: Array<Departure>;
-}
-
-export interface StopPlaceDepartures {
+export interface DeparturesById {
     id: string;
     departures: Array<Departure>;
 }
@@ -582,7 +553,7 @@ declare class EnturService {
   getDeparturesFromStopPlaces(
       stopPlaceIds: Array<string>,
       params?: GetDeparturesParams,
-  ): Promise<Array<StopPlaceDepartures | undefined>>;
+  ): Promise<Array<DeparturesById | void>>;
 
   getDeparturesFromStopPlace(
       stopPlaceId: string,
@@ -592,7 +563,7 @@ declare class EnturService {
   getDeparturesFromQuays(
       quayIds: Array<string>,
       params?: GetDeparturesParams,
-  ): Promise<Array<QuayDepartures | undefined>>;
+  ): Promise<Array<DeparturesById | undefined>>;
 
   getDeparturesBetweenStopPlaces(
       fromStopPlaceId: string,

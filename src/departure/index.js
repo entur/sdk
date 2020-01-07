@@ -6,6 +6,8 @@ import {
 
 import { forceOrder } from '../utils'
 
+import type { EstimatedCall } from '../fields/EstimatedCall'
+
 import {
     getDeparturesFromStopPlacesQuery,
     getDeparturesFromQuayQuery,
@@ -16,12 +18,11 @@ import {
     destinationMapper,
     legToDepartureMapper,
 } from './mapper'
-import type {
-    StopPlaceDepartures,
-    QuayDepartures,
-    Departure,
-} from '../../flow-types/Departures'
 
+export type DeparturesById = {
+    id: string,
+    departures: Array<EstimatedCall>
+}
 
 type GetDeparturesParams = {
     includeNonBoarding?: boolean,
@@ -37,7 +38,7 @@ type GetDeparturesParams = {
 export function getDeparturesFromStopPlaces(
     stopPlaceIds: Array<string>,
     params?: GetDeparturesParams = {},
-): Promise<Array<StopPlaceDepartures | void>> {
+): Promise<Array<DeparturesById | void>> {
     const {
         limit = 50,
         timeRange = 72000,
@@ -74,23 +75,23 @@ export function getDeparturesFromStopPlaces(
                 departures: estimatedCalls.map(destinationMapper),
             }))
         })
-        .then((stopPlaces: Array<StopPlaceDepartures>) => {
-            return forceOrder<StopPlaceDepartures>(stopPlaces, stopPlaceIds, ({ id }) => id)
+        .then((stopPlaces: Array<DeparturesById>) => {
+            return forceOrder<DeparturesById>(stopPlaces, stopPlaceIds, ({ id }) => id)
         })
 }
 
 export function getDeparturesFromStopPlace(
     stopPlaceId: string,
     params?: GetDeparturesParams,
-): Promise<Array<Departure>> {
+): Promise<Array<EstimatedCall>> {
     return getDeparturesFromStopPlaces.call(this, [stopPlaceId], params)
-        .then((stopPlaces: Array<StopPlaceDepartures | void>) => stopPlaces[0]?.departures || [])
+        .then((stopPlaces: Array<DeparturesById | void>) => stopPlaces[0]?.departures || [])
 }
 
 export function getDeparturesFromQuays(
     quayIds: Array<string>,
     params?: GetDeparturesParams = {},
-): Promise<Array<QuayDepartures | void>> {
+): Promise<Array<DeparturesById | void>> {
     const {
         limit = 30,
         limitPerLine,
@@ -120,8 +121,8 @@ export function getDeparturesFromQuays(
                 departures: estimatedCalls.map(destinationMapper),
             }))
         })
-        .then((quayDepartures: Array<QuayDepartures>) => {
-            return forceOrder<QuayDepartures>(quayDepartures, quayIds, ({ id }) => id)
+        .then((quayDepartures: Array<DeparturesById>) => {
+            return forceOrder<DeparturesById>(quayDepartures, quayIds, ({ id }) => id)
         })
 }
 
@@ -133,7 +134,7 @@ export function getDeparturesBetweenStopPlaces(
     fromStopPlaceId: string,
     toStopPlaceId: string,
     params?: GetDeparturesBetweenStopPlacesParams = {},
-): Promise<Array<Departure>> {
+): Promise<Array<EstimatedCall>> {
     const {
         limit = 20,
         start = new Date(),
@@ -160,9 +161,8 @@ export function getDeparturesBetweenStopPlaces(
 
             return data.trip.tripPatterns.map((trip) => {
                 const [leg] = trip.legs
-                if (!leg) return
+                if (!leg) return undefined
 
-                // eslint-disable-next-line consistent-return
                 return legToDepartureMapper(leg)
             }).filter(Boolean)
         })
