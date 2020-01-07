@@ -15,8 +15,8 @@ export type EstimatedCall = {|
     destinationDisplay: {
         frontText: string,
     },
-    expectedArrivalTime?: string, // Only available BEFORE arrival has taken place
-    expectedDepartureTime?: string, // Only available BEFORE departure has taken place
+    expectedArrivalTime: string,
+    expectedDepartureTime: string,
     forAlighting: boolean,
     forBoarding: boolean,
     notices?: Array<Notice>,
