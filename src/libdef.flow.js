@@ -298,8 +298,8 @@ type $entur$sdk$EstimatedCall = {
     cancellation: boolean,
     date: string,
     destinationDisplay: $entur$sdk$DestinationDisplay,
-    expectedArrivalTime?: string, // Only available BEFORE arrival has taken place
-    expectedDepartureTime?: string, // Only available BEFORE departure has taken place
+    expectedArrivalTime: string,
+    expectedDepartureTime: string,
     forAlighting: boolean,
     forBoarding: boolean,
     notices?: Array<$entur$sdk$Notice>,
