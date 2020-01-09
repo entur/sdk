@@ -345,11 +345,13 @@ export interface TransportSubmodeParam {
 }
 
 export interface GetTripPatternsParams {
-    searchDate?: Date;
     arriveBy?: boolean;
-    modes?: Array<LegMode>;
-    transportSubmodes?: Array<TransportSubmodeParam>;
     limit?: number;
+    maxPreTransitWalkDistance?: number;
+    modes?: Array<LegMode>;
+    searchDate?: Date;
+    transportSubmodes?: Array<TransportSubmodeParam>;
+    walkSpeed?: number;
     wheelchairAccessible?: boolean;
 }
 

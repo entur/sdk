@@ -37,13 +37,14 @@ type TransportSubmodeParam = {
 }
 
 export type GetTripPatternsParams = {
-    searchDate?: Date,
     arriveBy?: boolean,
-    modes?: Array<LegMode>,
-    transportSubmodes?: Array<TransportSubmodeParam>,
     limit?: number,
-    wheelchairAccessible?: boolean,
+    maxPreTransitWalkDistance?: number,
+    modes?: Array<LegMode>,
+    searchDate?: Date,
+    transportSubmodes?: Array<TransportSubmodeParam>,
     walkSpeed?: number,
+    wheelchairAccessible?: boolean,
 }
 
 const DEFAULT_GET_TRIP_PATTERN_IGNORE_FIELDS = [
