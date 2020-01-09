@@ -37,6 +37,7 @@ type TransportSubmodeParam = {
 }
 
 export type GetTripPatternsParams = {
+    allowBikeRental?: boolean,
     arriveBy?: boolean,
     limit?: number,
     maxPreTransitWalkDistance?: number,

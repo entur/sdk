@@ -359,6 +359,7 @@ type $entur$sdk$TransportSubmodeParam = {
 }
 
 type $entur$sdk$GetTripPatternsParams = {
+    allowBikeRental?: boolean,
     arriveBy?: boolean,
     limit?: number,
     maxPreTransitWalkDistance?: number;

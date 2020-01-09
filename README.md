@@ -105,8 +105,9 @@ The destination location to search for travels to.
 ##### params (`GetTripPatternsParams`) [Optional]
 An object of search parameters.
 
-| Key                     | Type               | Default   | Description |
-|:------------------------|:-------------------|:----------|:------------|
+| Key                         | Type               | Default   | Description |
+|:----------------------------|:-------------------|:----------|:------------|
+| `allowBikeRental`           | `boolean`          | `false` | Is bike rental allowed? |
 | `arriveBy`                  | `boolean`          | `false` | Depart by `searchDate`, or arrive by `searchDate` |
 | `limit`                     | `number`           | `5`      | Limit result to this number of trip patterns |
 | `maxPreTransitWalkDistance` | `number`           | `Number.MAX_VALUE` | Max walk distance for access/egress legs. |

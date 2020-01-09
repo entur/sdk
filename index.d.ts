@@ -345,6 +345,7 @@ export interface TransportSubmodeParam {
 }
 
 export interface GetTripPatternsParams {
+    allowBikeRental?: boolean;
     arriveBy?: boolean;
     limit?: number;
     maxPreTransitWalkDistance?: number;
