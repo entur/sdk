@@ -16,6 +16,7 @@ export const getTripPatternQuery = {
             transportSubmodes: '[TransportSubmodeFilter]',
             maxPreTransitWalkDistance: 'Float',
             walkSpeed: 'Float',
+            allowBikeRental: 'Boolean',
         },
         trip: {
             __args: {
@@ -29,6 +30,7 @@ export const getTripPatternQuery = {
                 transportSubmodes: new VariableType('transportSubmodes'),
                 maxPreTransitWalkDistance: new VariableType('maxPreTransitWalkDistance'),
                 walkSpeed: new VariableType('walkSpeed'),
+                allowBikeRental: new VariableType('allowBikeRental'),
             },
             tripPatterns: {
                 startTime: true,

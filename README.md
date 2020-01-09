@@ -105,14 +105,16 @@ The destination location to search for travels to.
 ##### params (`GetTripPatternsParams`) [Optional]
 An object of search parameters.
 
-| Key                     | Type               | Default   | Description |
-|:------------------------|:-------------------|:----------|:------------|
-| `searchDate`            | `Date`             | | when to calculate patterns |
-| `arriveBy`              | `boolean`          | `false` | depart by `searchDate`, or arrive by `searchDate` |
-| `modes`                 | [`Array of Modes`](#leg-mode) | `['foot', 'bus', 'tram', 'rail', 'metro', 'water', 'air']` | modes of transport to include in trip |
-| `limit`                 | `number`           | `5`      | Limit result to this number of trip patterns |
-| `wheelchairAccessible`  | `boolean`          | `false`  | include only stops which are wheelchair accessible |
-| `walkSpeed`             | `number`           | `1.3`    | the walk speed to use in searches in meters per second |
+| Key                         | Type               | Default   | Description |
+|:----------------------------|:-------------------|:----------|:------------|
+| `allowBikeRental`           | `boolean`          | `false` | Is bike rental allowed? |
+| `arriveBy`                  | `boolean`          | `false` | Depart by `searchDate`, or arrive by `searchDate` |
+| `limit`                     | `number`           | `5`      | Limit result to this number of trip patterns |
+| `maxPreTransitWalkDistance` | `number`           | `Number.MAX_VALUE` | Max walk distance for access/egress legs. |
+| `modes`                     | [`Array of Modes`](#leg-mode) | `['foot', 'bus', 'tram', 'rail', 'metro', 'water', 'air']` | modes of transport to include in trip |
+| `searchDate`                | `Date`             | | When to calculate patterns |
+| `walkSpeed`                 | `number`           | `1.3`    | The walk speed to use in searches in meters per second |
+| `wheelchairAccessible`      | `boolean`          | `false`  | Include only stops which are wheelchair accessible |
 
 
 ##### ignoreFields  [Optional]

@@ -359,11 +359,14 @@ type $entur$sdk$TransportSubmodeParam = {
 }
 
 type $entur$sdk$GetTripPatternsParams = {
-    searchDate?: Date,
+    allowBikeRental?: boolean,
     arriveBy?: boolean,
-    modes?: Array<$entur$sdk$LegMode>,
-    transportSubmodes?: Array<$entur$sdk$TransportSubmodeParam>,
     limit?: number,
+    maxPreTransitWalkDistance?: number;
+    modes?: Array<$entur$sdk$LegMode>,
+    searchDate?: Date,
+    transportSubmodes?: Array<$entur$sdk$TransportSubmodeParam>,
+    walkSpeed?: number,
     wheelchairAccessible?: boolean,
 }
 
