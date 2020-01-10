@@ -12,7 +12,7 @@ import { legMapper } from './mapper'
 
 import type {
     Location,
-    LegMode,
+    QueryMode,
     TransportMode,
     TransportSubmode,
 } from '../../flow-types'
@@ -41,7 +41,7 @@ export type GetTripPatternsParams = {
     arriveBy?: boolean,
     limit?: number,
     maxPreTransitWalkDistance?: number,
-    modes?: Array<LegMode>,
+    modes?: Array<QueryMode>,
     searchDate?: Date,
     transportSubmodes?: Array<TransportSubmodeParam>,
     walkSpeed?: number,

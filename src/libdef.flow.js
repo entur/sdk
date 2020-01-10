@@ -198,24 +198,37 @@ type $entur$sdk$Place = {
 type $entur$sdk$TransportMode =
     | 'air'
     | 'bus'
-    // | 'cableway'
     | 'water'
-    // | 'funicular'
-    // | 'lift'
     | 'rail'
     | 'metro'
     | 'tram'
     | 'coach'
     | 'car'
-    // | 'unknown'
+
+// All valid values for the "mode" parameter to JourneyPlanner
+ type $entur$sdk$QueryMode =
+    | 'air'
+    | 'bicycle'
+    | 'bus'
+    | 'cableway'
+    | 'car'
+    | 'car_dropoff'
+    | 'car_park'
+    | 'car_pickup'
+    | 'coach'
+    | 'foot'
+    | 'funicular'
+    | 'lift'
+    | 'metro'
+    | 'rail'
+    | 'tram'
+    | 'transit'
+    | 'water'
 
 type $entur$sdk$LegMode =
     | $entur$sdk$TransportMode
     | 'bicycle'
     | 'foot'
-    // | 'transit'
-    // | 'car_park'
-    // | 'car_pickup'
 
 type $entur$sdk$TransportSubmode =
     | 'airportLinkRail'
@@ -363,7 +376,7 @@ type $entur$sdk$GetTripPatternsParams = {
     arriveBy?: boolean,
     limit?: number,
     maxPreTransitWalkDistance?: number;
-    modes?: Array<$entur$sdk$LegMode>,
+    modes?: Array<$entur$sdk$QueryMode>,
     searchDate?: Date,
     transportSubmodes?: Array<$entur$sdk$TransportSubmodeParam>,
     walkSpeed?: number,
