@@ -588,6 +588,11 @@ declare module '@entur/sdk' {
             params?: $entur$sdk$GetDeparturesBetweenStopPlacesParams,
         ): Promise<Array<$entur$sdk$Departure>>,
 
+        getDeparturesForServiceJourney(
+            id: string,
+            date?: string,
+        ): Promise<Array<$entur$sdk$Departure>>,
+
         getNearestPlaces(
             coordinates: $entur$sdk$Coordinates,
             params?: {

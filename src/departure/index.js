@@ -12,6 +12,7 @@ import {
     getDeparturesFromStopPlacesQuery,
     getDeparturesFromQuayQuery,
     getDeparturesBetweenStopPlacesQuery,
+    getDeparturesForServiceJourneyQuery,
 } from './query'
 
 import {
@@ -165,6 +166,26 @@ export function getDeparturesBetweenStopPlaces(
 
                 return legToDepartureMapper(leg)
             }).filter(Boolean)
+        })
+}
+
+export function getDeparturesForServiceJourney(
+    id: string,
+    date?: string,
+): Promise<Array<EstimatedCall>> {
+    const variables = {
+        id,
+        date,
+    }
+
+    return journeyPlannerQuery(
+        getDeparturesForServiceJourneyQuery,
+        variables,
+        undefined,
+        this.config,
+    )
+        .then((data: Object) => {
+            return (data?.serviceJourney?.estimatedCalls || []).map(destinationMapper)
         })
 }
 

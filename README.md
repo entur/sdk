@@ -289,6 +289,24 @@ The ID of the stop place to get departures _to_.
 | `limit`                  | `number`       | `20`         | The maximum number of departures to fetch. |
 
 
+### getDeparturesForServiceJourney
+
+```javascript
+(id: string, date?: string) => Promise<Array<Departure>>
+```
+
+Types: [Departure](flow-types/Departures.js)
+
+`getDeparturesForServiceJourney` finds departures for a given service journey ID. You can also provide a desired date on the form "YYYY-MM-DD".
+
+#### Parameters
+
+##### id (`string`)
+The ID of the service journey to get departures for.
+
+##### date (`string`) [Optional]
+A date on the form "YYYY-MM-DD" to use if you want the service journey's departures for another date than today.
+
 ### getNearestPlaces
 
 ```javascript

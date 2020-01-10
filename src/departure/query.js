@@ -92,9 +92,28 @@ export const getDeparturesBetweenStopPlacesQuery = {
                 wheelchair: false,
                 maximumTransfers: 0,
             },
-
             tripPatterns: {
                 legs: legFields,
+            },
+        },
+    },
+}
+
+export const getDeparturesForServiceJourneyQuery = {
+    query: {
+        __variables: {
+            id: 'String!',
+            date: 'Date',
+        },
+        serviceJourney: {
+            __args: {
+                id: new VariableType('id'),
+            },
+            estimatedCalls: {
+                __args: {
+                    date: new VariableType('date'),
+                },
+                ...estimatedCallFields,
             },
         },
     },
