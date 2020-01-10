@@ -187,21 +187,34 @@ export interface Place {
 export type TransportMode =
     | "air"
     | "bus"
-    // | "cableway"
     | "water"
-    // | "funicular"
-    // | "lift"
     | "rail"
     | "metro"
     | "tram"
     | "coach"
     | "car"
-    // | "unknown"
+
+// All valid values for the "mode" parameter to JourneyPlanner
+export type QueryMode =
+    | 'air'
+    | 'bicycle'
+    | 'bus'
+    | 'cableway'
+    | 'car'
+    | 'car_dropoff'
+    | 'car_park'
+    | 'car_pickup'
+    | 'coach'
+    | 'foot'
+    | 'funicular'
+    | 'lift'
+    | 'metro'
+    | 'rail'
+    | 'tram'
+    | 'transit'
+    | 'water'
 
 export type LegMode = TransportMode | "bicycle" | "foot";
-    // | "transit"
-    // | "car_park"
-    // | "car_pickup"
 
 export type TransportSubmode =
     | "airportLinkRail"
@@ -349,7 +362,7 @@ export interface GetTripPatternsParams {
     arriveBy?: boolean;
     limit?: number;
     maxPreTransitWalkDistance?: number;
-    modes?: Array<LegMode>;
+    modes?: Array<QueryMode>;
     searchDate?: Date;
     transportSubmodes?: Array<TransportSubmodeParam>;
     walkSpeed?: number;
