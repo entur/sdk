@@ -587,6 +587,11 @@ declare class EnturService {
       params?: GetDeparturesBetweenStopPlacesParams,
   ): Promise<Departure[]>;
 
+  getDeparturesForServiceJourney(
+      id: string,
+      date?: string,
+  ): Promise<Departure[]>;
+
   getNearestPlaces(
       coordinates: Coordinates,
       params?: {
