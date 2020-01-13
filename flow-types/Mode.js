@@ -35,6 +35,7 @@ export type QueryMode =
 export type LegMode =
     | TransportMode
     | 'bicycle'
+    | 'car'
     | 'foot'
 
 export type TransportSubmode =

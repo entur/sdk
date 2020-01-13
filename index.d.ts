@@ -221,7 +221,7 @@ export type QueryMode =
     | 'transit'
     | 'water'
 
-export type LegMode = TransportMode | "bicycle" | "foot";
+export type LegMode = TransportMode | 'bicycle' | 'car' | 'foot';
 
 export type TransportSubmode =
     | "airportLinkRail"

@@ -235,6 +235,7 @@ type $entur$sdk$TransportMode =
 type $entur$sdk$LegMode =
     | $entur$sdk$TransportMode
     | 'bicycle'
+    | 'car'
     | 'foot'
 
 type $entur$sdk$TransportSubmode =
