@@ -185,14 +185,17 @@ export interface Place {
 }
 
 export type TransportMode =
-    | "air"
-    | "bus"
-    | "water"
-    | "rail"
-    | "metro"
-    | "tram"
-    | "coach"
-    | "car"
+    | 'air'
+    | 'bus'
+    | 'cableway'
+    | 'coach'
+    | 'funicular'
+    | 'lift'
+    | 'metro'
+    | 'rail'
+    | 'tram'
+    | 'unknown'
+    | 'water'
 
 // All valid values for the "mode" parameter to JourneyPlanner
 export type QueryMode =
