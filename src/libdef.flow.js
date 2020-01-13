@@ -388,6 +388,7 @@ type $entur$sdk$GetTripPatternsParams = {
     modes?: Array<$entur$sdk$QueryMode>,
     searchDate?: Date,
     transportSubmodes?: Array<$entur$sdk$TransportSubmodeParam>,
+    useFlex?: boolean,
     walkSpeed?: number,
     wheelchairAccessible?: boolean,
 }

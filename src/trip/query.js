@@ -17,6 +17,7 @@ export const getTripPatternQuery = {
             maxPreTransitWalkDistance: 'Float',
             walkSpeed: 'Float',
             allowBikeRental: 'Boolean',
+            useFlex: 'Boolean',
         },
         trip: {
             __args: {
@@ -31,6 +32,7 @@ export const getTripPatternQuery = {
                 maxPreTransitWalkDistance: new VariableType('maxPreTransitWalkDistance'),
                 walkSpeed: new VariableType('walkSpeed'),
                 allowBikeRental: new VariableType('allowBikeRental'),
+                useFlex: new VariableType('useFlex'),
             },
             tripPatterns: {
                 startTime: true,
