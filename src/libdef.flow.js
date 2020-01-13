@@ -372,6 +372,8 @@ type $entur$sdk$TransportSubmodeParam = {
 }
 
 type $entur$sdk$GetTripPatternsParams = {
+    from: $entur$sdk$Location,
+    to: $entur$sdk$Location,
     allowBikeRental?: boolean,
     arriveBy?: boolean,
     limit?: number,
@@ -568,9 +570,7 @@ declare module '@entur/sdk' {
         ): Promise<Array<$entur$sdk$Feature>>,
 
         getTripPatterns(
-            from: $entur$sdk$Location,
-            to: $entur$sdk$Location,
-            params?: $entur$sdk$GetTripPatternsParams,
+            params: $entur$sdk$GetTripPatternsParams,
             ignoreFields?: Array<string>,
         ): Promise<Array<$entur$sdk$TripPattern>>,
 

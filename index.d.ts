@@ -358,6 +358,8 @@ export interface TransportSubmodeParam {
 }
 
 export interface GetTripPatternsParams {
+    from: Location;
+    to: Location;
     allowBikeRental?: boolean;
     arriveBy?: boolean;
     limit?: number;
@@ -554,9 +556,7 @@ declare class EnturService {
   ): Promise<Feature[]>;
 
   getTripPatterns(
-      from: Location,
-      to: Location,
-      params?: GetTripPatternsParams,
+      params: GetTripPatternsParams,
       ignoreFields?: Array<string>,
   ): Promise<TripPattern[]>;
 
