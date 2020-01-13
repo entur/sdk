@@ -785,8 +785,8 @@ export function convertPositionToBbox(coordinates: Coordinates, distance: number
 };
 
 export function throttler<T, U>(
-  queryHandler: (T) => Promise<U>,
-  queries: T[]
+  func: (arg: T) => Promise<U>,
+  args: T[]
 ): Promise<U[]>;
 
 export function isAir(mode: string): boolean;
