@@ -171,6 +171,10 @@ type $entur$sdk$Quay = {
     description: string,
     publicCode: string,
     situations: Array<$entur$sdk$Situation>,
+    stopPlace: {
+        id: string,
+        description?: string,
+    };
 }
 
 type $entur$sdk$StopPlace = {

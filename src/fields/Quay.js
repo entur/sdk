@@ -3,11 +3,15 @@
 import situationFields, { type Situation } from './Situation'
 
 export type Quay = {|
-  id: string,
-  name: string,
-  description: string,
-  publicCode: string,
-  situations: Array<Situation>,
+    id: string,
+    name: string,
+    description: string,
+    publicCode: string,
+    situations: Array<Situation>,
+    stopPlace: {
+        id: string,
+        description?: string,
+    },
 |}
 
 export default {
@@ -16,4 +20,8 @@ export default {
     publicCode: true,
     description: true,
     situations: situationFields,
+    stopPlace: {
+        id: true,
+        description: true,
+    },
 }

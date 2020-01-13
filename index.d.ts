@@ -168,6 +168,10 @@ export interface Quay {
     description: string;
     publicCode: string;
     situations: Array<Situation>;
+    stopPlace: {
+        id: string;
+        description?: string;
+    };
 }
 
 export interface StopPlace {
