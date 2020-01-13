@@ -109,6 +109,7 @@ An object of search parameters.
 | `maxPreTransitWalkDistance` | `number`           | `Number.MAX_VALUE` | Max walk distance for access/egress legs. |
 | `modes`                     | [`Array of Modes`](#leg-mode) | `['foot', 'bus', 'tram', 'rail', 'metro', 'water', 'air']` | modes of transport to include in trip |
 | `searchDate`                | `Date`             | | When to calculate patterns |
+| `useFlex`                   | `boolean`          | `false`  | Whether to allow flexible search results or not |
 | `walkSpeed`                 | `number`           | `1.3`    | The walk speed to use in searches in meters per second |
 | `wheelchairAccessible`      | `boolean`          | `false`  | Include only stops which are wheelchair accessible |
 

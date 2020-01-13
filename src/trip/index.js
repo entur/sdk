@@ -46,6 +46,7 @@ export type GetTripPatternsParams = {
     modes?: Array<QueryMode>,
     searchDate?: Date,
     transportSubmodes?: Array<TransportSubmodeParam>,
+    useFlex?: boolean,
     walkSpeed?: number,
     wheelchairAccessible?: boolean,
 }
