@@ -198,12 +198,15 @@ type $entur$sdk$Place = {
 type $entur$sdk$TransportMode =
     | 'air'
     | 'bus'
-    | 'water'
-    | 'rail'
-    | 'metro'
-    | 'tram'
+    | 'cableway'
     | 'coach'
-    | 'car'
+    | 'funicular'
+    | 'lift'
+    | 'metro'
+    | 'rail'
+    | 'tram'
+    | 'unknown'
+    | 'water'
 
 // All valid values for the "mode" parameter to JourneyPlanner
  type $entur$sdk$QueryMode =

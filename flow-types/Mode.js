@@ -2,12 +2,15 @@
 export type TransportMode =
     | 'air'
     | 'bus'
-    | 'water'
-    | 'rail'
-    | 'metro'
-    | 'tram'
+    | 'cableway'
     | 'coach'
-    | 'car'
+    | 'funicular'
+    | 'lift'
+    | 'metro'
+    | 'rail'
+    | 'tram'
+    | 'unknown'
+    | 'water'
 
 // All valid values for the "mode" parameter to JourneyPlanner
 export type QueryMode =
