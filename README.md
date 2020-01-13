@@ -85,7 +85,7 @@ The wanted time of departure. Can be anything that is parseable by `new Date()`.
 ### getTripPatterns
 
 ```javascript
-(from: Location, to: Location, params?: GetTripPatternsParams, ignoreFields?: Array<string>) => Promise<Array<TripPattern>>
+(params: GetTripPatternsParams, ignoreFields?: Array<string>) => Promise<Array<TripPattern>>
 ```
 
 Types: [TripPattern](flow-types/TripPattern.js)
@@ -96,17 +96,13 @@ If you are going to do a huge amount of different searches at the same time, con
 
 #### Parameters
 
-##### from (`Location`)
-The location to search for travels from.
-
-##### to (`Location`)
-The destination location to search for travels to.
-
-##### params (`GetTripPatternsParams`) [Optional]
+##### params (`GetTripPatternsParams`)
 An object of search parameters.
 
 | Key                         | Type               | Default   | Description |
 |:----------------------------|:-------------------|:----------|:------------|
+| `from`                      | `Location`         |          | The location to search for travels from. |
+| `to`                        | `Location`         |          | The destination location to search for travels to. |
 | `allowBikeRental`           | `boolean`          | `false` | Is bike rental allowed? |
 | `arriveBy`                  | `boolean`          | `false` | Depart by `searchDate`, or arrive by `searchDate` |
 | `limit`                     | `number`           | `5`      | Limit result to this number of trip patterns |
@@ -145,17 +141,17 @@ Default:
 ```javascript
 service.getTripPatterns(
     {
-        name: 'Ryllikvegen, Lillehammer',
-        coordinates: {
-            latitude: 61.102848368937416,
-            longitude: 10.51613308426234
+        from: {
+            name: 'Ryllikvegen, Lillehammer',
+            coordinates: {
+                latitude: 61.102848368937416,
+                longitude: 10.51613308426234
+            },
         },
-    },
-    {
-        place: 'NSR:StopPlace:337',
-        name: 'Oslo S, Oslo'
-    },
-    {
+        to: {
+            place: 'NSR:StopPlace:337',
+            name: 'Oslo S, Oslo'
+        },
         searchDate: new Date(),
     }
 })

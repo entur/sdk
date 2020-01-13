@@ -37,6 +37,8 @@ type TransportSubmodeParam = {
 }
 
 export type GetTripPatternsParams = {
+    from: Location,
+    to: Location,
     allowBikeRental?: boolean,
     arriveBy?: boolean,
     limit?: number,
@@ -66,12 +68,12 @@ const DEFAULT_GET_TRIP_PATTERN_IGNORE_FIELDS = [
 ]
 
 export function getTripPatterns(
-    from: Location,
-    to: Location,
-    params?: GetTripPatternsParams = {},
+    params: GetTripPatternsParams = {},
     ignoreFields?: Array<string> = DEFAULT_GET_TRIP_PATTERN_IGNORE_FIELDS,
 ): Promise<Array<TripPattern>> {
     const {
+        from,
+        to,
         searchDate = new Date(),
         arriveBy = false,
         modes = [FOOT, BUS, TRAM, RAIL, METRO, WATER, AIR],
