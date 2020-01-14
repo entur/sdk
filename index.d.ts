@@ -64,8 +64,8 @@ export interface Situation {
 export interface BikeRentalStation {
     id: string;
     name: string;
-    bikesAvailable: number;
-    spacesAvailable: number;
+    bikesAvailable?: number;
+    spacesAvailable?: number;
     longitude: number;
     latitude: number;
     networks: Array<string>;

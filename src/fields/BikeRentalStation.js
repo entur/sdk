@@ -4,8 +4,8 @@ export type BikeRentalStation = {
     id: string,
     name: string,
     networks: Array<string>,
-    spacesAvailable: number,
-    bikesAvailable: number,
+    spacesAvailable?: number,
+    bikesAvailable?: number,
     longitude: number,
     latitude: number,
 }
