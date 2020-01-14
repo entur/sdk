@@ -1,15 +1,7 @@
 // @flow
 import { VariableType } from 'json-to-graphql-query'
 
-const bikeRentalStationFields = {
-    id: true,
-    name: true,
-    bikesAvailable: true,
-    spacesAvailable: true,
-    longitude: true,
-    latitude: true,
-    networks: true,
-}
+import bikeRentalStationFields from '../fields/BikeRentalStation'
 
 export const getBikeRentalStationQuery = {
     query: {

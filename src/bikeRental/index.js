@@ -8,7 +8,9 @@ import {
 } from './query'
 
 import { convertPositionToBbox, forceOrder } from '../utils'
-import type { BikeRentalStation, Coordinates } from '../../flow-types'
+import type { Coordinates } from '../../flow-types'
+
+import type { BikeRentalStation } from '../fields/BikeRentalStation'
 
 export function getBikeRentalStation(stationId: string): Promise<BikeRentalStation> {
     const variables = {

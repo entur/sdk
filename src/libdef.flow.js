@@ -66,15 +66,14 @@ type $entur$sdk$Situation = {|
  */
 
 type $entur$sdk$BikeRentalStation = {
-     id: string,
-     name: string,
-     bikesAvailable: number,
-     spacesAvailable: number,
-     longitude: number,
-     latitude: number,
-     networks: Array<string>,
- }
-
+    id: string,
+    name: string,
+    bikesAvailable: number,
+    spacesAvailable: number,
+    longitude: number,
+    latitude: number,
+    networks: Array<string>,
+}
 
 /**
  * Geocoder
@@ -165,38 +164,30 @@ type $entur$sdk$Operator = {
     url?: string,
 }
 
+type $entur$sdk$StopPlace = {
+    id: string,
+    description?: string,
+    name: string,
+    tariffZones?: Array<{
+        id: string,
+    }>,
+}
+
 type $entur$sdk$Quay = {
     id: string,
     name: string,
     description: string,
     publicCode: string,
     situations: Array<$entur$sdk$Situation>,
-    stopPlace: {
-        id: string,
-        description?: string,
-    };
-}
-
-type $entur$sdk$StopPlace = {
-    id: string,
-    name: string,
-    latitude: number,
-    longitude: number,
-    description: string,
-    wheelchairBoarding: boolean,
-    weighting: any,
-    transportMode: Array<string>,
-    transportSubmode: string,
-    quays: Array<$entur$sdk$Quay>,
+    stopPlace: $entur$sdk$StopPlace;
 }
 
 type $entur$sdk$Place = {
     latitude: number,
     longitude: number,
     name: string,
-    quay?: $entur$sdk$Quay & {
-        stopPlace: $entur$sdk$StopPlace
-    },
+    quay?: $entur$sdk$Quay,
+    bikeRentalStation?: $entur$sdk$BikeRentalStation,
 }
 
 type $entur$sdk$TransportMode =

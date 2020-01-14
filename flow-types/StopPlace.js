@@ -2,15 +2,7 @@
 import type { MultilingualString } from './MultilingualString'
 import type { TransportMode, TransportSubmode } from './Mode'
 
-import type { Situation } from '../src/fields/Situation'
 import type { Quay } from '../src/fields/Quay'
-
-export type StopPlace = {
-    description?: string,
-    id: string,
-    name: string,
-    tariffZones?: Array<{ id: string }>,
-}
 
 export type StopPlaceDetails = {
     id: string,
