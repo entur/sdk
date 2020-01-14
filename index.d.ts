@@ -64,13 +64,12 @@ export interface Situation {
 export interface BikeRentalStation {
     id: string;
     name: string;
-    bikesAvailable: number;
-    spacesAvailable: number;
+    bikesAvailable?: number;
+    spacesAvailable?: number;
     longitude: number;
     latitude: number;
     networks: Array<string>;
 }
-
 
 /**
  * Geocoder
@@ -162,30 +161,30 @@ export interface Operator {
     url?: string;
 }
 
+export interface StopPlace {
+    description?: string;
+    id: string;
+    name: string;
+    tariffZones?: Array<{
+        id: string
+    }>;
+}
+
 export interface Quay {
     id: string;
     name: string;
     description: string;
     publicCode: string;
     situations: Array<Situation>;
-    stopPlace: {
-        id: string;
-        description?: string;
-    };
-}
-
-export interface StopPlace {
-    description?: string;
-    id: string;
-    name: string;
-    tariffZones?: Array<{ id: string }>;
+    stopPlace: StopPlace;
 }
 
 export interface Place {
     latitude: number;
     longitude: number;
     name?: string;
-    quay?: Quay & { stopPlace: StopPlace };
+    quay?: Quay;
+    bikeRentalStation?: BikeRentalStation;
 }
 
 export type TransportMode =

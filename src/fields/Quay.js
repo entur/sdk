@@ -1,6 +1,7 @@
 // @flow
 
 import situationFields, { type Situation } from './Situation'
+import stopPlaceFields, { type StopPlace } from './StopPlace'
 
 export type Quay = {|
     id: string,
@@ -8,10 +9,7 @@ export type Quay = {|
     description: string,
     publicCode: string,
     situations: Array<Situation>,
-    stopPlace: {
-        id: string,
-        description?: string,
-    },
+    stopPlace: StopPlace,
 |}
 
 export default {
@@ -20,8 +18,5 @@ export default {
     publicCode: true,
     description: true,
     situations: situationFields,
-    stopPlace: {
-        id: true,
-        description: true,
-    },
+    stopPlace: stopPlaceFields,
 }

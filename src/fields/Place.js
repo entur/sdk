@@ -1,35 +1,19 @@
 // @flow
 import quayFields, { type Quay } from './Quay'
+import bikeRentalStationFields, { type BikeRentalStation } from './BikeRentalStation'
 
 export type Place = {|
-  latitude: number,
-  longitude: number,
-  name: string,
-  quay?: Quay & {
-      stopPlace: {
-        id: true,
-        name: true,
-        description: true,
-        tariffZones: {
-            id: true,
-        },
-    },
-  },
+    latitude: number,
+    longitude: number,
+    name: string,
+    quay?: Quay,
+    bikeRentalStation?: BikeRentalStation,
 |}
 
 export default {
     name: true,
     latitude: true,
     longitude: true,
-    quay: {
-        ...quayFields,
-        stopPlace: {
-            id: true,
-            name: true,
-            description: true,
-            tariffZones: {
-                id: true,
-            },
-        },
-    },
+    quay: quayFields,
+    bikeRentalStation: bikeRentalStationFields,
 }

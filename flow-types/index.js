@@ -1,5 +1,4 @@
 // @flow
-export type { BikeRentalStation } from './BikeRentalStation'
 export type { Coordinates } from './Coordinates'
 export type { DestinationDisplay } from './DestinationDisplay'
 export type { Feature, Category } from './Feature'
@@ -10,4 +9,3 @@ export type {
 export type { MultilingualString } from './MultilingualString'
 export type { TypeName, NearestPlace } from './NearestPlace'
 export type { PointsOnLink } from './PointsOnLink'
-export type { StopPlace } from './StopPlace'
