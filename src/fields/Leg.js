@@ -25,7 +25,7 @@ export type Leg = {|
     fromPlace: Place,
     interchangeFrom?: Interchange,
     interchangeTo?: Interchange,
-    intermediateEstimatedCalls?: Array<IntermediateEstimatedCall>,
+    intermediateEstimatedCalls: Array<IntermediateEstimatedCall>,
     line?: Line,
     mode: LegMode,
     notices?: Array<Notice>, // from mapper
@@ -35,7 +35,7 @@ export type Leg = {|
     ride: boolean,
     rentedBike?: boolean,
     serviceJourney: ServiceJourney,
-    situations?: Array<Situation>,
+    situations: Array<Situation>,
     toEstimatedCall?: EstimatedCall,
     toPlace: Place,
     transportSubmode: TransportSubmode,

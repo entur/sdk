@@ -352,7 +352,7 @@ export interface Leg {
     ride: boolean;
     rentedBike?: boolean;
     serviceJourney: ServiceJourney;
-    situations?: Array<Situation>;
+    situations: Array<Situation>;
     toEstimatedCall?: EstimatedCall;
     toPlace: Place;
     transportSubmode: TransportSubmode;

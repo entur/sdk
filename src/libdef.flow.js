@@ -359,7 +359,7 @@ type $entur$sdk$Leg = {
     ride: boolean,
     rentedBike?: boolean,
     serviceJourney: $entur$sdk$ServiceJourney,
-    situations?: Array<$entur$sdk$Situation>,
+    situations: Array<$entur$sdk$Situation>,
     toEstimatedCall?: $entur$sdk$EstimatedCall,
     toPlace: $entur$sdk$Place,
     transportSubmode: $entur$sdk$TransportSubmode,
