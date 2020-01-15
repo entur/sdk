@@ -31,7 +31,7 @@ export type ReportType = "general" | "incident" | null;
 export interface ServiceConfig {
     clientName: string;
     hosts: {
-        journeyplanner: string;
+        journeyPlanner: string;
         geocoder: string;
         nsr: string;
     };

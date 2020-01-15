@@ -54,7 +54,7 @@ The Entur SDK uses multiple endpoints for its services. Each endpoint can be ove
 
 ```javascript
 {
-    journeyplanner: '',
+    journeyPlanner: '',
     geocoder: ''
 }
 ```
