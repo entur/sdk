@@ -34,7 +34,7 @@ type $entur$sdk$ReportType = 'general' | 'incident' | null
 type $entur$sdk$ServiceConfig = {
     clientName: string,
     hosts: {
-        journeyplanner: string,
+        journeyPlanner: string,
         geocoder: string,
         nsr: string,
     },
