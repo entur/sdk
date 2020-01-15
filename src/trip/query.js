@@ -18,6 +18,8 @@ export const getTripPatternQuery = {
             walkSpeed: 'Float',
             allowBikeRental: 'Boolean',
             useFlex: 'Boolean',
+            banned: 'InputBanned',
+            whiteListed: 'InputWhiteListed',
         },
         trip: {
             __args: {
@@ -33,6 +35,8 @@ export const getTripPatternQuery = {
                 walkSpeed: new VariableType('walkSpeed'),
                 allowBikeRental: new VariableType('allowBikeRental'),
                 useFlex: new VariableType('useFlex'),
+                banned: new VariableType('banned'),
+                whiteListed: new VariableType('whiteListed'),
             },
             tripPatterns: {
                 startTime: true,

@@ -370,6 +370,21 @@ type $entur$sdk$TransportSubmodeParam = {
     transportSubmodes: Array<$entur$sdk$TransportSubmode>,
 }
 
+type $entur$sdk$InputBanned = {|
+    lines?: Array<string>,
+    authorities?: Array<string>,
+    organisations?: Array<string>,
+    quays?: Array<string>,
+    quaysHard?: Array<string>,
+    serviceJourneys?: Array<string>,
+|}
+
+type $entur$sdk$InputWhiteListed = {|
+    lines?: Array<string>,
+    authorities?: Array<string>,
+    organisations?: Array<string>,
+|}
+
 type $entur$sdk$GetTripPatternsParams = {
     from: $entur$sdk$Location,
     to: $entur$sdk$Location,
@@ -383,6 +398,8 @@ type $entur$sdk$GetTripPatternsParams = {
     useFlex?: boolean,
     walkSpeed?: number,
     wheelchairAccessible?: boolean,
+    banned?: $entur$sdk$InputBanned,
+    whiteListed?: $entur$sdk$InputWhiteListed,
 }
 
 type $entur$sdk$TripPattern = {

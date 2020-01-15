@@ -36,6 +36,21 @@ type TransportSubmodeParam = {
     transportSubmodes: Array<TransportSubmode>,
 }
 
+type InputBanned = {|
+    lines?: Array<string>,
+    authorities?: Array<string>,
+    organisations?: Array<string>,
+    quays?: Array<string>,
+    quaysHard?: Array<string>,
+    serviceJourneys?: Array<string>,
+|}
+
+type InputWhiteListed = {|
+    lines?: Array<string>,
+    authorities?: Array<string>,
+    organisations?: Array<string>,
+|}
+
 export type GetTripPatternsParams = {
     from: Location,
     to: Location,
@@ -49,6 +64,8 @@ export type GetTripPatternsParams = {
     useFlex?: boolean,
     walkSpeed?: number,
     wheelchairAccessible?: boolean,
+    banned?: InputBanned,
+    whiteListed?: InputWhiteListed,
 }
 
 const DEFAULT_GET_TRIP_PATTERN_IGNORE_FIELDS = [

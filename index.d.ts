@@ -363,6 +363,21 @@ export interface TransportSubmodeParam {
     transportSubmodes: Array<TransportSubmode>;
 }
 
+export interface InputBanned {
+    lines?: Array<string>;
+    authorities?: Array<string>;
+    organisations?: Array<string>;
+    quays?: Array<string>;
+    quaysHard?: Array<string>;
+    serviceJourneys?: Array<string>;
+}
+
+export interface InputWhiteListed {
+    lines?: Array<string>;
+    authorities?: Array<string>;
+    organisations?: Array<string>;
+}
+
 export interface GetTripPatternsParams {
     from: Location;
     to: Location;
@@ -376,6 +391,8 @@ export interface GetTripPatternsParams {
     useFlex?: boolean;
     walkSpeed?: number;
     wheelchairAccessible?: boolean;
+    banned?: InputBanned;
+    whiteListed?: InputWhiteListed;
 }
 
 export interface TripPattern {
