@@ -112,7 +112,27 @@ An object of search parameters.
 | `useFlex`                   | `boolean`          | `false`  | Whether to allow flexible search results or not |
 | `walkSpeed`                 | `number`           | `1.3`    | The walk speed to use in searches in meters per second |
 | `wheelchairAccessible`      | `boolean`          | `false`  | Include only stops which are wheelchair accessible |
+| `banned`                    | `InputBanned`      |          | Parameters for indicating authorities, lines or quays not be used in the trip patterns  |
+| `whiteListed`               | `InputWhitelisted` |          | Parameters for indicating the only authorities, lines or quays to be used in the trip patterns |
 
+InputBanned and InputWhitelisted types:
+
+```
+interface InputBanned {
+    lines?: Array<string>;
+    authorities?: Array<string>;
+    organisations?: Array<string>;
+    quays?: Array<string>;
+    quaysHard?: Array<string>;
+    serviceJourneys?: Array<string>;
+}
+
+interface InputWhiteListed {
+    lines?: Array<string>;
+    authorities?: Array<string>;
+    organisations?: Array<string>;
+}
+```
 
 ##### ignoreFields  [Optional]
 A list of keys to exclude from the resulting trip patterns.
