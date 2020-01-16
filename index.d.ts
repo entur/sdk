@@ -223,18 +223,40 @@ export type QueryMode =
 export type LegMode = TransportMode | 'bicycle' | 'car' | 'foot';
 
 export type TransportSubmode =
-    | "airportLinkRail"
-    | "highSpeedPassengerService"
-    | "highSpeedVehicleService"
-    | "internationalCarFerry"
-    | "localCarFerry"
-    | "localPassengerFerry"
-    | "nationalCarFerry"
-    | "railReplacementBus"
-    | "regionalCarFerry"
-    | "touristRailway"
-    | "airportLinkBus"
-    | "cityTram";
+    | 'localBus'
+    | 'regionalBus'
+    | 'expressBus'
+    | 'nightBus'
+    | 'sightseeingBus'
+    | 'shuttleBus'
+    | 'schoolBus'
+    | 'railReplacementBus'
+    | 'airportLinkBus'
+    | 'internationalCoach'
+    | 'nationalCoach'
+    | 'localTram'
+    | 'cityTram'
+    | 'metro'
+    | 'local'
+    | 'regionalRail'
+    | 'interregionalRail'
+    | 'longDistance'
+    | 'international'
+    | 'touristRailway'
+    | 'nightRail'
+    | 'internationalCarFerry'
+    | 'nationalCarFerry'
+    | 'localCarFerry'
+    | 'internationalPassengerFerry'
+    | 'localPassengerFerry'
+    | 'sightseeingService'
+    | 'highSpeedVehicleService'
+    | 'highSpeedPassengerService'
+    | 'internationalFlight'
+    | 'domesticFlight'
+    | 'helicopterService'
+    | 'telecabin'
+    | 'funicular'
 
 export interface DestinationDisplay {
     frontText: string;
