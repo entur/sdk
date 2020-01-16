@@ -244,6 +244,7 @@ export type TransportSubmode =
     | 'international'
     | 'touristRailway'
     | 'nightRail'
+    | 'airportLinkRail'
     | 'internationalCarFerry'
     | 'nationalCarFerry'
     | 'localCarFerry'
