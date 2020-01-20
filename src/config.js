@@ -5,23 +5,23 @@ export type HostConfig = {
     headers?: Object
 }
 
-export type ServiceConfig = {
+export type ServiceConfig = {|
     clientName: string,
     hosts: {
         journeyPlanner: string,
         geocoder: string,
         nsr: string,
     },
-};
+|}
 
-export type ArgumentConfig = {
+export type ArgumentConfig = {|
     clientName: string,
     hosts?: {
         journeyPlanner?: string,
         geocoder?: string,
         nsr?: string,
     },
-}
+|}
 
 const HOST_CONFIG = {
     journeyPlanner: 'https://api.entur.io/journey-planner/v2',
