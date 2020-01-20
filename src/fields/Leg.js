@@ -3,7 +3,7 @@ import type { LegMode, TransportSubmode } from '../../flow-types/Mode'
 
 import lineFields, { type Line } from './Line'
 import placeFields, { type Place } from './Place'
-import { type Authority } from './Authority'
+import authorityFields, { type Authority } from './Authority'
 import operatorFields, { type Operator } from './Operator'
 import serviceJourneyFields, { type ServiceJourney } from './ServiceJourney'
 import situationFields, { type Situation } from './Situation'
@@ -15,7 +15,7 @@ import estimatedCallFields, { type EstimatedCall, type IntermediateEstimatedCall
 export type Leg = {|
     aimedEndTime: string,
     aimedStartTime: string,
-    authority?: Authority, // from mapper
+    authority?: Authority,
     distance: number,
     directDuration: number,
     duration: number,
@@ -44,6 +44,7 @@ export type Leg = {|
 export default {
     aimedEndTime: true,
     aimedStartTime: true,
+    authority: authorityFields,
     distance: true,
     directDuration: true,
     duration: true,
