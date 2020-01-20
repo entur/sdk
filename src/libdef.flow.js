@@ -5,14 +5,14 @@
  * Commons
  */
 
-type $entur$sdk$Config = {
+type $entur$sdk$Config = {|
     clientName: string,
     hosts?: {
         journeyPlanner?: string,
         geocoder?: string,
         nsr?: string,
     }
-}
+|}
 
 type $entur$sdk$Coordinates = {
     latitude: number,
@@ -588,7 +588,7 @@ type $entur$sdk$StopPlaceParams = {
 
 declare module '@entur/sdk' {
     declare export default class EnturService {
-        constructor(config?: $entur$sdk$Config): EnturService;
+        constructor(config: $entur$sdk$Config): EnturService;
 
         journeyPlannerQuery<$entur$sdk$journeyPlannerResponse>(
             queryObj: Object | string,
