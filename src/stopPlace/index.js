@@ -29,7 +29,7 @@ export function getStopPlace(
         ...rest,
     }
 
-    return journeyPlannerQuery(getStopPlaceQuery, variables, undefined, this.config)
+    return journeyPlannerQuery(getStopPlaceQuery, variables, this.config)
         .then((data: Object = {}) => data?.stopPlace)
 }
 
@@ -52,7 +52,7 @@ export function getStopPlaces(
         ...rest,
     }
 
-    return journeyPlannerQuery(getStopPlacesQuery, variables, undefined, this.config)
+    return journeyPlannerQuery(getStopPlacesQuery, variables, this.config)
         .then((data: Object) => data?.stopPlaces || [])
         .then((stopPlaceDetails: Array<StopPlaceDetails>) => {
             return forceOrder<StopPlaceDetails>(stopPlaceDetails, stopPlaceIds, ({ id }) => id)
@@ -70,7 +70,7 @@ export function getParentStopPlace(
         ...rest,
     }
 
-    return journeyPlannerQuery(getParentStopPlaceQuery, variables, undefined, this.config)
+    return journeyPlannerQuery(getParentStopPlaceQuery, variables, this.config)
         .then((data: Object = {}) => data?.stopPlace?.parent)
 }
 
@@ -86,13 +86,13 @@ export function getStopPlacesByPosition(
         ...rest,
     }
 
-    return journeyPlannerQuery(getStopPlacesByBboxQuery, variables, undefined, this.config)
+    return journeyPlannerQuery(getStopPlacesByBboxQuery, variables, this.config)
         .then((data: Object = {}) => data?.stopPlacesByBbox || [])
 }
 
 export function getStopPlaceFacilities(stopPlaceId: string): Promise<StopPlaceFacilities> {
     const variables = { id: stopPlaceId }
-    return nsrQuery(getStopPlaceFacilitiesQuery, variables, undefined, this.config)
+    return nsrQuery(getStopPlaceFacilitiesQuery, variables, this.config)
 }
 
 export function getQuaysForStopPlace(
@@ -106,6 +106,6 @@ export function getQuaysForStopPlace(
         ...rest,
     }
 
-    return journeyPlannerQuery(getQuaysForStopPlaceQuery, variables, undefined, this.config)
+    return journeyPlannerQuery(getQuaysForStopPlaceQuery, variables, this.config)
         .then((data: Object = {}) => data?.stopPlace?.quays || [])
 }
