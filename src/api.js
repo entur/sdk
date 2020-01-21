@@ -23,7 +23,6 @@ function errorHandler(response: Object = {}): Object {
 export function journeyPlannerQuery<T>(
     queryObj: Object | string,
     variables?: Object,
-    ignoreFields?: Array<string>,
     config?: ServiceConfig,
 ): Promise<T> {
     const { host, headers } = getJourneyPlannerHost((this && this.config) || config)
@@ -31,7 +30,7 @@ export function journeyPlannerQuery<T>(
 
     const query = typeof queryObj === 'string'
         ? queryObj
-        : jsonToGraphQLQuery(queryObj, { pretty, ignoreFields })
+        : jsonToGraphQLQuery(queryObj, { pretty })
 
     return post(url, { query, variables }, headers)
         .then(errorHandler)
@@ -40,7 +39,6 @@ export function journeyPlannerQuery<T>(
 export function nsrQuery<T>(
     queryObj: Object | string,
     variables?: Object,
-    ignoreFields?: Array<string>,
     config?: ServiceConfig,
 ): Promise<T> {
     const { host, headers } = getNSRHost((this && this.config) || config)
@@ -48,7 +46,7 @@ export function nsrQuery<T>(
 
     const query = typeof queryObj === 'string'
         ? queryObj
-        : jsonToGraphQLQuery(queryObj, { pretty, ignoreFields })
+        : jsonToGraphQLQuery(queryObj, { pretty })
 
     return post(url, { query, variables }, headers)
         .then(errorHandler)

@@ -586,14 +586,12 @@ declare class EnturService {
   journeyPlannerQuery<journeyPlannerResponse>(
       queryObj: Object | string,
       variables?: Object,
-      ignoreFields?: Array<string>,
       config?: ServiceConfig,
   ): Promise<journeyPlannerResponse>;
 
   nsrQuery<nsrResponse>(
       queryObj: Object | string,
       variables?: Object,
-      ignoreFields?: Array<string>,
       config?: ServiceConfig,
   ): Promise<nsrResponse>;
 
@@ -605,7 +603,6 @@ declare class EnturService {
 
   getTripPatterns(
       params: GetTripPatternsParams,
-      ignoreFields?: Array<string>,
   ): Promise<TripPattern[]>;
 
   findTrips(

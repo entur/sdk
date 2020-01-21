@@ -68,26 +68,8 @@ export type GetTripPatternsParams = {
     whiteListed?: InputWhiteListed,
 }
 
-const DEFAULT_GET_TRIP_PATTERN_IGNORE_FIELDS = [
-    'notices',
-    'situations',
-    'journeyPattern',
-    'fromEstimatedCall',
-    'toEstimatedCall',
-    'intermediateEstimatedCalls',
-    'interchangeFrom',
-    'interchangeTo',
-    'pointsOnLink',
-    'authority',
-    'operator',
-    'quay',
-    'bookingArrangements',
-    'rentedBike',
-]
-
 export function getTripPatterns(
     params: GetTripPatternsParams = {},
-    ignoreFields?: Array<string> = DEFAULT_GET_TRIP_PATTERN_IGNORE_FIELDS,
 ): Promise<Array<TripPattern>> {
     const {
         from,
@@ -113,7 +95,7 @@ export function getTripPatterns(
         ...rest,
     }
 
-    return journeyPlannerQuery(getTripPatternQuery, variables, ignoreFields, this.config)
+    return journeyPlannerQuery(getTripPatternQuery, variables, this.config)
         .then((data: Object = {}) => {
             if (!data?.trip?.tripPatterns) {
                 return []
