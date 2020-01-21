@@ -1,0 +1,27 @@
+---
+name: getStopPlace
+menu: Places
+route: /places/getStopPlace
+---
+
+# getStopPlace
+
+```javascript
+(id: string, params?: StopPlaceParams) => Promise<StopPlaceDetails>
+```
+
+Types: [StopPlaceDetails](flow-types/StopPlace.js)
+
+`getStopPlace` finds the stop place with the given ID.
+
+## Parameters
+
+### id (`string`)
+
+The ID of the stop place to get.
+
+### params (`Object`) [Optional]
+
+| Key                      | Type           | Default      | Description |
+|:-------------------------|:---------------|:-------------|:------------|
+| `includeUnusedQuays`     | `boolean`      | `true`       | Whether to include quays no longer in use or not. |

@@ -1,0 +1,26 @@
+---
+name: findTrips
+menu: Travel
+route: /travel/findTrips
+---
+
+# findTrips
+
+```javascript
+(from: string, to: string, date?: Date | string | number) => Promise<Array<TripPattern>>
+```
+
+Finds up to 5 trip patterns from `from` to `to` at the time specified. This is a convenience method, which first tries to find locations for the given `from` and `to` strings before searching for trips between them. If you need more control, see the [`getTripPatterns`](#gettrippatterns) method.
+
+If no locations are found for either `from` or `to`, or if `date` is invalid, an error will be thrown.
+
+## Parameters
+
+### from (`string`)
+The place you want to search from. For instance `"Oslo"`
+
+### to (`string`)
+The place you want to search from. For instance `"Bergen"`
+
+### date (`Date | string | number`) [Optional]
+The wanted time of departure. Can be anything that is parseable by `new Date()`. If not provided, the search will be from "now".

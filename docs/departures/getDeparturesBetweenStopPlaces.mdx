@@ -1,0 +1,30 @@
+---
+name: getDeparturesBetweenStopPlaces
+menu: Departures
+route: /departures/getDeparturesBetweenStopPlaces
+---
+
+# getDeparturesBetweenStopPlaces
+
+```javascript
+(fromStopPlaceId: string, toStopPlaceId: string, params?: GetDeparturesBetweenStopPlacesParams) => Promise<Array<Departure>>
+```
+
+Types: [Departure](flow-types/Departures.js)
+
+`getDeparturesBetweenStopPlaces` finds departures from a stop place, but only departures that will go to the destination stop place.
+
+## Parameters
+
+### fromStopPlaceId (`string`)
+The ID of the stop place to get departures _from_.
+
+### toStopPlaceId (`string`)
+The ID of the stop place to get departures _to_.
+
+### params (`Object`) [Optional]
+
+| Key                      | Type           | Default      | Description |
+|:-------------------------|:---------------|:-------------|:------------|
+| `start`                  | `Date`         | `new Date()` | DateTime for when to fetch estimated calls from. |
+| `limit`                  | `number`       | `20`         | The maximum number of departures to fetch. |
