@@ -10,8 +10,6 @@ route: /departures/getDeparturesFromQuays
 (quayIds: Array<string>, params?: GetDeparturesParams) => Promise<Array<{ id: string, departures: Array<Departure | void> }>>
 ```
 
-Types: [Departure](flow-types/Departures.js)
-
 `getDeparturesFromQuays` finds departures from one or more given quays.
 
 The method will return an array of objects containing fields for the quay's `id` and its corresponding `departures`.

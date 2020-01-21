@@ -10,8 +10,6 @@ route: /departures/getDeparturesFromStopPlaces
 (stopPlaceIds: Array<string>, params?: GetDeparturesParams) => Promise<Array<{ id: string, departures: Array<Departure> }>>
 ```
 
-Types: [Departure](flow-types/Departures.js)
-
 `getDeparturesFromStopPlaces` finds departures from one or more given stop places. Also see `getDeparturesFromStopPlace` for a simpler interface for fetching departures for a single stop.
 
 The method will return an array of objects containing fields for the stop place's `id` and `departures`.
