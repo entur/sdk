@@ -52,6 +52,7 @@ export interface Situation {
     summary: Array<MultilingualString>;
     description: Array<MultilingualString>;
     detail: Array<MultilingualString>;
+    lines: Array<Line>;
     validityPeriod: ValidityPeriod;
     reportType: ReportType;
     infoLinks: Array<InfoLink>;
