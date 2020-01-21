@@ -1,9 +1,86 @@
 // @flow
 /* eslint-disable max-len */
 
-/**
- * Commons
- */
+type $entur$sdk$TransportMode =
+    | 'air'
+    | 'bus'
+    | 'cableway'
+    | 'coach'
+    | 'funicular'
+    | 'lift'
+    | 'metro'
+    | 'rail'
+    | 'tram'
+    | 'unknown'
+    | 'water'
+
+// All valid values for the "mode" parameter to JourneyPlanner
+ type $entur$sdk$QueryMode =
+    | 'air'
+    | 'bicycle'
+    | 'bus'
+    | 'cableway'
+    | 'car'
+    | 'car_dropoff'
+    | 'car_park'
+    | 'car_pickup'
+    | 'coach'
+    | 'foot'
+    | 'funicular'
+    | 'lift'
+    | 'metro'
+    | 'rail'
+    | 'tram'
+    | 'transit'
+    | 'water'
+
+type $entur$sdk$LegMode =
+    | $entur$sdk$TransportMode
+    | 'bicycle'
+    | 'car'
+    | 'foot'
+
+type $entur$sdk$TransportSubmode =
+    | 'localBus'
+    | 'regionalBus'
+    | 'expressBus'
+    | 'nightBus'
+    | 'sightseeingBus'
+    | 'shuttleBus'
+    | 'schoolBus'
+    | 'railReplacementBus'
+    | 'airportLinkBus'
+    | 'internationalCoach'
+    | 'nationalCoach'
+    | 'localTram'
+    | 'cityTram'
+    | 'metro'
+    | 'local'
+    | 'regionalRail'
+    | 'interregionalRail'
+    | 'longDistance'
+    | 'international'
+    | 'touristRailway'
+    | 'nightRail'
+    | 'airportLinkRail'
+    | 'internationalCarFerry'
+    | 'nationalCarFerry'
+    | 'localCarFerry'
+    | 'internationalPassengerFerry'
+    | 'localPassengerFerry'
+    | 'sightseeingService'
+    | 'highSpeedVehicleService'
+    | 'highSpeedPassengerService'
+    | 'internationalFlight'
+    | 'domesticFlight'
+    | 'helicopterService'
+    | 'telecabin'
+    | 'funicular'
+
+
+type $entur$sdk$DestinationDisplay = {
+    frontText: string
+}
 
 type $entur$sdk$Config = {|
     clientName: string,
@@ -50,11 +127,54 @@ type $entur$sdk$InfoLink = {
     label: string,
 }
 
+type $entur$sdk$BookingMethod = 'callOffice' | 'online'
+
+type $entur$sdk$BookingContact = {
+    phone: string,
+    url: string,
+}
+
+type $entur$sdk$BookingArrangement = {
+    bookingAccess: boolean,
+    bookingContact: $entur$sdk$BookingContact,
+    latestBookingTime: string,
+    bookingMethods?: Array<$entur$sdk$BookingMethod>,
+    bookWhen?: string,
+    minimumBookingPeriod?: string,
+    bookingNote?: string,
+    buyWhen: string,
+}
+
+type $entur$sdk$FlexibleLineType =
+    | 'corridorService'
+    | 'mainRouteWithFlexibleEnds'
+    | 'flexibleAreasOnly'
+    | 'hailAndRideSections'
+    | 'fixedStopAreaWide'
+    | 'freeAreaAreaWide'
+    | 'mixedFlexible'
+    | 'mixedFlexibleAndFixed'
+    | 'fixed'
+    | 'other'
+
+type $entur$sdk$Line = {
+    bookingArrangements?: $entur$sdk$BookingArrangement,
+    description?: string,
+    flexibleLineType?: $entur$sdk$FlexibleLineType,
+    id: string,
+    name: string,
+    notices: Array<$entur$sdk$Notice>,
+    publicCode: string,
+    transportMode: $entur$sdk$TransportMode,
+    transportSubmode: $entur$sdk$TransportSubmode,
+}
+
 type $entur$sdk$Situation = {|
     situationNumber: string,
     summary: Array<$entur$sdk$MultilingualString>,
     description: Array<$entur$sdk$MultilingualString>,
     detail: Array<$entur$sdk$MultilingualString>,
+    lines: Array<$entur$sdk$Line>,
     validityPeriod: $entur$sdk$ValidityPeriod,
     reportType: $entur$sdk$ReportType,
     infoLinks: Array<$entur$sdk$InfoLink>,
@@ -188,129 +308,6 @@ type $entur$sdk$Place = {
     name: string,
     quay?: $entur$sdk$Quay,
     bikeRentalStation?: $entur$sdk$BikeRentalStation,
-}
-
-type $entur$sdk$TransportMode =
-    | 'air'
-    | 'bus'
-    | 'cableway'
-    | 'coach'
-    | 'funicular'
-    | 'lift'
-    | 'metro'
-    | 'rail'
-    | 'tram'
-    | 'unknown'
-    | 'water'
-
-// All valid values for the "mode" parameter to JourneyPlanner
- type $entur$sdk$QueryMode =
-    | 'air'
-    | 'bicycle'
-    | 'bus'
-    | 'cableway'
-    | 'car'
-    | 'car_dropoff'
-    | 'car_park'
-    | 'car_pickup'
-    | 'coach'
-    | 'foot'
-    | 'funicular'
-    | 'lift'
-    | 'metro'
-    | 'rail'
-    | 'tram'
-    | 'transit'
-    | 'water'
-
-type $entur$sdk$LegMode =
-    | $entur$sdk$TransportMode
-    | 'bicycle'
-    | 'car'
-    | 'foot'
-
-type $entur$sdk$TransportSubmode =
-    | 'localBus'
-    | 'regionalBus'
-    | 'expressBus'
-    | 'nightBus'
-    | 'sightseeingBus'
-    | 'shuttleBus'
-    | 'schoolBus'
-    | 'railReplacementBus'
-    | 'airportLinkBus'
-    | 'internationalCoach'
-    | 'nationalCoach'
-    | 'localTram'
-    | 'cityTram'
-    | 'metro'
-    | 'local'
-    | 'regionalRail'
-    | 'interregionalRail'
-    | 'longDistance'
-    | 'international'
-    | 'touristRailway'
-    | 'nightRail'
-    | 'airportLinkRail'
-    | 'internationalCarFerry'
-    | 'nationalCarFerry'
-    | 'localCarFerry'
-    | 'internationalPassengerFerry'
-    | 'localPassengerFerry'
-    | 'sightseeingService'
-    | 'highSpeedVehicleService'
-    | 'highSpeedPassengerService'
-    | 'internationalFlight'
-    | 'domesticFlight'
-    | 'helicopterService'
-    | 'telecabin'
-    | 'funicular'
-
-
-type $entur$sdk$DestinationDisplay = {
-    frontText: string
-}
-
-type $entur$sdk$BookingMethod = 'callOffice' | 'online'
-
-type $entur$sdk$BookingContact = {
-    phone: string,
-    url: string,
-}
-
-type $entur$sdk$BookingArrangement = {
-    bookingAccess: boolean,
-    bookingContact: $entur$sdk$BookingContact,
-    latestBookingTime: string,
-    bookingMethods?: Array<$entur$sdk$BookingMethod>,
-    bookWhen?: string,
-    minimumBookingPeriod?: string,
-    bookingNote?: string,
-    buyWhen: string,
-}
-
-type $entur$sdk$FlexibleLineType =
-    | 'corridorService'
-    | 'mainRouteWithFlexibleEnds'
-    | 'flexibleAreasOnly'
-    | 'hailAndRideSections'
-    | 'fixedStopAreaWide'
-    | 'freeAreaAreaWide'
-    | 'mixedFlexible'
-    | 'mixedFlexibleAndFixed'
-    | 'fixed'
-    | 'other'
-
-type $entur$sdk$Line = {
-    bookingArrangements?: $entur$sdk$BookingArrangement,
-    description?: string,
-    flexibleLineType?: $entur$sdk$FlexibleLineType,
-    id: string,
-    name: string,
-    notices: Array<$entur$sdk$Notice>,
-    publicCode: string,
-    transportMode: $entur$sdk$TransportMode,
-    transportSubmode: $entur$sdk$TransportSubmode,
 }
 
 type $entur$sdk$JourneyPattern = {

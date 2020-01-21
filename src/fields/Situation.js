@@ -1,6 +1,8 @@
 // @flow
 import type { MultilingualString } from '../../flow-types/MultilingualString'
 
+import lineFields, { type Line } from './Line'
+
 type ReportType = 'general' | 'incident' | null
 
 export type Situation = {|
@@ -8,6 +10,7 @@ export type Situation = {|
     summary: Array<MultilingualString>,
     description: Array<MultilingualString>,
     detail: Array<MultilingualString>,
+    lines: Array<Line>,
     validityPeriod: {
         startTime: string,
         endTime: string,
@@ -21,9 +24,19 @@ export type Situation = {|
 
 export default {
     situationNumber: true,
-    summary: { language: true, value: true },
-    description: { language: true, value: true },
-    detail: { language: true, value: true },
+    summary: {
+        language: true,
+        value: true,
+    },
+    description: {
+        language: true,
+        value: true,
+    },
+    detail: {
+        language: true,
+        value: true,
+    },
+    lines: lineFields,
     validityPeriod: {
         startTime: true,
         endTime: true,
