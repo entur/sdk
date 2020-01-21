@@ -65,7 +65,7 @@ export function getDeparturesFromStopPlaces(
         ...rest,
     }
 
-    return journeyPlannerQuery(getDeparturesFromStopPlacesQuery, variables, undefined, this.config)
+    return journeyPlannerQuery(getDeparturesFromStopPlacesQuery, variables, this.config)
         .then((data: Object = {}) => {
             if (!data?.stopPlaces) {
                 return []
@@ -111,7 +111,7 @@ export function getDeparturesFromQuays(
         limitPerLine,
         ...rest,
     }
-    return journeyPlannerQuery(getDeparturesFromQuayQuery, variables, undefined, this.config)
+    return journeyPlannerQuery(getDeparturesFromQuayQuery, variables, this.config)
         .then((data: Object = {}) => {
             if (!data?.quays) {
                 return []
@@ -154,7 +154,6 @@ export function getDeparturesBetweenStopPlaces(
     return journeyPlannerQuery(
         getDeparturesBetweenStopPlacesQuery,
         variables,
-        undefined,
         this.config,
     )
         .then((data: Object) => {
@@ -181,7 +180,6 @@ export function getDeparturesForServiceJourney(
     return journeyPlannerQuery(
         getDeparturesForServiceJourneyQuery,
         variables,
-        undefined,
         this.config,
     )
         .then((data: Object) => {

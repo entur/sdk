@@ -7,7 +7,7 @@ route: /travel/getTripPatterns
 # getTripPatterns
 
 ```javascript
-(params: GetTripPatternsParams, ignoreFields?: Array<string>) => Promise<Array<TripPattern>>
+(params: GetTripPatternsParams) => Promise<Array<TripPattern>>
 ```
 
 Types: [TripPattern](flow-types/TripPattern.js)
@@ -54,29 +54,6 @@ interface InputWhiteListed {
     authorities?: Array<string>;
     organisations?: Array<string>;
 }
-```
-
-### ignoreFields  [Optional]
-A list of keys to exclude from the resulting trip patterns.
-
-Default:
-```
-[
-    'notices',
-    'situations',
-    'journeyPattern',
-    'fromEstimatedCall',
-    'toEstimatedCall',
-    'intermediateEstimatedCalls',
-    'interchangeFrom',
-    'interchangeTo',
-    'pointsOnLink',
-    'authority',
-    'operator',
-    'quay',
-    'bookingArrangements',
-    'rentedBike',
-]
 ```
 
 ## Example

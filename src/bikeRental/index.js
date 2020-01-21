@@ -17,7 +17,7 @@ export function getBikeRentalStation(stationId: string): Promise<BikeRentalStati
         id: stationId,
     }
 
-    return journeyPlannerQuery(getBikeRentalStationQuery, variables, undefined, this.config)
+    return journeyPlannerQuery(getBikeRentalStationQuery, variables, this.config)
         .then((data: Object = {}) => data?.bikeRentalStation)
 }
 
@@ -36,7 +36,7 @@ export function getBikeRentalStations(
         ids: stationIds,
     }
 
-    return journeyPlannerQuery(getBikeRentalStationsQuery, variables, undefined, this.config)
+    return journeyPlannerQuery(getBikeRentalStationsQuery, variables, this.config)
         .then((data: Object = {}) => data?.bikeRentalStations || [])
         // TODO: JourneyPlanner does not support filtering yet, so we filter on ID ourselves.
         .then(stations => stations.filter(({ id }) => stationIds.includes(id)))
@@ -54,7 +54,6 @@ export function getBikeRentalStationsByPosition(
     return journeyPlannerQuery(
         getBikeRentalStationsByPositionQuery,
         variables,
-        undefined,
         this.config,
     )
         .then((data: Object = {}) => data?.bikeRentalStationsByBbox || [])

@@ -9,5 +9,6 @@ flow-typed
 
 [options]
 esproposal.optional_chaining=enable
+server.max_workers=1
 
 [strict]

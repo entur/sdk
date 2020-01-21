@@ -590,14 +590,12 @@ declare module '@entur/sdk' {
         journeyPlannerQuery<$entur$sdk$journeyPlannerResponse>(
             queryObj: Object | string,
             variables?: Object,
-            ignoreFields?: Array<string>,
             config?: $entur$sdk$ServiceConfig,
         ): Promise<$entur$sdk$journeyPlannerResponse>,
 
         nsrQuery<$entur$sdk$nsrResponse>(
             queryObj: Object | string,
             variables?: Object,
-            ignoreFields?: Array<string>,
             config?: $entur$sdk$ServiceConfig,
         ): Promise<$entur$sdk$nsrResponse>,
 
@@ -609,7 +607,6 @@ declare module '@entur/sdk' {
 
         getTripPatterns(
             params: $entur$sdk$GetTripPatternsParams,
-            ignoreFields?: Array<string>,
         ): Promise<Array<$entur$sdk$TripPattern>>,
 
         findTrips(

@@ -74,7 +74,7 @@ export function getNearestPlaces(
             .filter(Boolean)
     }
 
-    return journeyPlannerQuery(getNearestPlacesQuery, variables, undefined, this.config)
+    return journeyPlannerQuery(getNearestPlacesQuery, variables, this.config)
         .then((data: Object = {}) => (data?.nearest.edges || []).map(({ node }) => {
             const { distance, place } = node
 
