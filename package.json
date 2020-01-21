@@ -18,7 +18,9 @@
     "flow": "flow",
     "pretranspile": "npm test && rm -rf lib",
     "transpile": "babel src --out-dir lib --copy-files",
-    "prepublishOnly": "npm run transpile"
+    "prepublishOnly": "npm run transpile",
+    "docs": "docz dev",
+    "build:docs": "docz build"
   },
   "dependencies": {
     "@turf/bbox": "^6.0.1",
@@ -40,11 +42,15 @@
     "@babel/preset-flow": "^7.0.0",
     "@babel/register": "^7.6.2",
     "babel-eslint": "^10.0.3",
+    "docz": "^2.0.0-rc.23",
     "eslint": "^5.16.0",
     "eslint-config-airbnb": "^17.1.1",
     "eslint-plugin-flowtype": "^3.13.0",
     "eslint-plugin-import": "^2.18.2",
     "flow-bin": "^0.89.0",
+    "gatsby-theme-docz": "^2.2.0",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
     "typescript": "^3.7.4"
   }
 }

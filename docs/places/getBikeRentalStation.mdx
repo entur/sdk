@@ -1,0 +1,20 @@
+---
+name: getBikeRentalStation
+menu: Places
+route: /places/getBikeRentalStation
+---
+
+# getBikeRentalStation
+
+```javascript
+(stationId: string) => Promise<BikeRentalStation>
+```
+
+Types: [BikeRentalStation](flow-types/BikeRentalStation.js)
+
+`getBikeRentalStation` finds a single bike rental station by its ID.
+
+## Parameters
+
+### stationId (`string`)
+The ID of the bike rental station you are interested in. The method will return a Promise which will resolve to an object of type [BikeRentalStation](flow-types/BikeRentalStation.js).
