@@ -828,6 +828,7 @@ declare module '@entur/sdk' {
     /**
      * Utils
      */
+    declare export function getTripPatternsQuery(params: $entur$sdk$GetTripPatternsParams): { query: string, variables?: Object }
 
     declare export function convertFeatureToLocation(feature: $entur$sdk$Feature): $entur$sdk$Location
     declare export function convertLocationToPosition(feature: $entur$sdk$Feature): $entur$sdk$Location

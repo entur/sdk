@@ -826,6 +826,8 @@ export var FeatureCategory: {
  * Utils
  */
 
+export function getTripPatternsQuery(params: GetTripPatternsParams): { query: string, variables?: Object }
+
 export function convertFeatureToLocation(feature: Feature): Location;
 export function convertLocationToPosition(feature: Feature): Location;
 export function convertPositionToBbox(coordinates: Coordinates, distance: number): {
