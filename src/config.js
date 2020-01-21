@@ -2,7 +2,7 @@
 
 export type HostConfig = {
     host: string,
-    headers?: Object
+    headers?: {[string]: string},
 }
 
 export type ServiceConfig = {|
@@ -12,6 +12,7 @@ export type ServiceConfig = {|
         geocoder: string,
         nsr: string,
     },
+    headers: {[string]: string},
 |}
 
 export type ArgumentConfig = {|
@@ -21,6 +22,17 @@ export type ArgumentConfig = {|
         geocoder?: string,
         nsr?: string,
     },
+    headers?: {[string]: string},
+|}
+
+export type OverrideConfig = {|
+    clientName?: string,
+    hosts?: {
+        journeyPlanner?: string,
+        geocoder?: string,
+        nsr?: string,
+    },
+    headers?: {[string]: string},
 |}
 
 const HOST_CONFIG = {
@@ -35,37 +47,44 @@ export function getServiceConfig(config: ArgumentConfig): ServiceConfig {
             + 'See https://www.entur.org/dev/api/header/ for information.\n')
     }
 
-    const { hosts = {}, ...rest } = config
+    const { clientName, hosts = {}, headers = {} } = config
 
     return {
-        ...rest,
-        hosts: { ...HOST_CONFIG, ...hosts },
+        clientName,
+        headers,
+        hosts: {
+            ...HOST_CONFIG,
+            ...hosts,
+        },
     }
 }
 
-export function getJourneyPlannerHost({ hosts, clientName }: ServiceConfig): HostConfig {
+export function getJourneyPlannerHost({ hosts, clientName, headers }: ServiceConfig): HostConfig {
     return {
         host: hosts.journeyPlanner,
         headers: {
             'ET-Client-Name': clientName,
+            ...headers,
         },
     }
 }
 
-export function getGeocoderHost({ hosts, clientName }: ServiceConfig): HostConfig {
+export function getGeocoderHost({ hosts, clientName, headers }: ServiceConfig): HostConfig {
     return {
         host: hosts.geocoder,
         headers: {
             'ET-Client-Name': clientName,
+            ...headers,
         },
     }
 }
 
-export function getNSRHost({ hosts, clientName }: ServiceConfig): HostConfig {
+export function getNSRHost({ hosts, clientName, headers }: ServiceConfig): HostConfig {
     return {
         host: hosts.nsr,
         headers: {
             'ET-Client-Name': clientName,
+            ...headers,
         },
     }
 }

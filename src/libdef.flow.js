@@ -88,7 +88,18 @@ type $entur$sdk$Config = {|
         journeyPlanner?: string,
         geocoder?: string,
         nsr?: string,
-    }
+    },
+    headers?: {[string]: string},
+|}
+
+type $entur$sdk$OverrideConfig = {|
+    clientName?: string,
+    hosts?: {
+        journeyPlanner?: string,
+        geocoder?: string,
+        nsr?: string,
+    },
+    headers?: {[string]: string},
 |}
 
 type $entur$sdk$Coordinates = {
@@ -115,6 +126,7 @@ type $entur$sdk$ServiceConfig = {
         geocoder: string,
         nsr: string,
     },
+    headers: {[string]: string},
 }
 
 type $entur$sdk$ValidityPeriod = {
@@ -607,6 +619,7 @@ declare module '@entur/sdk' {
 
         getTripPatterns(
             params: $entur$sdk$GetTripPatternsParams,
+            overrideConfig?: $entur$sdk$OverrideConfig,
         ): Promise<Array<$entur$sdk$TripPattern>>,
 
         findTrips(

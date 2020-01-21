@@ -20,6 +20,8 @@ import { convertFeatureToLocation, isValidDate } from '../utils'
 
 import type { Leg } from '../fields/Leg'
 
+import type { OverrideConfig } from '../config'
+
 type TripPattern = {
     distance: number,
     directDuration: number,
@@ -70,6 +72,7 @@ export type GetTripPatternsParams = {
 
 export function getTripPatterns(
     params: GetTripPatternsParams = {},
+    overrideConfig?: OverrideConfig,
 ): Promise<Array<TripPattern>> {
     const {
         from,
@@ -95,7 +98,14 @@ export function getTripPatterns(
         ...rest,
     }
 
-    return journeyPlannerQuery(getTripPatternQuery, variables, this.config)
+    return journeyPlannerQuery(
+        getTripPatternQuery,
+        variables,
+        {
+            ...this.config,
+            ...overrideConfig,
+        },
+    )
         .then((data: Object = {}) => {
             if (!data?.trip?.tripPatterns) {
                 return []

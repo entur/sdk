@@ -7,7 +7,7 @@ route: /travel/getTripPatterns
 # getTripPatterns
 
 ```javascript
-(params: GetTripPatternsParams) => Promise<Array<TripPattern>>
+(params: GetTripPatternsParams, overrideConfig?: OverrideConfig) => Promise<Array<TripPattern>>
 ```
 
 Types: [TripPattern](flow-types/TripPattern.js)
@@ -53,6 +53,22 @@ interface InputWhiteListed {
     lines?: Array<string>;
     authorities?: Array<string>;
     organisations?: Array<string>;
+}
+```
+
+### overrideConfig (`OverrideConfig`) [Optional]
+
+You can override the default service config on invocation if necessary.
+
+```
+interface OverrideConfig {
+    clientName?: string;
+    hosts?: {
+        journeyPlanner?: string;
+        geocoder?: string;
+        nsr?: string;
+    };
+    headers?: {[key: string]: string};
 }
 ```
 
