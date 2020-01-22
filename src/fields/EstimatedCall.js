@@ -1,9 +1,29 @@
 // @flow
+import { uniq } from '../utils'
 
-import serviceJourneyFields, { type ServiceJourney } from './ServiceJourney'
-import noticeFields, { type Notice } from './Notice'
-import quayFields, { type Quay } from './Quay'
-import situationFields, { type Situation } from './Situation'
+import {
+    fragmentName as noticeFields,
+    fragments as noticeFragments,
+    type Notice,
+} from './Notice'
+
+import {
+    fragmentName as quayFields,
+    fragments as quayFragments,
+    type Quay,
+} from './Quay'
+
+import {
+    fragmentName as serviceJourneyFields,
+    fragments as serviceJourneyFragments,
+    type ServiceJourney,
+} from './ServiceJourney'
+
+import {
+    fragmentName as situationFields,
+    fragments as situationFragments,
+    type Situation,
+} from './Situation'
 
 export type EstimatedCall = {|
     actualArrivalTime?: string, // Only available AFTER arrival has taken place
@@ -29,24 +49,43 @@ export type EstimatedCall = {|
 
 export type IntermediateEstimatedCall = EstimatedCall
 
-export default {
-    actualArrivalTime: true,
-    actualDepartureTime: true,
-    aimedArrivalTime: true,
-    aimedDepartureTime: true,
-    cancellation: true,
-    date: true,
-    destinationDisplay: {
-        frontText: true,
-    },
-    expectedDepartureTime: true,
-    expectedArrivalTime: true,
-    forAlighting: true,
-    forBoarding: true,
-    notices: noticeFields,
-    quay: quayFields,
-    realtime: true,
-    requestStop: true,
-    serviceJourney: serviceJourneyFields,
-    situations: situationFields,
-}
+export const fragmentName = 'estimatedCallFields'
+
+const fragment = `
+fragment ${fragmentName} on EstimatedCall {
+    actualArrivalTime
+    actualDepartureTime
+    aimedArrivalTime
+    aimedDepartureTime
+    cancellation
+    date
+    destinationDisplay {
+        frontText
+    }
+    expectedDepartureTime
+    expectedArrivalTime
+    forAlighting
+    forBoarding
+    notices {
+        ...${noticeFields}
+    }
+    quay {
+        ...${quayFields}
+    }
+    realtime
+    requestStop
+    serviceJourney {
+        ...${serviceJourneyFields}
+    }
+    situations {
+        ...${situationFields}
+    }
+}`
+
+export const fragments = uniq<string>([
+    fragment,
+    ...noticeFragments,
+    ...quayFragments,
+    ...serviceJourneyFragments,
+    ...situationFragments,
+])

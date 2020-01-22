@@ -9,11 +9,19 @@ export type StopPlace = {
     }>,
 }
 
-export default {
-    id: true,
-    description: true,
-    name: true,
-    tariffZones: {
-        id: true,
-    },
+export const fragmentName = 'stopPlaceFields'
+
+const fragment = `
+fragment ${fragmentName} on StopPlace {
+    id
+    description
+    name
+    tariffZones {
+        id
+    }
 }
+`
+
+export const fragments = [
+    fragment,
+]

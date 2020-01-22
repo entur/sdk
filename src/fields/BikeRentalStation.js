@@ -10,12 +10,19 @@ export type BikeRentalStation = {
     latitude: number,
 }
 
-export default {
-    id: true,
-    name: true,
-    networks: true,
-    bikesAvailable: true,
-    spacesAvailable: true,
-    longitude: true,
-    latitude: true,
-}
+export const fragmentName = 'bikeRentalStationFields'
+
+const fragment = `
+fragment ${fragmentName} on BikeRentalStation {
+    id
+    name
+    networks
+    bikesAvailable
+    spacesAvailable
+    longitude
+    latitude
+}`
+
+export const fragments = [
+    fragment,
+]

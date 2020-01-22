@@ -1,7 +1,13 @@
 // @flow
 import type { MultilingualString } from '../../flow-types/MultilingualString'
 
-import lineFields, { type Line } from './Line'
+import { uniq } from '../utils'
+
+import {
+    fragmentName as lineFields,
+    fragments as lineFragments,
+    type Line,
+} from './Line'
 
 type ReportType = 'general' | 'incident' | null
 
@@ -22,28 +28,39 @@ export type Situation = {|
     }>,
 |}
 
-export default {
-    situationNumber: true,
-    summary: {
-        language: true,
-        value: true,
-    },
-    description: {
-        language: true,
-        value: true,
-    },
-    detail: {
-        language: true,
-        value: true,
-    },
-    lines: lineFields,
-    validityPeriod: {
-        startTime: true,
-        endTime: true,
-    },
-    reportType: true,
-    infoLinks: {
-        uri: true,
-        label: true,
-    },
+export const fragmentName = 'situationFields'
+
+export const fragment = `
+fragment ${fragmentName} on PtSituationElement {
+    situationNumber
+    summary {
+        language
+        value
+    }
+    description {
+        language
+        value
+    }
+    detail {
+        language
+        value
+    }
+    lines {
+        ...${lineFields}
+    }
+    validityPeriod {
+        startTime
+        endTime
+    }
+    reportType
+    infoLinks {
+        uri
+        label
+    }
 }
+`
+
+export const fragments = uniq<string>([
+    fragment,
+    ...lineFragments,
+])

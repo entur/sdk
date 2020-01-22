@@ -28,7 +28,7 @@ export function getGraphqlParams(
     variables?: Object
 } {
     const query = typeof queryObj === 'string'
-        ? queryObj
+        ? queryObj.trim()
         : jsonToGraphQLQuery(queryObj, { pretty })
 
     return {

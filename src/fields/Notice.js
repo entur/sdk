@@ -4,6 +4,14 @@ export type Notice = {|
     text: string,
 |}
 
-export default {
-    text: true,
+export const fragmentName = 'noticeFields'
+
+const fragment = `
+fragment ${fragmentName} on Notice {
+    text
 }
+`
+
+export const fragments = [
+    fragment,
+]
