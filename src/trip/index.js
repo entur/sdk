@@ -1,5 +1,5 @@
 // @flow
-import { journeyPlannerQuery } from '../api'
+import { journeyPlannerQuery, getGraphqlParams } from '../api'
 import {
     FOOT, BUS, TRAM, RAIL, METRO, WATER, AIR,
 } from '../constants/travelModes'
@@ -19,6 +19,8 @@ import type {
 import { convertFeatureToLocation, isValidDate } from '../utils'
 
 import type { Leg } from '../fields/Leg'
+
+import type { OverrideConfig } from '../config'
 
 type TripPattern = {
     distance: number,
@@ -68,9 +70,9 @@ export type GetTripPatternsParams = {
     whiteListed?: InputWhiteListed,
 }
 
-export function getTripPatterns(
+function getTripPatternsVariables(
     params: GetTripPatternsParams = {},
-): Promise<Array<TripPattern>> {
+): GetTripPatternsParams {
     const {
         from,
         to,
@@ -83,7 +85,7 @@ export function getTripPatterns(
         ...rest
     } = params
 
-    const variables = {
+    return {
         from,
         to,
         dateTime: searchDate.toISOString(),
@@ -94,8 +96,20 @@ export function getTripPatterns(
         numTripPatterns: limit,
         ...rest,
     }
+}
 
-    return journeyPlannerQuery(getTripPatternQuery, variables, this.config)
+export function getTripPatterns(
+    params: GetTripPatternsParams = {},
+    overrideConfig?: OverrideConfig,
+): Promise<Array<TripPattern>> {
+    return journeyPlannerQuery(
+        getTripPatternQuery,
+        getTripPatternsVariables(params),
+        {
+            ...this.config,
+            ...overrideConfig,
+        },
+    )
         .then((data: Object = {}) => {
             if (!data?.trip?.tripPatterns) {
                 return []
@@ -106,6 +120,12 @@ export function getTripPatterns(
                 legs: trip.legs.map(legMapper),
             }))
         })
+}
+
+export function getTripPatternsQuery(
+    params: GetTripPatternsParams = {},
+): { query: string, variables?: Object } {
+    return getGraphqlParams(getTripPatternQuery, getTripPatternsVariables(params))
 }
 
 export async function findTrips(

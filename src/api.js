@@ -20,6 +20,23 @@ function errorHandler(response: Object = {}): Object {
     return response.data
 }
 
+export function getGraphqlParams(
+    queryObj: Object | string,
+    variables?: Object,
+): {
+    query: string,
+    variables?: Object
+} {
+    const query = typeof queryObj === 'string'
+        ? queryObj
+        : jsonToGraphQLQuery(queryObj, { pretty })
+
+    return {
+        query,
+        variables,
+    }
+}
+
 export function journeyPlannerQuery<T>(
     queryObj: Object | string,
     variables?: Object,
@@ -28,11 +45,9 @@ export function journeyPlannerQuery<T>(
     const { host, headers } = getJourneyPlannerHost((this && this.config) || config)
     const url = `${host}/graphql`
 
-    const query = typeof queryObj === 'string'
-        ? queryObj
-        : jsonToGraphQLQuery(queryObj, { pretty })
+    const params = getGraphqlParams(queryObj, variables)
 
-    return post(url, { query, variables }, headers)
+    return post(url, params, headers)
         .then(errorHandler)
 }
 

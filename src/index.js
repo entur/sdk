@@ -8,6 +8,10 @@ export {
     throttler,
 } from './utils'
 
+export {
+    getTripPatternsQuery,
+} from './trip'
+
 export * from './constants/travelModes'
 export * from './constants/featureCategory'
 

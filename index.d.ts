@@ -9,6 +9,17 @@ export interface Config {
         geocoder?: string;
         nsr?: string;
     };
+    headers?: {[key: string]: string};
+}
+
+export interface OverrideConfig {
+    clientName?: string;
+    hosts?: {
+        journeyPlanner?: string;
+        geocoder?: string;
+        nsr?: string;
+    };
+    headers?: {[key: string]: string};
 }
 
 export interface Coordinates {
@@ -35,6 +46,7 @@ export interface ServiceConfig {
         geocoder: string;
         nsr: string;
     };
+    headers: {[key: string]: string};
 }
 
 interface ValidityPeriod {
@@ -603,6 +615,7 @@ declare class EnturService {
 
   getTripPatterns(
       params: GetTripPatternsParams,
+      overrideConfig?: OverrideConfig,
   ): Promise<TripPattern[]>;
 
   findTrips(
@@ -812,6 +825,8 @@ export var FeatureCategory: {
 /**
  * Utils
  */
+
+export function getTripPatternsQuery(params: GetTripPatternsParams): { query: string, variables?: Object }
 
 export function convertFeatureToLocation(feature: Feature): Location;
 export function convertLocationToPosition(feature: Feature): Location;
