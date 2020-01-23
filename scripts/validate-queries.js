@@ -1,45 +1,45 @@
-/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable import/no-extraneous-dependencies, no-console */
 
 /*
 This is a script that validates queries against the GraphQL schemas for JourneyPlanner and NSR.
 To download updated schemas, run the ./scripts/fetch-schemas.sh script.
 */
 
-const { parse, buildClientSchema } = require('graphql')
-const { validate } = require('graphql/validation')
+import { parse, buildClientSchema } from 'graphql'
+import { validate } from 'graphql/validation'
 
-const journeyplanner2SchemaJSON = require('../schemas/journeyplanner2.json')
-const nsrSchemaJSON = require('../schemas/nsr.json')
+import journeyplanner2SchemaJSON from '../schemas/journeyplanner2.json'
+import nsrSchemaJSON from '../schemas/nsr.json'
 
-const {
+import {
     getBikeRentalStationQuery,
     getBikeRentalStationsQuery,
     getBikeRentalStationsByPositionQuery,
-} = require('../src/bikeRental/query')
+} from '../src/bikeRental/query'
 
-const {
+import {
     getDeparturesFromStopPlacesQuery,
     getDeparturesFromQuayQuery,
     getDeparturesBetweenStopPlacesQuery,
     getDeparturesForServiceJourneyQuery,
-} = require('../src/departure/query')
+} from '../src/departure/query'
 
-const {
+import {
     getNearestPlacesQuery,
-} = require('../src/nearest/query')
+} from '../src/nearest/query'
 
-const {
+import {
     getStopPlaceQuery,
     getStopPlacesQuery,
     getParentStopPlaceQuery,
     getStopPlacesByBboxQuery,
     getStopPlaceFacilitiesQuery,
     getQuaysForStopPlaceQuery,
-} = require('../src/stopPlace/query')
+} from '../src/stopPlace/query'
 
-const {
+import {
     getTripPatternQuery,
-} = require('../src/trip/query')
+} from '../src/trip/query'
 
 const journeyplanner2Schema = buildClientSchema(journeyplanner2SchemaJSON.data)
 const nsrSchema = buildClientSchema(nsrSchemaJSON.data)
