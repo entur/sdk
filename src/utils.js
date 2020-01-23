@@ -79,6 +79,10 @@ export function uniqBy<T>(arr: Array<T>, predicate: (T) => any): Array<T> {
     }, new Map()).values()]
 }
 
+export function uniq<T>(arr: Array<T>): Array<T> {
+    return uniqBy<T>(arr, value => value)
+}
+
 export function forceOrder<T>(
     list: Array<T>,
     sequence: Array<any>,

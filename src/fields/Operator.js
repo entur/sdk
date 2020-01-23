@@ -6,8 +6,16 @@ export type Operator = {|
     url?: string,
 |}
 
-export default {
-    id: true,
-    name: true,
-    url: true,
+export const fragmentName = 'operatorFields'
+
+const fragment = `
+fragment ${fragmentName} on Operator {
+    id
+    name
+    url
 }
+`
+
+export const fragments = [
+    fragment,
+]

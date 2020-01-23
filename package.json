@@ -13,7 +13,7 @@
   "typings": "./index.d.ts",
   "scripts": {
     "lint": "eslint src/ example/",
-    "test": "npm run ts",
+    "test": "npm run ts && babel-node scripts/validate-queries.js",
     "ts": "tsc index.d.ts --noEmit",
     "flow": "flow",
     "pretranspile": "npm test && rm -rf lib",
@@ -26,7 +26,6 @@
     "@turf/bbox": "^6.0.1",
     "@turf/destination": "^6.0.1",
     "clean-deep": "^3.1.0",
-    "json-to-graphql-query": "^1.9.0",
     "node-fetch": "^2.6.0",
     "promise-throttle": "^1.0.1",
     "qs": "^6.9.0",
@@ -36,6 +35,7 @@
   "devDependencies": {
     "@babel/cli": "^7.6.4",
     "@babel/core": "^7.6.4",
+    "@babel/node": "^7.8.3",
     "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/plugin-proposal-optional-chaining": "^7.6.0",
     "@babel/preset-env": "^7.6.3",

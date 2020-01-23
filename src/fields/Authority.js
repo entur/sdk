@@ -7,8 +7,16 @@ export type Authority = {|
     url?: string,
 |}
 
-export default {
-    id: true,
-    name: true,
-    url: true,
+export const fragmentName = 'authorityFields'
+
+const fragment = `
+fragment ${fragmentName} on Authority {
+    id
+    name
+    url
 }
+`
+
+export const fragments = [
+    fragment,
+]

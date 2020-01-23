@@ -1,9 +1,19 @@
 // @flow
+import { uniq } from '../utils'
 
 import type { TransportSubmode } from '../../flow-types/Mode'
 
-import noticeFields, { type Notice } from './Notice'
-import lineFields, { type Line } from './Line'
+import {
+    fragmentName as noticeFields,
+    fragments as noticeFragments,
+    type Notice,
+} from './Notice'
+
+import {
+    fragmentName as lineFields,
+    fragments as lineFragments,
+    type Line,
+} from './Line'
 
 type JourneyPattern = {|
     line: Line,
@@ -18,13 +28,29 @@ export type ServiceJourney = {|
     transportSubmode?: TransportSubmode,
 |}
 
-export default {
-    id: true,
-    journeyPattern: {
-        line: lineFields,
-        notices: noticeFields,
-    },
-    notices: noticeFields,
-    publicCode: true,
-    transportSubmode: true,
+export const fragmentName = 'serviceJourneyFields'
+
+export const fragment = `
+fragment ${fragmentName} on ServiceJourney {
+    id
+    journeyPattern {
+        line {
+            ...${lineFields}
+        }
+        notices {
+            ...${noticeFields}
+        }
+    }
+    notices {
+        ...${noticeFields}
+    }
+    publicCode
+    transportSubmode
 }
+`
+
+export const fragments = uniq<string>([
+    fragment,
+    ...noticeFragments,
+    ...lineFragments,
+])

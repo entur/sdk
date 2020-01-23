@@ -1,16 +1,64 @@
 // @flow
 import type { LegMode, TransportSubmode } from '../../flow-types/Mode'
 
-import lineFields, { type Line } from './Line'
-import placeFields, { type Place } from './Place'
-import authorityFields, { type Authority } from './Authority'
-import operatorFields, { type Operator } from './Operator'
-import serviceJourneyFields, { type ServiceJourney } from './ServiceJourney'
-import situationFields, { type Situation } from './Situation'
+import { uniq } from '../utils'
+
+import {
+    fragmentName as lineFields,
+    fragments as lineFragments,
+    type Line,
+} from './Line'
+
+import {
+    fragmentName as placeFields,
+    fragments as placeFragments,
+    type Place,
+} from './Place'
+
+import {
+    fragmentName as authorityFields,
+    fragments as authorityFragments,
+    type Authority,
+} from './Authority'
+
+import {
+    fragmentName as operatorFields,
+    fragments as operatorFragments,
+    type Operator,
+} from './Operator'
+
+import {
+    fragmentName as serviceJourneyFields,
+    fragments as serviceJourneyFragments,
+    type ServiceJourney,
+} from './ServiceJourney'
+
+import {
+    fragmentName as situationFields,
+    fragments as situationFragments,
+    type Situation,
+} from './Situation'
+
+import {
+    fragmentName as interchangeFields,
+    fragments as interchangeFragments,
+    type Interchange,
+} from './Interchange'
+
+import {
+    fragmentName as pointsOnLinkFields,
+    fragments as pointsOnLinkFragments,
+    type PointsOnLink,
+} from './PointsOnLink'
+
+import {
+    fragmentName as estimatedCallFields,
+    fragments as estimatedCallFragments,
+    type EstimatedCall,
+    type IntermediateEstimatedCall,
+} from './EstimatedCall'
+
 import { type Notice } from './Notice'
-import interchangeFields, { type Interchange } from './Interchange'
-import pointsOnLinkFields, { type PointsOnLink } from './PointsOnLink'
-import estimatedCallFields, { type EstimatedCall, type IntermediateEstimatedCall } from './EstimatedCall'
 
 export type Leg = {|
     aimedEndTime: string,
@@ -41,30 +89,73 @@ export type Leg = {|
     transportSubmode: TransportSubmode,
 |}
 
-export default {
-    aimedEndTime: true,
-    aimedStartTime: true,
-    authority: authorityFields,
-    distance: true,
-    directDuration: true,
-    duration: true,
-    expectedEndTime: true,
-    expectedStartTime: true,
-    fromEstimatedCall: estimatedCallFields,
-    fromPlace: placeFields,
-    interchangeFrom: interchangeFields,
-    interchangeTo: interchangeFields,
-    intermediateEstimatedCalls: estimatedCallFields,
-    line: lineFields,
-    mode: true,
-    operator: operatorFields,
-    pointsOnLink: pointsOnLinkFields,
-    realtime: true,
-    ride: true,
-    rentedBike: true,
-    serviceJourney: serviceJourneyFields,
-    situations: situationFields,
-    toEstimatedCall: estimatedCallFields,
-    toPlace: placeFields,
-    transportSubmode: true,
+export const fragmentName = 'legFields'
+
+const fragment = `
+fragment ${fragmentName} on Leg {
+    aimedEndTime
+    aimedStartTime
+    authority {
+        ...${authorityFields}
+    }
+    distance
+    directDuration
+    duration
+    expectedEndTime
+    expectedStartTime
+    fromEstimatedCall {
+        ...${estimatedCallFields}
+    }
+    fromPlace {
+        ...${placeFields}
+    }
+    interchangeFrom {
+        ...${interchangeFields}
+    }
+    interchangeTo {
+        ...${interchangeFields}
+    }
+    intermediateEstimatedCalls {
+        ...${estimatedCallFields}
+    }
+    line {
+        ...${lineFields}
+    }
+    mode
+    operator {
+        ...${operatorFields}
+    }
+    pointsOnLink {
+        ...${pointsOnLinkFields}
+    }
+    realtime
+    ride
+    rentedBike
+    serviceJourney {
+        ...${serviceJourneyFields}
+    }
+    situations {
+        ...${situationFields}
+    }
+    toEstimatedCall {
+        ...${estimatedCallFields}
+    }
+    toPlace {
+        ...${placeFields}
+    }
+    transportSubmode
 }
+`
+
+export const fragments = uniq<string>([
+    fragment,
+    ...lineFragments,
+    ...placeFragments,
+    ...authorityFragments,
+    ...operatorFragments,
+    ...serviceJourneyFragments,
+    ...situationFragments,
+    ...interchangeFragments,
+    ...pointsOnLinkFragments,
+    ...estimatedCallFragments,
+])

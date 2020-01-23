@@ -1,35 +1,19 @@
 // @flow
 import type { TransportMode, TransportSubmode } from '../../flow-types/Mode'
 
-import noticeFields, { type Notice } from './Notice'
+import { uniq } from '../utils'
 
-type BookingMethod = 'callOffice' | 'online'
+import {
+    fragmentName as bookingArrangementFields,
+    fragments as bookingArrangementFragments,
+    type BookingArrangement,
+} from './BookingArrangement'
 
-type BookingContact = {
-  phone: string,
-  url: string,
-}
-
-type BookingArrangement = {
-  bookingAccess: boolean,
-  bookingContact: BookingContact,
-  latestBookingTime: string,
-  bookingMethods?: Array<BookingMethod>,
-  bookWhen?: string,
-  minimumBookingPeriod?: string,
-  bookingNote?: string,
-  buyWhen: string,
-}
-
-const bookingArrangementsFields = {
-    bookingMethods: true,
-    bookingNote: true,
-    minimumBookingPeriod: true,
-    bookingContact: {
-        phone: true,
-        url: true,
-    },
-}
+import {
+    fragmentName as noticeFields,
+    fragments as noticeFragments,
+    type Notice,
+} from './Notice'
 
 type FlexibleLineType =
     | 'corridorService'
@@ -55,14 +39,28 @@ export type Line = {
     transportSubmode: TransportSubmode,
 }
 
-export default {
-    bookingArrangements: bookingArrangementsFields,
-    description: true,
-    flexibleLineType: true,
-    id: true,
-    name: true,
-    notices: noticeFields,
-    publicCode: true,
-    transportMode: true,
-    transportSubmode: true,
+export const fragmentName = 'lineFields'
+
+export const fragment = `
+fragment ${fragmentName} on Line {
+    bookingArrangements {
+        ...${bookingArrangementFields}
+    }
+    description
+    flexibleLineType
+    id
+    name
+    notices {
+        ...${noticeFields}
+    }
+    publicCode
+    transportMode
+    transportSubmode
 }
+`
+
+export const fragments = uniq<string>([
+    fragment,
+    ...bookingArrangementFragments,
+    ...noticeFragments,
+])

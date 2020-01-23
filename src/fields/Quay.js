@@ -1,7 +1,18 @@
 // @flow
 
-import situationFields, { type Situation } from './Situation'
-import stopPlaceFields, { type StopPlace } from './StopPlace'
+import { uniq } from '../utils'
+
+import {
+    fragmentName as situationFields,
+    fragments as situationFragments,
+    type Situation,
+} from './Situation'
+
+import {
+    fragmentName as stopPlaceFields,
+    fragments as stopPlaceFragments,
+    type StopPlace,
+} from './StopPlace'
 
 export type Quay = {|
     id: string,
@@ -12,11 +23,25 @@ export type Quay = {|
     stopPlace: StopPlace,
 |}
 
-export default {
-    id: true,
-    name: true,
-    publicCode: true,
-    description: true,
-    situations: situationFields,
-    stopPlace: stopPlaceFields,
+export const fragmentName = 'quayFields'
+
+export const fragment = `
+fragment ${fragmentName} on Quay {
+    id
+    name
+    description
+    publicCode
+    situations {
+        ...${situationFields}
+    }
+    stopPlace {
+        ...${stopPlaceFields}
+    }
 }
+`
+
+export const fragments = uniq<string>([
+    fragment,
+    ...situationFragments,
+    ...stopPlaceFragments,
+])

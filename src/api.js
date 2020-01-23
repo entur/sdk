@@ -1,12 +1,12 @@
 // @flow
-import { jsonToGraphQLQuery } from 'json-to-graphql-query'
-
 import { post } from './http'
 
 import { getJourneyPlannerHost, getNSRHost } from './config'
 import type { ServiceConfig } from './config'
 
-const pretty = process.env.NODE_ENV !== 'production'
+function minify(query: string): string {
+    return query.trim().replace(/\s+/g, ' ')
+}
 
 function errorHandler(response: Object = {}): Object {
     if (response?.errors?.[0]) {
@@ -21,18 +21,14 @@ function errorHandler(response: Object = {}): Object {
 }
 
 export function getGraphqlParams(
-    queryObj: Object | string,
+    query: string,
     variables?: Object,
 ): {
     query: string,
     variables?: Object
 } {
-    const query = typeof queryObj === 'string'
-        ? queryObj
-        : jsonToGraphQLQuery(queryObj, { pretty })
-
     return {
-        query,
+        query: minify(query),
         variables,
     }
 }
@@ -52,17 +48,13 @@ export function journeyPlannerQuery<T>(
 }
 
 export function nsrQuery<T>(
-    queryObj: Object | string,
+    query: string,
     variables?: Object,
     config?: ServiceConfig,
 ): Promise<T> {
     const { host, headers } = getNSRHost((this && this.config) || config)
     const url = `${host}/graphql`
 
-    const query = typeof queryObj === 'string'
-        ? queryObj
-        : jsonToGraphQLQuery(queryObj, { pretty })
-
-    return post(url, { query, variables }, headers)
+    return post(url, { query: minify(query), variables }, headers)
         .then(errorHandler)
 }
