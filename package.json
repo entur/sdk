@@ -13,7 +13,7 @@
   "typings": "./index.d.ts",
   "scripts": {
     "lint": "eslint src/",
-    "test": "npm run ts && babel-node scripts/validate-queries.js",
+    "test": "npm run lint && npm run ts && babel-node scripts/validate-queries.js",
     "ts": "tsc index.d.ts --noEmit",
     "flow": "flow",
     "pretranspile": "npm test && rm -rf lib",
