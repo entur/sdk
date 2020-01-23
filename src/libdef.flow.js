@@ -794,7 +794,7 @@ declare module '@entur/sdk' {
     declare export var FERRY_STOP: 'ferryStop'
     declare export var LIFT_STATION: 'liftStation'
     declare export var VEHICLE_RAIL_INTERCHANGE: 'vehicleRailInterchange'
-    declare export var GROUP_OF_STOPP_LACES: 'GroupOfStopPlaces'
+    declare export var GROUP_OF_STOP_PLACES: 'GroupOfStopPlaces'
     declare export var POI: 'poi'
     declare export var VEGADRESSE: 'Vegadresse'
     declare export var STREET: 'street'
@@ -816,7 +816,7 @@ declare module '@entur/sdk' {
         FERRY_STOP: 'ferryStop',
         LIFT_STATION: 'liftStation',
         VEHICLE_RAIL_INTERCHANGE: 'vehicleRailInterchange',
-        GROUP_OF_STOPP_LACES: 'GroupOfStopPlaces',
+        GROUP_OF_STOP_PLACES: 'GroupOfStopPlaces',
         POI: 'poi',
         VEGADRESSE: 'Vegadresse',
         STREET: 'street',

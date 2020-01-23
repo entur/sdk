@@ -791,7 +791,7 @@ export var FERRY_PORT: 'ferryPort';
 export var FERRY_STOP: 'ferryStop';
 export var LIFT_STATION: 'liftStation';
 export var VEHICLE_RAIL_INTERCHANGE: 'vehicleRailInterchange';
-export var GROUP_OF_STOPP_LACES: 'GroupOfStopPlaces';
+export var GROUP_OF_STOP_PLACES: 'GroupOfStopPlaces';
 export var POI: 'poi';
 export var VEGADRESSE: 'Vegadresse';
 export var STREET: 'street';
