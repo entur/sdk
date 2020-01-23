@@ -26,6 +26,7 @@ export type DeparturesById = {
 }
 
 type GetDeparturesParams = {
+    includeCancelledTrips?: boolean,
     includeNonBoarding?: boolean,
     limit?: number,
     limitPerLine?: number,
