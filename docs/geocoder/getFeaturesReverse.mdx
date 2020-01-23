@@ -1,0 +1,28 @@
+---
+name: getFeaturesReverse
+menu: Geocoder
+---
+
+# getFeaturesReverse
+
+```javascript
+(coords: Coordinates, params?: GetFeaturesReverseParam) => Promise<Array<Feature>>
+```
+
+`getFeaturesReverse` does a reverse lookup of stop places, stations or addresses around the given coordinates.
+
+## Parameters
+
+### coords (`Coordinates`)
+
+The coordinates to do a lookup for. Examples: `{ latitude: 59.909774, longitude: 10.763712 }`.
+
+### params (`ReverseGeocoderParams`) [Optional]
+
+An optional object of parameters to pass to the query.
+
+| Key      | Type             | Default               | Description                                                                                                                                                                              |
+| :------- | :--------------- | :-------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `radius` | `number`         | 1                     | Radius (in meters) from the given point to limit results.                                                                                                                                |
+| `size`   | `number`         | 10                    | The number of results to return                                                                                                                                                          |
+| `layers` |  `Array<string>` | `["venue","address"]` | The types of places to search for in a comma-separated string. `venue` means stop places and stations, `address` means postal addresses that might not be connected to public transport. |

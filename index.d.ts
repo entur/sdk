@@ -9,7 +9,7 @@ export interface Config {
         geocoder?: string;
         nsr?: string;
     };
-    headers?: {[key: string]: string};
+    headers?: { [key: string]: string };
 }
 
 export interface OverrideConfig {
@@ -19,7 +19,7 @@ export interface OverrideConfig {
         geocoder?: string;
         nsr?: string;
     };
-    headers?: {[key: string]: string};
+    headers?: { [key: string]: string };
 }
 
 export interface Coordinates {
@@ -37,7 +37,7 @@ export interface Notice {
     text: string;
 }
 
-export type ReportType = "general" | "incident" | null;
+export type ReportType = 'general' | 'incident' | null;
 
 export interface ServiceConfig {
     clientName: string;
@@ -46,7 +46,7 @@ export interface ServiceConfig {
         geocoder: string;
         nsr: string;
     };
-    headers: {[key: string]: string};
+    headers: { [key: string]: string };
 }
 
 interface ValidityPeriod {
@@ -55,8 +55,8 @@ interface ValidityPeriod {
 }
 
 interface InfoLink {
-  uri: string;
-  label: string;
+    uri: string;
+    label: string;
 }
 
 export interface Situation {
@@ -89,50 +89,56 @@ export interface BikeRentalStation {
  */
 
 export type Category =
-    | "onstreetBus"
-    | "onstreetTram"
-    | "airport"
-    | "railStation"
-    | "metroStation"
-    | "busStation"
-    | "coachStation"
-    | "tramStation"
-    | "harbourPort"
-    | "ferryPort"
-    | "ferryStop"
-    | "liftStation"
-    | "vehicleRailInterchange"
-    | "other"
-    | "GroupOfStopPlaces"
-    | "poi"
-    | "Vegadresse"
-    | "street"
-    | "tettsteddel"
-    | "bydel";
+    | 'onstreetBus'
+    | 'onstreetTram'
+    | 'airport'
+    | 'railStation'
+    | 'metroStation'
+    | 'busStation'
+    | 'coachStation'
+    | 'tramStation'
+    | 'harbourPort'
+    | 'ferryPort'
+    | 'ferryStop'
+    | 'liftStation'
+    | 'vehicleRailInterchange'
+    | 'other'
+    | 'GroupOfStopPlaces'
+    | 'poi'
+    | 'Vegadresse'
+    | 'street'
+    | 'tettsteddel'
+    | 'bydel';
 
 export interface GetFeaturesParams {
-    "boundary.rect.min_lon"?: number;
-    "boundary.rect.max_lon"?: number;
-    "boundary.rect.min_lat"?: number;
-    "boundary.rect.max_lat"?: number;
-    "boundary.country"?: string;
+    'boundary.rect.min_lon'?: number;
+    'boundary.rect.max_lon'?: number;
+    'boundary.rect.min_lat'?: number;
+    'boundary.rect.max_lat'?: number;
+    'boundary.country'?: string;
     sources?: Array<string>;
     layers?: Array<string>;
     limit?: number;
 }
 
+export interface GetFeaturesReverseParam {
+    radius?: number;
+    size?: number;
+    layers?: Array<string>;
+}
+
 export interface Feature {
     geometry: {
         coordinates: [number, number]; // longitude, latitude
-        type: "Point";
+        type: 'Point';
     };
     properties: {
         id: string;
         name: string;
         label?: string;
         borough: string;
-        accuracy: "point";
-        layer: "venue" | "address";
+        accuracy: 'point';
+        layer: 'venue' | 'address';
         borough_gid: string;
         category: Array<Category>;
         country_gid: string;
@@ -154,7 +160,6 @@ export interface Location {
     place?: string;
     coordinates?: Coordinates;
 }
-
 
 /**
  * Trip
@@ -179,7 +184,7 @@ export interface StopPlace {
     id: string;
     name: string;
     tariffZones?: Array<{
-        id: string
+        id: string;
     }>;
 }
 
@@ -211,9 +216,9 @@ export type TransportMode =
     | 'rail'
     | 'tram'
     | 'unknown'
-    | 'water'
+    | 'water';
 
-// All valid values for the "mode" parameter to JourneyPlanner
+// All valid values for the 'mode' parameter to JourneyPlanner
 export type QueryMode =
     | 'air'
     | 'bicycle'
@@ -231,7 +236,7 @@ export type QueryMode =
     | 'rail'
     | 'tram'
     | 'transit'
-    | 'water'
+    | 'water';
 
 export type LegMode = TransportMode | 'bicycle' | 'car' | 'foot';
 
@@ -270,7 +275,7 @@ export type TransportSubmode =
     | 'domesticFlight'
     | 'helicopterService'
     | 'telecabin'
-    | 'funicular'
+    | 'funicular';
 
 export interface DestinationDisplay {
     frontText: string;
@@ -296,9 +301,9 @@ export interface EstimatedCall {
     situations: Array<Situation>;
 }
 
-export type IntermediateEstimatedCall = EstimatedCall
+export type IntermediateEstimatedCall = EstimatedCall;
 
-export type Departure = EstimatedCall
+export type Departure = EstimatedCall;
 
 export type BookingMethod = 'callOffice' | 'online';
 
@@ -340,7 +345,7 @@ export type FlexibleLineType =
     | 'mixedFlexible'
     | 'mixedFlexibleAndFixed'
     | 'fixed'
-    | 'other'
+    | 'other';
 
 export interface Interchange {
     guaranteed: boolean;
@@ -348,8 +353,8 @@ export interface Interchange {
 }
 
 export interface PointsOnLink {
-  points: string;
-  length: number;
+    points: string;
+    length: number;
 }
 
 export interface JourneyPattern {
@@ -370,14 +375,14 @@ export interface Leg {
     aimedStartTime: string;
     authority?: Authority;
     distance: number;
-    directDuration: number,
+    directDuration: number;
     duration: number;
     expectedEndTime: string;
     expectedStartTime: string;
     fromEstimatedCall?: EstimatedCall;
     fromPlace: Place;
-    interchangeFrom?: Interchange,
-    interchangeTo?: Interchange,
+    interchangeFrom?: Interchange;
+    interchangeTo?: Interchange;
     intermediateEstimatedCalls: Array<IntermediateEstimatedCall>;
     line?: Line;
     mode: LegMode;
@@ -433,10 +438,10 @@ export interface GetTripPatternsParams {
 
 export interface TripPattern {
     distance: number;
-    directDuration: number,
+    directDuration: number;
     duration: number;
     endTime: string;
-    id?: string,
+    id?: string;
     legs: Array<Leg>;
     startTime: string;
     walkDistance: number;
@@ -467,14 +472,14 @@ export type TypeName =
     | 'BikeRentalStation'
     | 'CarPark'
     | 'Quay'
-    | 'StopPlace'
+    | 'StopPlace';
 
 export interface NearestPlace {
-    id: string,
-    type: TypeName,
-    distance: number,
-    latitude: number,
-    longitude: number,
+    id: string;
+    type: TypeName;
+    distance: number;
+    latitude: number;
+    longitude: number;
 }
 
 /**
@@ -492,14 +497,18 @@ export interface StopPlaceDetails {
     description?: string;
     latitude: number;
     longitude: number;
-    wheelchairBoarding: "noInformation" | "possible" | "notPossible";
-    weighting: "preferredInterchange" | "recommendedInterchange" | "interchangeAllowed" | "noInterchange";
+    wheelchairBoarding: 'noInformation' | 'possible' | 'notPossible';
+    weighting:
+        | 'preferredInterchange'
+        | 'recommendedInterchange'
+        | 'interchangeAllowed'
+        | 'noInterchange';
     transportMode: TransportMode;
     transportSubmode?: TransportSubmode;
     quays?: Array<Quay & { situations?: Situation[] }>;
 }
 
-export type LimitationStatusType = "FALSE" | "TRUE" | "PARTIAL" | "UNKNOWN";
+export type LimitationStatusType = 'FALSE' | 'TRUE' | 'PARTIAL' | 'UNKNOWN';
 
 export interface WaitingRoomEquipment {
     id: string;
@@ -512,7 +521,7 @@ export interface ShelterEquipment {
 export interface SanitaryEquipment {
     id: string;
     numberOfToilets: number;
-    gender: "both" | "femaleOnly" | "maleOnly" | "sameSexOnly";
+    gender: 'both' | 'femaleOnly' | 'maleOnly' | 'sameSexOnly';
 }
 
 export interface TicketingEquipment {
@@ -523,41 +532,41 @@ export interface TicketingEquipment {
 }
 
 export type ParkingVehicle =
-    | "pedalCycle"
-    | "moped"
-    | "motorcycle"
-    | "motorcycleWithSidecar"
-    | "motorScooter"
-    | "twoWheeledVehicle"
-    | "threeWheeledVehicle"
-    | "car"
-    | "smallCar"
-    | "passengerCar"
-    | "largeCar"
-    | "fourWheelDrive"
-    | "taxi"
-    | "camperCar"
-    | "carWithTrailer"
-    | "carWithCaravan"
-    | "minibus"
-    | "bus"
-    | "van"
-    | "largeVan"
-    | "highSidedVehicle"
-    | "lightGoodsVehicle"
-    | "heavyGoodsVehicle"
-    | "truck"
-    | "agriculturalVehicle"
-    | "tanker"
-    | "tram"
-    | "articulatedVehicle"
-    | "vehicleWithTrailer"
-    | "lightGoodsVehicleWithTrailer"
-    | "heavyGoodsVehicleWithTrailer"
-    | "undefined"
-    | "other"
-    | "allPassengerVehicles"
-    | "all";
+    | 'pedalCycle'
+    | 'moped'
+    | 'motorcycle'
+    | 'motorcycleWithSidecar'
+    | 'motorScooter'
+    | 'twoWheeledVehicle'
+    | 'threeWheeledVehicle'
+    | 'car'
+    | 'smallCar'
+    | 'passengerCar'
+    | 'largeCar'
+    | 'fourWheelDrive'
+    | 'taxi'
+    | 'camperCar'
+    | 'carWithTrailer'
+    | 'carWithCaravan'
+    | 'minibus'
+    | 'bus'
+    | 'van'
+    | 'largeVan'
+    | 'highSidedVehicle'
+    | 'lightGoodsVehicle'
+    | 'heavyGoodsVehicle'
+    | 'truck'
+    | 'agriculturalVehicle'
+    | 'tanker'
+    | 'tram'
+    | 'articulatedVehicle'
+    | 'vehicleWithTrailer'
+    | 'lightGoodsVehicleWithTrailer'
+    | 'heavyGoodsVehicleWithTrailer'
+    | 'undefined'
+    | 'other'
+    | 'allPassengerVehicles'
+    | 'all';
 
 export interface StopPlaceFacilitiesStopPlace {
     id: string;
@@ -566,14 +575,14 @@ export interface StopPlaceFacilitiesStopPlace {
         limitations: {
             wheelchairAccess: LimitationStatusType;
             stepFreeAccess: LimitationStatusType;
-        }
-    },
+        };
+    };
     placeEquipments: {
         waitingRoomEquipment?: Array<WaitingRoomEquipment>;
         shelterEquipment?: Array<ShelterEquipment>;
         sanitaryEquipment?: Array<SanitaryEquipment>;
         ticketingEquipment?: Array<TicketingEquipment>;
-    }
+    };
 }
 
 export interface StopPlaceFacilitiesParking {
@@ -594,110 +603,117 @@ export interface StopPlaceParams {
 }
 
 declare class EnturService {
-  constructor(args: Config);
+    constructor(args: Config);
 
-  journeyPlannerQuery<journeyPlannerResponse>(
-      queryObj: Object | string,
-      variables?: Object,
-      config?: ServiceConfig,
-  ): Promise<journeyPlannerResponse>;
+    journeyPlannerQuery<journeyPlannerResponse>(
+        queryObj: Object | string,
+        variables?: Object,
+        config?: ServiceConfig
+    ): Promise<journeyPlannerResponse>;
 
-  nsrQuery<nsrResponse>(
-      queryObj: Object | string,
-      variables?: Object,
-      config?: ServiceConfig,
-  ): Promise<nsrResponse>;
+    nsrQuery<nsrResponse>(
+        queryObj: Object | string,
+        variables?: Object,
+        config?: ServiceConfig
+    ): Promise<nsrResponse>;
 
-  getFeatures(
-    query: string,
-    coords?: Coordinates,
-    params?: GetFeaturesParams,
-  ): Promise<Feature[]>;
+    getFeatures(
+        query: string,
+        coords?: Coordinates,
+        params?: GetFeaturesParams
+    ): Promise<Feature[]>;
 
-  getTripPatterns(
-      params: GetTripPatternsParams,
-      overrideConfig?: OverrideConfig,
-  ): Promise<TripPattern[]>;
+    getFeaturesReverse(
+        coords: Coordinates,
+        params?: GetFeaturesReverseParam
+    ): Promise<Feature[]>;
 
-  findTrips(
-    from: string,
-    to: string,
-    date?: Date | string | number,
-  ): Promise<TripPattern[]>;
+    getTripPatterns(
+        params: GetTripPatternsParams,
+        overrideConfig?: OverrideConfig
+    ): Promise<TripPattern[]>;
 
-  getDeparturesFromStopPlaces(
-      stopPlaceIds: Array<string>,
-      params?: GetDeparturesParams,
-  ): Promise<Array<DeparturesById | void>>;
+    findTrips(
+        from: string,
+        to: string,
+        date?: Date | string | number
+    ): Promise<TripPattern[]>;
 
-  getDeparturesFromStopPlace(
-      stopPlaceId: string,
-      params?: GetDeparturesParams,
-  ): Promise<Departure[]>;
+    getDeparturesFromStopPlaces(
+        stopPlaceIds: Array<string>,
+        params?: GetDeparturesParams
+    ): Promise<Array<DeparturesById | void>>;
 
-  getDeparturesFromQuays(
-      quayIds: Array<string>,
-      params?: GetDeparturesParams,
-  ): Promise<Array<DeparturesById | undefined>>;
+    getDeparturesFromStopPlace(
+        stopPlaceId: string,
+        params?: GetDeparturesParams
+    ): Promise<Departure[]>;
 
-  getDeparturesBetweenStopPlaces(
-      fromStopPlaceId: string,
-      toStopPlaceId: string,
-      params?: GetDeparturesBetweenStopPlacesParams,
-  ): Promise<Departure[]>;
+    getDeparturesFromQuays(
+        quayIds: Array<string>,
+        params?: GetDeparturesParams
+    ): Promise<Array<DeparturesById | undefined>>;
 
-  getDeparturesForServiceJourney(
-      id: string,
-      date?: string,
-  ): Promise<Departure[]>;
+    getDeparturesBetweenStopPlaces(
+        fromStopPlaceId: string,
+        toStopPlaceId: string,
+        params?: GetDeparturesBetweenStopPlacesParams
+    ): Promise<Departure[]>;
 
-  getNearestPlaces(
-      coordinates: Coordinates,
-      params?: {
-          maximumDistance?: number,
-          maximumResults?: number,
-          filterByPlaceTypes?: Array<TypeName>,
-          filterByModes?: Array<TransportMode>,
-          filterByInUse?: boolean,
-          multiModalMode?: 'parent' | 'child' | 'all',
-      },
-  ): Promise<Array<NearestPlace>>;
+    getDeparturesForServiceJourney(
+        id: string,
+        date?: string
+    ): Promise<Departure[]>;
 
-  getStopPlace(
-      id: string,
-      params?: StopPlaceParams,
-  ): Promise<StopPlaceDetails>;
+    getNearestPlaces(
+        coordinates: Coordinates,
+        params?: {
+            maximumDistance?: number;
+            maximumResults?: number;
+            filterByPlaceTypes?: Array<TypeName>;
+            filterByModes?: Array<TransportMode>;
+            filterByInUse?: boolean;
+            multiModalMode?: 'parent' | 'child' | 'all';
+        }
+    ): Promise<Array<NearestPlace>>;
 
-  getStopPlaces(
-      stopPlaceId: Array<string>,
-      params?: StopPlaceParams,
-  ): Promise<Array<StopPlaceDetails | undefined>>;
+    getStopPlace(
+        id: string,
+        params?: StopPlaceParams
+    ): Promise<StopPlaceDetails>;
 
-  getParentStopPlace(
-    id: string,
-    params?: StopPlaceParams,
-): Promise<StopPlaceDetails | null>;
+    getStopPlaces(
+        stopPlaceId: Array<string>,
+        params?: StopPlaceParams
+    ): Promise<Array<StopPlaceDetails | undefined>>;
 
-  getStopPlacesByPosition(
-    coordinates: Coordinates,
-    distance?: number,
-  ): Promise<StopPlace[]>;
+    getParentStopPlace(
+        id: string,
+        params?: StopPlaceParams
+    ): Promise<StopPlaceDetails | null>;
 
-  getStopPlaceFacilities(stopPlaceId: string): Promise<StopPlaceFacilities>;
+    getStopPlacesByPosition(
+        coordinates: Coordinates,
+        distance?: number
+    ): Promise<StopPlace[]>;
 
-  getQuaysForStopPlace(
-      stopPlaceId: string,
-      params?: StopPlaceParams,
-  ): Promise<Quay[]>;
+    getStopPlaceFacilities(stopPlaceId: string): Promise<StopPlaceFacilities>;
 
-  getBikeRentalStation(stationId: string): Promise<BikeRentalStation>;
+    getQuaysForStopPlace(
+        stopPlaceId: string,
+        params?: StopPlaceParams
+    ): Promise<Quay[]>;
 
-  getBikeRentalStations(stationIds: Array<string>): Promise<Array<BikeRentalStation | undefined>>;
+    getBikeRentalStation(stationId: string): Promise<BikeRentalStation>;
 
-  getBikeRentalStationsByPosition(
-    coordinates: Coordinates,
-    distance?: number,
-  ): Promise<BikeRentalStation[]>;
+    getBikeRentalStations(
+        stationIds: Array<string>
+    ): Promise<Array<BikeRentalStation | undefined>>;
+
+    getBikeRentalStationsByPosition(
+        coordinates: Coordinates,
+        distance?: number
+    ): Promise<BikeRentalStation[]>;
 }
 
 export default EnturService;
@@ -741,42 +757,42 @@ export var TOURIST_RAILWAY: 'touristRailway';
 export var AIRPORT_LINK_BUS: 'airportLinkBus';
 
 export var TransportMode: {
-    BUS: 'bus',
-    TRAM: 'tram',
-    RAIL: 'rail',
-    METRO: 'metro',
-    WATER: 'water',
-    AIR: 'air',
-    COACH: 'coach',
-    CAR: 'car',
+    BUS: 'bus';
+    TRAM: 'tram';
+    RAIL: 'rail';
+    METRO: 'metro';
+    WATER: 'water';
+    AIR: 'air';
+    COACH: 'coach';
+    CAR: 'car';
 };
 
 export var LegMode: {
-    BUS: 'bus',
-    TRAM: 'tram',
-    RAIL: 'rail',
-    METRO: 'metro',
-    WATER: 'water',
-    AIR: 'air',
-    COACH: 'coach',
-    CAR: 'car',
-    FOOT: 'foot',
-    BICYCLE: 'bicycle',
+    BUS: 'bus';
+    TRAM: 'tram';
+    RAIL: 'rail';
+    METRO: 'metro';
+    WATER: 'water';
+    AIR: 'air';
+    COACH: 'coach';
+    CAR: 'car';
+    FOOT: 'foot';
+    BICYCLE: 'bicycle';
 };
 
 export var TransportSubmode: {
-    AIRPORT_LINK_RAIL: 'airportLinkRail',
-    HIGH_SPEED_PASSENGER_SERVICE: 'highSpeedPassengerService',
-    HIGH_SPEED_VEHICLE_SERVICE: 'highSpeedVehicleService',
-    INTERNATIONAL_CAR_FERRY: 'internationalCarFerry',
-    LOCAL_CAR_FERRY: 'localCarFerry',
-    LOCAL_PASSENGER_FERRY: 'localPassengerFerry',
-    NATIONAL_CAR_FERRY: 'nationalCarFerry',
-    RAIL_REPLACEMENT_BUS: 'railReplacementBus',
-    REGIONAL_CAR_FERRY: 'regionalCarFerry',
-    TOURIST_RAILWAY: 'touristRailway',
-    AIRPORT_LINK_BUS: 'airportLinkBus',
-    CITY_TRAM: 'cityTram',
+    AIRPORT_LINK_RAIL: 'airportLinkRail';
+    HIGH_SPEED_PASSENGER_SERVICE: 'highSpeedPassengerService';
+    HIGH_SPEED_VEHICLE_SERVICE: 'highSpeedVehicleService';
+    INTERNATIONAL_CAR_FERRY: 'internationalCarFerry';
+    LOCAL_CAR_FERRY: 'localCarFerry';
+    LOCAL_PASSENGER_FERRY: 'localPassengerFerry';
+    NATIONAL_CAR_FERRY: 'nationalCarFerry';
+    RAIL_REPLACEMENT_BUS: 'railReplacementBus';
+    REGIONAL_CAR_FERRY: 'regionalCarFerry';
+    TOURIST_RAILWAY: 'touristRailway';
+    AIRPORT_LINK_BUS: 'airportLinkBus';
+    CITY_TRAM: 'cityTram';
 };
 
 export var ONSTREET_BUS: 'onstreetBus';
@@ -827,20 +843,25 @@ export var FeatureCategory: {
  * Utils
  */
 
-export function getTripPatternsQuery(params: GetTripPatternsParams): { query: string, variables?: Object }
+export function getTripPatternsQuery(
+    params: GetTripPatternsParams
+): { query: string; variables?: Object };
 
 export function convertFeatureToLocation(feature: Feature): Location;
 export function convertLocationToPosition(feature: Feature): Location;
-export function convertPositionToBbox(coordinates: Coordinates, distance: number): {
-    minLng: number,
-    minLat: number,
-    maxLng: number,
-    maxLat: number,
+export function convertPositionToBbox(
+    coordinates: Coordinates,
+    distance: number
+): {
+    minLng: number;
+    minLat: number;
+    maxLng: number;
+    maxLat: number;
 };
 
 export function throttler<T, U>(
-  func: (arg: T) => Promise<U>,
-  args: T[]
+    func: (arg: T) => Promise<U>,
+    args: T[]
 ): Promise<U[]>;
 
 export function isAir(mode: string): boolean;
