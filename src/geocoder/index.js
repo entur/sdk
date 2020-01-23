@@ -8,7 +8,7 @@ import type { Coordinates } from '../../flow-types/Coordinates'
 type PositionParam = {
     'focus.point.lat': number,
     'focus.point.lon': number
-};
+}
 
 function getPositionParamsFromGeolocationResult(
     coords?: Coordinates,
@@ -34,7 +34,7 @@ type GetFeaturesParam = {
     sources?: Array<string>,
     layers?: Array<string>,
     limit?: number
-};
+}
 
 export function getFeatures(
     text: string,
@@ -64,7 +64,7 @@ type GetFeaturesReverseParam = {
     radius?: number,
     size?: number,
     layers?: Array<string>
-};
+}
 
 export function getFeaturesReverse(
     coords: Coordinates,
