@@ -1,10 +1,7 @@
 // @flow
 import { journeyPlannerQuery, nsrQuery } from './api'
 
-import {
-    findTrips,
-    getTripPatterns,
-} from './trip'
+import { findTrips, getTripPatterns } from './trip'
 
 import {
     getDeparturesFromStopPlace,
@@ -15,9 +12,7 @@ import {
     getStopPlaceDeparturesDEPRECATED,
 } from './departure'
 
-import {
-    getNearestPlaces,
-} from './nearest'
+import { getNearestPlaces } from './nearest'
 
 import {
     getStopPlace,
@@ -34,7 +29,7 @@ import {
     getBikeRentalStationsByPosition,
 } from './bikeRental'
 
-import { getFeatures } from './geocoder'
+import { getFeatures, getFeaturesReverse } from './geocoder'
 import { getServiceConfig } from './config'
 import type { ServiceConfig, ArgumentConfig } from './config'
 
@@ -45,47 +40,49 @@ class EnturService {
         this.config = getServiceConfig(config)
     }
 
-    journeyPlannerQuery = journeyPlannerQuery
+    journeyPlannerQuery = journeyPlannerQuery;
 
-    nsrQuery = nsrQuery
+    nsrQuery = nsrQuery;
 
-    getFeatures = getFeatures
+    getFeatures = getFeatures;
 
-    getTripPatterns = getTripPatterns
+    getFeaturesReverse = getFeaturesReverse;
 
-    findTrips = findTrips
+    getTripPatterns = getTripPatterns;
 
-    getStopPlaceDepartures = getStopPlaceDeparturesDEPRECATED
+    findTrips = findTrips;
 
-    getDeparturesFromStopPlace = getDeparturesFromStopPlace
+    getStopPlaceDepartures = getStopPlaceDeparturesDEPRECATED;
 
-    getDeparturesFromStopPlaces = getDeparturesFromStopPlaces
+    getDeparturesFromStopPlace = getDeparturesFromStopPlace;
 
-    getDeparturesFromQuays = getDeparturesFromQuays
+    getDeparturesFromStopPlaces = getDeparturesFromStopPlaces;
 
-    getDeparturesBetweenStopPlaces = getDeparturesBetweenStopPlaces
+    getDeparturesFromQuays = getDeparturesFromQuays;
 
-    getDeparturesForServiceJourney = getDeparturesForServiceJourney
+    getDeparturesBetweenStopPlaces = getDeparturesBetweenStopPlaces;
 
-    getNearestPlaces = getNearestPlaces
+    getDeparturesForServiceJourney = getDeparturesForServiceJourney;
 
-    getStopPlace = getStopPlace
+    getNearestPlaces = getNearestPlaces;
 
-    getStopPlaces = getStopPlaces
+    getStopPlace = getStopPlace;
 
-    getParentStopPlace = getParentStopPlace
+    getStopPlaces = getStopPlaces;
 
-    getStopPlacesByPosition = getStopPlacesByPosition
+    getParentStopPlace = getParentStopPlace;
 
-    getStopPlaceFacilities = getStopPlaceFacilities
+    getStopPlacesByPosition = getStopPlacesByPosition;
 
-    getQuaysForStopPlace = getQuaysForStopPlace
+    getStopPlaceFacilities = getStopPlaceFacilities;
 
-    getBikeRentalStation = getBikeRentalStation
+    getQuaysForStopPlace = getQuaysForStopPlace;
 
-    getBikeRentalStations = getBikeRentalStations
+    getBikeRentalStation = getBikeRentalStation;
 
-    getBikeRentalStationsByPosition = getBikeRentalStationsByPosition
+    getBikeRentalStations = getBikeRentalStations;
+
+    getBikeRentalStationsByPosition = getBikeRentalStationsByPosition;
 }
 
 export default EnturService
