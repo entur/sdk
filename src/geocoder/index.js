@@ -6,8 +6,8 @@ import type { Feature } from '../../flow-types/Feature'
 import type { Coordinates } from '../../flow-types/Coordinates'
 
 type PositionParam = {
-    "focus.point.lat": number,
-    "focus.point.lon": number
+    'focus.point.lat': number,
+    'focus.point.lon': number
 };
 
 function getPositionParamsFromGeolocationResult(
@@ -26,15 +26,16 @@ function getPositionParamsFromGeolocationResult(
 }
 
 type GetFeaturesParam = {
-    "boundary.rect.min_lon"?: number,
-    "boundary.rect.max_lon"?: number,
-    "boundary.rect.min_lat"?: number,
-    "boundary.rect.max_lat"?: number,
-    "boundary.country"?: string,
+    'boundary.rect.min_lon'?: number,
+    'boundary.rect.max_lon'?: number,
+    'boundary.rect.min_lat'?: number,
+    'boundary.rect.max_lat'?: number,
+    'boundary.country'?: string,
     sources?: Array<string>,
     layers?: Array<string>,
     limit?: number
 };
+
 export function getFeatures(
     text: string,
     coords?: Coordinates,
