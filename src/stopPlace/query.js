@@ -1,164 +1,161 @@
 // @flow
-import { VariableType } from 'json-to-graphql-query'
+import {
+    fragmentName as quayFields,
+    fragments as quayFragments,
+} from '../fields/Quay'
 
-import quayFields from '../fields/Quay'
-
-const stopPlaceFields = {
-    id: true,
-    name: true,
-    description: true,
-    latitude: true,
-    longitude: true,
-    wheelchairBoarding: true,
-    weighting: true,
-    transportMode: true,
-    transportSubmode: true,
-    quays: {
-        __args: {
-            filterByInUse: new VariableType('filterByInUse'),
-        },
-        ...quayFields,
-    },
+export const getStopPlaceQuery = `
+query($id: String!, $filterByInUse: Boolean) {
+    stopPlace(id: $id) {
+        id
+        name
+        description
+        latitude
+        longitude
+        wheelchairBoarding
+        weighting
+        transportMode
+        transportSubmode
+        quays(filterByInUse: $filterByInUse) {
+            ...${quayFields}
+        }
+    }
 }
 
-export const getStopPlaceQuery = {
-    query: {
-        __variables: {
-            id: 'String!',
-            filterByInUse: 'Boolean',
-        },
-        stopPlace: {
-            __args: {
-                id: new VariableType('id'),
-            },
-            ...stopPlaceFields,
-        },
-    },
+${quayFragments.join('')}
+`
+
+export const getStopPlacesQuery = `
+query($ids: [String]!, $filterByInUse: Boolean) {
+    stopPlaces(ids: $ids) {
+        id
+        name
+        description
+        latitude
+        longitude
+        wheelchairBoarding
+        weighting
+        transportMode
+        transportSubmode
+        quays(filterByInUse: $filterByInUse) {
+            ...${quayFields}
+        }
+    }
 }
 
-export const getStopPlacesQuery = {
-    query: {
-        __variables: {
-            ids: '[String]!',
-            filterByInUse: 'Boolean',
-        },
-        stopPlaces: {
-            __args: {
-                ids: new VariableType('ids'),
-            },
-            ...stopPlaceFields,
-        },
-    },
+${quayFragments.join('')}
+`
+
+export const getParentStopPlaceQuery = `
+query($id: String!, $filterByInUse: Boolean) {
+    stopPlace(id: $id) {
+        parent {
+            id
+            name
+            description
+            latitude
+            longitude
+            wheelchairBoarding
+            weighting
+            transportMode
+            transportSubmode
+            quays(filterByInUse: $filterByInUse) {
+                ...${quayFields}
+            }
+        }
+    }
 }
 
-export const getParentStopPlaceQuery = {
-    query: {
-        __variables: {
-            id: 'String!',
-            filterByInUse: 'Boolean',
-        },
-        stopPlace: {
-            __args: {
-                id: new VariableType('id'),
-            },
-            parent: stopPlaceFields,
-        },
-    },
+${quayFragments.join('')}
+`
+
+export const getStopPlacesByBboxQuery = `
+query(
+    $minLat: Float,
+    $minLng: Float,
+    $maxLng: Float,
+    $maxLat: Float,
+    $filterByInUse: Boolean
+) {
+    stopPlacesByBbox(
+        minimumLatitude: $minLat,
+        minimumLongitude: $minLng,
+        maximumLatitude: $maxLat,
+        maximumLongitude: $maxLng
+    ) {
+        id
+        name
+        description
+        latitude
+        longitude
+        wheelchairBoarding
+        weighting
+        transportMode
+        transportSubmode
+        quays(filterByInUse: $filterByInUse) {
+            ...${quayFields}
+        }
+    }
 }
 
-export const getStopPlacesByBboxQuery = {
-    query: {
-        __variables: {
-            minLat: 'Float',
-            minLng: 'Float',
-            maxLng: 'Float',
-            maxLat: 'Float',
-            filterByInUse: 'Boolean',
-        },
-        stopPlacesByBbox: {
-            __args: {
-                minimumLatitude: new VariableType('minLat'),
-                minimumLongitude: new VariableType('minLng'),
-                maximumLatitude: new VariableType('maxLat'),
-                maximumLongitude: new VariableType('maxLng'),
-            },
-            ...stopPlaceFields,
-        },
-    },
+${quayFragments.join('')}
+`
+
+export const getStopPlaceFacilitiesQuery = `
+query($id: String!) {
+    stopPlace(id: $id) {
+        id
+        name {
+            lang
+            value
+        }
+        accessibilityAssessment {
+            limitations {
+                wheelchairAccess
+                stepFreeAccess
+            }
+        }
+        placeEquipments {
+            waitingRoomEquipment {
+                id
+            }
+            shelterEquipment {
+                id
+            }
+            sanitaryEquipment {
+                id
+                numberOfToilets
+                gender
+            }
+            ticketingEquipment {
+                id
+                numberOfMachines
+                ticketMachines
+                ticketOffice
+            }
+        }
+    }
+    parking(stopPlaceId: $id) {
+        name {
+            lang
+            value
+        }
+        parentSiteRef
+        totalCapacity
+        principalCapacity
+        parkingVehicleTypes
+    }
+}
+`
+
+export const getQuaysForStopPlaceQuery = `
+query($id: String!, $filterByInUse: Boolean) {
+    stopPlace(id: $id) {
+        quays(filterByInUse: $filterByInUse) {
+            ...${quayFields}
+        }
+    }
 }
 
-export const getStopPlaceFacilitiesQuery = {
-    query: {
-        __variables: {
-            id: 'String!',
-        },
-        stopPlace: {
-            __args: {
-                id: new VariableType('id'),
-            },
-            id: true,
-            name: {
-                lang: true,
-                value: true,
-            },
-            accessibilityAssessment: {
-                limitations: {
-                    wheelchairAccess: true,
-                    stepFreeAccess: true,
-                },
-            },
-            placeEquipments: {
-                waitingRoomEquipment: {
-                    id: true,
-                },
-                shelterEquipment: {
-                    id: true,
-                },
-                sanitaryEquipment: {
-                    id: true,
-                    numberOfToilets: true,
-                    gender: true,
-                },
-                ticketingEquipment: {
-                    id: true,
-                    numberOfMachines: true,
-                    ticketMachines: true,
-                    ticketOffice: true,
-                },
-            },
-        },
-        parking: {
-            __args: {
-                stopPlaceId: new VariableType('id'),
-            },
-            name: {
-                lang: true,
-                value: true,
-            },
-            parentSiteRef: true,
-            totalCapacity: true,
-            principalCapacity: true,
-            parkingVehicleTypes: true,
-        },
-    },
-}
-
-export const getQuaysForStopPlaceQuery = {
-    query: {
-        __variables: {
-            id: 'String!',
-            filterByInUse: 'Boolean',
-        },
-        stopPlace: {
-            __args: {
-                id: new VariableType('id'),
-            },
-            quays: {
-                __args: {
-                    filterByInUse: new VariableType('filterByInUse'),
-                },
-                ...quayFields,
-            },
-        },
-    },
-}
+${quayFragments.join('')}
+`

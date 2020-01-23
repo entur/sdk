@@ -1,46 +1,45 @@
 // @flow
-import { VariableType } from 'json-to-graphql-query'
+import {
+    fragmentName as bikeRentalStationFields,
+    fragments as bikeRentalStationFragments,
+} from '../fields/BikeRentalStation'
 
-import bikeRentalStationFields from '../fields/BikeRentalStation'
-
-export const getBikeRentalStationQuery = {
-    query: {
-        __variables: {
-            id: 'String!',
-        },
-        bikeRentalStation: {
-            __args: {
-                id: new VariableType('id'),
-            },
-            ...bikeRentalStationFields,
-        },
-    },
+export const getBikeRentalStationQuery = `
+query($id: String!) {
+    bikeRentalStation(id: $id) {
+        ...${bikeRentalStationFields}
+    }
 }
 
-export const getBikeRentalStationsQuery = {
-    query: {
-        bikeRentalStations: {
-            ...bikeRentalStationFields,
-        },
-    },
+${bikeRentalStationFragments.join('')}
+`
+
+export const getBikeRentalStationsQuery = `
+query {
+    bikeRentalStations {
+        ...${bikeRentalStationFields}
+    }
 }
 
-export const getBikeRentalStationsByPositionQuery = {
-    query: {
-        __variables: {
-            minLat: 'Float',
-            minLng: 'Float',
-            maxLat: 'Float',
-            maxLng: 'Float',
-        },
-        bikeRentalStationsByBbox: {
-            __args: {
-                minimumLatitude: new VariableType('minLat'),
-                minimumLongitude: new VariableType('minLng'),
-                maximumLatitude: new VariableType('maxLat'),
-                maximumLongitude: new VariableType('maxLng'),
-            },
-            ...bikeRentalStationFields,
-        },
-    },
+${bikeRentalStationFragments.join('')}
+`
+
+export const getBikeRentalStationsByPositionQuery = `
+query(
+    $minLat: Float,
+    $minLng: Float,
+    $maxLat: Float,
+    $maxLng: Float
+) {
+    bikeRentalStationsByBbox(
+        minimumLatitude: $minLat,
+        minimumLongitude: $minLng,
+        maximumLatitude: $maxLat,
+        maximumLongitude: $maxLng,
+    ) {
+        ...${bikeRentalStationFields}
+    }
 }
+
+${bikeRentalStationFragments.join('')}
+`
