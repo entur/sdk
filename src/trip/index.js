@@ -34,12 +34,12 @@ type TripPattern = {
     id?: string,
     legs: Array<Leg>,
     startTime: string,
-    walkDistance: number
+    walkDistance: number,
 }
 
 type TransportSubmodeParam = {
     transportMode: TransportMode,
-    transportSubmodes: Array<TransportSubmode>
+    transportSubmodes: Array<TransportSubmode>,
 }
 
 type InputBanned = {|
@@ -48,13 +48,13 @@ type InputBanned = {|
     organisations?: Array<string>,
     quays?: Array<string>,
     quaysHard?: Array<string>,
-    serviceJourneys?: Array<string>
+    serviceJourneys?: Array<string>,
 |}
 
 type InputWhiteListed = {|
     lines?: Array<string>,
     authorities?: Array<string>,
-    organisations?: Array<string>
+    organisations?: Array<string>,
 |}
 
 export type GetTripPatternsParams = {
@@ -71,7 +71,7 @@ export type GetTripPatternsParams = {
     walkSpeed?: number,
     wheelchairAccessible?: boolean,
     banned?: InputBanned,
-    whiteListed?: InputWhiteListed
+    whiteListed?: InputWhiteListed,
 }
 
 function getTripPatternsVariables(
