@@ -12,7 +12,7 @@ export const FERRY_PORT = 'ferryPort'
 export const FERRY_STOP = 'ferryStop'
 export const LIFT_STATION = 'liftStation'
 export const VEHICLE_RAIL_INTERCHANGE = 'vehicleRailInterchange'
-export const GROUP_OF_STOPP_LACES = 'GroupOfStopPlaces'
+export const GROUP_OF_STOP_PLACES = 'GroupOfStopPlaces'
 export const POI = 'poi'
 export const VEGADRESSE = 'Vegadresse'
 export const STREET = 'street'
@@ -34,7 +34,7 @@ export const FeatureCategory = {
     FERRY_STOP,
     LIFT_STATION,
     VEHICLE_RAIL_INTERCHANGE,
-    GROUP_OF_STOPP_LACES,
+    GROUP_OF_STOP_PLACES,
     POI,
     VEGADRESSE,
     STREET,
