@@ -443,6 +443,7 @@ export interface TripPattern {
 }
 
 export interface GetDeparturesParams {
+    includeCancelledTrips?: boolean;
     includeNonBoarding?: boolean;
     limit?: number;
     limitPerLine?: number;
@@ -791,7 +792,7 @@ export var FERRY_PORT: 'ferryPort';
 export var FERRY_STOP: 'ferryStop';
 export var LIFT_STATION: 'liftStation';
 export var VEHICLE_RAIL_INTERCHANGE: 'vehicleRailInterchange';
-export var GROUP_OF_STOPP_LACES: 'GroupOfStopPlaces';
+export var GROUP_OF_STOP_PLACES: 'GroupOfStopPlaces';
 export var POI: 'poi';
 export var VEGADRESSE: 'Vegadresse';
 export var STREET: 'street';
@@ -813,7 +814,7 @@ export var FeatureCategory: {
     FERRY_STOP: 'ferryStop',
     LIFT_STATION: 'liftStation',
     VEHICLE_RAIL_INTERCHANGE: 'vehicleRailInterchange',
-    GROUP_OF_STOPP_LACES: 'GroupOfStopPlaces',
+    GROUP_OF_STOP_PLACES: 'GroupOfStopPlaces',
     POI: 'poi',
     VEGADRESSE: 'Vegadresse',
     STREET: 'street',

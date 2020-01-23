@@ -20,6 +20,7 @@ query(
     $whiteListedLines: [String!],
     $whiteListedAuthorities: [String!],
     $whiteListedModes: [Mode],
+    $includeCancelledTrips: Boolean
 ) {
     stopPlaces(ids: $ids) {
         id
@@ -33,7 +34,8 @@ query(
                 lines: $whiteListedLines,
                 authorities: $whiteListedAuthorities,
             },
-            whiteListedModes: $whiteListedModes
+            whiteListedModes: $whiteListedModes,
+            includeCancelledTrips: $includeCancelledTrips
         ) {
             ...${estimatedCallFields}
         }
@@ -49,7 +51,8 @@ query(
     $start: DateTime!,
     $timeRange: Int!,
     $limit: Int!,
-    $omitNonBoarding: Boolean!
+    $omitNonBoarding: Boolean!,
+    $includeCancelledTrips: Boolean
 ) {
     quays(ids: $ids) {
         id
@@ -57,7 +60,8 @@ query(
             startTime: $start,
             timeRange: $timeRange,
             numberOfDepartures: $limit,
-            omitNonBoarding: $omitNonBoarding
+            omitNonBoarding: $omitNonBoarding,
+            includeCancelledTrips: $includeCancelledTrips
         ) {
             ...${estimatedCallFields}
         }

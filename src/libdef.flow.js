@@ -452,6 +452,7 @@ type $entur$sdk$DeparturesById = {
 }
 
 type $entur$sdk$GetDeparturesParams = {
+    includeCancelledTrips?: boolean,
     includeNonBoarding?: boolean,
     limit?: number,
     limitPerLine?: number,
