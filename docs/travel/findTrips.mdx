@@ -24,3 +24,32 @@ The place you want to search from. For instance `"Bergen"`
 
 ### date (`Date | string | number`) [Optional]
 The wanted time of departure. Can be anything that is parseable by `new Date()`. If not provided, the search will be from "now".
+
+## Example
+
+```javascript
+import EnturService, { convertFeatureToLocation } from '@entur/sdk'
+
+const service = new EnturService({
+    clientName: 'awesomecompany-awesomeapp'
+})
+
+async function printTripPatterns() {
+    const [fromFeature] = await service.getFeatures('Ryllikvegen, Lillehammer')
+    const [toFeature] = await service.getFeatures('Oslo S')
+
+    if (!fromFeature || !toFeature) {
+        return
+    }
+
+    const tripPatterns = await service.getTripPatterns({
+        searchDate: new Date(),
+        from: convertFeatureToLocation(fromFeature),
+        to: convertFeatureToLocation(toFeature),
+    })
+
+    console.log(tripPatterns)
+}
+
+printTripPatterns()
+```
