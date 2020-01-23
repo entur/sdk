@@ -244,6 +244,12 @@ type $entur$sdk$GetFeaturesParams = {
     limit?: number,
 }
 
+type $entur$sdk$GetFeaturesReverseParam = {
+    radius?: number,
+    size?: number,
+    layers?: Array<string>,
+}
+
 type $entur$sdk$Feature = {
     geometry: {
         coordinates: [number, number], // longitude, latitude
@@ -616,6 +622,11 @@ declare module '@entur/sdk' {
             query: string,
             coords?: $entur$sdk$Coordinates,
             params?: $entur$sdk$GetFeaturesParams,
+        ): Promise<Array<$entur$sdk$Feature>>,
+
+        getFeaturesReverse(
+            coords: $entur$sdk$Coordinates,
+            params?: $entur$sdk$GetFeaturesReverseParam,
         ): Promise<Array<$entur$sdk$Feature>>,
 
         getTripPatterns(
