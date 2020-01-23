@@ -4,7 +4,7 @@ import { post } from './http'
 import { getJourneyPlannerHost, getNSRHost } from './config'
 import type { ServiceConfig } from './config'
 
-function prettify(query: string): string {
+function minify(query: string): string {
     return query.trim().replace(/\s+/g, ' ')
 }
 
@@ -28,7 +28,7 @@ export function getGraphqlParams(
     variables?: Object
 } {
     return {
-        query: prettify(query),
+        query: minify(query),
         variables,
     }
 }
@@ -55,6 +55,6 @@ export function nsrQuery<T>(
     const { host, headers } = getNSRHost((this && this.config) || config)
     const url = `${host}/graphql`
 
-    return post(url, { query: prettify(query), variables }, headers)
+    return post(url, { query: minify(query), variables }, headers)
         .then(errorHandler)
 }
