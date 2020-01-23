@@ -16,9 +16,9 @@
     "test": "npm run lint && npm run flow && npm run ts && babel-node scripts/validate-queries.js",
     "ts": "tsc index.d.ts --noEmit",
     "flow": "flow",
-    "pretranspile": "npm test && rm -rf lib",
-    "transpile": "babel src --out-dir lib --copy-files",
-    "prepublishOnly": "npm run transpile",
+    "prebuild": "npm test && rm -rf lib",
+    "build": "babel src --out-dir lib --copy-files",
+    "prepublishOnly": "npm run build",
     "docs": "docz dev",
     "build:docs": "docz build"
   },
