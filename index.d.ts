@@ -9,7 +9,7 @@ export interface Config {
         geocoder?: string;
         nsr?: string;
     };
-    headers?: {[key: string]: string};
+    headers?: { [key: string]: string };
 }
 
 export interface OverrideConfig {
@@ -19,7 +19,7 @@ export interface OverrideConfig {
         geocoder?: string;
         nsr?: string;
     };
-    headers?: {[key: string]: string};
+    headers?: { [key: string]: string };
 }
 
 export interface Coordinates {
@@ -28,8 +28,8 @@ export interface Coordinates {
 }
 
 export interface MultilingualString {
-    lang: 'eng' | 'nob' | 'nno';
-    language?: 'en' | 'nb' | 'nn' | 'no';
+    lang: "eng" | "nob" | "nno";
+    language?: "en" | "nb" | "nn" | "no";
     value: string;
 }
 
@@ -46,7 +46,7 @@ export interface ServiceConfig {
         geocoder: string;
         nsr: string;
     };
-    headers: {[key: string]: string};
+    headers: { [key: string]: string };
 }
 
 interface ValidityPeriod {
@@ -55,8 +55,8 @@ interface ValidityPeriod {
 }
 
 interface InfoLink {
-  uri: string;
-  label: string;
+    uri: string;
+    label: string;
 }
 
 export interface Situation {
@@ -121,6 +121,12 @@ export interface GetFeaturesParams {
     limit?: number;
 }
 
+export interface GetFeaturesReverseParam {
+    radius?: number;
+    size?: number;
+    layers?: Array<string>;
+}
+
 export interface Feature {
     geometry: {
         coordinates: [number, number]; // longitude, latitude
@@ -155,7 +161,6 @@ export interface Location {
     coordinates?: Coordinates;
 }
 
-
 /**
  * Trip
  */
@@ -179,7 +184,7 @@ export interface StopPlace {
     id: string;
     name: string;
     tariffZones?: Array<{
-        id: string
+        id: string;
     }>;
 }
 
@@ -201,76 +206,76 @@ export interface Place {
 }
 
 export type TransportMode =
-    | 'air'
-    | 'bus'
-    | 'cableway'
-    | 'coach'
-    | 'funicular'
-    | 'lift'
-    | 'metro'
-    | 'rail'
-    | 'tram'
-    | 'unknown'
-    | 'water'
+    | "air"
+    | "bus"
+    | "cableway"
+    | "coach"
+    | "funicular"
+    | "lift"
+    | "metro"
+    | "rail"
+    | "tram"
+    | "unknown"
+    | "water";
 
 // All valid values for the "mode" parameter to JourneyPlanner
 export type QueryMode =
-    | 'air'
-    | 'bicycle'
-    | 'bus'
-    | 'cableway'
-    | 'car'
-    | 'car_dropoff'
-    | 'car_park'
-    | 'car_pickup'
-    | 'coach'
-    | 'foot'
-    | 'funicular'
-    | 'lift'
-    | 'metro'
-    | 'rail'
-    | 'tram'
-    | 'transit'
-    | 'water'
+    | "air"
+    | "bicycle"
+    | "bus"
+    | "cableway"
+    | "car"
+    | "car_dropoff"
+    | "car_park"
+    | "car_pickup"
+    | "coach"
+    | "foot"
+    | "funicular"
+    | "lift"
+    | "metro"
+    | "rail"
+    | "tram"
+    | "transit"
+    | "water";
 
-export type LegMode = TransportMode | 'bicycle' | 'car' | 'foot';
+export type LegMode = TransportMode | "bicycle" | "car" | "foot";
 
 export type TransportSubmode =
-    | 'localBus'
-    | 'regionalBus'
-    | 'expressBus'
-    | 'nightBus'
-    | 'sightseeingBus'
-    | 'shuttleBus'
-    | 'schoolBus'
-    | 'railReplacementBus'
-    | 'airportLinkBus'
-    | 'internationalCoach'
-    | 'nationalCoach'
-    | 'localTram'
-    | 'cityTram'
-    | 'metro'
-    | 'local'
-    | 'regionalRail'
-    | 'interregionalRail'
-    | 'longDistance'
-    | 'international'
-    | 'touristRailway'
-    | 'nightRail'
-    | 'airportLinkRail'
-    | 'internationalCarFerry'
-    | 'nationalCarFerry'
-    | 'localCarFerry'
-    | 'internationalPassengerFerry'
-    | 'localPassengerFerry'
-    | 'sightseeingService'
-    | 'highSpeedVehicleService'
-    | 'highSpeedPassengerService'
-    | 'internationalFlight'
-    | 'domesticFlight'
-    | 'helicopterService'
-    | 'telecabin'
-    | 'funicular'
+    | "localBus"
+    | "regionalBus"
+    | "expressBus"
+    | "nightBus"
+    | "sightseeingBus"
+    | "shuttleBus"
+    | "schoolBus"
+    | "railReplacementBus"
+    | "airportLinkBus"
+    | "internationalCoach"
+    | "nationalCoach"
+    | "localTram"
+    | "cityTram"
+    | "metro"
+    | "local"
+    | "regionalRail"
+    | "interregionalRail"
+    | "longDistance"
+    | "international"
+    | "touristRailway"
+    | "nightRail"
+    | "airportLinkRail"
+    | "internationalCarFerry"
+    | "nationalCarFerry"
+    | "localCarFerry"
+    | "internationalPassengerFerry"
+    | "localPassengerFerry"
+    | "sightseeingService"
+    | "highSpeedVehicleService"
+    | "highSpeedPassengerService"
+    | "internationalFlight"
+    | "domesticFlight"
+    | "helicopterService"
+    | "telecabin"
+    | "funicular";
 
 export interface DestinationDisplay {
     frontText: string;
@@ -296,11 +301,11 @@ export interface EstimatedCall {
     situations: Array<Situation>;
 }
 
-export type IntermediateEstimatedCall = EstimatedCall
+export type IntermediateEstimatedCall = EstimatedCall;
 
-export type Departure = EstimatedCall
+export type Departure = EstimatedCall;
 
-export type BookingMethod = 'callOffice' | 'online';
+export type BookingMethod = "callOffice" | "online";
 
 export interface BookingContact {
     phone: string;
@@ -331,16 +336,16 @@ export interface Line {
 }
 
 export type FlexibleLineType =
-    | 'corridorService'
-    | 'mainRouteWithFlexibleEnds'
-    | 'flexibleAreasOnly'
-    | 'hailAndRideSections'
-    | 'fixedStopAreaWide'
-    | 'freeAreaAreaWide'
-    | 'mixedFlexible'
-    | 'mixedFlexibleAndFixed'
-    | 'fixed'
-    | 'other'
+    | "corridorService"
+    | "mainRouteWithFlexibleEnds"
+    | "flexibleAreasOnly"
+    | "hailAndRideSections"
+    | "fixedStopAreaWide"
+    | "freeAreaAreaWide"
+    | "mixedFlexible"
+    | "mixedFlexibleAndFixed"
+    | "fixed"
+    | "other";
 
 export interface Interchange {
     guaranteed: boolean;
@@ -348,8 +353,8 @@ export interface Interchange {
 }
 
 export interface PointsOnLink {
-  points: string;
-  length: number;
+    points: string;
+    length: number;
 }
 
 export interface JourneyPattern {
@@ -370,14 +375,14 @@ export interface Leg {
     aimedStartTime: string;
     authority?: Authority;
     distance: number;
-    directDuration: number,
+    directDuration: number;
     duration: number;
     expectedEndTime: string;
     expectedStartTime: string;
     fromEstimatedCall?: EstimatedCall;
     fromPlace: Place;
-    interchangeFrom?: Interchange,
-    interchangeTo?: Interchange,
+    interchangeFrom?: Interchange;
+    interchangeTo?: Interchange;
     intermediateEstimatedCalls: Array<IntermediateEstimatedCall>;
     line?: Line;
     mode: LegMode;
@@ -433,10 +438,10 @@ export interface GetTripPatternsParams {
 
 export interface TripPattern {
     distance: number;
-    directDuration: number,
+    directDuration: number;
     duration: number;
     endTime: string;
-    id?: string,
+    id?: string;
     legs: Array<Leg>;
     startTime: string;
     walkDistance: number;
@@ -462,18 +467,18 @@ export interface GetDeparturesBetweenStopPlacesParams {
  */
 
 export type TypeName =
-    | 'BikePark'
-    | 'BikeRentalStation'
-    | 'CarPark'
-    | 'Quay'
-    | 'StopPlace'
+    | "BikePark"
+    | "BikeRentalStation"
+    | "CarPark"
+    | "Quay"
+    | "StopPlace";
 
 export interface NearestPlace {
-    id: string,
-    type: TypeName,
-    distance: number,
-    latitude: number,
-    longitude: number,
+    id: string;
+    type: TypeName;
+    distance: number;
+    latitude: number;
+    longitude: number;
 }
 
 /**
@@ -492,7 +497,11 @@ export interface StopPlaceDetails {
     latitude: number;
     longitude: number;
     wheelchairBoarding: "noInformation" | "possible" | "notPossible";
-    weighting: "preferredInterchange" | "recommendedInterchange" | "interchangeAllowed" | "noInterchange";
+    weighting:
+        | "preferredInterchange"
+        | "recommendedInterchange"
+        | "interchangeAllowed"
+        | "noInterchange";
     transportMode: TransportMode;
     transportSubmode?: TransportSubmode;
     quays?: Array<Quay & { situations?: Situation[] }>;
@@ -565,14 +574,14 @@ export interface StopPlaceFacilitiesStopPlace {
         limitations: {
             wheelchairAccess: LimitationStatusType;
             stepFreeAccess: LimitationStatusType;
-        }
-    },
+        };
+    };
     placeEquipments: {
         waitingRoomEquipment?: Array<WaitingRoomEquipment>;
         shelterEquipment?: Array<ShelterEquipment>;
         sanitaryEquipment?: Array<SanitaryEquipment>;
         ticketingEquipment?: Array<TicketingEquipment>;
-    }
+    };
 }
 
 export interface StopPlaceFacilitiesParking {
@@ -593,110 +602,117 @@ export interface StopPlaceParams {
 }
 
 declare class EnturService {
-  constructor(args: Config);
+    constructor(args: Config);
 
-  journeyPlannerQuery<journeyPlannerResponse>(
-      queryObj: Object | string,
-      variables?: Object,
-      config?: ServiceConfig,
-  ): Promise<journeyPlannerResponse>;
+    journeyPlannerQuery<journeyPlannerResponse>(
+        queryObj: Object | string,
+        variables?: Object,
+        config?: ServiceConfig
+    ): Promise<journeyPlannerResponse>;
 
-  nsrQuery<nsrResponse>(
-      queryObj: Object | string,
-      variables?: Object,
-      config?: ServiceConfig,
-  ): Promise<nsrResponse>;
+    nsrQuery<nsrResponse>(
+        queryObj: Object | string,
+        variables?: Object,
+        config?: ServiceConfig
+    ): Promise<nsrResponse>;
 
-  getFeatures(
-    query: string,
-    coords?: Coordinates,
-    params?: GetFeaturesParams,
-  ): Promise<Feature[]>;
+    getFeatures(
+        query: string,
+        coords?: Coordinates,
+        params?: GetFeaturesParams
+    ): Promise<Feature[]>;
 
-  getTripPatterns(
-      params: GetTripPatternsParams,
-      overrideConfig?: OverrideConfig,
-  ): Promise<TripPattern[]>;
+    getFeaturesReverse(
+        coords: Coordinates,
+        params?: GetFeaturesReverseParam
+    ): Promise<Feature[]>;
 
-  findTrips(
-    from: string,
-    to: string,
-    date?: Date | string | number,
-  ): Promise<TripPattern[]>;
+    getTripPatterns(
+        params: GetTripPatternsParams,
+        overrideConfig?: OverrideConfig
+    ): Promise<TripPattern[]>;
 
-  getDeparturesFromStopPlaces(
-      stopPlaceIds: Array<string>,
-      params?: GetDeparturesParams,
-  ): Promise<Array<DeparturesById | void>>;
+    findTrips(
+        from: string,
+        to: string,
+        date?: Date | string | number
+    ): Promise<TripPattern[]>;
 
-  getDeparturesFromStopPlace(
-      stopPlaceId: string,
-      params?: GetDeparturesParams,
-  ): Promise<Departure[]>;
+    getDeparturesFromStopPlaces(
+        stopPlaceIds: Array<string>,
+        params?: GetDeparturesParams
+    ): Promise<Array<DeparturesById | void>>;
 
-  getDeparturesFromQuays(
-      quayIds: Array<string>,
-      params?: GetDeparturesParams,
-  ): Promise<Array<DeparturesById | undefined>>;
+    getDeparturesFromStopPlace(
+        stopPlaceId: string,
+        params?: GetDeparturesParams
+    ): Promise<Departure[]>;
 
-  getDeparturesBetweenStopPlaces(
-      fromStopPlaceId: string,
-      toStopPlaceId: string,
-      params?: GetDeparturesBetweenStopPlacesParams,
-  ): Promise<Departure[]>;
+    getDeparturesFromQuays(
+        quayIds: Array<string>,
+        params?: GetDeparturesParams
+    ): Promise<Array<DeparturesById | undefined>>;
 
-  getDeparturesForServiceJourney(
-      id: string,
-      date?: string,
-  ): Promise<Departure[]>;
+    getDeparturesBetweenStopPlaces(
+        fromStopPlaceId: string,
+        toStopPlaceId: string,
+        params?: GetDeparturesBetweenStopPlacesParams
+    ): Promise<Departure[]>;
 
-  getNearestPlaces(
-      coordinates: Coordinates,
-      params?: {
-          maximumDistance?: number,
-          maximumResults?: number,
-          filterByPlaceTypes?: Array<TypeName>,
-          filterByModes?: Array<TransportMode>,
-          filterByInUse?: boolean,
-          multiModalMode?: 'parent' | 'child' | 'all',
-      },
-  ): Promise<Array<NearestPlace>>;
+    getDeparturesForServiceJourney(
+        id: string,
+        date?: string
+    ): Promise<Departure[]>;
 
-  getStopPlace(
-      id: string,
-      params?: StopPlaceParams,
-  ): Promise<StopPlaceDetails>;
+    getNearestPlaces(
+        coordinates: Coordinates,
+        params?: {
+            maximumDistance?: number;
+            maximumResults?: number;
+            filterByPlaceTypes?: Array<TypeName>;
+            filterByModes?: Array<TransportMode>;
+            filterByInUse?: boolean;
+            multiModalMode?: "parent" | "child" | "all";
+        }
+    ): Promise<Array<NearestPlace>>;
 
-  getStopPlaces(
-      stopPlaceId: Array<string>,
-      params?: StopPlaceParams,
-  ): Promise<Array<StopPlaceDetails | undefined>>;
+    getStopPlace(
+        id: string,
+        params?: StopPlaceParams
+    ): Promise<StopPlaceDetails>;
 
-  getParentStopPlace(
-    id: string,
-    params?: StopPlaceParams,
-): Promise<StopPlaceDetails | null>;
+    getStopPlaces(
+        stopPlaceId: Array<string>,
+        params?: StopPlaceParams
+    ): Promise<Array<StopPlaceDetails | undefined>>;
 
-  getStopPlacesByPosition(
-    coordinates: Coordinates,
-    distance?: number,
-  ): Promise<StopPlace[]>;
+    getParentStopPlace(
+        id: string,
+        params?: StopPlaceParams
+    ): Promise<StopPlaceDetails | null>;
 
-  getStopPlaceFacilities(stopPlaceId: string): Promise<StopPlaceFacilities>;
+    getStopPlacesByPosition(
+        coordinates: Coordinates,
+        distance?: number
+    ): Promise<StopPlace[]>;
 
-  getQuaysForStopPlace(
-      stopPlaceId: string,
-      params?: StopPlaceParams,
-  ): Promise<Quay[]>;
+    getStopPlaceFacilities(stopPlaceId: string): Promise<StopPlaceFacilities>;
 
-  getBikeRentalStation(stationId: string): Promise<BikeRentalStation>;
+    getQuaysForStopPlace(
+        stopPlaceId: string,
+        params?: StopPlaceParams
+    ): Promise<Quay[]>;
 
-  getBikeRentalStations(stationIds: Array<string>): Promise<Array<BikeRentalStation | undefined>>;
+    getBikeRentalStation(stationId: string): Promise<BikeRentalStation>;
 
-  getBikeRentalStationsByPosition(
-    coordinates: Coordinates,
-    distance?: number,
-  ): Promise<BikeRentalStation[]>;
+    getBikeRentalStations(
+        stationIds: Array<string>
+    ): Promise<Array<BikeRentalStation | undefined>>;
+
+    getBikeRentalStationsByPosition(
+        coordinates: Coordinates,
+        distance?: number
+    ): Promise<BikeRentalStation[]>;
 }
 
 export default EnturService;
@@ -706,140 +722,145 @@ export default EnturService;
  */
 
 // Any for of public transportation
-export var AIR: 'air';
-export var BICYCLE: 'bicycle';
-export var BUS: 'bus';
-export var CABLEWAY: 'cableway';
-export var CAR: 'car';
-export var COACH: 'coach';
-export var WATER: 'water';
-export var FUNICULAR: 'funicular';
-export var LIFT: 'lift';
-export var RAIL: 'rail';
-export var METRO: 'metro';
-export var TRAM: 'tram';
-export var TRANSIT: 'transit';
-export var FOOT: 'foot';
+export var AIR: "air";
+export var BICYCLE: "bicycle";
+export var BUS: "bus";
+export var CABLEWAY: "cableway";
+export var CAR: "car";
+export var COACH: "coach";
+export var WATER: "water";
+export var FUNICULAR: "funicular";
+export var LIFT: "lift";
+export var RAIL: "rail";
+export var METRO: "metro";
+export var TRAM: "tram";
+export var TRANSIT: "transit";
+export var FOOT: "foot";
 
 // Combine with foot and transit for park and ride.
-export var CAR_PARK: 'car_park';
+export var CAR_PARK: "car_park";
 
 // Combine with foot and transit for ride and kiss
-export var CAR_PICKUP: 'car_pickup';
+export var CAR_PICKUP: "car_pickup";
 
-export var AIRPORT_LINK_RAIL: 'airportLinkRail';
-export var HIGH_SPEED_PASSENGER_SERVICE: 'highSpeedPassengerService';
-export var HIGH_SPEED_VEHICLE_SERVICE: 'highSpeedVehicleService';
-export var INTERNATIONAL_CAR_FERRY: 'internationalCarFerry';
-export var LOCAL_CAR_FERRY: 'localCarFerry';
-export var LOCAL_PASSENGER_FERRY: 'localPassengerFerry';
-export var NATIONAL_CAR_FERRY: 'nationalCarFerry';
-export var RAIL_REPLACEMENT_BUS: 'railReplacementBus';
-export var REGIONAL_CAR_FERRY: 'regionalCarFerry';
-export var TOURIST_RAILWAY: 'touristRailway';
-export var AIRPORT_LINK_BUS: 'airportLinkBus';
+export var AIRPORT_LINK_RAIL: "airportLinkRail";
+export var HIGH_SPEED_PASSENGER_SERVICE: "highSpeedPassengerService";
+export var HIGH_SPEED_VEHICLE_SERVICE: "highSpeedVehicleService";
+export var INTERNATIONAL_CAR_FERRY: "internationalCarFerry";
+export var LOCAL_CAR_FERRY: "localCarFerry";
+export var LOCAL_PASSENGER_FERRY: "localPassengerFerry";
+export var NATIONAL_CAR_FERRY: "nationalCarFerry";
+export var RAIL_REPLACEMENT_BUS: "railReplacementBus";
+export var REGIONAL_CAR_FERRY: "regionalCarFerry";
+export var TOURIST_RAILWAY: "touristRailway";
+export var AIRPORT_LINK_BUS: "airportLinkBus";
 
 export var TransportMode: {
-    BUS: 'bus',
-    TRAM: 'tram',
-    RAIL: 'rail',
-    METRO: 'metro',
-    WATER: 'water',
-    AIR: 'air',
-    COACH: 'coach',
-    CAR: 'car',
+    BUS: "bus";
+    TRAM: "tram";
+    RAIL: "rail";
+    METRO: "metro";
+    WATER: "water";
+    AIR: "air";
+    COACH: "coach";
+    CAR: "car";
 };
 
 export var LegMode: {
-    BUS: 'bus',
-    TRAM: 'tram',
-    RAIL: 'rail',
-    METRO: 'metro',
-    WATER: 'water',
-    AIR: 'air',
-    COACH: 'coach',
-    CAR: 'car',
-    FOOT: 'foot',
-    BICYCLE: 'bicycle',
+    BUS: "bus";
+    TRAM: "tram";
+    RAIL: "rail";
+    METRO: "metro";
+    WATER: "water";
+    AIR: "air";
+    COACH: "coach";
+    CAR: "car";
+    FOOT: "foot";
+    BICYCLE: "bicycle";
 };
 
 export var TransportSubmode: {
-    AIRPORT_LINK_RAIL: 'airportLinkRail',
-    HIGH_SPEED_PASSENGER_SERVICE: 'highSpeedPassengerService',
-    HIGH_SPEED_VEHICLE_SERVICE: 'highSpeedVehicleService',
-    INTERNATIONAL_CAR_FERRY: 'internationalCarFerry',
-    LOCAL_CAR_FERRY: 'localCarFerry',
-    LOCAL_PASSENGER_FERRY: 'localPassengerFerry',
-    NATIONAL_CAR_FERRY: 'nationalCarFerry',
-    RAIL_REPLACEMENT_BUS: 'railReplacementBus',
-    REGIONAL_CAR_FERRY: 'regionalCarFerry',
-    TOURIST_RAILWAY: 'touristRailway',
-    AIRPORT_LINK_BUS: 'airportLinkBus',
-    CITY_TRAM: 'cityTram',
+    AIRPORT_LINK_RAIL: "airportLinkRail";
+    HIGH_SPEED_PASSENGER_SERVICE: "highSpeedPassengerService";
+    HIGH_SPEED_VEHICLE_SERVICE: "highSpeedVehicleService";
+    INTERNATIONAL_CAR_FERRY: "internationalCarFerry";
+    LOCAL_CAR_FERRY: "localCarFerry";
+    LOCAL_PASSENGER_FERRY: "localPassengerFerry";
+    NATIONAL_CAR_FERRY: "nationalCarFerry";
+    RAIL_REPLACEMENT_BUS: "railReplacementBus";
+    REGIONAL_CAR_FERRY: "regionalCarFerry";
+    TOURIST_RAILWAY: "touristRailway";
+    AIRPORT_LINK_BUS: "airportLinkBus";
+    CITY_TRAM: "cityTram";
 };
 
-export var ONSTREET_BUS: 'onstreetBus';
-export var ONSTREET_TRAM: 'onstreetTram';
-export var AIRPORT: 'airport';
-export var RAIL_STATION: 'railStation';
-export var METRO_STATION: 'metroStation';
-export var BUS_STATION: 'busStation';
-export var COACH_STATION: 'coachStation';
-export var TRAM_STATION: 'tramStation';
-export var HARBOUR_PORT: 'harbourPort';
-export var FERRY_PORT: 'ferryPort';
-export var FERRY_STOP: 'ferryStop';
-export var LIFT_STATION: 'liftStation';
-export var VEHICLE_RAIL_INTERCHANGE: 'vehicleRailInterchange';
-export var GROUP_OF_STOPP_LACES: 'GroupOfStopPlaces';
-export var POI: 'poi';
-export var VEGADRESSE: 'Vegadresse';
-export var STREET: 'street';
-export var TETTSTEDDEL: 'tettsteddel';
-export var BYDEL: 'bydel';
-export var OTHER: 'other';
+export var ONSTREET_BUS: "onstreetBus";
+export var ONSTREET_TRAM: "onstreetTram";
+export var AIRPORT: "airport";
+export var RAIL_STATION: "railStation";
+export var METRO_STATION: "metroStation";
+export var BUS_STATION: "busStation";
+export var COACH_STATION: "coachStation";
+export var TRAM_STATION: "tramStation";
+export var HARBOUR_PORT: "harbourPort";
+export var FERRY_PORT: "ferryPort";
+export var FERRY_STOP: "ferryStop";
+export var LIFT_STATION: "liftStation";
+export var VEHICLE_RAIL_INTERCHANGE: "vehicleRailInterchange";
+export var GROUP_OF_STOPP_LACES: "GroupOfStopPlaces";
+export var POI: "poi";
+export var VEGADRESSE: "Vegadresse";
+export var STREET: "street";
+export var TETTSTEDDEL: "tettsteddel";
+export var BYDEL: "bydel";
+export var OTHER: "other";
 
 export var FeatureCategory: {
-    ONSTREET_BUS: 'onstreetBus',
-    ONSTREET_TRAM: 'onstreetTram',
-    AIRPORT: 'airport',
-    RAIL_STATION: 'railStation',
-    METRO_STATION: 'metroStation',
-    BUS_STATION: 'busStation',
-    COACH_STATION: 'coachStation',
-    TRAM_STATION: 'tramStation',
-    HARBOUR_PORT: 'harbourPort',
-    FERRY_PORT: 'ferryPort',
-    FERRY_STOP: 'ferryStop',
-    LIFT_STATION: 'liftStation',
-    VEHICLE_RAIL_INTERCHANGE: 'vehicleRailInterchange',
-    GROUP_OF_STOPP_LACES: 'GroupOfStopPlaces',
-    POI: 'poi',
-    VEGADRESSE: 'Vegadresse',
-    STREET: 'street',
-    TETTSTEDDEL: 'tettsteddel',
-    BYDEL: 'bydel',
-    OTHER: 'other',
+    ONSTREET_BUS: "onstreetBus";
+    ONSTREET_TRAM: "onstreetTram";
+    AIRPORT: "airport";
+    RAIL_STATION: "railStation";
+    METRO_STATION: "metroStation";
+    BUS_STATION: "busStation";
+    COACH_STATION: "coachStation";
+    TRAM_STATION: "tramStation";
+    HARBOUR_PORT: "harbourPort";
+    FERRY_PORT: "ferryPort";
+    FERRY_STOP: "ferryStop";
+    LIFT_STATION: "liftStation";
+    VEHICLE_RAIL_INTERCHANGE: "vehicleRailInterchange";
+    GROUP_OF_STOPP_LACES: "GroupOfStopPlaces";
+    POI: "poi";
+    VEGADRESSE: "Vegadresse";
+    STREET: "street";
+    TETTSTEDDEL: "tettsteddel";
+    BYDEL: "bydel";
+    OTHER: "other";
 };
 
 /**
  * Utils
  */
 
-export function getTripPatternsQuery(params: GetTripPatternsParams): { query: string, variables?: Object }
+export function getTripPatternsQuery(
+    params: GetTripPatternsParams
+): { query: string; variables?: Object };
 
 export function convertFeatureToLocation(feature: Feature): Location;
 export function convertLocationToPosition(feature: Feature): Location;
-export function convertPositionToBbox(coordinates: Coordinates, distance: number): {
-    minLng: number,
-    minLat: number,
-    maxLng: number,
-    maxLat: number,
+export function convertPositionToBbox(
+    coordinates: Coordinates,
+    distance: number
+): {
+    minLng: number;
+    minLat: number;
+    maxLng: number;
+    maxLat: number;
 };
 
 export function throttler<T, U>(
-  func: (arg: T) => Promise<U>,
-  args: T[]
+    func: (arg: T) => Promise<U>,
+    args: T[]
 ): Promise<U[]>;
 
 export function isAir(mode: string): boolean;
