@@ -88,3 +88,22 @@ export function getNSRHost({ hosts, clientName, headers }: ServiceConfig): HostC
         },
     }
 }
+
+export function mergeConfig(config: ServiceConfig, override?: OverrideConfig): ServiceConfig {
+    if (!override) {
+        return config
+    }
+
+    return {
+        ...config,
+        clientName: override.clientName || config.clientName,
+        hosts: {
+            ...config.hosts,
+            ...override.hosts,
+        },
+        headers: {
+            ...config.headers,
+            ...override.headers,
+        },
+    }
+}

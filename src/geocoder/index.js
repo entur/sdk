@@ -1,9 +1,10 @@
 // @flow
 
 import { get } from '../http'
-import { getGeocoderHost } from '../config'
+import { getGeocoderHost, getServiceConfig, type ArgumentConfig } from '../config'
 import type { Feature } from '../../flow-types/Feature'
 import type { Coordinates } from '../../flow-types/Coordinates'
+
 
 type PositionParam = {
     'focus.point.lat': number,
@@ -36,28 +37,32 @@ type GetFeaturesParam = {
     limit?: number
 }
 
-export function getFeatures(
-    text: string,
-    coords?: Coordinates,
-    params?: GetFeaturesParam = {},
-): Promise<Array<Feature>> {
-    const { host, headers } = getGeocoderHost(this.config)
-    const {
-        sources, layers, limit, ...rest
-    } = params
+export function createGetFeatures(argConfig: ArgumentConfig) {
+    const config = getServiceConfig(argConfig)
 
-    const searchParams = {
-        text,
-        lang: 'no',
-        ...getPositionParamsFromGeolocationResult(coords),
-        sources: sources ? sources.join(',') : undefined,
-        layers: layers ? layers.join(',') : undefined,
-        size: limit,
-        ...rest,
+    return function getFeatures(
+        text: string,
+        coords?: Coordinates,
+        params?: GetFeaturesParam = {},
+    ): Promise<Array<Feature>> {
+        const { host, headers } = getGeocoderHost(config)
+        const {
+            sources, layers, limit, ...rest
+        } = params
+
+        const searchParams = {
+            text,
+            lang: 'no',
+            ...getPositionParamsFromGeolocationResult(coords),
+            sources: sources ? sources.join(',') : undefined,
+            layers: layers ? layers.join(',') : undefined,
+            size: limit,
+            ...rest,
+        }
+
+        const url = `${host}/autocomplete`
+        return get(url, searchParams, headers).then(data => data.features || [])
     }
-
-    const url = `${host}/autocomplete`
-    return get(url, searchParams, headers).then(data => data.features || [])
 }
 
 type GetFeaturesReverseParam = {
@@ -66,23 +71,27 @@ type GetFeaturesReverseParam = {
     layers?: Array<string>
 }
 
-export function getFeaturesReverse(
-    coords: Coordinates,
-    params?: GetFeaturesReverseParam = {},
-): Promise<Feature[]> {
-    const { host, headers } = getGeocoderHost(this.config)
+export function createGetFeaturesReverse(argConfig: ArgumentConfig) {
+    const config = getServiceConfig(argConfig)
 
-    const searchParams = {
-        'point.lat': coords.latitude,
-        'point.lon': coords.longitude,
-        'boundary.circle.radius': params.radius,
-        size: params.size,
-        layers:
-            params.layers && Array.isArray(params.layers)
-                ? params.layers.join(',')
-                : undefined,
+    return function getFeaturesReverse(
+        coords: Coordinates,
+        params?: GetFeaturesReverseParam = {},
+    ): Promise<Feature[]> {
+        const { host, headers } = getGeocoderHost(config)
+
+        const searchParams = {
+            'point.lat': coords.latitude,
+            'point.lon': coords.longitude,
+            'boundary.circle.radius': params.radius,
+            size: params.size,
+            layers:
+                params.layers && Array.isArray(params.layers)
+                    ? params.layers.join(',')
+                    : undefined,
+        }
+
+        const url = `${host}/reverse`
+        return get(url, searchParams, headers).then(data => data.features || [])
     }
-
-    const url = `${host}/reverse`
-    return get(url, searchParams, headers).then(data => data.features || [])
 }

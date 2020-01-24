@@ -602,70 +602,68 @@ export interface StopPlaceParams {
     filterByInUse?: boolean;
 }
 
-declare class EnturService {
-    constructor(args: Config);
-
-    journeyPlannerQuery<journeyPlannerResponse>(
+export interface EnturService {
+    journeyPlannerQuery: <journeyPlannerResponse>(
         queryObj: Object | string,
         variables?: Object,
         config?: ServiceConfig
-    ): Promise<journeyPlannerResponse>;
+    ) => Promise<journeyPlannerResponse>;
 
-    nsrQuery<nsrResponse>(
+    nsrQuery: <nsrResponse>(
         queryObj: Object | string,
         variables?: Object,
         config?: ServiceConfig
-    ): Promise<nsrResponse>;
+    ) => Promise<nsrResponse>;
 
-    getFeatures(
+    getFeatures: (
         query: string,
         coords?: Coordinates,
         params?: GetFeaturesParams
-    ): Promise<Feature[]>;
+    ) => Promise<Feature[]>;
 
-    getFeaturesReverse(
+    getFeaturesReverse: (
         coords: Coordinates,
         params?: GetFeaturesReverseParam
-    ): Promise<Feature[]>;
+    ) => Promise<Feature[]>;
 
-    getTripPatterns(
+    getTripPatterns: (
         params: GetTripPatternsParams,
         overrideConfig?: OverrideConfig
-    ): Promise<TripPattern[]>;
+    ) => Promise<TripPattern[]>;
 
-    findTrips(
+    findTrips: (
         from: string,
         to: string,
         date?: Date | string | number
-    ): Promise<TripPattern[]>;
+    ) => Promise<TripPattern[]>;
 
-    getDeparturesFromStopPlaces(
+    getDeparturesFromStopPlaces: (
         stopPlaceIds: Array<string>,
         params?: GetDeparturesParams
-    ): Promise<Array<DeparturesById | void>>;
+    ) => Promise<Array<DeparturesById | void>>;
 
-    getDeparturesFromStopPlace(
+    getDeparturesFromStopPlace: (
         stopPlaceId: string,
         params?: GetDeparturesParams
-    ): Promise<Departure[]>;
+    ) => Promise<Departure[]>;
 
-    getDeparturesFromQuays(
+    getDeparturesFromQuays: (
         quayIds: Array<string>,
         params?: GetDeparturesParams
-    ): Promise<Array<DeparturesById | undefined>>;
+    ) => Promise<Array<DeparturesById | undefined>>;
 
-    getDeparturesBetweenStopPlaces(
+    getDeparturesBetweenStopPlaces: (
         fromStopPlaceId: string,
         toStopPlaceId: string,
         params?: GetDeparturesBetweenStopPlacesParams
-    ): Promise<Departure[]>;
+    ) => Promise<Departure[]>;
 
-    getDeparturesForServiceJourney(
+    getDeparturesForServiceJourney: (
         id: string,
         date?: string
-    ): Promise<Departure[]>;
+    ) => Promise<Departure[]>;
 
-    getNearestPlaces(
+    getNearestPlaces: (
         coordinates: Coordinates,
         params?: {
             maximumDistance?: number;
@@ -675,48 +673,48 @@ declare class EnturService {
             filterByInUse?: boolean;
             multiModalMode?: 'parent' | 'child' | 'all';
         }
-    ): Promise<Array<NearestPlace>>;
+    ) => Promise<Array<NearestPlace>>;
 
-    getStopPlace(
+    getStopPlace: (
         id: string,
         params?: StopPlaceParams
-    ): Promise<StopPlaceDetails>;
+    ) => Promise<StopPlaceDetails>;
 
-    getStopPlaces(
+    getStopPlaces: (
         stopPlaceId: Array<string>,
         params?: StopPlaceParams
-    ): Promise<Array<StopPlaceDetails | undefined>>;
+    ) => Promise<Array<StopPlaceDetails | undefined>>;
 
-    getParentStopPlace(
+    getParentStopPlace: (
         id: string,
         params?: StopPlaceParams
-    ): Promise<StopPlaceDetails | null>;
+    ) => Promise<StopPlaceDetails | null>;
 
-    getStopPlacesByPosition(
+    getStopPlacesByPosition: (
         coordinates: Coordinates,
         distance?: number
-    ): Promise<StopPlace[]>;
+    ) => Promise<StopPlace[]>;
 
-    getStopPlaceFacilities(stopPlaceId: string): Promise<StopPlaceFacilities>;
+    getStopPlaceFacilities: (stopPlaceId: string) => Promise<StopPlaceFacilities>;
 
-    getQuaysForStopPlace(
+    getQuaysForStopPlace: (
         stopPlaceId: string,
         params?: StopPlaceParams
-    ): Promise<Quay[]>;
+    ) => Promise<Quay[]>;
 
-    getBikeRentalStation(stationId: string): Promise<BikeRentalStation>;
+    getBikeRentalStation: (stationId: string) => Promise<BikeRentalStation>;
 
-    getBikeRentalStations(
+    getBikeRentalStations: (
         stationIds: Array<string>
-    ): Promise<Array<BikeRentalStation | undefined>>;
+    ) => Promise<Array<BikeRentalStation | undefined>>;
 
-    getBikeRentalStationsByPosition(
+    getBikeRentalStationsByPosition: (
         coordinates: Coordinates,
         distance?: number
-    ): Promise<BikeRentalStation[]>;
+    ) => Promise<BikeRentalStation[]>;
 }
 
-export default EnturService;
+export default function createEnturService(config: Config): EnturService;
 
 /**
  * Constants

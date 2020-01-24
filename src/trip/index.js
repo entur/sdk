@@ -18,9 +18,13 @@ import type {
 } from '../../flow-types'
 import { convertFeatureToLocation, isValidDate } from '../utils'
 
+import { createGetFeatures } from '../geocoder'
+
 import type { Leg } from '../fields/Leg'
 
-import type { OverrideConfig } from '../config'
+import {
+    getServiceConfig, mergeConfig, type ArgumentConfig, type OverrideConfig,
+} from '../config'
 
 type TripPattern = {
     distance: number,
@@ -98,28 +102,29 @@ function getTripPatternsVariables(
     }
 }
 
-export function getTripPatterns(
-    params: GetTripPatternsParams = {},
-    overrideConfig?: OverrideConfig,
-): Promise<Array<TripPattern>> {
-    return journeyPlannerQuery(
-        getTripPatternQuery,
-        getTripPatternsVariables(params),
-        {
-            ...this.config,
-            ...overrideConfig,
-        },
-    )
-        .then((data: Object = {}) => {
-            if (!data?.trip?.tripPatterns) {
-                return []
-            }
+export function createGetTripPatterns(argConfig: ArgumentConfig) {
+    const config = getServiceConfig(argConfig)
 
-            return data.trip.tripPatterns.map(trip => ({
-                ...trip,
-                legs: trip.legs.map(legMapper),
-            }))
-        })
+    return function getTripPatterns(
+        params: GetTripPatternsParams = {},
+        overrideConfig?: OverrideConfig,
+    ): Promise<Array<TripPattern>> {
+        return journeyPlannerQuery(
+            getTripPatternQuery,
+            getTripPatternsVariables(params),
+            mergeConfig(config, overrideConfig),
+        )
+            .then((data: Object = {}) => {
+                if (!data?.trip?.tripPatterns) {
+                    return []
+                }
+
+                return data.trip.tripPatterns.map(trip => ({
+                    ...trip,
+                    legs: trip.legs.map(legMapper),
+                }))
+            })
+    }
 }
 
 export function getTripPatternsQuery(
@@ -128,33 +133,38 @@ export function getTripPatternsQuery(
     return getGraphqlParams(getTripPatternQuery, getTripPatternsVariables(params))
 }
 
-export async function findTrips(
-    from: string,
-    to: string,
-    date?: Date | string | number,
-): Promise<Array<TripPattern>> {
-    const searchDate = date ? new Date(date) : new Date()
+export function createFindTrips(argConfig: ArgumentConfig) {
+    const getFeatures = createGetFeatures(argConfig)
+    const getTripPatterns = createGetTripPatterns(argConfig)
 
-    if (!isValidDate(searchDate)) {
-        throw new Error('Entur SDK: Could not parse <date> argument to valid Date')
+    return async function findTrips(
+        from: string,
+        to: string,
+        date?: Date | string | number,
+    ): Promise<Array<TripPattern>> {
+        const searchDate = date ? new Date(date) : new Date()
+
+        if (!isValidDate(searchDate)) {
+            throw new Error('Entur SDK: Could not parse <date> argument to valid Date')
+        }
+
+        const [fromFeatures, toFeatures] = await Promise.all([
+            getFeatures(from),
+            getFeatures(to),
+        ])
+
+        if (!fromFeatures || !fromFeatures.length) {
+            throw new Error(`Entur SDK: Could not find any locations matching <from> argument "${from}"`)
+        }
+
+        if (!toFeatures || !toFeatures.length) {
+            throw new Error(`Entur SDK: Could not find any locations matching <to> argument "${to}"`)
+        }
+
+        return getTripPatterns({
+            from: convertFeatureToLocation(fromFeatures[0]),
+            to: convertFeatureToLocation(toFeatures[0]),
+            searchDate,
+        })
     }
-
-    const [fromFeatures, toFeatures] = await Promise.all([
-        this.getFeatures(from),
-        this.getFeatures(to),
-    ])
-
-    if (!fromFeatures || !fromFeatures.length) {
-        throw new Error(`Entur SDK: Could not find any locations matching <from> argument "${from}"`)
-    }
-
-    if (!toFeatures || !toFeatures.length) {
-        throw new Error(`Entur SDK: Could not find any locations matching <to> argument "${to}"`)
-    }
-
-    return this.getTripPatterns({
-        from: convertFeatureToLocation(fromFeatures[0]),
-        to: convertFeatureToLocation(toFeatures[0]),
-        searchDate,
-    })
 }
