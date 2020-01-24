@@ -1,5 +1,7 @@
 // @flow
 
+import 'regenerator-runtime/runtime'
+
 import EnturService from './service'
 
 export {

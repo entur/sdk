@@ -152,9 +152,9 @@ export async function findTrips(
         throw new Error(`Entur SDK: Could not find any locations matching <to> argument "${to}"`)
     }
 
-    return this.getTripPatterns(
-        convertFeatureToLocation(fromFeatures[0]),
-        convertFeatureToLocation(toFeatures[0]),
+    return this.getTripPatterns({
+        from: convertFeatureToLocation(fromFeatures[0]),
+        to: convertFeatureToLocation(toFeatures[0]),
         searchDate,
-    )
+    })
 }
