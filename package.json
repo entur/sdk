@@ -29,6 +29,7 @@
     "node-fetch": "^2.6.0",
     "promise-throttle": "^1.0.1",
     "qs": "^6.9.1",
+    "regenerator-runtime": "^0.13.3",
     "turf-linestring": "^1.0.2",
     "turf-point": "^2.0.1"
   },
