@@ -35,9 +35,9 @@ const JERNBANETORGET = 'NSR:StopPlace:58366'
 const OSLO_S = 'NSR:StopPlace:59872'
 const MISSING = 'NSR:StopPlace:5483957348574389'
 
-const { default: EnturService } = require('./src')
+const { default: createEnturService } = require('./src')
 
-const service = new EnturService({
+const service = createEnturService({
     clientName: 'SDK cli-test',
 })
 

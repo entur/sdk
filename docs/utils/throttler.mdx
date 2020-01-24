@@ -12,9 +12,9 @@ To help you with this, we have a `throttler` utility that throttles the requests
 Example usage:
 
 ```
-import EnturService, { throttler, convertFeatureToLocation } from '@entur/sdk'
+import createEnturService, { throttler, convertFeatureToLocation } from '@entur/sdk'
 
-const service = new EnturService({ clientName: 'myawesomecompany-myawesomeapp' })
+const service = createEnturService({ clientName: 'myawesomecompany-myawesomeapp' })
 
 async function getTripPatternsForVeryManyDifferentLocations() {
   const [fromLocation] = await service.getFeatures('Oslo S')
