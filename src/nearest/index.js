@@ -7,6 +7,8 @@ import type {
     TransportMode, Coordinates, TypeName, NearestPlace,
 } from '../../flow-types'
 
+import { getServiceConfig, type ArgumentConfig } from '../config'
+
 type FilterPlaceType =
     | 'bicycleRent'
     | 'bikePark'
@@ -42,48 +44,52 @@ type NearestParams = {
     multiModalMode?: 'parent' | 'child' | 'all',
 }
 
-export function getNearestPlaces(
-    coordinates: Coordinates,
-    params?: NearestParams = {},
-): Promise<Array<NearestPlace>> {
-    const { latitude, longitude } = coordinates
+export function createGetNearestPlaces(argConfig: ArgumentConfig) {
+    const config = getServiceConfig(argConfig)
 
-    const {
-        maximumDistance = 2000,
-        maximumResults = 20,
-        filterByInUse = false,
-        filterByModes,
-        filterByPlaceTypes = ALL_PLACE_TYPES,
-        multiModalMode = 'parent',
-    } = params
+    return function getNearestPlaces(
+        coordinates: Coordinates,
+        params?: NearestParams = {},
+    ): Promise<Array<NearestPlace>> {
+        const { latitude, longitude } = coordinates
 
-    const variables = {
-        latitude,
-        longitude,
-        maximumDistance,
-        maximumResults,
-        filterByInUse,
-        filterByModes,
-        filterByPlaceTypes,
-        multiModalMode,
+        const {
+            maximumDistance = 2000,
+            maximumResults = 20,
+            filterByInUse = false,
+            filterByModes,
+            filterByPlaceTypes = ALL_PLACE_TYPES,
+            multiModalMode = 'parent',
+        } = params
+
+        const variables = {
+            latitude,
+            longitude,
+            maximumDistance,
+            maximumResults,
+            filterByInUse,
+            filterByModes,
+            filterByPlaceTypes,
+            multiModalMode,
+        }
+
+        if (params.filterByPlaceTypes) {
+            variables.filterByPlaceTypes = params.filterByPlaceTypes
+                .map(convertTypeNameToFilterPlaceType)
+                .filter(Boolean)
+        }
+
+        return journeyPlannerQuery(getNearestPlacesQuery, variables, config)
+            .then((data: Object = {}) => (data?.nearest.edges || []).map(({ node }) => {
+                const { distance, place } = node
+
+                return {
+                    distance,
+                    id: place.id,
+                    type: place.__typename, // eslint-disable-line no-underscore-dangle
+                    latitude: place.latitude,
+                    longitude: place.longitude,
+                }
+            }))
     }
-
-    if (params.filterByPlaceTypes) {
-        variables.filterByPlaceTypes = params.filterByPlaceTypes
-            .map(convertTypeNameToFilterPlaceType)
-            .filter(Boolean)
-    }
-
-    return journeyPlannerQuery(getNearestPlacesQuery, variables, this.config)
-        .then((data: Object = {}) => (data?.nearest.edges || []).map(({ node }) => {
-            const { distance, place } = node
-
-            return {
-                distance,
-                id: place.id,
-                type: place.__typename, // eslint-disable-line no-underscore-dangle
-                latitude: place.latitude,
-                longitude: place.longitude,
-            }
-        }))
 }

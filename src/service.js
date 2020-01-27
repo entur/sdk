@@ -1,88 +1,71 @@
 // @flow
 import { journeyPlannerQuery, nsrQuery } from './api'
 
-import { findTrips, getTripPatterns } from './trip'
+import {
+    createFindTrips,
+    createGetTripPatterns,
+} from './trip'
 
 import {
-    getDeparturesFromStopPlace,
-    getDeparturesFromStopPlaces,
-    getDeparturesFromQuays,
-    getDeparturesBetweenStopPlaces,
-    getDeparturesForServiceJourney,
+    createGetDeparturesFromStopPlace,
+    createGetDeparturesFromStopPlaces,
+    createGetDeparturesFromQuays,
+    createGetDeparturesBetweenStopPlaces,
+    createGetDeparturesForServiceJourney,
     getStopPlaceDeparturesDEPRECATED,
 } from './departure'
 
-import { getNearestPlaces } from './nearest'
+import {
+    createGetNearestPlaces,
+} from './nearest'
 
 import {
-    getStopPlace,
-    getStopPlaces,
-    getParentStopPlace,
-    getStopPlacesByPosition,
-    getStopPlaceFacilities,
-    getQuaysForStopPlace,
+    createGetStopPlace,
+    createGetStopPlaces,
+    createGetParentStopPlace,
+    createGetStopPlacesByPosition,
+    createGetStopPlaceFacilities,
+    createGetQuaysForStopPlace,
 } from './stopPlace'
 
 import {
-    getBikeRentalStation,
-    getBikeRentalStations,
-    getBikeRentalStationsByPosition,
+    createGetBikeRentalStation,
+    createGetBikeRentalStations,
+    createGetBikeRentalStationsByPosition,
 } from './bikeRental'
 
-import { getFeatures, getFeaturesReverse } from './geocoder'
-import { getServiceConfig } from './config'
-import type { ServiceConfig, ArgumentConfig } from './config'
+import {
+    createGetFeatures,
+    createGetFeaturesReverse,
+} from './geocoder'
 
-class EnturService {
-    config: ServiceConfig;
+import type { ArgumentConfig } from './config'
 
-    constructor(config: ArgumentConfig) {
-        this.config = getServiceConfig(config)
+function createEnturService(config: ArgumentConfig) {
+    return {
+        journeyPlannerQuery,
+        nsrQuery,
+        getFeatures: createGetFeatures(config),
+        getFeaturesReverse: createGetFeaturesReverse(config),
+        getTripPatterns: createGetTripPatterns(config),
+        findTrips: createFindTrips(config),
+        getStopPlaceDepartures: getStopPlaceDeparturesDEPRECATED,
+        getDeparturesFromStopPlace: createGetDeparturesFromStopPlace(config),
+        getDeparturesFromStopPlaces: createGetDeparturesFromStopPlaces(config),
+        getDeparturesFromQuays: createGetDeparturesFromQuays(config),
+        getDeparturesBetweenStopPlaces: createGetDeparturesBetweenStopPlaces(config),
+        getDeparturesForServiceJourney: createGetDeparturesForServiceJourney(config),
+        getNearestPlaces: createGetNearestPlaces(config),
+        getStopPlace: createGetStopPlace(config),
+        getStopPlaces: createGetStopPlaces(config),
+        getParentStopPlace: createGetParentStopPlace(config),
+        getStopPlacesByPosition: createGetStopPlacesByPosition(config),
+        getStopPlaceFacilities: createGetStopPlaceFacilities(config),
+        getQuaysForStopPlace: createGetQuaysForStopPlace(config),
+        getBikeRentalStation: createGetBikeRentalStation(config),
+        getBikeRentalStations: createGetBikeRentalStations(config),
+        getBikeRentalStationsByPosition: createGetBikeRentalStationsByPosition(config),
     }
-
-    journeyPlannerQuery = journeyPlannerQuery;
-
-    nsrQuery = nsrQuery;
-
-    getFeatures = getFeatures;
-
-    getFeaturesReverse = getFeaturesReverse;
-
-    getTripPatterns = getTripPatterns;
-
-    findTrips = findTrips;
-
-    getStopPlaceDepartures = getStopPlaceDeparturesDEPRECATED;
-
-    getDeparturesFromStopPlace = getDeparturesFromStopPlace;
-
-    getDeparturesFromStopPlaces = getDeparturesFromStopPlaces;
-
-    getDeparturesFromQuays = getDeparturesFromQuays;
-
-    getDeparturesBetweenStopPlaces = getDeparturesBetweenStopPlaces;
-
-    getDeparturesForServiceJourney = getDeparturesForServiceJourney;
-
-    getNearestPlaces = getNearestPlaces;
-
-    getStopPlace = getStopPlace;
-
-    getStopPlaces = getStopPlaces;
-
-    getParentStopPlace = getParentStopPlace;
-
-    getStopPlacesByPosition = getStopPlacesByPosition;
-
-    getStopPlaceFacilities = getStopPlaceFacilities;
-
-    getQuaysForStopPlace = getQuaysForStopPlace;
-
-    getBikeRentalStation = getBikeRentalStation;
-
-    getBikeRentalStations = getBikeRentalStations;
-
-    getBikeRentalStationsByPosition = getBikeRentalStationsByPosition;
 }
 
-export default EnturService
+export default createEnturService

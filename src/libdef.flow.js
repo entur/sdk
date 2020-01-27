@@ -603,70 +603,68 @@ type $entur$sdk$StopPlaceParams = {
 }
 
 declare module '@entur/sdk' {
-    declare export default class EnturService {
-        constructor(config: $entur$sdk$Config): EnturService;
-
-        journeyPlannerQuery<$entur$sdk$journeyPlannerResponse>(
+    declare type EnturService = {|
+        journeyPlannerQuery: <$entur$sdk$journeyPlannerResponse>(
             queryObj: Object | string,
             variables?: Object,
             config?: $entur$sdk$ServiceConfig,
-        ): Promise<$entur$sdk$journeyPlannerResponse>,
+        ) => Promise<$entur$sdk$journeyPlannerResponse>,
 
-        nsrQuery<$entur$sdk$nsrResponse>(
+        nsrQuery: <$entur$sdk$nsrResponse>(
             queryObj: Object | string,
             variables?: Object,
             config?: $entur$sdk$ServiceConfig,
-        ): Promise<$entur$sdk$nsrResponse>,
+        ) => Promise<$entur$sdk$nsrResponse>,
 
-        getFeatures(
+        getFeatures: (
             query: string,
             coords?: $entur$sdk$Coordinates,
             params?: $entur$sdk$GetFeaturesParams,
-        ): Promise<Array<$entur$sdk$Feature>>,
+        ) => Promise<Array<$entur$sdk$Feature>>,
 
-        getFeaturesReverse(
+        getFeaturesReverse: (
             coords: $entur$sdk$Coordinates,
             params?: $entur$sdk$GetFeaturesReverseParam,
-        ): Promise<Array<$entur$sdk$Feature>>,
+        ) => Promise<Array<$entur$sdk$Feature>>,
 
-        getTripPatterns(
+        getTripPatterns: (
             params: $entur$sdk$GetTripPatternsParams,
             overrideConfig?: $entur$sdk$OverrideConfig,
-        ): Promise<Array<$entur$sdk$TripPattern>>,
+        ) => Promise<Array<$entur$sdk$TripPattern>>,
 
-        findTrips(
+        findTrips: (
             from: string,
             to: string,
             date?: Date | string | number
-        ): Promise<Array<$entur$sdk$TripPattern>>,
+        ) => Promise<Array<$entur$sdk$TripPattern>>,
 
-        getDeparturesFromStopPlaces(
+        getDeparturesFromStopPlaces: (
             stopPlaceIds: Array<string>,
             params?: $entur$sdk$GetDeparturesParams,
-        ): Promise<Array<$entur$sdk$DeparturesById | void>>,
+        ) => Promise<Array<$entur$sdk$DeparturesById | void>>,
 
-        getDeparturesFromStopPlace(
+        getDeparturesFromStopPlace: (
             stopPlaceId: string,
             params?: $entur$sdk$GetDeparturesParams,
-        ): Promise<Array<$entur$sdk$Departure>>,
+        ) => Promise<Array<$entur$sdk$Departure>>,
 
-        getDeparturesFromQuays(
+        getDeparturesFromQuays: (
             quayIds: Array<string>,
             params?: $entur$sdk$GetDeparturesParams,
-        ): Promise<Array<$entur$sdk$DeparturesById | void>>,
+        ) => Promise<Array<$entur$sdk$DeparturesById | void>>,
 
-        getDeparturesBetweenStopPlaces(
+        getDeparturesBetweenStopPlaces: (
             fromStopPlaceId: string,
             toStopPlaceId: string,
             params?: $entur$sdk$GetDeparturesBetweenStopPlacesParams,
-        ): Promise<Array<$entur$sdk$Departure>>,
+        ) => Promise<Array<$entur$sdk$Departure>>,
 
-        getDeparturesForServiceJourney(
+        getDeparturesForServiceJourney: (
             id: string,
             date?: string,
-        ): Promise<Array<$entur$sdk$Departure>>,
+        ) => Promise<Array<$entur$sdk$Departure>>,
 
-        getNearestPlaces(
+        getNearestPlaces: (
             coordinates: $entur$sdk$Coordinates,
             params?: {
                 maximumDistance?: number,
@@ -676,45 +674,47 @@ declare module '@entur/sdk' {
                 filterByInUse?: boolean,
                 multiModalMode?: 'parent' | 'child' | 'all',
             },
-        ): Promise<Array<$entur$sdk$NearestPlace>>,
+        ) => Promise<Array<$entur$sdk$NearestPlace>>,
 
-        getStopPlace(
+        getStopPlace: (
             stopPlaceId: string,
             params?: $entur$sdk$StopPlaceParams,
-        ): Promise<$entur$sdk$StopPlaceDetails>,
+        ) => Promise<$entur$sdk$StopPlaceDetails>,
 
-        getStopPlaces(
+        getStopPlaces: (
             stopPlaceIds: Array<string>,
             params?: $entur$sdk$StopPlaceParams,
-        ): Promise<Array<$entur$sdk$StopPlaceDetails | void>>,
+        ) => Promise<Array<$entur$sdk$StopPlaceDetails | void>>,
 
-        getParentStopPlace(
+        getParentStopPlace: (
             stopPlaceId: string,
             params?: $entur$sdk$StopPlaceParams,
-        ): Promise<$entur$sdk$StopPlaceDetails | null>,
+        ) => Promise<$entur$sdk$StopPlaceDetails | null>,
 
-        getStopPlacesByPosition(
+        getStopPlacesByPosition: (
             coordinates: $entur$sdk$Coordinates,
             distance?: number,
             params?: $entur$sdk$StopPlaceParams,
-        ): Promise<Array<$entur$sdk$StopPlaceDetails>>,
+        ) => Promise<Array<$entur$sdk$StopPlaceDetails>>,
 
-        getStopPlaceFacilities(stopPlaceId: string): Promise<$entur$sdk$StopPlaceFacilities>,
+        getStopPlaceFacilities: (stopPlaceId: string) => Promise<$entur$sdk$StopPlaceFacilities>,
 
-        getQuaysForStopPlace(
+        getQuaysForStopPlace: (
             stopPlaceId: string,
             params?: $entur$sdk$StopPlaceParams,
-        ): Promise<Array<$entur$sdk$Quay>>,
+        ) => Promise<Array<$entur$sdk$Quay>>,
 
-        getBikeRentalStation(stationId: string): Promise<$entur$sdk$BikeRentalStation>,
+        getBikeRentalStation: (stationId: string) => Promise<$entur$sdk$BikeRentalStation>,
 
-        getBikeRentalStations(stationId: Array<string>): Promise<Array<$entur$sdk$BikeRentalStation | void>>,
+        getBikeRentalStations: (stationId: Array<string>) => Promise<Array<$entur$sdk$BikeRentalStation | void>>,
 
-        getBikeRentalStationsByPosition(
+        getBikeRentalStationsByPosition: (
             coordinates: $entur$sdk$Coordinates,
             distance?: number
-        ): Promise<Array<$entur$sdk$BikeRentalStation>>,
-    }
+        ) => Promise<Array<$entur$sdk$BikeRentalStation>>,
+    |}
+
+    declare export default function createEnturService(config: $entur$sdk$Config): EnturService
 
     /**
      * Constants

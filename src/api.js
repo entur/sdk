@@ -36,9 +36,9 @@ export function getGraphqlParams(
 export function journeyPlannerQuery<T>(
     queryObj: Object | string,
     variables?: Object,
-    config?: ServiceConfig,
+    config: ServiceConfig,
 ): Promise<T> {
-    const { host, headers } = getJourneyPlannerHost((this && this.config) || config)
+    const { host, headers } = getJourneyPlannerHost(config)
     const url = `${host}/graphql`
 
     const params = getGraphqlParams(queryObj, variables)
@@ -50,9 +50,9 @@ export function journeyPlannerQuery<T>(
 export function nsrQuery<T>(
     query: string,
     variables?: Object,
-    config?: ServiceConfig,
+    config: ServiceConfig,
 ): Promise<T> {
-    const { host, headers } = getNSRHost((this && this.config) || config)
+    const { host, headers } = getNSRHost(config)
     const url = `${host}/graphql`
 
     return post(url, { query: minify(query), variables }, headers)

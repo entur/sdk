@@ -11,50 +11,63 @@ import { convertPositionToBbox, forceOrder } from '../utils'
 import type { Coordinates } from '../../flow-types'
 
 import type { BikeRentalStation } from '../fields/BikeRentalStation'
+import { getServiceConfig, type ArgumentConfig } from '../config'
 
-export function getBikeRentalStation(stationId: string): Promise<BikeRentalStation> {
-    const variables = {
-        id: stationId,
+export function createGetBikeRentalStation(argConfig: ArgumentConfig) {
+    const config = getServiceConfig(argConfig)
+
+    return function getBikeRentalStation(stationId: string): Promise<BikeRentalStation> {
+        const variables = {
+            id: stationId,
+        }
+
+        return journeyPlannerQuery(getBikeRentalStationQuery, variables, config)
+            .then((data: Object = {}) => data?.bikeRentalStation)
     }
-
-    return journeyPlannerQuery(getBikeRentalStationQuery, variables, this.config)
-        .then((data: Object = {}) => data?.bikeRentalStation)
 }
 
-export function getBikeRentalStations(
-    stationIds: Array<string>,
-): Promise<Array<BikeRentalStation | void>> {
-    if (!stationIds || !Array.isArray(stationIds)) {
-        throw new Error(`getBikeRentalStations takes an an array of strings, but got ${typeof stationIds}`)
-    }
+export function createGetBikeRentalStations(argConfig: ArgumentConfig) {
+    const config = getServiceConfig(argConfig)
 
-    if (stationIds.length === 0) {
-        return Promise.resolve([])
-    }
+    return function getBikeRentalStations(
+        stationIds: Array<string>,
+    ): Promise<Array<BikeRentalStation | void>> {
+        if (!stationIds || !Array.isArray(stationIds)) {
+            throw new Error(`getBikeRentalStations takes an an array of strings, but got ${typeof stationIds}`)
+        }
 
-    const variables = {
-        ids: stationIds,
-    }
+        if (stationIds.length === 0) {
+            return Promise.resolve([])
+        }
 
-    return journeyPlannerQuery(getBikeRentalStationsQuery, variables, this.config)
-        .then((data: Object = {}) => data?.bikeRentalStations || [])
-        // TODO: JourneyPlanner does not support filtering yet, so we filter on ID ourselves.
-        .then(stations => stations.filter(({ id }) => stationIds.includes(id)))
-        .then((stations: Array<BikeRentalStation>) => {
-            return forceOrder<BikeRentalStation>(stations, stationIds, ({ id }) => id)
-        })
+        const variables = {
+            ids: stationIds,
+        }
+
+        return journeyPlannerQuery(getBikeRentalStationsQuery, variables, config)
+            .then((data: Object = {}) => data?.bikeRentalStations || [])
+            // TODO: JourneyPlanner does not support filtering yet, so we filter on ID ourselves.
+            .then(stations => stations.filter(({ id }) => stationIds.includes(id)))
+            .then((stations: Array<BikeRentalStation>) => {
+                return forceOrder<BikeRentalStation>(stations, stationIds, ({ id }) => id)
+            })
+    }
 }
 
-export function getBikeRentalStationsByPosition(
-    coordinates: Coordinates,
-    distance?: number = 500,
-): Promise<Array<BikeRentalStation>> {
-    const variables = convertPositionToBbox(coordinates, distance)
+export function createGetBikeRentalStationsByPosition(argConfig: ArgumentConfig) {
+    const config = getServiceConfig(argConfig)
 
-    return journeyPlannerQuery(
-        getBikeRentalStationsByPositionQuery,
-        variables,
-        this.config,
-    )
-        .then((data: Object = {}) => data?.bikeRentalStationsByBbox || [])
+    return function getBikeRentalStationsByPosition(
+        coordinates: Coordinates,
+        distance?: number = 500,
+    ): Promise<Array<BikeRentalStation>> {
+        const variables = convertPositionToBbox(coordinates, distance)
+
+        return journeyPlannerQuery(
+            getBikeRentalStationsByPositionQuery,
+            variables,
+            config,
+        )
+            .then((data: Object = {}) => data?.bikeRentalStationsByBbox || [])
+    }
 }
