@@ -10,4 +10,5 @@ export default {
         'Places',
         'Utils',
     ],
+    typescript: true,
 }
