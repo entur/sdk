@@ -47,7 +47,7 @@ export function journeyPlannerQuery<T>(
 
 export function nsrQuery<T>(
     query: string,
-    variables: Record<string, any>,
+    variables: object,
     config: ServiceConfig,
 ): Promise<T> {
     const { host, headers } = getNSRHost(config)
