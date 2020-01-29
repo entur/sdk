@@ -6,7 +6,7 @@ route: /travel/getTripPatterns
 
 # getTripPatterns
 
-```javascript
+```typescript
 (params: GetTripPatternsParams, overrideConfig?: OverrideConfig) => Promise<Array<TripPattern>>
 ```
 
@@ -39,7 +39,7 @@ An object of search parameters.
 
 InputBanned and InputWhitelisted types:
 
-```
+```typescript
 interface InputBanned {
     lines?: Array<string>;
     authorities?: Array<string>;
@@ -60,7 +60,7 @@ interface InputWhiteListed {
 
 You can override the default service config on invocation if necessary.
 
-```
+```typescript
 interface OverrideConfig {
     clientName?: string;
     hosts?: {
