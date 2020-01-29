@@ -454,8 +454,9 @@ export interface GetDeparturesParams {
     limitPerLine?: number;
     start?: Date;
     timeRange?: number;
-    whiteListedLines?: Array<string>;
     whiteListedAuthorities?: Array<string>;
+    whiteListedLines?: Array<string>;
+    whiteListedModes?: Array<QueryMode>;
 }
 
 export interface GetDeparturesBetweenStopPlacesParams {
@@ -604,14 +605,14 @@ export interface StopPlaceParams {
 
 export interface EnturService {
     journeyPlannerQuery: <journeyPlannerResponse>(
-        queryObj: Object | string,
-        variables?: Object,
+        queryObj: string,
+        variables?: Record<string, any>,
         config?: ServiceConfig
     ) => Promise<journeyPlannerResponse>;
 
     nsrQuery: <nsrResponse>(
-        queryObj: Object | string,
-        variables?: Object,
+        queryObj: string,
+        variables?: Record<string, any>,
         config?: ServiceConfig
     ) => Promise<nsrResponse>;
 
@@ -815,26 +816,26 @@ export var BYDEL: 'bydel';
 export var OTHER: 'other';
 
 export var FeatureCategory: {
-    ONSTREET_BUS: 'onstreetBus',
-    ONSTREET_TRAM: 'onstreetTram',
-    AIRPORT: 'airport',
-    RAIL_STATION: 'railStation',
-    METRO_STATION: 'metroStation',
-    BUS_STATION: 'busStation',
-    COACH_STATION: 'coachStation',
-    TRAM_STATION: 'tramStation',
-    HARBOUR_PORT: 'harbourPort',
-    FERRY_PORT: 'ferryPort',
-    FERRY_STOP: 'ferryStop',
-    LIFT_STATION: 'liftStation',
-    VEHICLE_RAIL_INTERCHANGE: 'vehicleRailInterchange',
-    GROUP_OF_STOP_PLACES: 'GroupOfStopPlaces',
-    POI: 'poi',
-    VEGADRESSE: 'Vegadresse',
-    STREET: 'street',
-    TETTSTEDDEL: 'tettsteddel',
-    BYDEL: 'bydel',
-    OTHER: 'other',
+    ONSTREET_BUS: 'onstreetBus';
+    ONSTREET_TRAM: 'onstreetTram';
+    AIRPORT: 'airport';
+    RAIL_STATION: 'railStation';
+    METRO_STATION: 'metroStation';
+    BUS_STATION: 'busStation';
+    COACH_STATION: 'coachStation';
+    TRAM_STATION: 'tramStation';
+    HARBOUR_PORT: 'harbourPort';
+    FERRY_PORT: 'ferryPort';
+    FERRY_STOP: 'ferryStop';
+    LIFT_STATION: 'liftStation';
+    VEHICLE_RAIL_INTERCHANGE: 'vehicleRailInterchange';
+    GROUP_OF_STOP_PLACES: 'GroupOfStopPlaces';
+    POI: 'poi';
+    VEGADRESSE: 'Vegadresse';
+    STREET: 'street';
+    TETTSTEDDEL: 'tettsteddel';
+    BYDEL: 'bydel';
+    OTHER: 'other';
 };
 
 /**
@@ -843,7 +844,7 @@ export var FeatureCategory: {
 
 export function getTripPatternsQuery(
     params: GetTripPatternsParams
-): { query: string; variables?: Object };
+): { query: string; variables?: Record<string, any> };
 
 export function convertFeatureToLocation(feature: Feature): Location;
 export function convertLocationToPosition(feature: Feature): Location;
