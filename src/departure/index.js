@@ -51,6 +51,7 @@ export function createGetDeparturesFromStopPlaces(argConfig: ArgumentConfig) {
             timeRange = 72000,
             start = new Date(),
             limitPerLine,
+            includeCancelledTrips = false,
             includeNonBoarding = false,
             whiteListedLines,
             whiteListedAuthorities,
@@ -60,6 +61,7 @@ export function createGetDeparturesFromStopPlaces(argConfig: ArgumentConfig) {
 
         const variables = {
             ids: stopPlaceIds,
+            includeCancelledTrips,
             start: start.toISOString(),
             omitNonBoarding: !includeNonBoarding,
             timeRange,
@@ -111,6 +113,7 @@ export function createGetDeparturesFromQuays(argConfig: ArgumentConfig) {
             limit = 30,
             limitPerLine,
             timeRange = 72000,
+            includeCancelledTrips = false,
             includeNonBoarding = false,
             start = new Date(),
             ...rest
@@ -119,6 +122,7 @@ export function createGetDeparturesFromQuays(argConfig: ArgumentConfig) {
         const variables = {
             ids: quayIds,
             start: start.toISOString(),
+            includeCancelledTrips,
             omitNonBoarding: !includeNonBoarding,
             timeRange,
             limit,
