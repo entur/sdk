@@ -5,6 +5,25 @@ route: /
 
 # Entur SDK
 
-This SDK simplifies the use of Entur's travel APIs in JavaScript apps. For more information about Entur's APIs, see https://developer.entur.org
+This SDK simplifies the use of Entur's travel APIs in JavaScript apps and works for both the browser and Node.js.
+For more information about Entur's APIs, see https://developer.entur.org
 
 Miss anything? Found a bug? File an [issue](https://github.com/entur/sdk/issues/new) or create a pull request!
+
+Ready to get started? Check out [Getting Started!](/getting-started)
+
+## Why use the SDK?
+TL;DR: simplicity and types.
+
+The SDK provides a simple interface to accessing Entur's JourneyPlanner and Geocoder APIs through fully typed JavaScript functions for both TypeScript and Flow.
+You avoid a lot of boilerplate like handling network requests, defining GraphQL queries, _understanding_ GraphQL, and so on.
+
+The data types do not include _all_ possible fields and values that the APIs provide, but most likely more than you need.
+
+## Why NOT use the SDK?
+TL;DR: performance and flexibility.
+
+If performance is very important to you, querying the GraphQL APIs directly is probably the way to go. With GraphQL you can specify exactly what data you need, which will reduce payloads and increase speed.
+This SDK will likely return more data than you are interested in.
+
+There might also be cases where the SDK does not ask for data you need. With GraphQL you can simply add the fields you are missing to your queries, while with the SDK you might need to file an issue or pull request and wait for a new version.
