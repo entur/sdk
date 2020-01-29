@@ -1,0 +1,24 @@
+---
+name: getDeparturesFromStopPlaces
+menu: Departures
+route: /departures/getDeparturesFromStopPlaces
+---
+
+# getDeparturesFromStopPlaces
+
+```javascript
+(stopPlaceIds: Array<string>, params?: GetDeparturesParams) => Promise<Array<{ id: string, departures: Array<Departure> }>>
+```
+
+`getDeparturesFromStopPlaces` finds departures from one or more given stop places. Also see `getDeparturesFromStopPlace` for a simpler interface for fetching departures for a single stop.
+
+The method will return an array of objects containing fields for the stop place's `id` and `departures`.
+
+## Parameters
+
+### stopPlaceIds (`Array<string>`)
+The IDs of the stop places you are interested in.
+
+### params (`Object`) [Optional]
+
+See the `params` parameter for [`getDeparturesForStopPlace`](/departures/getDeparturesFromStopPlace#params-object-optional).

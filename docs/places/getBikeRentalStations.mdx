@@ -1,0 +1,18 @@
+---
+name: getBikeRentalStations
+menu: Places
+route: /places/getBikeRentalStations
+---
+
+# getBikeRentalStations
+
+```javascript
+(stationIds: Array<string>) => Promise<Array<BikeRentalStation>>
+```
+
+`getBikeRentalStations` finds multiple bike rental stations according to an array of IDs. The returned array will have the same order as the input array, and may contain undefined values if the corresponding ID didn't produce a result.
+
+## Parameters
+
+### stationIds (`Array<string>`)
+The IDs of the bike rental stations you are interested in. The method will return a Promise which will resolve to an array of objects of type [BikeRentalStation](flow-types/BikeRentalStation.js).

@@ -1,0 +1,24 @@
+---
+name: getBikeRentalStationsByPosition
+menu: Places
+route: /places/getBikeRentalStationsByPosition
+---
+
+# getBikeRentalStationsByPosition
+
+```javascript
+(coordinates: Coordinates, distance?: number) => Promise<Array<BikeRentalStation>>
+```
+
+`getBikeRentalStations` finds bike rental stations within an area surrounding a coordinate.
+
+## Parameters
+
+### coordinates (`{ latitude: number, longitude: number }`)
+The coordinates of which to find bike rental stations around.
+
+### distance (`number`) [Optional]
+Default: `500`
+
+The "radius" in meters of the surrounding bounding box in which you want to find bike rental stations.
+The width and height of the bounding box are therefore `2 * distance`, and the coordinates given are its centerpoint.

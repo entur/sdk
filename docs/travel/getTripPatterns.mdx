@@ -1,0 +1,100 @@
+---
+name: getTripPatterns
+menu: Travel
+route: /travel/getTripPatterns
+---
+
+# getTripPatterns
+
+```javascript
+(params: GetTripPatternsParams, overrideConfig?: OverrideConfig) => Promise<Array<TripPattern>>
+```
+
+Types: [TripPattern](flow-types/TripPattern.js)
+
+`getTripPatterns` is for searching for itineraries for a trip from some location to a destination at a given time. The method takes one argument `query`, which is an object with search parameters.
+
+If you are going to do a huge amount of different searches at the same time, consider using our [`throttler`](/utils/throttler) utility.
+
+## Parameters
+
+### params (`GetTripPatternsParams`)
+An object of search parameters.
+
+| Key                         | Type               | Default   | Description |
+|:----------------------------|:-------------------|:----------|:------------|
+| `from`                      | `Location`         |          | The location to search for travels from. |
+| `to`                        | `Location`         |          | The destination location to search for travels to. |
+| `allowBikeRental`           | `boolean`          | `false` | Is bike rental allowed? |
+| `arriveBy`                  | `boolean`          | `false` | Depart by `searchDate`, or arrive by `searchDate` |
+| `limit`                     | `number`           | `5`      | Limit result to this number of trip patterns |
+| `maxPreTransitWalkDistance` | `number`           | `Number.MAX_VALUE` | Max walk distance for access/egress legs. |
+| `modes`                     | [`Array of Modes`](#leg-mode) | `['foot', 'bus', 'tram', 'rail', 'metro', 'water', 'air']` | modes of transport to include in trip |
+| `searchDate`                | `Date`             | | When to calculate patterns |
+| `useFlex`                   | `boolean`          | `false`  | Whether to allow flexible search results or not |
+| `walkSpeed`                 | `number`           | `1.3`    | The walk speed to use in searches in meters per second |
+| `wheelchairAccessible`      | `boolean`          | `false`  | Include only stops which are wheelchair accessible |
+| `banned`                    | `InputBanned`      |          | Parameters for indicating authorities, lines or quays not be used in the trip patterns  |
+| `whiteListed`               | `InputWhitelisted` |          | Parameters for indicating the only authorities, lines or quays to be used in the trip patterns |
+
+InputBanned and InputWhitelisted types:
+
+```
+interface InputBanned {
+    lines?: Array<string>;
+    authorities?: Array<string>;
+    organisations?: Array<string>;
+    quays?: Array<string>;
+    quaysHard?: Array<string>;
+    serviceJourneys?: Array<string>;
+}
+
+interface InputWhiteListed {
+    lines?: Array<string>;
+    authorities?: Array<string>;
+    organisations?: Array<string>;
+}
+```
+
+### overrideConfig (`OverrideConfig`) [Optional]
+
+You can override the default service config on invocation if necessary.
+
+```
+interface OverrideConfig {
+    clientName?: string;
+    hosts?: {
+        journeyPlanner?: string;
+        geocoder?: string;
+        nsr?: string;
+    };
+    headers?: {[key: string]: string};
+}
+```
+
+## Example
+
+```javascript
+import createEnturService from '@entur/sdk'
+
+const service = createEnturService({
+    clientName: 'awesomecompany-awesomeapp'
+})
+
+service.getTripPatterns(
+    {
+        from: {
+            name: 'Ryllikvegen, Lillehammer',
+            coordinates: {
+                latitude: 61.102848368937416,
+                longitude: 10.51613308426234
+            },
+        },
+        to: {
+            place: 'NSR:StopPlace:337',
+            name: 'Oslo S, Oslo'
+        },
+        searchDate: new Date(),
+    }
+})
+```

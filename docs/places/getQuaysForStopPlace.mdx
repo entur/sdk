@@ -1,0 +1,24 @@
+---
+name: getQuaysForStopPlace
+menu: Places
+route: /places/getQuaysForStopPlace
+---
+
+# getQuaysForStopPlace
+
+```javascript
+(stopPlaceId: string, params?: StopPlaceParams) => Promise<Array<Quay>>
+```
+
+Returns all the quays that belong to a stop place.
+
+## Parameters
+
+### stopPlaceId (`string`)
+The ID of the stop place to find quays for. Example: `"NSR:StopPlace:59616"`.
+
+### params (`Object`) [Optional]
+
+| Key                      | Type           | Default      | Description |
+|:-------------------------|:---------------|:-------------|:------------|
+| `includeUnusedQuays`     | `boolean`      | `true`       | Whether to include quays no longer in use or not. |

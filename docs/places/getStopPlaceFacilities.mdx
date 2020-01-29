@@ -1,0 +1,19 @@
+---
+name: getStopPlaceFacilities
+menu: Places
+route: /places/getStopPlaceFacilities
+---
+
+# getStopPlaceFacilities
+
+```
+(stopPlaceId: string) => Promise<StopPlaceFacilities>
+```
+
+`getStopPlaceFacilities` returns information about the available facilities at a given stop place.
+Facilities can be accessibility assessments like is the stop place wheelchair accessible? Or other things, like is there a waiting room, sanitary or ticketing equipment, etc.
+
+## Parameters
+
+### stopPlaceId (`string`)
+The ID of the stop place to find facilities for. Example: `"NSR:StopPlace:59616"`.

@@ -1,6 +1,6 @@
 {
   "name": "@entur/sdk",
-  "version": "0.11.4",
+  "version": "1.0.0-next.55",
   "license": "EUPL-1.2",
   "main": "./lib/index.js",
   "repository": "github:entur/sdk",
@@ -11,39 +11,56 @@
     "./lib/fetch.js": "./lib/fetch.browser.js"
   },
   "typings": "./index.d.ts",
+  "files": [
+    "lib",
+    "index.d.ts",
+    "libdef.flow.js"
+  ],
   "scripts": {
-    "lint": "eslint src/ example/",
-    "test": "echo 'There are no tests'",
-    "flow": "flow",
-    "ts": "tsc index.d.ts --noEmit",
-    "transpile": "rm -rf lib && babel src --out-dir lib --copy-files",
-    "prepublishOnly": "npm run ts && npm run transpile"
+    "lint": "eslint src/ --ext=js,ts",
+    "test": "npm run lint && npm run check-libdefs && ts-node scripts/validate-queries.js",
+    "check-libdefs": "flow && tsc index.d.ts --noEmit",
+    "prebuild": "npm test && rm -rf lib",
+    "build": "babel --extensions .ts src --out-dir lib",
+    "prepublishOnly": "npm run build",
+    "docs": "docz dev",
+    "build:docs": "docz build"
   },
   "dependencies": {
     "@babel/polyfill": "^7.4.4",
     "@turf/bbox": "^6.0.1",
     "@turf/destination": "^6.0.1",
-    "clean-deep": "^3.0.2",
-    "json-to-graphql-query": "^1.9.0",
+    "@turf/helpers": "^6.1.4",
+    "clean-deep": "^3.2.0",
     "node-fetch": "^2.6.0",
     "promise-throttle": "^1.0.1",
-    "qs": "^6.7.0",
-    "turf-linestring": "^1.0.2",
-    "turf-point": "^2.0.1"
+    "qs": "^6.9.1",
+    "regenerator-runtime": "^0.13.3"
   },
   "devDependencies": {
-    "@babel/cli": "^7.5.5",
-    "@babel/core": "^7.5.5",
-    "@babel/plugin-proposal-class-properties": "^7.5.5",
-    "@babel/plugin-proposal-optional-chaining": "^7.2.0",
-    "@babel/preset-env": "^7.5.5",
-    "@babel/preset-flow": "^7.0.0",
-    "babel-eslint": "^10.0.2",
-    "eslint": "^6.1.0",
+    "@babel/cli": "^7.8.3",
+    "@babel/core": "^7.8.3",
+    "@babel/node": "^7.8.3",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/preset-env": "^7.8.3",
+    "@babel/preset-flow": "^7.8.3",
+    "@babel/preset-typescript": "^7.8.3",
+    "@babel/register": "^7.8.3",
+    "@types/node-fetch": "^2.5.4",
+    "@types/qs": "^6.9.0",
+    "@typescript-eslint/eslint-plugin": "^2.17.0",
+    "@typescript-eslint/parser": "^2.17.0",
+    "babel-eslint": "^10.0.3",
+    "docz": "^2.2.0",
+    "eslint": "^5.16.0",
     "eslint-config-airbnb": "^17.1.1",
-    "eslint-plugin-flowtype": "^3.12.1",
-    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-flowtype": "^3.13.0",
+    "eslint-plugin-import": "^2.20.0",
     "flow-bin": "^0.89.0",
-    "typescript": "^3.5.3"
+    "gatsby-theme-docz": "^2.2.0",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "ts-node": "^8.6.2",
+    "typescript": "^3.7.5"
   }
 }

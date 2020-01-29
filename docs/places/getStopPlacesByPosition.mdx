@@ -1,0 +1,28 @@
+---
+name: getStopPlacesByPosition
+menu: Places
+route: /places/getStopPlacesByPosition
+---
+
+# getStopPlacesByPosition
+
+```javascript
+(coordinates: Coordinates, distance?: number, params?: StopPlaceParams) => Promise<Array<StopPlaceDetails>>
+```
+
+`getStopPlacesByPosition` finds stop places within an area surrounding a coordinate.
+
+## Parameters
+
+### coordinates (`Coordinates`)
+The coordinates of which to find bike rental stations around.
+
+### distance (`number`) [Optional]
+Default: `500`
+
+The "radius" in meters of the surrounding bounding box in which you want to find stop places.
+The width and height of the bounding box are therefore `2 * distance`, and the coordinates given are its centerpoint.
+
+### params (`Object`) [Optional]
+
+See the `params` parameter for `getStopPlace`.
