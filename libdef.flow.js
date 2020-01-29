@@ -462,10 +462,11 @@ type $entur$sdk$GetDeparturesParams = {
     includeNonBoarding?: boolean,
     limit?: number,
     limitPerLine?: number,
-    departures?: number, // deprecated
+    start?: Date,
     timeRange?: number,
-    whiteListedLines?: Array<string>,
     whiteListedAuthorities?: Array<string>,
+    whiteListedLines?: Array<string>,
+    whiteListedModes?: Array<$entur$sdk$QueryMode>;
 }
 
 type $entur$sdk$GetDeparturesBetweenStopPlacesParams = {
@@ -605,13 +606,13 @@ type $entur$sdk$StopPlaceParams = {
 declare module '@entur/sdk' {
     declare type EnturService = {|
         journeyPlannerQuery: <$entur$sdk$journeyPlannerResponse>(
-            queryObj: Object | string,
+            queryObj: string,
             variables?: Object,
             config?: $entur$sdk$ServiceConfig,
         ) => Promise<$entur$sdk$journeyPlannerResponse>,
 
         nsrQuery: <$entur$sdk$nsrResponse>(
-            queryObj: Object | string,
+            queryObj: string,
             variables?: Object,
             config?: $entur$sdk$ServiceConfig,
         ) => Promise<$entur$sdk$nsrResponse>,
