@@ -47,6 +47,14 @@ export function createGetDeparturesFromStopPlaces(argConfig: ArgumentConfig) {
         stopPlaceIds: Array<string>,
         params: GetDeparturesParams = {},
     ): Promise<Array<DeparturesById | void>> {
+        if (!stopPlaceIds || !Array.isArray(stopPlaceIds)) {
+            throw new Error(`getDeparturesFromStopPlaces takes an an array of strings, but got ${typeof stopPlaceIds}`)
+        }
+
+        if (stopPlaceIds.length === 0) {
+            return Promise.resolve([])
+        }
+
         const {
             limit = 50,
             timeRange = 72000,
@@ -113,6 +121,14 @@ export function createGetDeparturesFromQuays(argConfig: ArgumentConfig) {
         quayIds: Array<string>,
         params: GetDeparturesParams = {},
     ): Promise<Array<DeparturesById | void>> {
+        if (!quayIds || !Array.isArray(quayIds)) {
+            throw new Error(`getDeparturesFromQuays takes an an array of strings, but got ${typeof quayIds}`)
+        }
+
+        if (quayIds.length === 0) {
+            return Promise.resolve([])
+        }
+
         const {
             limit = 30,
             limitPerLine,
