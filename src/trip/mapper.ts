@@ -11,7 +11,8 @@ function getNoticesFromIntermediateEstimatedCalls(
 ): Notice[] {
     if (!estimatedCalls?.length) return []
     return estimatedCalls
-        .flatMap(({ notices }) => notices || [])
+        .map(({ notices }) => notices || [])
+        .reduce((a, b) => [...a, ...b], [])
 }
 
 export function getNotices(leg: Leg): Array<Notice> {
