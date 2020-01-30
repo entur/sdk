@@ -51,7 +51,7 @@ query(
     $timeRange: Int!,
     $limit: Int!,
     $omitNonBoarding: Boolean!,
-    $includeCancelledTrips: Boolean
+    $includeCancelledTrips: Boolean!
 ) {
     quays(ids: $ids) {
         id
