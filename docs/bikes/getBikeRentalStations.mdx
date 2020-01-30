@@ -10,7 +10,7 @@ route: /bikes/getBikeRentalStations
 (stationIds: Array<string>) => Promise<Array<BikeRentalStation>>
 ```
 
-`getBikeRentalStations` finds multiple bike rental stations according to an array of IDs. The returned array will have the same order as the input array, and may contain undefined values if the corresponding ID didn't produce a result.
+`getBikeRentalStations` finds multiple bike rental stations according to an array of IDs. The returned array will have the same length and order as the input array, and may contain undefined values if the corresponding ID didn't produce a result.
 
 ## Parameters
 
