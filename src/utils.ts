@@ -20,7 +20,14 @@ export function convertFeatureToLocation(feature: Feature): Location {
     }
 }
 
-export function convertPositionToBbox(coordinates: Coordinates, distance: number) {
+interface Bbox {
+    minLng: number;
+    minLat: number;
+    maxLng: number;
+    maxLat: number;
+}
+
+export function convertPositionToBbox(coordinates: Coordinates, distance: number): Bbox {
     const { latitude, longitude } = coordinates
     const distanceToKilometer = distance / 1000
 
