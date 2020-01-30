@@ -45,8 +45,6 @@ export function createGetBikeRentalStations(argConfig: ArgumentConfig) {
 
         return journeyPlannerQuery<{ bikeRentalStations?: BikeRentalStation[] }>(getBikeRentalStationsQuery, variables, config)
             .then(data => data?.bikeRentalStations || [])
-            // TODO: JourneyPlanner does not support filtering yet, so we filter on ID ourselves.
-            .then(stations => stations.filter(({ id }) => stationIds.includes(id)))
             .then(stations => forceOrder(stations, stationIds, ({ id }) => id))
     }
 }

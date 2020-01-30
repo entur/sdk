@@ -14,8 +14,8 @@ ${bikeRentalStationFragments.join('')}
 `
 
 export const getBikeRentalStationsQuery = `
-query {
-    bikeRentalStations {
+query($ids: [String!]) {
+    bikeRentalStations(ids: $ids) {
         ...${bikeRentalStationFields}
     }
 }
