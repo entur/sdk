@@ -19,7 +19,7 @@ query(
     $whiteListedLines: [String!],
     $whiteListedAuthorities: [String!],
     $whiteListedModes: [Mode],
-    $includeCancelledTrips: Boolean
+    $includeCancelledTrips: Boolean!
 ) {
     stopPlaces(ids: $ids) {
         id
