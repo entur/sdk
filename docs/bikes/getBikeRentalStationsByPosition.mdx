@@ -1,7 +1,7 @@
 ---
 name: getBikeRentalStationsByPosition
-menu: Places
-route: /places/getBikeRentalStationsByPosition
+menu: Bikes
+route: /bikes/getBikeRentalStationsByPosition
 ---
 
 # getBikeRentalStationsByPosition
@@ -22,3 +22,28 @@ Default: `500`
 
 The "radius" in meters of the surrounding bounding box in which you want to find bike rental stations.
 The width and height of the bounding box are therefore `2 * distance`, and the coordinates given are its centerpoint.
+
+## Example
+
+```javascript
+import createEnturService, { convertFeatureToLocation } from '@entur/sdk'
+
+const service = createEnturService({
+    clientName: 'awesomecompany-awesomeapp'
+})
+
+async function example() {
+    try {
+        const bikeRentalStations = await service.getBikeRentalStationsByPosition(
+            {
+                latitude: 59.95,
+                longitude: 10.75,
+            },
+            1000,
+        )
+        console.log(bikeRentalStation)
+    } catch (error) {
+        console.error(error)
+    }
+}
+```
