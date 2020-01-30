@@ -1,0 +1,40 @@
+---
+name: getBikeRentalStations
+menu: Bikes
+route: /bikes/getBikeRentalStations
+---
+
+# getBikeRentalStations
+
+```typescript
+(stationIds: Array<string>) => Promise<Array<BikeRentalStation>>
+```
+
+`getBikeRentalStations` finds multiple bike rental stations according to an array of IDs. The returned array will have the same length and order as the input array, and may contain undefined values if the corresponding ID didn't produce a result.
+
+## Parameters
+
+### stationIds (`Array<string>`)
+The IDs of the bike rental stations you are interested in. The method will return a Promise which will resolve to an array of objects of type [BikeRentalStation](flow-types/BikeRentalStation.js).
+
+## Example
+
+```javascript
+import createEnturService, { convertFeatureToLocation } from '@entur/sdk'
+
+const service = createEnturService({
+    clientName: 'awesomecompany-awesomeapp'
+})
+
+async function example() {
+    try {
+        const bikeRentalStations = await service.getBikeRentalStations([
+            'YBE:VehicleSharingParkingArea:368',
+            'YBE:VehicleSharingParkingArea:83',
+        ])
+        console.log(bikeRentalStation)
+    } catch (error) {
+        console.error(error)
+    }
+}
+```

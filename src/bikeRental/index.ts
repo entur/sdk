@@ -20,8 +20,8 @@ export function createGetBikeRentalStation(argConfig: ArgumentConfig) {
             id: stationId,
         }
 
-        return journeyPlannerQuery(getBikeRentalStationQuery, variables, config)
-            .then((data) => data?.bikeRentalStation)
+        return journeyPlannerQuery<{ bikeRentalStation: BikeRentalStation }>(getBikeRentalStationQuery, variables, config)
+            .then(data => data?.bikeRentalStation)
     }
 }
 
@@ -43,13 +43,9 @@ export function createGetBikeRentalStations(argConfig: ArgumentConfig) {
             ids: stationIds,
         }
 
-        return journeyPlannerQuery(getBikeRentalStationsQuery, variables, config)
-            .then((data: Record<string, any> = {}) => data?.bikeRentalStations || [])
-            // TODO: JourneyPlanner does not support filtering yet, so we filter on ID ourselves.
-            .then(stations => stations.filter(({ id }) => stationIds.includes(id)))
-            .then((stations: Array<BikeRentalStation>) => {
-                return forceOrder<BikeRentalStation>(stations, stationIds, ({ id }) => id)
-            })
+        return journeyPlannerQuery<{ bikeRentalStations?: BikeRentalStation[] }>(getBikeRentalStationsQuery, variables, config)
+            .then(data => data?.bikeRentalStations || [])
+            .then(stations => forceOrder(stations, stationIds, ({ id }) => id))
     }
 }
 
@@ -62,11 +58,10 @@ export function createGetBikeRentalStationsByPosition(argConfig: ArgumentConfig)
     ): Promise<Array<BikeRentalStation>> {
         const variables = convertPositionToBbox(coordinates, distance)
 
-        return journeyPlannerQuery(
+        return journeyPlannerQuery<{ bikeRentalStationsByBbox?: BikeRentalStation[] }>(
             getBikeRentalStationsByPositionQuery,
             variables,
             config,
-        )
-            .then((data: Record<string, any> = {}) => data?.bikeRentalStationsByBbox || [])
+        ).then(data => data?.bikeRentalStationsByBbox || [])
     }
 }
