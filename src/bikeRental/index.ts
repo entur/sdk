@@ -32,7 +32,7 @@ export function createGetBikeRentalStations(argConfig: ArgumentConfig) {
         stationIds: Array<string>,
     ): Promise<Array<BikeRentalStation | void>> {
         if (!stationIds || !Array.isArray(stationIds)) {
-            throw new Error(`getBikeRentalStations takes an an array of strings, but got ${typeof stationIds}`)
+            throw new Error(`getBikeRentalStations takes an array of strings, but got ${typeof stationIds}`)
         }
 
         if (stationIds.length === 0) {
