@@ -24,7 +24,8 @@
     "build": "babel --extensions .ts src --out-dir lib",
     "prepublishOnly": "npm run build",
     "docs": "docz dev",
-    "build:docs": "docz build"
+    "build:docs": "docz build",
+    "fetch-schemas": "ts-node scripts/fetch-schemas.ts"
   },
   "dependencies": {
     "@babel/polyfill": "^7.4.4",
