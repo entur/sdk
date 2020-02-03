@@ -6,4 +6,4 @@ Miss anything? Found a bug? File an [issue](https://github.com/entur/sdk/issues/
 
 ## Documentation
 
-https://entur-sdk.netlify.com/
+https://sdk.entur.org
