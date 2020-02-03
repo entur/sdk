@@ -436,6 +436,7 @@ type $entur$sdk$GetTripPatternsParams = {
     transportSubmodes?: Array<$entur$sdk$TransportSubmodeParam>,
     useFlex?: boolean,
     walkSpeed?: number,
+    minimumTransferTime?: number,
     wheelchairAccessible?: boolean,
     banned?: $entur$sdk$InputBanned,
     whiteListed?: $entur$sdk$InputWhiteListed,

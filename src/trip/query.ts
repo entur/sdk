@@ -14,6 +14,7 @@ const variables = {
     transportSubmodes: '[TransportSubmodeFilter]',
     maxPreTransitWalkDistance: 'Float',
     walkSpeed: 'Float',
+    walkminimumTransferTimeSpeed: 'Float',
     allowBikeRental: 'Boolean',
     useFlex: 'Boolean',
     banned: 'InputBanned',

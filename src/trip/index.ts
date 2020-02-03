@@ -65,6 +65,7 @@ export interface GetTripPatternsParams {
     transportSubmodes?: Array<TransportSubmodeParam>;
     useFlex?: boolean;
     walkSpeed?: number;
+    minimumTransferTime?: number;
     wheelchairAccessible?: boolean;
     banned?: InputBanned;
     whiteListed?: InputWhiteListed;
@@ -82,6 +83,7 @@ interface GetTripPatternsVariables {
     transportSubmodes: Array<TransportSubmodeParam>;
     useFlex?: boolean;
     walkSpeed?: number;
+    minimumTransferTime?: number;
     wheelchair: boolean;
     banned?: InputBanned;
     whiteListed?: InputWhiteListed;
