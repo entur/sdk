@@ -29,7 +29,7 @@ export function get<T extends object>(
     })
     .then(responseHandler)
     .then(res => res.json())
-    .then(data => cleanDeep(data, { emptyArrays: false }))
+    .then(data => cleanDeep(data, { emptyArrays: false, emptyStrings: false }))
 }
 
 export function post<T>(
@@ -46,5 +46,5 @@ export function post<T>(
     })
         .then(responseHandler)
         .then(res => res.json())
-        .then(data => cleanDeep(data, { emptyArrays: false }))
+        .then(data => cleanDeep(data, { emptyArrays: false, emptyStrings: false }))
 }
