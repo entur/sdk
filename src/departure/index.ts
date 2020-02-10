@@ -85,7 +85,7 @@ export function createGetDeparturesFromStopPlaces(argConfig: ArgumentConfig) {
         return journeyPlannerQuery<{ stopPlaces?: Array<{ id: string; estimatedCalls: EstimatedCall[] }> }>(getDeparturesFromStopPlacesQuery, variables, config)
             .then((data) => {
                 if (!data?.stopPlaces) {
-                    return []
+                    throw new Error(`Missing data: getDeparturesFromStopPlaces received no data from the API.`)
                 }
 
                 return data.stopPlaces.map(({ estimatedCalls, ...stopPlace }) => ({
@@ -156,7 +156,7 @@ export function createGetDeparturesFromQuays(argConfig: ArgumentConfig) {
         )
             .then((data) => {
                 if (!data || !data?.quays) {
-                    return []
+                    throw new Error(`Missing data: getDeparturesFromQuays received no data from the API.`)
                 }
 
                 return data.quays.map(({ estimatedCalls, ...stopPlace }) => ({
