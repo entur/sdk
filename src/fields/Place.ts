@@ -13,11 +13,11 @@ import {
 } from './BikeRentalStation'
 
 export interface Place {
-    latitude: number;
-    longitude: number;
-    name: string;
-    quay?: Quay;
-    bikeRentalStation?: BikeRentalStation;
+    latitude: number
+    longitude: number
+    name: string
+    quay?: Quay
+    bikeRentalStation?: BikeRentalStation
 }
 
 export const fragmentName = 'placeFields'

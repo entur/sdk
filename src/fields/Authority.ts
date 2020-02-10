@@ -1,8 +1,8 @@
 export interface Authority {
-    codeSpace: string; // Added by mapper
-    id: string;
-    name: string;
-    url?: string;
+    codeSpace: string // Added by mapper
+    id: string
+    name: string
+    url?: string
 }
 
 export const fragmentName = 'authorityFields'
@@ -15,6 +15,4 @@ fragment ${fragmentName} on Authority {
 }
 `
 
-export const fragments = [
-    fragment,
-]
+export const fragments = [fragment]

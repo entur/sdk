@@ -25,25 +25,25 @@ import {
 } from './Situation'
 
 export interface EstimatedCall {
-    actualArrivalTime?: string; // Only available AFTER arrival has taken place
-    actualDepartureTime?: string; // Only available AFTER departure has taken place
-    aimedArrivalTime: string;
-    aimedDepartureTime: string;
-    cancellation: boolean;
-    date: string;
+    actualArrivalTime?: string // Only available AFTER arrival has taken place
+    actualDepartureTime?: string // Only available AFTER departure has taken place
+    aimedArrivalTime: string
+    aimedDepartureTime: string
+    cancellation: boolean
+    date: string
     destinationDisplay: {
-        frontText: string;
-    };
-    expectedArrivalTime: string;
-    expectedDepartureTime: string;
-    forAlighting: boolean;
-    forBoarding: boolean;
-    notices?: Array<Notice>;
-    quay?: Quay;
-    realtime: boolean;
-    requestStop: boolean;
-    serviceJourney: ServiceJourney;
-    situations: Array<Situation>;
+        frontText: string
+    }
+    expectedArrivalTime: string
+    expectedDepartureTime: string
+    forAlighting: boolean
+    forBoarding: boolean
+    notices?: Array<Notice>
+    quay?: Quay
+    realtime: boolean
+    requestStop: boolean
+    serviceJourney: ServiceJourney
+    situations: Array<Situation>
 }
 
 export type IntermediateEstimatedCall = EstimatedCall

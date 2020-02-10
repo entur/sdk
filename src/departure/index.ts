@@ -1,6 +1,13 @@
 import { journeyPlannerQuery } from '../api'
 import {
-    BUS, TRAM, RAIL, METRO, WATER, AIR, COACH, CAR,
+    BUS,
+    TRAM,
+    RAIL,
+    METRO,
+    WATER,
+    AIR,
+    COACH,
+    CAR,
 } from '../constants/travelModes'
 
 import { forceOrder } from '../utils'
@@ -15,29 +22,26 @@ import {
     getDeparturesForServiceJourneyQuery,
 } from './query'
 
-import {
-    destinationMapper,
-    legToDepartureMapper,
-} from './mapper'
+import { destinationMapper, legToDepartureMapper } from './mapper'
 
 import { getServiceConfig, ArgumentConfig } from '../config'
 import { isTruthy } from '../utils'
 
 export type DeparturesById = {
-    id: string;
-    departures: Array<EstimatedCall>;
+    id: string
+    departures: Array<EstimatedCall>
 }
 
 type GetDeparturesParams = {
-    includeCancelledTrips?: boolean;
-    includeNonBoarding?: boolean;
-    limit?: number;
-    limitPerLine?: number;
-    start?: Date;
-    timeRange?: number;
-    whiteListedLines?: Array<string>;
-    whiteListedAuthorities?: Array<string>;
-    whiteListedModes?: Array<string>;
+    includeCancelledTrips?: boolean
+    includeNonBoarding?: boolean
+    limit?: number
+    limitPerLine?: number
+    start?: Date
+    timeRange?: number
+    whiteListedLines?: Array<string>
+    whiteListedAuthorities?: Array<string>
+    whiteListedModes?: Array<string>
 }
 
 export function createGetDeparturesFromStopPlaces(argConfig: ArgumentConfig) {
@@ -48,7 +52,9 @@ export function createGetDeparturesFromStopPlaces(argConfig: ArgumentConfig) {
         params: GetDeparturesParams = {},
     ): Promise<Array<DeparturesById | undefined>> {
         if (!Array.isArray(stopPlaceIds)) {
-            throw new Error(`getDeparturesFromStopPlaces takes an array of strings, but got ${typeof stopPlaceIds}`)
+            throw new Error(
+                `getDeparturesFromStopPlaces takes an array of strings, but got ${typeof stopPlaceIds}`,
+            )
         }
 
         if (stopPlaceIds.length === 0) {
@@ -82,16 +88,22 @@ export function createGetDeparturesFromStopPlaces(argConfig: ArgumentConfig) {
             ...rest,
         }
 
-        return journeyPlannerQuery<{ stopPlaces?: Array<{ id: string; estimatedCalls: EstimatedCall[] }> }>(getDeparturesFromStopPlacesQuery, variables, config)
-            .then((data) => {
+        return journeyPlannerQuery<{
+            stopPlaces?: Array<{ id: string; estimatedCalls: EstimatedCall[] }>
+        }>(getDeparturesFromStopPlacesQuery, variables, config)
+            .then(data => {
                 if (!data?.stopPlaces) {
-                    throw new Error(`Missing data: getDeparturesFromStopPlaces received no data from the API.`)
+                    throw new Error(
+                        `Missing data: getDeparturesFromStopPlaces received no data from the API.`,
+                    )
                 }
 
-                return data.stopPlaces.map(({ estimatedCalls, ...stopPlace }) => ({
-                    ...stopPlace,
-                    departures: estimatedCalls.map(destinationMapper),
-                }))
+                return data.stopPlaces.map(
+                    ({ estimatedCalls, ...stopPlace }) => ({
+                        ...stopPlace,
+                        departures: estimatedCalls.map(destinationMapper),
+                    }),
+                )
             })
             .then((stopPlaces: Array<DeparturesById>) => {
                 return forceOrder(stopPlaces, stopPlaceIds, ({ id }) => id)
@@ -100,17 +112,20 @@ export function createGetDeparturesFromStopPlaces(argConfig: ArgumentConfig) {
 }
 
 export function createGetDeparturesFromStopPlace(argConfig: ArgumentConfig) {
-    const getDeparturesFromStopPlaces = createGetDeparturesFromStopPlaces(argConfig)
+    const getDeparturesFromStopPlaces = createGetDeparturesFromStopPlaces(
+        argConfig,
+    )
 
     return function getDeparturesFromStopPlace(
         stopPlaceId: string,
         params?: GetDeparturesParams,
     ): Promise<Array<EstimatedCall>> {
-        return getDeparturesFromStopPlaces([stopPlaceId], params)
-            .then((stopPlaces: Array<DeparturesById | void>) => {
+        return getDeparturesFromStopPlaces([stopPlaceId], params).then(
+            (stopPlaces: Array<DeparturesById | void>) => {
                 if (!stopPlaces?.length || !stopPlaces[0]) return []
                 return stopPlaces[0].departures || []
-            })
+            },
+        )
     }
 }
 
@@ -122,7 +137,9 @@ export function createGetDeparturesFromQuays(argConfig: ArgumentConfig) {
         params: GetDeparturesParams = {},
     ): Promise<Array<DeparturesById | void>> {
         if (!Array.isArray(quayIds)) {
-            throw new Error(`getDeparturesFromQuays takes an array of strings, but got ${typeof quayIds}`)
+            throw new Error(
+                `getDeparturesFromQuays takes an array of strings, but got ${typeof quayIds}`,
+            )
         }
 
         if (quayIds.length === 0) {
@@ -149,14 +166,14 @@ export function createGetDeparturesFromQuays(argConfig: ArgumentConfig) {
             limitPerLine,
             ...rest,
         }
-        return journeyPlannerQuery<{ quays?: Array<{ estimatedCalls: EstimatedCall[]; id: string }> }>(
-            getDeparturesFromQuayQuery,
-            variables,
-            config
-        )
-            .then((data) => {
+        return journeyPlannerQuery<{
+            quays?: Array<{ estimatedCalls: EstimatedCall[]; id: string }>
+        }>(getDeparturesFromQuayQuery, variables, config)
+            .then(data => {
                 if (!data || !data?.quays) {
-                    throw new Error(`Missing data: getDeparturesFromQuays received no data from the API.`)
+                    throw new Error(
+                        `Missing data: getDeparturesFromQuays received no data from the API.`,
+                    )
                 }
 
                 return data.quays.map(({ estimatedCalls, ...stopPlace }) => ({
@@ -171,10 +188,12 @@ export function createGetDeparturesFromQuays(argConfig: ArgumentConfig) {
 }
 
 export type GetDeparturesBetweenStopPlacesParams = {
-    limit?: number;
-    start?: Date;
+    limit?: number
+    start?: Date
 }
-export function createGetDeparturesBetweenStopPlaces(argConfig: ArgumentConfig) {
+export function createGetDeparturesBetweenStopPlaces(
+    argConfig: ArgumentConfig,
+) {
     const config = getServiceConfig(argConfig)
 
     return function getDeparturesBetweenStopPlaces(
@@ -182,11 +201,7 @@ export function createGetDeparturesBetweenStopPlaces(argConfig: ArgumentConfig) 
         toStopPlaceId: string,
         params: GetDeparturesBetweenStopPlacesParams = {},
     ): Promise<Array<EstimatedCall>> {
-        const {
-            limit = 20,
-            start = new Date(),
-            ...rest
-        } = params
+        const { limit = 20, start = new Date(), ...rest } = params
         const variables = {
             from: { place: fromStopPlaceId },
             to: { place: toStopPlaceId },
@@ -197,25 +212,28 @@ export function createGetDeparturesBetweenStopPlaces(argConfig: ArgumentConfig) 
             ...rest,
         }
 
-        return journeyPlannerQuery<{ trip: { tripPatterns: Array<{ legs: Leg[] }> }}>(
-            getDeparturesBetweenStopPlacesQuery,
-            variables,
-            config,
-        )
-            .then((data) => {
+        return journeyPlannerQuery<{
+            trip: { tripPatterns: Array<{ legs: Leg[] }> }
+        }>(getDeparturesBetweenStopPlacesQuery, variables, config).then(
+            data => {
                 if (!data || !data?.trip?.tripPatterns) return []
 
-                return data.trip.tripPatterns.map((trip) => {
-                    const [leg] = trip.legs
-                    if (!leg) return undefined
+                return data.trip.tripPatterns
+                    .map(trip => {
+                        const [leg] = trip.legs
+                        if (!leg) return undefined
 
-                    return legToDepartureMapper(leg)
-                }).filter(isTruthy)
-            })
+                        return legToDepartureMapper(leg)
+                    })
+                    .filter(isTruthy)
+            },
+        )
     }
 }
 
-export function createGetDeparturesForServiceJourney(argConfig: ArgumentConfig) {
+export function createGetDeparturesForServiceJourney(
+    argConfig: ArgumentConfig,
+) {
     const config = getServiceConfig(argConfig)
 
     return function getDeparturesForServiceJourney(
@@ -227,17 +245,20 @@ export function createGetDeparturesForServiceJourney(argConfig: ArgumentConfig) 
             date,
         }
 
-        return journeyPlannerQuery<{ serviceJourney?: { estimatedCalls: EstimatedCall[] }}>(
-            getDeparturesForServiceJourneyQuery,
-            variables,
-            config,
+        return journeyPlannerQuery<{
+            serviceJourney?: { estimatedCalls: EstimatedCall[] }
+        }>(getDeparturesForServiceJourneyQuery, variables, config).then(
+            data => {
+                return (data?.serviceJourney?.estimatedCalls || []).map(
+                    destinationMapper,
+                )
+            },
         )
-            .then((data) => {
-                return (data?.serviceJourney?.estimatedCalls || []).map(destinationMapper)
-            })
     }
 }
 
 export function getStopPlaceDeparturesDEPRECATED() {
-    throw new Error('Entur SDK: "getStopPlaceDepartures" is deprecated, use "getDeparturesForStopPlace" or getDeparturesForStopPlaces instead.')
+    throw new Error(
+        'Entur SDK: "getStopPlaceDepartures" is deprecated, use "getDeparturesForStopPlace" or getDeparturesForStopPlaces instead.',
+    )
 }

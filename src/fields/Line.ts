@@ -27,15 +27,15 @@ type FlexibleLineType =
     | 'other'
 
 export type Line = {
-    bookingArrangements?: BookingArrangement;
-    description?: string;
-    flexibleLineType?: FlexibleLineType;
-    id: string;
-    name: string;
-    notices: Array<Notice>;
-    publicCode: string;
-    transportMode: TransportMode;
-    transportSubmode: TransportSubmode;
+    bookingArrangements?: BookingArrangement
+    description?: string
+    flexibleLineType?: FlexibleLineType
+    id: string
+    name: string
+    notices: Array<Notice>
+    publicCode: string
+    transportMode: TransportMode
+    transportSubmode: TransportSubmode
 }
 
 export const fragmentName = 'lineFields'

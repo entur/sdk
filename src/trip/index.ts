@@ -1,11 +1,15 @@
 import { journeyPlannerQuery, getGraphqlParams } from '../api'
 import {
-    FOOT, BUS, TRAM, RAIL, METRO, WATER, AIR,
+    FOOT,
+    BUS,
+    TRAM,
+    RAIL,
+    METRO,
+    WATER,
+    AIR,
 } from '../constants/travelModes'
 
-import {
-    getTripPatternQuery,
-} from './query'
+import { getTripPatternQuery } from './query'
 
 import { legMapper } from './mapper'
 
@@ -19,74 +23,77 @@ import { createGetFeatures } from '../geocoder'
 import { Leg } from '../fields/Leg'
 
 import {
-    getServiceConfig, mergeConfig, ArgumentConfig, OverrideConfig,
+    getServiceConfig,
+    mergeConfig,
+    ArgumentConfig,
+    OverrideConfig,
 } from '../config'
 
 interface TripPattern {
-    distance: number;
-    directDuration: number;
-    duration: number;
-    endTime: string;
-    id?: string;
-    legs: Array<Leg>;
-    startTime: string;
-    walkDistance: number;
+    distance: number
+    directDuration: number
+    duration: number
+    endTime: string
+    id?: string
+    legs: Array<Leg>
+    startTime: string
+    walkDistance: number
 }
 
 interface TransportSubmodeParam {
-    transportMode: TransportMode;
-    transportSubmodes: Array<TransportSubmode>;
+    transportMode: TransportMode
+    transportSubmodes: Array<TransportSubmode>
 }
 
 interface InputBanned {
-    lines?: Array<string>;
-    authorities?: Array<string>;
-    organisations?: Array<string>;
-    quays?: Array<string>;
-    quaysHard?: Array<string>;
-    serviceJourneys?: Array<string>;
+    lines?: Array<string>
+    authorities?: Array<string>
+    organisations?: Array<string>
+    quays?: Array<string>
+    quaysHard?: Array<string>
+    serviceJourneys?: Array<string>
 }
 
 interface InputWhiteListed {
-    lines?: Array<string>;
-    authorities?: Array<string>;
-    organisations?: Array<string>;
+    lines?: Array<string>
+    authorities?: Array<string>
+    organisations?: Array<string>
 }
 
 export interface GetTripPatternsParams {
-    from: Location;
-    to: Location;
-    allowBikeRental?: boolean;
-    arriveBy?: boolean;
-    limit?: number;
-    maxPreTransitWalkDistance?: number;
-    modes?: Array<QueryMode>;
-    searchDate?: Date;
-    transportSubmodes?: Array<TransportSubmodeParam>;
-    useFlex?: boolean;
-    walkSpeed?: number;
-    minimumTransferTime?: number;
-    wheelchairAccessible?: boolean;
-    banned?: InputBanned;
-    whiteListed?: InputWhiteListed;
+    from: Location
+    to: Location
+    allowBikeRental?: boolean
+    arriveBy?: boolean
+    limit?: number
+    maxPreTransitWalkDistance?: number
+    modes?: Array<QueryMode>
+    searchDate?: Date
+    transportSubmodes?: Array<TransportSubmodeParam>
+    useFlex?: boolean
+    walkSpeed?: number
+    minimumTransferTime?: number
+    wheelchairAccessible?: boolean
+    banned?: InputBanned
+    whiteListed?: InputWhiteListed
 }
 
 interface GetTripPatternsVariables {
-    from: Location;
-    to: Location;
-    allowBikeRental?: boolean;
-    arriveBy: boolean;
-    numTripPatterns: number;
-    maxPreTransitWalkDistance?: number;
-    modes: Array<QueryMode>;
-    dateTime: string;
-    transportSubmodes: Array<TransportSubmodeParam>;
-    useFlex?: boolean;
-    walkSpeed?: number;
-    minimumTransferTime?: number;
-    wheelchair: boolean;
-    banned?: InputBanned;
-    whiteListed?: InputWhiteListed;
+    from: Location
+    to: Location
+    allowBikeRental?: boolean
+    arriveBy: boolean
+    numTripPatterns: number
+    maxPreTransitWalkDistance?: number
+    modes: Array<QueryMode>
+    dateTime: string
+    transportSubmodes: Array<TransportSubmodeParam>
+    useFlex?: boolean
+    walkSpeed?: number
+    minimumTransferTime?: number
+    wheelchair: boolean
+    banned?: InputBanned
+    whiteListed?: InputWhiteListed
 }
 
 const DEFAULT_MODES: QueryMode[] = [FOOT, BUS, TRAM, RAIL, METRO, WATER, AIR]
@@ -126,28 +133,30 @@ export function createGetTripPatterns(argConfig: ArgumentConfig) {
         params: GetTripPatternsParams,
         overrideConfig?: OverrideConfig,
     ): Promise<TripPattern[]> {
-        return journeyPlannerQuery<{ trip: { tripPatterns: TripPattern[] }}>(
+        return journeyPlannerQuery<{ trip: { tripPatterns: TripPattern[] } }>(
             getTripPatternQuery,
             getTripPatternsVariables(params),
             mergeConfig(config, overrideConfig),
-        )
-            .then((data) => {
-                if (!data?.trip?.tripPatterns) {
-                    return []
-                }
+        ).then(data => {
+            if (!data?.trip?.tripPatterns) {
+                return []
+            }
 
-                return data.trip.tripPatterns.map(trip => ({
-                    ...trip,
-                    legs: trip.legs.map(legMapper),
-                }))
-            })
+            return data.trip.tripPatterns.map(trip => ({
+                ...trip,
+                legs: trip.legs.map(legMapper),
+            }))
+        })
     }
 }
 
 export function getTripPatternsQuery(
     params: GetTripPatternsParams,
-): { query: string; variables?: {[key: string]: any } } {
-    return getGraphqlParams(getTripPatternQuery, getTripPatternsVariables(params))
+): { query: string; variables?: { [key: string]: any } } {
+    return getGraphqlParams(
+        getTripPatternQuery,
+        getTripPatternsVariables(params),
+    )
 }
 
 export function createFindTrips(argConfig: ArgumentConfig) {
@@ -162,7 +171,9 @@ export function createFindTrips(argConfig: ArgumentConfig) {
         const searchDate = date ? new Date(date) : new Date()
 
         if (!isValidDate(searchDate)) {
-            throw new Error('Entur SDK: Could not parse <date> argument to valid Date')
+            throw new Error(
+                'Entur SDK: Could not parse <date> argument to valid Date',
+            )
         }
 
         const [fromFeatures, toFeatures] = await Promise.all([
@@ -171,11 +182,15 @@ export function createFindTrips(argConfig: ArgumentConfig) {
         ])
 
         if (!fromFeatures || !fromFeatures.length) {
-            throw new Error(`Entur SDK: Could not find any locations matching <from> argument "${from}"`)
+            throw new Error(
+                `Entur SDK: Could not find any locations matching <from> argument "${from}"`,
+            )
         }
 
         if (!toFeatures || !toFeatures.length) {
-            throw new Error(`Entur SDK: Could not find any locations matching <to> argument "${to}"`)
+            throw new Error(
+                `Entur SDK: Could not find any locations matching <to> argument "${to}"`,
+            )
         }
 
         return getTripPatterns({

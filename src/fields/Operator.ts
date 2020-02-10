@@ -1,7 +1,7 @@
 export interface Operator {
-    id: string;
-    name: string;
-    url?: string;
+    id: string
+    name: string
+    url?: string
 }
 
 export const fragmentName = 'operatorFields'
@@ -14,6 +14,4 @@ fragment ${fragmentName} on Operator {
 }
 `
 
-export const fragments = [
-    fragment,
-]
+export const fragments = [fragment]

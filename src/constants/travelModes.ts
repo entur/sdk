@@ -33,7 +33,6 @@ export const TOURIST_RAILWAY = 'touristRailway'
 export const AIRPORT_LINK_BUS = 'airportLinkBus'
 export const CITY_TRAM = 'cityTram'
 
-
 export const TransportMode = {
     BUS,
     TRAM,

@@ -13,12 +13,12 @@ import {
 } from './StopPlace'
 
 export interface Quay {
-    id: string;
-    name: string;
-    description: string;
-    publicCode: string;
-    situations: Array<Situation>;
-    stopPlace: StopPlace;
+    id: string
+    name: string
+    description: string
+    publicCode: string
+    situations: Array<Situation>
+    stopPlace: StopPlace
 }
 
 export const fragmentName = 'quayFields'

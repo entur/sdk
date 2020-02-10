@@ -3,6 +3,7 @@ module.exports = {
     parser: '@typescript-eslint/parser',
     plugins: [
         '@typescript-eslint',
+        'prettier',
     ],
     extends: [
         'eslint:recommended',
@@ -11,5 +12,7 @@ module.exports = {
     ],
     rules: {
         '@typescript-eslint/ban-ts-ignore': 'warn',
+        '@typescript-eslint/member-delimiter-style': 'off',
+        'prettier/prettier': 'error',
     }
-};
+}

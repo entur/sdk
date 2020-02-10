@@ -17,13 +17,15 @@ function getNoticesFromIntermediateEstimatedCalls(
 
 export function getNotices(leg: Leg): Array<Notice> {
     const notices = [
-        ...getNoticesFromIntermediateEstimatedCalls(leg.intermediateEstimatedCalls),
-        ...leg.serviceJourney?.notices || [],
-        ...leg.serviceJourney?.journeyPattern?.notices || [],
-        ...leg.serviceJourney?.journeyPattern?.line?.notices || [],
-        ...leg.fromEstimatedCall?.notices || [],
-        ...leg.toEstimatedCall?.notices || [],
-        ...leg.line?.notices || [],
+        ...getNoticesFromIntermediateEstimatedCalls(
+            leg.intermediateEstimatedCalls,
+        ),
+        ...(leg.serviceJourney?.notices || []),
+        ...(leg.serviceJourney?.journeyPattern?.notices || []),
+        ...(leg.serviceJourney?.journeyPattern?.line?.notices || []),
+        ...(leg.fromEstimatedCall?.notices || []),
+        ...(leg.toEstimatedCall?.notices || []),
+        ...(leg.line?.notices || []),
     ]
     return uniqBy(notices, notice => notice.text)
 }

@@ -15,16 +15,16 @@ import {
 } from './Line'
 
 interface JourneyPattern {
-    line: Line;
-    notices?: Array<Notice>;
+    line: Line
+    notices?: Array<Notice>
 }
 
 export interface ServiceJourney {
-    id: string;
-    journeyPattern?: JourneyPattern;
-    notices?: Array<Notice>;
-    publicCode?: string;
-    transportSubmode?: TransportSubmode;
+    id: string
+    journeyPattern?: JourneyPattern
+    notices?: Array<Notice>
+    publicCode?: string
+    transportSubmode?: TransportSubmode
 }
 
 export const fragmentName = 'serviceJourneyFields'

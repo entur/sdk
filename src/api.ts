@@ -20,10 +20,10 @@ function errorHandler(response: any) {
 
 export function getGraphqlParams(
     query: string,
-    variables: {[key: string]: any },
+    variables: { [key: string]: any },
 ): {
-    query: string;
-    variables?: {[key: string]: any };
+    query: string
+    variables?: { [key: string]: any }
 } {
     return {
         query: minify(query),
@@ -41,8 +41,7 @@ export function journeyPlannerQuery<T>(
 
     const params = getGraphqlParams(queryObj, variables)
 
-    return post(url, params, headers)
-        .then(errorHandler)
+    return post(url, params, headers).then(errorHandler)
 }
 
 export function nsrQuery<T>(
@@ -53,6 +52,7 @@ export function nsrQuery<T>(
     const { host, headers } = getNSRHost(config)
     const url = `${host}/graphql`
 
-    return post(url, { query: minify(query), variables }, headers)
-        .then(errorHandler)
+    return post(url, { query: minify(query), variables }, headers).then(
+        errorHandler,
+    )
 }
