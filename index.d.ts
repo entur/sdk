@@ -642,7 +642,7 @@ export interface EnturService {
     getDeparturesFromStopPlaces: (
         stopPlaceIds: Array<string>,
         params?: GetDeparturesParams
-    ) => Promise<Array<DeparturesById | void>>;
+    ) => Promise<Array<DeparturesById | undefined>>;
 
     getDeparturesFromStopPlace: (
         stopPlaceId: string,
