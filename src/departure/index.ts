@@ -93,7 +93,9 @@ export function createGetDeparturesFromStopPlaces(argConfig: ArgumentConfig) {
         }>(getDeparturesFromStopPlacesQuery, variables, config)
             .then(data => {
                 if (!data?.stopPlaces) {
-                    throw new Error(`Missing data: getDeparturesFromStopPlaces received no data from the API.`)
+                    throw new Error(
+                        `Missing data: getDeparturesFromStopPlaces received no data from the API.`,
+                    )
                 }
 
                 return data.stopPlaces.map(
@@ -169,7 +171,9 @@ export function createGetDeparturesFromQuays(argConfig: ArgumentConfig) {
         }>(getDeparturesFromQuayQuery, variables, config)
             .then(data => {
                 if (!data || !data?.quays) {
-                    throw new Error(`Missing data: getDeparturesFromQuays received no data from the API.`)
+                    throw new Error(
+                        `Missing data: getDeparturesFromQuays received no data from the API.`,
+                    )
                 }
 
                 return data.quays.map(({ estimatedCalls, ...stopPlace }) => ({
