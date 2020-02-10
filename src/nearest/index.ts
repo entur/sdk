@@ -24,40 +24,48 @@ const ALL_PLACE_TYPES = [
     'stopPlace',
 ]
 
-function convertTypeNameToFilterPlaceType(typeName: TypeName): FilterPlaceType | undefined {
+function convertTypeNameToFilterPlaceType(
+    typeName: TypeName,
+): FilterPlaceType | undefined {
     switch (typeName) {
-        case 'BikePark': return 'bikePark'
-        case 'BikeRentalStation': return 'bicycleRent'
-        case 'CarPark': return 'carPark'
-        case 'Quay': return 'quay'
-        case 'StopPlace': return 'stopPlace'
-        default: return undefined
+        case 'BikePark':
+            return 'bikePark'
+        case 'BikeRentalStation':
+            return 'bicycleRent'
+        case 'CarPark':
+            return 'carPark'
+        case 'Quay':
+            return 'quay'
+        case 'StopPlace':
+            return 'stopPlace'
+        default:
+            return undefined
     }
 }
 
 type NearestParams = {
-    maximumDistance?: number;
-    maximumResults?: number;
-    filterByPlaceTypes?: Array<TypeName>;
-    filterByModes?: Array<TransportMode>;
-    filterByInUse?: boolean;
-    multiModalMode?: 'parent' | 'child' | 'all';
+    maximumDistance?: number
+    maximumResults?: number
+    filterByPlaceTypes?: Array<TypeName>
+    filterByModes?: Array<TransportMode>
+    filterByInUse?: boolean
+    multiModalMode?: 'parent' | 'child' | 'all'
 }
 
 type NearestData = {
     nearest?: {
         edges?: Array<{
             node: {
-                distance: number;
+                distance: number
                 place: {
-                    id: string;
-                    __typename: TypeName;
-                    latitude: number;
-                    longitude: number;
-                };
-            };
-        }>;
-    };
+                    id: string
+                    __typename: TypeName
+                    latitude: number
+                    longitude: number
+                }
+            }
+        }>
+    }
 }
 
 export function createGetNearestPlaces(argConfig: ArgumentConfig) {
@@ -95,8 +103,12 @@ export function createGetNearestPlaces(argConfig: ArgumentConfig) {
                 .filter(isTruthy)
         }
 
-        return journeyPlannerQuery<NearestData>(getNearestPlacesQuery, variables, config)
-            .then((data) => (data?.nearest?.edges || []).map(({ node }) => {
+        return journeyPlannerQuery<NearestData>(
+            getNearestPlacesQuery,
+            variables,
+            config,
+        ).then(data =>
+            (data?.nearest?.edges || []).map(({ node }) => {
                 const { distance, place } = node
 
                 return {
@@ -106,6 +118,7 @@ export function createGetNearestPlaces(argConfig: ArgumentConfig) {
                     latitude: place.latitude,
                     longitude: place.longitude,
                 }
-            }))
+            }),
+        )
     }
 }

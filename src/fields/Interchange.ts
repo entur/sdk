@@ -1,6 +1,6 @@
 export interface Interchange {
-    guaranteed: boolean;
-    staySeated: boolean;
+    guaranteed: boolean
+    staySeated: boolean
 }
 
 export const fragmentName = 'interchangeFields'
@@ -12,6 +12,4 @@ fragment ${fragmentName} on Interchange {
 }
 `
 
-export const fragments = [
-    fragment,
-]
+export const fragments = [fragment]

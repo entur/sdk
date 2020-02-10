@@ -33,8 +33,11 @@ export function createGetStopPlace(argConfig: ArgumentConfig) {
             ...rest,
         }
 
-        return journeyPlannerQuery<{ stopPlace?: StopPlaceDetails }>(getStopPlaceQuery, variables, config)
-            .then((data) => data?.stopPlace)
+        return journeyPlannerQuery<{ stopPlace?: StopPlaceDetails }>(
+            getStopPlaceQuery,
+            variables,
+            config,
+        ).then(data => data?.stopPlace)
     }
 }
 
@@ -46,7 +49,9 @@ export function createGetStopPlaces(argConfig: ArgumentConfig) {
         params: StopPlaceParams = {},
     ): Promise<Array<StopPlaceDetails | void>> {
         if (!Array.isArray(stopPlaceIds)) {
-            throw new Error(`getStopPlaces takes an array of strings, but got ${typeof stopPlaceIds}`)
+            throw new Error(
+                `getStopPlaces takes an array of strings, but got ${typeof stopPlaceIds}`,
+            )
         }
 
         if (stopPlaceIds.length === 0) {
@@ -60,10 +65,18 @@ export function createGetStopPlaces(argConfig: ArgumentConfig) {
             ...rest,
         }
 
-        return journeyPlannerQuery<{ stopPlaces?: StopPlaceDetails[] }>(getStopPlacesQuery, variables, config)
-            .then((data) => data?.stopPlaces || [])
+        return journeyPlannerQuery<{ stopPlaces?: StopPlaceDetails[] }>(
+            getStopPlacesQuery,
+            variables,
+            config,
+        )
+            .then(data => data?.stopPlaces || [])
             .then((stopPlaceDetails: StopPlaceDetails[]) => {
-                return forceOrder(stopPlaceDetails, stopPlaceIds, ({ id }) => id)
+                return forceOrder(
+                    stopPlaceDetails,
+                    stopPlaceIds,
+                    ({ id }) => id,
+                )
             })
     }
 }
@@ -82,8 +95,11 @@ export function createGetParentStopPlace(argConfig: ArgumentConfig) {
             ...rest,
         }
 
-        return journeyPlannerQuery<{ stopPlace?: { parent?: StopPlaceDetails } }>(getParentStopPlaceQuery, variables, config)
-            .then((data) => data?.stopPlace?.parent)
+        return journeyPlannerQuery<{
+            stopPlace?: { parent?: StopPlaceDetails }
+        }>(getParentStopPlaceQuery, variables, config).then(
+            data => data?.stopPlace?.parent,
+        )
     }
 }
 
@@ -102,15 +118,20 @@ export function createGetStopPlacesByPosition(argConfig: ArgumentConfig) {
             ...rest,
         }
 
-        return journeyPlannerQuery<{ stopPlacesByBbox?: StopPlaceDetails[] }>(getStopPlacesByBboxQuery, variables, config)
-            .then((data) => data?.stopPlacesByBbox || [])
+        return journeyPlannerQuery<{ stopPlacesByBbox?: StopPlaceDetails[] }>(
+            getStopPlacesByBboxQuery,
+            variables,
+            config,
+        ).then(data => data?.stopPlacesByBbox || [])
     }
 }
 
 export function createGetStopPlaceFacilities(argConfig: ArgumentConfig) {
     const config = getServiceConfig(argConfig)
 
-    return function getStopPlaceFacilities(stopPlaceId: string): Promise<StopPlaceFacilities> {
+    return function getStopPlaceFacilities(
+        stopPlaceId: string,
+    ): Promise<StopPlaceFacilities> {
         const variables = { id: stopPlaceId }
         return nsrQuery(getStopPlaceFacilitiesQuery, variables, config)
     }
@@ -130,7 +151,10 @@ export function createGetQuaysForStopPlace(argConfig: ArgumentConfig) {
             ...rest,
         }
 
-        return journeyPlannerQuery<{ stopPlace?: { quays?: Quay[] }}>(getQuaysForStopPlaceQuery, variables, config)
-            .then((data) => data?.stopPlace?.quays || [])
+        return journeyPlannerQuery<{ stopPlace?: { quays?: Quay[] } }>(
+            getQuaysForStopPlaceQuery,
+            variables,
+            config,
+        ).then(data => data?.stopPlace?.quays || [])
     }
 }

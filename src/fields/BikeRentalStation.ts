@@ -1,11 +1,11 @@
 export interface BikeRentalStation {
-    id: string;
-    name: string;
-    networks: Array<string>;
-    spacesAvailable?: number;
-    bikesAvailable?: number;
-    longitude: number;
-    latitude: number;
+    id: string
+    name: string
+    networks: Array<string>
+    spacesAvailable?: number
+    bikesAvailable?: number
+    longitude: number
+    latitude: number
 }
 
 export const fragmentName = 'bikeRentalStationFields'
@@ -21,6 +21,4 @@ fragment ${fragmentName} on BikeRentalStation {
     latitude
 }`
 
-export const fragments = [
-    fragment,
-]
+export const fragments = [fragment]

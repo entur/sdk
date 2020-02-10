@@ -60,32 +60,32 @@ import {
 import { Notice } from './Notice'
 
 export interface Leg {
-    aimedEndTime: string;
-    aimedStartTime: string;
-    authority?: Authority;
-    distance: number;
-    directDuration: number;
-    duration: number;
-    expectedEndTime: string;
-    expectedStartTime: string;
-    fromEstimatedCall?: EstimatedCall;
-    fromPlace: Place;
-    interchangeFrom?: Interchange;
-    interchangeTo?: Interchange;
-    intermediateEstimatedCalls: Array<IntermediateEstimatedCall>;
-    line?: Line;
-    mode: LegMode;
-    notices?: Array<Notice>; // from mapper
-    operator?: Operator;
-    pointsOnLink?: PointsOnLink;
-    realtime: boolean;
-    ride: boolean;
-    rentedBike?: boolean;
-    serviceJourney: ServiceJourney;
-    situations: Array<Situation>;
-    toEstimatedCall?: EstimatedCall;
-    toPlace: Place;
-    transportSubmode: TransportSubmode;
+    aimedEndTime: string
+    aimedStartTime: string
+    authority?: Authority
+    distance: number
+    directDuration: number
+    duration: number
+    expectedEndTime: string
+    expectedStartTime: string
+    fromEstimatedCall?: EstimatedCall
+    fromPlace: Place
+    interchangeFrom?: Interchange
+    interchangeTo?: Interchange
+    intermediateEstimatedCalls: Array<IntermediateEstimatedCall>
+    line?: Line
+    mode: LegMode
+    notices?: Array<Notice> // from mapper
+    operator?: Operator
+    pointsOnLink?: PointsOnLink
+    realtime: boolean
+    ride: boolean
+    rentedBike?: boolean
+    serviceJourney: ServiceJourney
+    situations: Array<Situation>
+    toEstimatedCall?: EstimatedCall
+    toPlace: Place
+    transportSubmode: TransportSubmode
 }
 
 export const fragmentName = 'legFields'

@@ -15,13 +15,18 @@ import { getServiceConfig, ArgumentConfig } from '../config'
 export function createGetBikeRentalStation(argConfig: ArgumentConfig) {
     const config = getServiceConfig(argConfig)
 
-    return function getBikeRentalStation(stationId: string): Promise<BikeRentalStation> {
+    return function getBikeRentalStation(
+        stationId: string,
+    ): Promise<BikeRentalStation> {
         const variables = {
             id: stationId,
         }
 
-        return journeyPlannerQuery<{ bikeRentalStation: BikeRentalStation }>(getBikeRentalStationQuery, variables, config)
-            .then(data => data?.bikeRentalStation)
+        return journeyPlannerQuery<{ bikeRentalStation: BikeRentalStation }>(
+            getBikeRentalStationQuery,
+            variables,
+            config,
+        ).then(data => data?.bikeRentalStation)
     }
 }
 
@@ -32,7 +37,9 @@ export function createGetBikeRentalStations(argConfig: ArgumentConfig) {
         stationIds: Array<string>,
     ): Promise<Array<BikeRentalStation | void>> {
         if (!stationIds || !Array.isArray(stationIds)) {
-            throw new Error(`getBikeRentalStations takes an array of strings, but got ${typeof stationIds}`)
+            throw new Error(
+                `getBikeRentalStations takes an array of strings, but got ${typeof stationIds}`,
+            )
         }
 
         if (stationIds.length === 0) {
@@ -43,13 +50,17 @@ export function createGetBikeRentalStations(argConfig: ArgumentConfig) {
             ids: stationIds,
         }
 
-        return journeyPlannerQuery<{ bikeRentalStations?: BikeRentalStation[] }>(getBikeRentalStationsQuery, variables, config)
+        return journeyPlannerQuery<{
+            bikeRentalStations?: BikeRentalStation[]
+        }>(getBikeRentalStationsQuery, variables, config)
             .then(data => data?.bikeRentalStations || [])
             .then(stations => forceOrder(stations, stationIds, ({ id }) => id))
     }
 }
 
-export function createGetBikeRentalStationsByPosition(argConfig: ArgumentConfig) {
+export function createGetBikeRentalStationsByPosition(
+    argConfig: ArgumentConfig,
+) {
     const config = getServiceConfig(argConfig)
 
     return function getBikeRentalStationsByPosition(
@@ -58,10 +69,10 @@ export function createGetBikeRentalStationsByPosition(argConfig: ArgumentConfig)
     ): Promise<Array<BikeRentalStation>> {
         const variables = convertPositionToBbox(coordinates, distance)
 
-        return journeyPlannerQuery<{ bikeRentalStationsByBbox?: BikeRentalStation[] }>(
-            getBikeRentalStationsByPositionQuery,
-            variables,
-            config,
-        ).then(data => data?.bikeRentalStationsByBbox || [])
+        return journeyPlannerQuery<{
+            bikeRentalStationsByBbox?: BikeRentalStation[]
+        }>(getBikeRentalStationsByPositionQuery, variables, config).then(
+            data => data?.bikeRentalStationsByBbox || [],
+        )
     }
 }

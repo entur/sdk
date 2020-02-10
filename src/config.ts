@@ -1,36 +1,36 @@
 export interface HostConfig {
-    host: string;
-    headers?: {[key: string]: string};
+    host: string
+    headers?: { [key: string]: string }
 }
 
 export interface ServiceConfig {
-    clientName: string;
+    clientName: string
     hosts: {
-        journeyPlanner: string;
-        geocoder: string;
-        nsr: string;
-    };
-    headers: {[key: string]: string};
+        journeyPlanner: string
+        geocoder: string
+        nsr: string
+    }
+    headers: { [key: string]: string }
 }
 
 export interface ArgumentConfig {
-    clientName: string;
+    clientName: string
     hosts?: {
-        journeyPlanner?: string;
-        geocoder?: string;
-        nsr?: string;
-    };
-    headers?: {[key: string]: string};
+        journeyPlanner?: string
+        geocoder?: string
+        nsr?: string
+    }
+    headers?: { [key: string]: string }
 }
 
 export interface OverrideConfig {
-    clientName?: string;
+    clientName?: string
     hosts?: {
-        journeyPlanner?: string;
-        geocoder?: string;
-        nsr?: string;
-    };
-    headers?: {[key: string]: string};
+        journeyPlanner?: string
+        geocoder?: string
+        nsr?: string
+    }
+    headers?: { [key: string]: string }
 }
 
 const HOST_CONFIG = {
@@ -41,8 +41,10 @@ const HOST_CONFIG = {
 
 export function getServiceConfig(config: ArgumentConfig): ServiceConfig {
     if (!config || !config.clientName) {
-        throw new Error('ERROR: You must pass a "clientName" to EnturService through the config argument. '
-            + 'See https://www.entur.org/dev/api/header/ for information.\n')
+        throw new Error(
+            'ERROR: You must pass a "clientName" to EnturService through the config argument. ' +
+                'See https://www.entur.org/dev/api/header/ for information.\n',
+        )
     }
 
     const { clientName, hosts = {}, headers = {} } = config
@@ -57,7 +59,11 @@ export function getServiceConfig(config: ArgumentConfig): ServiceConfig {
     }
 }
 
-export function getJourneyPlannerHost({ hosts, clientName, headers }: ServiceConfig): HostConfig {
+export function getJourneyPlannerHost({
+    hosts,
+    clientName,
+    headers,
+}: ServiceConfig): HostConfig {
     return {
         host: hosts.journeyPlanner,
         headers: {
@@ -67,7 +73,11 @@ export function getJourneyPlannerHost({ hosts, clientName, headers }: ServiceCon
     }
 }
 
-export function getGeocoderHost({ hosts, clientName, headers }: ServiceConfig): HostConfig {
+export function getGeocoderHost({
+    hosts,
+    clientName,
+    headers,
+}: ServiceConfig): HostConfig {
     return {
         host: hosts.geocoder,
         headers: {
@@ -77,7 +87,11 @@ export function getGeocoderHost({ hosts, clientName, headers }: ServiceConfig): 
     }
 }
 
-export function getNSRHost({ hosts, clientName, headers }: ServiceConfig): HostConfig {
+export function getNSRHost({
+    hosts,
+    clientName,
+    headers,
+}: ServiceConfig): HostConfig {
     return {
         host: hosts.nsr,
         headers: {
@@ -87,7 +101,10 @@ export function getNSRHost({ hosts, clientName, headers }: ServiceConfig): HostC
     }
 }
 
-export function mergeConfig(config: ServiceConfig, override?: OverrideConfig): ServiceConfig {
+export function mergeConfig(
+    config: ServiceConfig,
+    override?: OverrideConfig,
+): ServiceConfig {
     if (!override) {
         return config
     }

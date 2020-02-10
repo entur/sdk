@@ -5,7 +5,11 @@ import PromiseThrottle from 'promise-throttle'
 import { Feature } from '../types/Feature'
 import { Location } from '../types/Location'
 import { Coordinates } from '../types/Coordinates'
-import { MAX_CALLS_PER_SECOND, MAX_CALLS_PER_MINUTE, MAX_CALLS_PER_HOUR } from './constants/rateLimits'
+import {
+    MAX_CALLS_PER_SECOND,
+    MAX_CALLS_PER_MINUTE,
+    MAX_CALLS_PER_HOUR,
+} from './constants/rateLimits'
 
 export function convertFeatureToLocation(feature: Feature): Location {
     const { properties, geometry } = feature
@@ -21,13 +25,16 @@ export function convertFeatureToLocation(feature: Feature): Location {
 }
 
 interface Bbox {
-    minLng: number;
-    minLat: number;
-    maxLng: number;
-    maxLat: number;
+    minLng: number
+    minLat: number
+    maxLng: number
+    maxLat: number
 }
 
-export function convertPositionToBbox(coordinates: Coordinates, distance: number): Bbox {
+export function convertPositionToBbox(
+    coordinates: Coordinates,
+    distance: number,
+): Bbox {
     const { latitude, longitude } = coordinates
     const distanceToKilometer = distance / 1000
 
@@ -48,11 +55,17 @@ export function convertPositionToBbox(coordinates: Coordinates, distance: number
     const [minLng, minLat, maxLng, maxLat] = bbox(line)
 
     return {
-        minLng, minLat, maxLng, maxLat,
+        minLng,
+        minLat,
+        maxLng,
+        maxLat,
     }
 }
 
-export function throttler<T, V>(func: (arg: T) => Promise<V>, args: Array<T>): Promise<V[]> {
+export function throttler<T, V>(
+    func: (arg: T) => Promise<V>,
+    args: Array<T>,
+): Promise<V[]> {
     const argCount = args.length
 
     let requestsPerSecond
@@ -69,19 +82,26 @@ export function throttler<T, V>(func: (arg: T) => Promise<V>, args: Array<T>): P
 }
 
 export function isValidDate(d: any): boolean {
-    return Object.prototype.toString.call(d) === '[object Date]' && !Number.isNaN(d.getTime())
+    return (
+        Object.prototype.toString.call(d) === '[object Date]' &&
+        !Number.isNaN(d.getTime())
+    )
 }
 
 export function uniqBy<T, K>(arr: Array<T>, getKey: (arg: T) => K): Array<T> {
-    return [...arr.reduce((map, item) => {
-        const key = getKey(item)
+    return [
+        ...arr
+            .reduce((map, item) => {
+                const key = getKey(item)
 
-        if (!map.has(key)) {
-            map.set(key, item)
-        }
+                if (!map.has(key)) {
+                    map.set(key, item)
+                }
 
-        return map
-    }, new Map()).values()]
+                return map
+            }, new Map())
+            .values(),
+    ]
 }
 
 function identity<T>(thing: T): T {
@@ -103,7 +123,7 @@ export function forceOrder<T, V>(
 
     const getKeyFunc = getKey || identity
 
-    sequence.forEach((sequenceIdentifier) => {
+    sequence.forEach(sequenceIdentifier => {
         const item = queue.find(t => getKeyFunc(t) === sequenceIdentifier)
         if (item) {
             result.push(item)

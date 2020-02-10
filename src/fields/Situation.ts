@@ -11,20 +11,20 @@ import {
 type ReportType = 'general' | 'incident' | null
 
 export interface Situation {
-    situationNumber: string;
-    summary: Array<MultilingualString>;
-    description: Array<MultilingualString>;
-    detail: Array<MultilingualString>;
-    lines: Array<Line>;
+    situationNumber: string
+    summary: Array<MultilingualString>
+    description: Array<MultilingualString>
+    detail: Array<MultilingualString>
+    lines: Array<Line>
     validityPeriod: {
-        startTime: string;
-        endTime: string;
-    };
-    reportType: ReportType;
+        startTime: string
+        endTime: string
+    }
+    reportType: ReportType
     infoLinks: Array<{
-        uri: string;
-        label: string;
-    }>;
+        uri: string
+        label: string
+    }>
 }
 
 export const fragmentName = 'situationFields'
@@ -59,7 +59,4 @@ fragment ${fragmentName} on PtSituationElement {
 }
 `
 
-export const fragments = uniq<string>([
-    fragment,
-    ...lineFragments,
-])
+export const fragments = uniq<string>([fragment, ...lineFragments])

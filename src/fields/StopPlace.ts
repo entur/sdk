@@ -1,10 +1,10 @@
 export interface StopPlace {
-    id: string;
-    description?: string;
-    name: string;
+    id: string
+    description?: string
+    name: string
     tariffZones?: Array<{
-        id: string;
-    }>;
+        id: string
+    }>
 }
 
 export const fragmentName = 'stopPlaceFields'
@@ -20,6 +20,4 @@ fragment ${fragmentName} on StopPlace {
 }
 `
 
-export const fragments = [
-    fragment,
-]
+export const fragments = [fragment]

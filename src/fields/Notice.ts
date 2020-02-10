@@ -1,5 +1,5 @@
 export interface Notice {
-    text: string;
+    text: string
 }
 
 export const fragmentName = 'noticeFields'
@@ -10,6 +10,4 @@ fragment ${fragmentName} on Notice {
 }
 `
 
-export const fragments = [
-    fragment,
-]
+export const fragments = [fragment]

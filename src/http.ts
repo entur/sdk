@@ -27,9 +27,11 @@ export function get<T extends object>(
         ...config,
         headers: { ...DEFAULT_HEADERS, ...headers },
     })
-    .then(responseHandler)
-    .then(res => res.json())
-    .then(data => cleanDeep(data, { emptyArrays: false, emptyStrings: false }))
+        .then(responseHandler)
+        .then(res => res.json())
+        .then(data =>
+            cleanDeep(data, { emptyArrays: false, emptyStrings: false }),
+        )
 }
 
 export function post<T>(
@@ -37,7 +39,7 @@ export function post<T>(
     params?: object,
     headers?: object,
     config?: object,
-    ): Promise<T> {
+): Promise<T> {
     return fetch(url, {
         method: 'post',
         ...config,
@@ -46,5 +48,7 @@ export function post<T>(
     })
         .then(responseHandler)
         .then(res => res.json())
-        .then(data => cleanDeep(data, { emptyArrays: false, emptyStrings: false }))
+        .then(data =>
+            cleanDeep(data, { emptyArrays: false, emptyStrings: false }),
+        )
 }

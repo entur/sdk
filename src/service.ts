@@ -1,9 +1,6 @@
 import { journeyPlannerQuery, nsrQuery } from './api'
 
-import {
-    createFindTrips,
-    createGetTripPatterns,
-} from './trip'
+import { createFindTrips, createGetTripPatterns } from './trip'
 
 import {
     createGetDeparturesFromStopPlace,
@@ -14,9 +11,7 @@ import {
     getStopPlaceDeparturesDEPRECATED,
 } from './departure'
 
-import {
-    createGetNearestPlaces,
-} from './nearest'
+import { createGetNearestPlaces } from './nearest'
 
 import {
     createGetStopPlace,
@@ -33,10 +28,7 @@ import {
     createGetBikeRentalStationsByPosition,
 } from './bikeRental'
 
-import {
-    createGetFeatures,
-    createGetFeaturesReverse,
-} from './geocoder'
+import { createGetFeatures, createGetFeaturesReverse } from './geocoder'
 
 import { ArgumentConfig } from './config'
 
@@ -52,8 +44,12 @@ function createEnturService(config: ArgumentConfig) {
         getDeparturesFromStopPlace: createGetDeparturesFromStopPlace(config),
         getDeparturesFromStopPlaces: createGetDeparturesFromStopPlaces(config),
         getDeparturesFromQuays: createGetDeparturesFromQuays(config),
-        getDeparturesBetweenStopPlaces: createGetDeparturesBetweenStopPlaces(config),
-        getDeparturesForServiceJourney: createGetDeparturesForServiceJourney(config),
+        getDeparturesBetweenStopPlaces: createGetDeparturesBetweenStopPlaces(
+            config,
+        ),
+        getDeparturesForServiceJourney: createGetDeparturesForServiceJourney(
+            config,
+        ),
         getNearestPlaces: createGetNearestPlaces(config),
         getStopPlace: createGetStopPlace(config),
         getStopPlaces: createGetStopPlaces(config),
@@ -63,7 +59,9 @@ function createEnturService(config: ArgumentConfig) {
         getQuaysForStopPlace: createGetQuaysForStopPlace(config),
         getBikeRentalStation: createGetBikeRentalStation(config),
         getBikeRentalStations: createGetBikeRentalStations(config),
-        getBikeRentalStationsByPosition: createGetBikeRentalStationsByPosition(config),
+        getBikeRentalStationsByPosition: createGetBikeRentalStationsByPosition(
+            config,
+        ),
     }
 }
 

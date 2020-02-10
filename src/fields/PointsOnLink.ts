@@ -1,6 +1,6 @@
 export type PointsOnLink = {
-    points: string;
-    length: number;
+    points: string
+    length: number
 }
 
 export const fragmentName = 'pointsOnLinkFields'
@@ -12,6 +12,4 @@ fragment ${fragmentName} on PointsOnLink {
 }
 `
 
-export const fragments = [
-    fragment,
-]
+export const fragments = [fragment]

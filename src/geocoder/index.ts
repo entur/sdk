@@ -4,8 +4,8 @@ import { Feature } from '../../types/Feature'
 import { Coordinates } from '../../types/Coordinates'
 
 interface PositionParam {
-    'focus.point.lat': number;
-    'focus.point.lon': number;
+    'focus.point.lat': number
+    'focus.point.lon': number
 }
 
 function getPositionParamsFromGeolocationResult(
@@ -24,14 +24,14 @@ function getPositionParamsFromGeolocationResult(
 }
 
 type GetFeaturesParam = {
-    'boundary.rect.min_lon'?: number;
-    'boundary.rect.max_lon'?: number;
-    'boundary.rect.min_lat'?: number;
-    'boundary.rect.max_lat'?: number;
-    'boundary.country'?: string;
-    sources?: Array<string>;
-    layers?: Array<string>;
-    limit?: number;
+    'boundary.rect.min_lon'?: number
+    'boundary.rect.max_lon'?: number
+    'boundary.rect.min_lat'?: number
+    'boundary.rect.max_lat'?: number
+    'boundary.country'?: string
+    sources?: Array<string>
+    layers?: Array<string>
+    limit?: number
 }
 
 export function createGetFeatures(argConfig: ArgumentConfig) {
@@ -43,9 +43,7 @@ export function createGetFeatures(argConfig: ArgumentConfig) {
         params: GetFeaturesParam = {},
     ): Promise<Feature[]> {
         const { host, headers } = getGeocoderHost(config)
-        const {
-            sources, layers, limit, ...rest
-        } = params
+        const { sources, layers, limit, ...rest } = params
 
         const searchParams = {
             text,
@@ -58,14 +56,16 @@ export function createGetFeatures(argConfig: ArgumentConfig) {
         }
 
         const url = `${host}/autocomplete`
-        return get<{ features?: Feature[] }>(url, searchParams, headers).then(data => data.features || [])
+        return get<{ features?: Feature[] }>(url, searchParams, headers).then(
+            data => data.features || [],
+        )
     }
 }
 
 type GetFeaturesReverseParam = {
-    radius?: number;
-    size?: number;
-    layers?: Array<string>;
+    radius?: number
+    size?: number
+    layers?: Array<string>
 }
 
 export function createGetFeaturesReverse(argConfig: ArgumentConfig) {
@@ -89,6 +89,8 @@ export function createGetFeaturesReverse(argConfig: ArgumentConfig) {
         }
 
         const url = `${host}/reverse`
-        return get<{ features?: Feature[] }>(url, searchParams, headers).then(data => data.features || [])
+        return get<{ features?: Feature[] }>(url, searchParams, headers).then(
+            data => data.features || [],
+        )
     }
 }
