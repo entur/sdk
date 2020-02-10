@@ -7,7 +7,7 @@ route: /departures/getDeparturesFromQuays
 # getDeparturesFromQuays
 
 ```typescript
-(quayIds: Array<string>, params?: GetDeparturesParams) => Promise<Array<{ id: string, departures: Array<Departure | void> }>>
+(quayIds: Array<string>, params?: GetDeparturesParams) => Promise<Array<{ id: string, departures: Departure[] } | undefined>>
 ```
 
 `getDeparturesFromQuays` finds departures from one or more given quays.
