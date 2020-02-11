@@ -1,3 +1,5 @@
+import { Response } from 'node-fetch'
+
 export interface HostConfig {
     host: string
     headers?: { [key: string]: string }
@@ -11,6 +13,10 @@ export interface ServiceConfig {
         nsr: string
     }
     headers: { [key: string]: string }
+    fetch?: (
+        url: RequestInfo,
+        init?: RequestInit | undefined,
+    ) => Promise<Response>
 }
 
 export interface ArgumentConfig {
@@ -21,6 +27,10 @@ export interface ArgumentConfig {
         nsr?: string
     }
     headers?: { [key: string]: string }
+    fetch?: (
+        url: RequestInfo,
+        init?: RequestInit | undefined,
+    ) => Promise<Response>
 }
 
 export interface OverrideConfig {
@@ -31,6 +41,10 @@ export interface OverrideConfig {
         nsr?: string
     }
     headers?: { [key: string]: string }
+    fetch?: (
+        url: RequestInfo,
+        init?: RequestInit | undefined,
+    ) => Promise<Response>
 }
 
 const HOST_CONFIG = {
@@ -47,7 +61,7 @@ export function getServiceConfig(config: ArgumentConfig): ServiceConfig {
         )
     }
 
-    const { clientName, hosts = {}, headers = {} } = config
+    const { clientName, hosts = {}, headers = {}, fetch } = config
 
     return {
         clientName,
@@ -56,6 +70,7 @@ export function getServiceConfig(config: ArgumentConfig): ServiceConfig {
             ...HOST_CONFIG,
             ...hosts,
         },
+        fetch,
     }
 }
 
@@ -112,6 +127,7 @@ export function mergeConfig(
     return {
         ...config,
         clientName: override.clientName || config.clientName,
+        fetch: override.fetch || config.fetch,
         hosts: {
             ...config.hosts,
             ...override.hosts,

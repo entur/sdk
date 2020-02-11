@@ -90,6 +90,10 @@ type $entur$sdk$Config = {|
         nsr?: string,
     },
     headers?: {[string]: string},
+    fetch?: (
+        url: string,
+        init?: Object,
+    ) => Promise<any>
 |}
 
 type $entur$sdk$OverrideConfig = {|
@@ -100,6 +104,10 @@ type $entur$sdk$OverrideConfig = {|
         nsr?: string,
     },
     headers?: {[string]: string},
+    fetch?: (
+        url: string,
+        init?: Object,
+    ) => Promise<any>
 |}
 
 type $entur$sdk$Coordinates = {
