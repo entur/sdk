@@ -41,7 +41,9 @@ export function journeyPlannerQuery<T>(
 
     const params = getGraphqlParams(queryObj, variables)
 
-    return post(url, params, headers).then(errorHandler)
+    return post(url, params, headers, undefined, config.fetch).then(
+        errorHandler,
+    )
 }
 
 export function nsrQuery<T>(
@@ -52,7 +54,12 @@ export function nsrQuery<T>(
     const { host, headers } = getNSRHost(config)
     const url = `${host}/graphql`
 
-    return post(url, { query: minify(query), variables }, headers).then(
+    const params = {
+        query: minify(query),
+        variables,
+    }
+
+    return post(url, params, headers, undefined, config.fetch).then(
         errorHandler,
     )
 }

@@ -21,8 +21,14 @@ export function get<T extends object>(
     params?: object,
     headers?: object,
     config?: object,
+    customFetch?: (
+        url: RequestInfo,
+        init?: RequestInit | undefined,
+    ) => Promise<Response>,
 ): Promise<T> {
-    return fetch(`${url}?${qs.stringify(params)}`, {
+    const fetcher = customFetch || fetch
+
+    return fetcher(`${url}?${qs.stringify(params)}`, {
         method: 'get',
         ...config,
         headers: { ...DEFAULT_HEADERS, ...headers },
@@ -39,8 +45,14 @@ export function post<T>(
     params?: object,
     headers?: object,
     config?: object,
+    customFetch?: (
+        url: RequestInfo,
+        init?: RequestInit | undefined,
+    ) => Promise<Response>,
 ): Promise<T> {
-    return fetch(url, {
+    const fetcher = customFetch || fetch
+
+    return fetcher(url, {
         method: 'post',
         ...config,
         headers: { ...DEFAULT_HEADERS, ...headers },
