@@ -1,0 +1,31 @@
+---
+name: nsrQuery
+menu: Advanced
+route: /advanced/nsrQuery
+---
+
+# nsrQuery
+
+```typescript
+<T>(queryObj: string, variables: object, config: ServiceConfig) => Promise<T>
+```
+
+If none of the provided functions do exactly what you want, we expose two functions to do direct queries to [the Journey Planner API](https://developer.entur.org/pages-journeyplanner-journeyplanner) and to [NSR](https://developer.entur.org/pages-nsr-nsr).
+
+This one is for NSR.
+
+## Parameters
+
+### queryObj (`string`)
+
+The GraphQL query string.
+
+### variables (`object`)
+
+An object with GraphQL variables.
+
+### config (`ServiceConfig`)
+
+Configuration options.
+
+Note that journeyPlannerQuery expects a more explicit config parameter than [`createEnturService`](/getting-started).
