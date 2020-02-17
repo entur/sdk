@@ -5,6 +5,7 @@ export default {
     menu: [
         'Entur SDK',
         'Getting Started',
+        'Advanced',
         'Travel',
         'Departures',
         'Places',
