@@ -868,6 +868,17 @@ export function throttler<T, U>(
     args: T[],
 ): Promise<U[]>
 
+export function journeyPlannerQuery<T>(
+    queryObj: string,
+    variables: object,
+    config: ServiceConfig,
+): Promise<T>
+export function nsrQuery<T>(
+    queryObj: string,
+    variables: object,
+    config: ServiceConfig,
+): Promise<T>
+
 export function isAir(mode: string): boolean
 export function isBicycle(mode: string): boolean
 export function isBus(mode: string): boolean

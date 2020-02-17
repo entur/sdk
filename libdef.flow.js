@@ -725,6 +725,8 @@ declare module '@entur/sdk' {
     |}
 
     declare export default function createEnturService(config: $entur$sdk$Config): EnturService
+    declare export function journeyPlannerQuery<T>(query: string, variables: Object, config: $entur$sdk$ServiceConfig): Promise<T>
+    declare export function nsrQuery<T>(query: string, variables: Object, config: $entur$sdk$ServiceConfig): Promise<T>
 
     /**
      * Constants
