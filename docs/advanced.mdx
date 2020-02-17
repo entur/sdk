@@ -1,0 +1,84 @@
+---
+name: Advanced
+route: /advanced
+---
+
+# Advanced
+
+If none of the provided functions do exactly what you want, we expose two functions to do direct queries to [the Journey Planner API](https://developer.entur.org/pages-journeyplanner-journeyplanner) and to [NSR](https://developer.entur.org/pages-nsr-nsr). 
+
+## journeyPatternQuery
+
+```typescript
+<T>(queryObj: string, variables: object, config: ServiceConfig) => Promise<T>
+```
+
+Do a direct query against the Journey Planner API.
+
+## Parameters
+
+### queryObj (`string`)
+
+The GraphQL query string.
+
+### variables (`object`)
+
+An object with GraphQL variables.
+
+### config (`ServiceConfig`)
+
+Configuration options. See the example below.
+
+## Example
+
+The example below finds lines that stops at the given stop places. Also check this out at [Shamash](https://api.staging.entur.io/journey-planner/v2/ide/?query=%7B%0A%20%20%0A%7D&variables=%7B%0A%20%20%22ids%22%3A%20%5B%22NSR%3AStopPlace%3A4089%22%2C%20%22NSR%3AStopPlace%3A1337%22%5D%0A%7D).
+
+
+```typescript
+import { journeyPlannerQuery } from '@entur/sdk'
+
+const query = `
+query ($ids: [String!]!) {
+  stopPlaces(ids: $ids) {
+    quays {
+      lines {
+        id
+      }
+    }
+  }
+}
+`
+
+journeyPlannerQuery(query, 
+    { ids: ['NSR:StopPlace:4089', 'NSR:StopPlace:1337']},
+    { clientName: "myawesomeorg-myawesomeapp",
+        hosts: {
+            journeyPlanner: 'https://api.staging.entur.io/journey-planner/v2/' // Use staging environment
+            geocoder: 'https://api.entur.io/geocoder/v1'
+            nsr: 'https://api.entur.io/stop-places/v1'
+            }
+        }
+    ).then(res => console.log(res)) // Print out lines servicing these stop places
+```
+
+## nsrQuery
+
+```typescript
+<T>(queryObj: string, variables: object, config: ServiceConfig) => Promise<T>
+```
+
+Do a direct query against NSR.
+
+## Parameters
+
+### queryObj (`string`)
+
+The GraphQL query string.
+
+### variables (`object`)
+
+An object with GraphQL variables.
+
+### config (`ServiceConfig`)
+
+Configuration options.

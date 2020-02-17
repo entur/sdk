@@ -13,4 +13,6 @@ export { getTripPatternsQuery } from './trip'
 export * from './constants/travelModes'
 export * from './constants/featureCategory'
 
+export { journeyPlannerQuery, nsrQuery } from './api'
+
 export default EnturService

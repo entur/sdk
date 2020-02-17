@@ -9,6 +9,7 @@ export default {
         'Departures',
         'Places',
         'Utils',
+        'Advanced',
     ],
     typescript: true,
 }
