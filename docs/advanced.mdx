@@ -10,7 +10,7 @@ If none of the provided functions do exactly what you want, we expose two functi
 ## journeyPatternQuery
 
 ```typescript
-(queryObj: string, variables: object, config: ServiceConfig)
+<T>(queryObj: string, variables: object, config: ServiceConfig) => Promise<T>
 ```
 
 Do a direct query against the Journey Planner API.
@@ -64,7 +64,7 @@ journeyPlannerQuery(query,
 ## nsrQuery
 
 ```typescript
-(queryObj: string, variables: object, config: ServiceConfig)
+<T>(queryObj: string, variables: object, config: ServiceConfig) => Promise<T>
 ```
 
 Do a direct query against NSR.
