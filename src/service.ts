@@ -30,12 +30,14 @@ import {
 
 import { createGetFeatures, createGetFeaturesReverse } from './geocoder'
 
-import { ArgumentConfig } from './config'
+import { ArgumentConfig, getServiceConfig } from './config'
 
 function createEnturService(config: ArgumentConfig) {
     return {
         journeyPlannerQuery,
+        queryJourneyPlanner: journeyPlannerQuery(getServiceConfig(config)),
         nsrQuery,
+        queryNsr: nsrQuery(getServiceConfig(config)),
         getFeatures: createGetFeatures(config),
         getFeaturesReverse: createGetFeaturesReverse(config),
         getTripPatterns: createGetTripPatterns(config),

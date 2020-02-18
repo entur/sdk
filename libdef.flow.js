@@ -620,10 +620,20 @@ declare module '@entur/sdk' {
             config?: $entur$sdk$ServiceConfig,
         ) => Promise<$entur$sdk$journeyPlannerResponse>,
 
+        queryJourneyPlanner: <$entur$sdk$journeyPlannerResponse>(
+            queryObj: string,
+            variables?: Object
+        ) => Promise<$entur$sdk$journeyPlannerResponse>,
+
         nsrQuery: <$entur$sdk$nsrResponse>(
             queryObj: string,
             variables?: Object,
             config?: $entur$sdk$ServiceConfig,
+        ) => Promise<$entur$sdk$nsrResponse>,
+
+        queryNsr: <$entur$sdk$nsrResponse>(
+            queryObj: string,
+            variables?: Object,
         ) => Promise<$entur$sdk$nsrResponse>,
 
         getFeatures: (
