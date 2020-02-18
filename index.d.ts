@@ -613,10 +613,20 @@ export interface EnturService {
         config?: ServiceConfig,
     ) => Promise<journeyPlannerResponse>
 
+    queryJourneyPlanner: <journeyPlannerResponse>(
+        queryObj: string,
+        variables?: Record<string, any>,
+    ) => Promise<journeyPlannerResponse>
+
     nsrQuery: <nsrResponse>(
         queryObj: string,
         variables?: Record<string, any>,
         config?: ServiceConfig,
+    ) => Promise<nsrResponse>
+
+    queryNsr: <nsrResponse>(
+        queryObj: string,
+        variables?: Record<string, any>,
     ) => Promise<nsrResponse>
 
     getFeatures: (

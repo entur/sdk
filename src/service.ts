@@ -30,12 +30,39 @@ import {
 
 import { createGetFeatures, createGetFeaturesReverse } from './geocoder'
 
-import { ArgumentConfig } from './config'
+import { ArgumentConfig, getServiceConfig, ServiceConfig } from './config'
 
 function createEnturService(config: ArgumentConfig) {
     return {
-        journeyPlannerQuery,
-        nsrQuery,
+        journeyPlannerQuery: <T>(
+            query: string,
+            variables: object,
+            config: ServiceConfig,
+        ): Promise<T> => {
+            if (process.env.NODE_ENV !== 'production') {
+                // eslint-disable-next-line
+                console.warn('journeyPlannerQuery is deprecated and will be removed in a future release. Please use queryJourneyPlanner instead.')
+            }
+            return journeyPlannerQuery(query, variables, config)
+        },
+        queryJourneyPlanner: <T>(
+            queryObj: string,
+            variables: object,
+        ): Promise<T> =>
+            journeyPlannerQuery(queryObj, variables, getServiceConfig(config)),
+        nsrQuery: <T>(
+            query: string,
+            variables: object,
+            config: ServiceConfig,
+        ): Promise<T> => {
+            if (process.env.NODE_ENV !== 'production') {
+                // eslint-disable-next-line
+                console.warn('nsrQuery is deprecated and will be removed in a future release. Please use queryNsr instead.')
+            }
+            return nsrQuery(query, variables, config)
+        },
+        queryNsr: <T>(queryObj: string, variables: object): Promise<T> =>
+            nsrQuery(queryObj, variables, getServiceConfig(config)),
         getFeatures: createGetFeatures(config),
         getFeaturesReverse: createGetFeaturesReverse(config),
         getTripPatterns: createGetTripPatterns(config),

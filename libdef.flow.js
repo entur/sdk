@@ -614,17 +614,27 @@ type $entur$sdk$StopPlaceParams = {
 
 declare module '@entur/sdk' {
     declare type EnturService = {|
-        journeyPlannerQuery: <$entur$sdk$journeyPlannerResponse>(
+        journeyPlannerQuery: <E>(
             queryObj: string,
             variables?: Object,
             config?: $entur$sdk$ServiceConfig,
-        ) => Promise<$entur$sdk$journeyPlannerResponse>,
+        ) => Promise<E>,
 
-        nsrQuery: <$entur$sdk$nsrResponse>(
+        queryJourneyPlanner: <E>(
+            queryObj: string,
+            variables?: Object
+        ) => Promise<E>,
+
+        nsrQuery: <E>(
             queryObj: string,
             variables?: Object,
             config?: $entur$sdk$ServiceConfig,
-        ) => Promise<$entur$sdk$nsrResponse>,
+        ) => Promise<E>,
+
+        queryNsr: <E>(
+            queryObj: string,
+            variables?: Object,
+        ) => Promise<E>,
 
         getFeatures: (
             query: string,
