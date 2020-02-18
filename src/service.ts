@@ -35,9 +35,14 @@ import { ArgumentConfig, getServiceConfig } from './config'
 function createEnturService(config: ArgumentConfig) {
     return {
         journeyPlannerQuery,
-        queryJourneyPlanner: journeyPlannerQuery(getServiceConfig(config)),
+        queryJourneyPlanner: <T>(
+            queryObj: string,
+            variables: object,
+        ): Promise<T> =>
+            journeyPlannerQuery(queryObj, variables, getServiceConfig(config)),
         nsrQuery,
-        queryNsr: nsrQuery(getServiceConfig(config)),
+        queryNsr: <T>(queryObj: string, variables: object): Promise<T> =>
+            nsrQuery(queryObj, variables, getServiceConfig(config)),
         getFeatures: createGetFeatures(config),
         getFeaturesReverse: createGetFeaturesReverse(config),
         getTripPatterns: createGetTripPatterns(config),
