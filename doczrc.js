@@ -5,9 +5,11 @@ export default {
     menu: [
         'Entur SDK',
         'Getting Started',
+        'Geocoder',
         'Travel',
         'Departures',
         'Places',
+        'Bikes',
         'Utils',
         'Advanced',
     ],
