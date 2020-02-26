@@ -56,9 +56,13 @@ export function createGetFeatures(argConfig: ArgumentConfig) {
         }
 
         const url = `${host}/autocomplete`
-        return get<{ features?: Feature[] }>(url, searchParams, headers).then(
-            data => data.features || [],
-        )
+        return get<{ features?: Feature[] }>(
+            url,
+            searchParams,
+            headers,
+            undefined,
+            config.fetch,
+        ).then(data => data.features || [])
     }
 }
 
@@ -89,8 +93,12 @@ export function createGetFeaturesReverse(argConfig: ArgumentConfig) {
         }
 
         const url = `${host}/reverse`
-        return get<{ features?: Feature[] }>(url, searchParams, headers).then(
-            data => data.features || [],
-        )
+        return get<{ features?: Feature[] }>(
+            url,
+            searchParams,
+            headers,
+            undefined,
+            config.fetch,
+        ).then(data => data.features || [])
     }
 }
