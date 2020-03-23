@@ -27,7 +27,7 @@ export function getNotices(leg: Leg): Array<Notice> {
         ...(leg.toEstimatedCall?.notices || []),
         ...(leg.line?.notices || []),
     ]
-    return uniqBy(notices, notice => notice.text)
+    return uniqBy(notices, (notice) => notice.text)
 }
 
 function authorityMapper(authority?: Authority): Authority | undefined {

@@ -107,7 +107,7 @@ export function createGetNearestPlaces(argConfig: ArgumentConfig) {
             getNearestPlacesQuery,
             variables,
             config,
-        ).then(data =>
+        ).then((data) =>
             (data?.nearest?.edges || []).map(({ node }) => {
                 const { distance, place } = node
 

@@ -37,7 +37,7 @@ export function createGetStopPlace(argConfig: ArgumentConfig) {
             getStopPlaceQuery,
             variables,
             config,
-        ).then(data => data?.stopPlace)
+        ).then((data) => data?.stopPlace)
     }
 }
 
@@ -70,7 +70,7 @@ export function createGetStopPlaces(argConfig: ArgumentConfig) {
             variables,
             config,
         )
-            .then(data => data?.stopPlaces || [])
+            .then((data) => data?.stopPlaces || [])
             .then((stopPlaceDetails: StopPlaceDetails[]) => {
                 return forceOrder(
                     stopPlaceDetails,
@@ -98,7 +98,7 @@ export function createGetParentStopPlace(argConfig: ArgumentConfig) {
         return journeyPlannerQuery<{
             stopPlace?: { parent?: StopPlaceDetails }
         }>(getParentStopPlaceQuery, variables, config).then(
-            data => data?.stopPlace?.parent,
+            (data) => data?.stopPlace?.parent,
         )
     }
 }
@@ -122,7 +122,7 @@ export function createGetStopPlacesByPosition(argConfig: ArgumentConfig) {
             getStopPlacesByBboxQuery,
             variables,
             config,
-        ).then(data => data?.stopPlacesByBbox || [])
+        ).then((data) => data?.stopPlacesByBbox || [])
     }
 }
 
@@ -155,6 +155,6 @@ export function createGetQuaysForStopPlace(argConfig: ArgumentConfig) {
             getQuaysForStopPlaceQuery,
             variables,
             config,
-        ).then(data => data?.stopPlace?.quays || [])
+        ).then((data) => data?.stopPlace?.quays || [])
     }
 }

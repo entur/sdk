@@ -78,7 +78,7 @@ export function throttler<T, V>(
     }
 
     const promiseThrottle = new PromiseThrottle({ requestsPerSecond })
-    return Promise.all(args.map(a => promiseThrottle.add(() => func(a))))
+    return Promise.all(args.map((a) => promiseThrottle.add(() => func(a))))
 }
 
 export function isValidDate(d: any): boolean {
@@ -123,11 +123,11 @@ export function forceOrder<T, V>(
 
     const getKeyFunc = getKey || identity
 
-    sequence.forEach(sequenceIdentifier => {
-        const item = queue.find(t => getKeyFunc(t) === sequenceIdentifier)
+    sequence.forEach((sequenceIdentifier) => {
+        const item = queue.find((t) => getKeyFunc(t) === sequenceIdentifier)
         if (item) {
             result.push(item)
-            queue = queue.filter(q => q !== item)
+            queue = queue.filter((q) => q !== item)
         } else {
             result.push(undefined)
         }
