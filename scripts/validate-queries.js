@@ -1,4 +1,4 @@
-/* eslint-disable import/no-extraneous-dependencies, no-console */
+/* eslint-disable no-console */
 
 /*
 This is a script that validates queries against the GraphQL schemas for JourneyPlanner and NSR.
@@ -24,9 +24,7 @@ import {
     getDeparturesForServiceJourneyQuery,
 } from '../src/departure/query'
 
-import {
-    getNearestPlacesQuery,
-} from '../src/nearest/query'
+import { getNearestPlacesQuery } from '../src/nearest/query'
 
 import {
     getStopPlaceQuery,
@@ -37,9 +35,7 @@ import {
     getQuaysForStopPlaceQuery,
 } from '../src/stopPlace/query'
 
-import {
-    getTripPatternQuery,
-} from '../src/trip/query'
+import { getTripPatternQuery } from '../src/trip/query'
 
 const journeyplanner2Schema = buildClientSchema(journeyplanner2SchemaJSON.data)
 const nsrSchema = buildClientSchema(nsrSchemaJSON.data)
@@ -61,9 +57,7 @@ const jp2Queries = [
     { getTripPatternQuery },
 ]
 
-const nsrQueries = [
-    { getStopPlaceFacilitiesQuery },
-]
+const nsrQueries = [{ getStopPlaceFacilitiesQuery }]
 
 function validateQuery(queryName, query, schema) {
     try {

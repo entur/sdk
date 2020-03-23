@@ -26,7 +26,7 @@ const declaration = Object.entries(variables)
     .join(',')
 
 const invocation = Object.keys(variables)
-    .map(key => `${key}: $${key}`)
+    .map((key) => `${key}: $${key}`)
     .join(',')
 
 export const getTripPatternQuery = `

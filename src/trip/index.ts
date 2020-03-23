@@ -137,12 +137,12 @@ export function createGetTripPatterns(argConfig: ArgumentConfig) {
             getTripPatternQuery,
             getTripPatternsVariables(params),
             mergeConfig(config, overrideConfig),
-        ).then(data => {
+        ).then((data) => {
             if (!data?.trip?.tripPatterns) {
                 return []
             }
 
-            return data.trip.tripPatterns.map(trip => ({
+            return data.trip.tripPatterns.map((trip) => ({
                 ...trip,
                 legs: trip.legs.map(legMapper),
             }))

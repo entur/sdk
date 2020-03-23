@@ -1,4 +1,4 @@
 export interface PointsOnLink {
-    points: string;
-    length: number;
+    points: string
+    length: number
 }

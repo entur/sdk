@@ -62,7 +62,7 @@ export function createGetFeatures(argConfig: ArgumentConfig) {
             headers,
             undefined,
             config.fetch,
-        ).then(data => data.features || [])
+        ).then((data) => data.features || [])
     }
 }
 
@@ -99,6 +99,6 @@ export function createGetFeaturesReverse(argConfig: ArgumentConfig) {
             headers,
             undefined,
             config.fetch,
-        ).then(data => data.features || [])
+        ).then((data) => data.features || [])
     }
 }

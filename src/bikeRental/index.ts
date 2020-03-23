@@ -26,7 +26,7 @@ export function createGetBikeRentalStation(argConfig: ArgumentConfig) {
             getBikeRentalStationQuery,
             variables,
             config,
-        ).then(data => data?.bikeRentalStation)
+        ).then((data) => data?.bikeRentalStation)
     }
 }
 
@@ -53,8 +53,10 @@ export function createGetBikeRentalStations(argConfig: ArgumentConfig) {
         return journeyPlannerQuery<{
             bikeRentalStations?: BikeRentalStation[]
         }>(getBikeRentalStationsQuery, variables, config)
-            .then(data => data?.bikeRentalStations || [])
-            .then(stations => forceOrder(stations, stationIds, ({ id }) => id))
+            .then((data) => data?.bikeRentalStations || [])
+            .then((stations) =>
+                forceOrder(stations, stationIds, ({ id }) => id),
+            )
     }
 }
 
@@ -72,7 +74,7 @@ export function createGetBikeRentalStationsByPosition(
         return journeyPlannerQuery<{
             bikeRentalStationsByBbox?: BikeRentalStation[]
         }>(getBikeRentalStationsByPositionQuery, variables, config).then(
-            data => data?.bikeRentalStationsByBbox || [],
+            (data) => data?.bikeRentalStationsByBbox || [],
         )
     }
 }

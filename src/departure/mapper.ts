@@ -11,7 +11,7 @@ function getNoticesFromLeg(leg: Leg): Array<Notice> {
         ...(leg.serviceJourney?.journeyPattern?.line?.notices || []),
         ...(leg.fromEstimatedCall?.notices || []),
     ]
-    return uniqBy(notices, notice => notice.text)
+    return uniqBy(notices, (notice) => notice.text)
 }
 
 function getNotices(departure: EstimatedCall): Array<Notice> {
@@ -21,7 +21,7 @@ function getNotices(departure: EstimatedCall): Array<Notice> {
         ...(departure.serviceJourney?.journeyPattern?.notices || []),
         ...(departure.serviceJourney?.journeyPattern?.line?.notices || []),
     ]
-    return uniqBy(notices, notice => notice.text)
+    return uniqBy(notices, (notice) => notice.text)
 }
 
 export function destinationMapper(departure: EstimatedCall): EstimatedCall {

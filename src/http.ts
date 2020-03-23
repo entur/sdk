@@ -34,8 +34,8 @@ export function get<T extends object>(
         headers: { ...DEFAULT_HEADERS, ...headers },
     })
         .then(responseHandler)
-        .then(res => res.json())
-        .then(data =>
+        .then((res) => res.json())
+        .then((data) =>
             cleanDeep(data, { emptyArrays: false, emptyStrings: false }),
         )
 }
@@ -59,8 +59,8 @@ export function post<T>(
         body: JSON.stringify(params),
     })
         .then(responseHandler)
-        .then(res => res.json())
-        .then(data =>
+        .then((res) => res.json())
+        .then((data) =>
             cleanDeep(data, { emptyArrays: false, emptyStrings: false }),
         )
 }

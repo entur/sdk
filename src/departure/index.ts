@@ -91,7 +91,7 @@ export function createGetDeparturesFromStopPlaces(argConfig: ArgumentConfig) {
         return journeyPlannerQuery<{
             stopPlaces?: Array<{ id: string; estimatedCalls: EstimatedCall[] }>
         }>(getDeparturesFromStopPlacesQuery, variables, config)
-            .then(data => {
+            .then((data) => {
                 if (!data?.stopPlaces) {
                     throw new Error(
                         `Missing data: getDeparturesFromStopPlaces received no data from the API.`,
@@ -169,7 +169,7 @@ export function createGetDeparturesFromQuays(argConfig: ArgumentConfig) {
         return journeyPlannerQuery<{
             quays?: Array<{ estimatedCalls: EstimatedCall[]; id: string }>
         }>(getDeparturesFromQuayQuery, variables, config)
-            .then(data => {
+            .then((data) => {
                 if (!data || !data?.quays) {
                     throw new Error(
                         `Missing data: getDeparturesFromQuays received no data from the API.`,
@@ -215,11 +215,11 @@ export function createGetDeparturesBetweenStopPlaces(
         return journeyPlannerQuery<{
             trip: { tripPatterns: Array<{ legs: Leg[] }> }
         }>(getDeparturesBetweenStopPlacesQuery, variables, config).then(
-            data => {
+            (data) => {
                 if (!data || !data?.trip?.tripPatterns) return []
 
                 return data.trip.tripPatterns
-                    .map(trip => {
+                    .map((trip) => {
                         const [leg] = trip.legs
                         if (!leg) return undefined
 
@@ -248,7 +248,7 @@ export function createGetDeparturesForServiceJourney(
         return journeyPlannerQuery<{
             serviceJourney?: { estimatedCalls: EstimatedCall[] }
         }>(getDeparturesForServiceJourneyQuery, variables, config).then(
-            data => {
+            (data) => {
                 return (data?.serviceJourney?.estimatedCalls || []).map(
                     destinationMapper,
                 )
