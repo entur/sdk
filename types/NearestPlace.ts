@@ -6,9 +6,9 @@ export type TypeName =
     | 'StopPlace'
 
 export interface NearestPlace {
-    id: string;
-    type: TypeName;
-    distance: number;
-    latitude: number;
-    longitude: number;
+    id: string
+    type: TypeName
+    distance: number
+    latitude: number
+    longitude: number
 }

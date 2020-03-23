@@ -1,4 +1,4 @@
 export type Interchange = {
-    guaranteed: boolean;
-    staySeated: boolean;
+    guaranteed: boolean
+    staySeated: boolean
 }

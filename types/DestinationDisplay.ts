@@ -1,3 +1,3 @@
 export interface DestinationDisplay {
-    frontText: string;
+    frontText: string
 }

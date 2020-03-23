@@ -17,7 +17,7 @@
     "libdef.flow.js"
   ],
   "scripts": {
-    "lint": "eslint src/ --ext=js,ts",
+    "lint": "eslint src/ types/ scripts/ --ext=js,ts",
     "test": "npm run lint && npm run check-libdefs && ts-node scripts/validate-queries.js && tsc --noEmit -p .",
     "check-libdefs": "flow && tsc index.d.ts --noEmit",
     "prebuild": "npm test && rm -rf lib",
