@@ -707,7 +707,7 @@ export interface EnturService {
     getStopPlacesByPosition: (
         coordinates: Coordinates,
         distance?: number,
-    ) => Promise<StopPlace[]>
+    ) => Promise<StopPlaceDetails[]>
 
     getStopPlaceFacilities: (
         stopPlaceId: string,
