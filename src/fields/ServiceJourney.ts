@@ -24,6 +24,7 @@ export interface ServiceJourney {
     journeyPattern?: JourneyPattern
     notices?: Array<Notice>
     publicCode?: string
+    privateCode?: string
     transportSubmode?: TransportSubmode
 }
 
@@ -44,6 +45,7 @@ fragment ${fragmentName} on ServiceJourney {
         ...${noticeFields}
     }
     publicCode
+    privateCode
     transportSubmode
 }
 `
