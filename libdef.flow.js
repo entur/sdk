@@ -314,6 +314,8 @@ type $entur$sdk$StopPlace = {
     id: string,
     description?: string,
     name: string,
+    latitude?: number,
+    longitude?: number,
     tariffZones?: Array<{
         id: string,
     }>,
@@ -346,6 +348,7 @@ type $entur$sdk$ServiceJourney = {
     journeyPattern?: $entur$sdk$JourneyPattern,
     notices?: Array<$entur$sdk$Notice>,
     publicCode?: string,
+    privateCode?: string,
     transportSubmode?: $entur$sdk$TransportSubmode,
 }
 
@@ -376,6 +379,12 @@ type $entur$sdk$Departure = $entur$sdk$EstimatedCall
 type $entur$sdk$Interchange = {
     guaranteed: boolean,
     staySeated: boolean,
+    FromServiceJourney?: {
+        id: string
+    },
+    ToServiceJourney?: {
+        id: string
+    },
 }
 
 type $entur$sdk$PointsOnLink = {

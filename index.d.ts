@@ -185,6 +185,8 @@ export interface StopPlace {
     description?: string
     id: string
     name: string
+    latitude?: number
+    longitude?: number
     tariffZones?: Array<{
         id: string
     }>
@@ -352,6 +354,12 @@ export type FlexibleLineType =
 export interface Interchange {
     guaranteed: boolean
     staySeated: boolean
+    FromServiceJourney?: {
+        id: string
+    }
+    ToServiceJourney?: {
+        id: string
+    }
 }
 
 export interface PointsOnLink {
@@ -369,6 +377,7 @@ export interface ServiceJourney {
     journeyPattern?: JourneyPattern
     notices?: Array<Notice>
     publicCode?: string
+    privateCode?: string
     transportSubmode?: TransportSubmode
 }
 
