@@ -365,6 +365,7 @@ type $entur$sdk$EstimatedCall = {
     forAlighting: boolean,
     forBoarding: boolean,
     notices?: Array<$entur$sdk$Notice>,
+    predictionInaccurate: boolean,
     quay?: $entur$sdk$Quay,
     realtime: boolean,
     requestStop: boolean,

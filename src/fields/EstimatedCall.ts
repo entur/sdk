@@ -39,6 +39,7 @@ export interface EstimatedCall {
     forAlighting: boolean
     forBoarding: boolean
     notices?: Array<Notice>
+    predictionInaccurate: boolean
     quay?: Quay
     realtime: boolean
     requestStop: boolean
@@ -68,6 +69,7 @@ fragment ${fragmentName} on EstimatedCall {
     notices {
         ...${noticeFields}
     }
+    predictionInaccurate
     quay {
         ...${quayFields}
     }
