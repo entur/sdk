@@ -34,27 +34,26 @@ export function destinationMapper(departure: EstimatedCall): EstimatedCall {
 export function legToDepartureMapper(leg: Leg): EstimatedCall | undefined {
     const { fromEstimatedCall } = leg
 
-    if (!fromEstimatedCall) {
-        return undefined
-    }
+    if (!fromEstimatedCall) return undefined
 
     return {
         actualArrivalTime: fromEstimatedCall.actualArrivalTime,
         actualDepartureTime: fromEstimatedCall.actualDepartureTime,
         aimedArrivalTime: fromEstimatedCall.aimedArrivalTime,
-        cancellation: fromEstimatedCall.cancellation,
-        expectedArrivalTime: fromEstimatedCall.expectedArrivalTime,
-        date: fromEstimatedCall.date,
-        forBoarding: fromEstimatedCall.forBoarding,
-        requestStop: fromEstimatedCall.requestStop,
-        forAlighting: fromEstimatedCall.forAlighting,
-        destinationDisplay: fromEstimatedCall.destinationDisplay,
-        notices: getNoticesFromLeg(leg),
         aimedDepartureTime: leg.aimedStartTime,
+        cancellation: fromEstimatedCall.cancellation,
+        date: fromEstimatedCall.date,
+        destinationDisplay: fromEstimatedCall.destinationDisplay,
+        expectedArrivalTime: fromEstimatedCall.expectedArrivalTime,
         expectedDepartureTime: leg.expectedStartTime,
-        realtime: leg.realtime,
-        situations: leg.situations || [],
+        forAlighting: fromEstimatedCall.forAlighting,
+        forBoarding: fromEstimatedCall.forBoarding,
+        notices: getNoticesFromLeg(leg),
+        predictionInaccurate: fromEstimatedCall.predictionInaccurate,
         quay: leg.fromPlace.quay,
+        realtime: leg.realtime,
+        requestStop: fromEstimatedCall.requestStop,
         serviceJourney: leg.serviceJourney,
+        situations: leg.situations || [],
     }
 }

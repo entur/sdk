@@ -298,6 +298,7 @@ export interface EstimatedCall {
     forAlighting: boolean
     forBoarding: boolean
     notices?: Array<Notice>
+    predictionInaccurate: boolean
     quay?: Quay
     realtime: boolean
     requestStop: boolean
