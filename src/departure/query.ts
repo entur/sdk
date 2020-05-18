@@ -50,6 +50,7 @@ query(
     $start: DateTime!,
     $timeRange: Int!,
     $limit: Int!,
+    $limitPerLine: Int,
     $omitNonBoarding: Boolean!,
     $includeCancelledTrips: Boolean!
 ) {
@@ -60,7 +61,8 @@ query(
             timeRange: $timeRange,
             numberOfDepartures: $limit,
             omitNonBoarding: $omitNonBoarding,
-            includeCancelledTrips: $includeCancelledTrips
+            includeCancelledTrips: $includeCancelledTrips,
+            numberOfDeparturesPerLineAndDestinationDisplay: $limitPerLine
         ) {
             ...${estimatedCallFields}
         }
