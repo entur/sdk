@@ -8,7 +8,6 @@ import { Coordinates } from '../types/Coordinates'
 import {
     MAX_CALLS_PER_SECOND,
     MAX_CALLS_PER_MINUTE,
-    MAX_CALLS_PER_HOUR,
 } from './constants/rateLimits'
 
 export function convertFeatureToLocation(feature: Feature): Location {
@@ -68,14 +67,10 @@ export function throttler<T, V>(
 ): Promise<V[]> {
     const argCount = args.length
 
-    let requestsPerSecond
-    if (argCount <= MAX_CALLS_PER_MINUTE) {
-        requestsPerSecond = MAX_CALLS_PER_SECOND
-    } else if (argCount <= MAX_CALLS_PER_HOUR) {
-        requestsPerSecond = Math.floor(MAX_CALLS_PER_MINUTE / 60)
-    } else {
-        requestsPerSecond = Math.floor(MAX_CALLS_PER_HOUR / 3600)
-    }
+    const requestsPerSecond =
+        argCount > MAX_CALLS_PER_MINUTE
+            ? Math.floor(MAX_CALLS_PER_MINUTE / 60)
+            : MAX_CALLS_PER_SECOND
 
     const promiseThrottle = new PromiseThrottle({ requestsPerSecond })
     return Promise.all(args.map((a) => promiseThrottle.add(() => func(a))))
