@@ -6053,6 +6053,18 @@
               },
               "isDeprecated": true,
               "deprecationReason": "Not yet officially supported. May be removed or renamed."
+            },
+            {
+              "name": "priority",
+              "description": "Priority-level of this situation, 1 is highest priority, 0 means unknown.",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
             }
           ],
           "inputFields": null,
