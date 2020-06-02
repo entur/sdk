@@ -65,7 +65,8 @@ export interface Situation {
     situationNumber: string
     summary: Array<MultilingualString>
     description: Array<MultilingualString>
-    detail: Array<MultilingualString>
+    advice: Array<MultilingualString>
+    detail: Array<MultilingualString> // Deprecated! `advice` should be used instead.
     lines: Array<Line>
     validityPeriod: ValidityPeriod
     reportType: ReportType

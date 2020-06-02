@@ -193,7 +193,8 @@ type $entur$sdk$Situation = {|
     situationNumber: string,
     summary: Array<$entur$sdk$MultilingualString>,
     description: Array<$entur$sdk$MultilingualString>,
-    detail: Array<$entur$sdk$MultilingualString>,
+    advice: Array<$entur$sdk$MultilingualString>,
+    detail: Array<$entur$sdk$MultilingualString>, // Deprecated! `advice` should be used instead.
     lines: Array<$entur$sdk$Line>,
     validityPeriod: $entur$sdk$ValidityPeriod,
     reportType: $entur$sdk$ReportType,
