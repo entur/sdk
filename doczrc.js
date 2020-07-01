@@ -10,6 +10,7 @@ export default {
         'Departures',
         'Places',
         'Bikes',
+        'Scooters',
         'Utils',
         'Advanced',
     ],
