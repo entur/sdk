@@ -217,6 +217,35 @@ type $entur$sdk$BikeRentalStation = {
 }
 
 /**
+ * Scooters
+ */
+
+type $entur$sdk$ScooterOperator = 'VOI' | 'LIME' | 'TIER' | 'ZVIPP'
+
+type $entur$sdk$BaseScooter = {|
+    id: string,
+    lat: number,
+    lon: number,
+    code?: string,
+|}
+
+type $entur$sdk$BatteryScooter = {|
+    ...$entur$sdk$BaseScooter,
+    operator: 'VOI' | 'TIER' | 'ZVIPP',
+    battery: number,
+|}
+
+type $entur$sdk$BatteryLevel = 'LOW' | 'MEDIUM' | 'HIGH'
+
+type $entur$sdk$BatteryLevelScooter = {|
+    ...$entur$sdk$BaseScooter,
+    operator: 'LIME',
+    batteryLevel: $entur$sdk$BatteryLevel,
+|}
+
+type $entur$sdk$Scooter = $entur$sdk$BatteryScooter | $entur$sdk$BatteryLevelScooter
+
+/**
  * Geocoder
  */
 
@@ -743,6 +772,14 @@ declare module '@entur/sdk' {
             coordinates: $entur$sdk$Coordinates,
             distance?: number
         ) => Promise<Array<$entur$sdk$BikeRentalStation>>,
+
+        getScootersByPosition: (params: {
+            latitude: number,
+            longitude: number,
+            distance?: number,
+            limit?: number,
+            operators?: $entur$sdk$ScooterOperator[],
+        }) => Promise<$entur$sdk$Scooter[]>
     |}
 
     declare export default function createEnturService(config: $entur$sdk$Config): EnturService
@@ -902,4 +939,10 @@ declare module '@entur/sdk' {
     declare export function isFoot(mode: string): boolean
     declare export function isCarPark(mode: string): boolean
     declare export function isCarPickup(mode: string): boolean
+
+    declare export function isBatteryScooter(scooter: $entur$sdk$Scooter): boolean
+    declare export function isBatteryLevelScooter(
+        scooter: $entur$sdk$Scooter,
+    ): boolean
+
 }

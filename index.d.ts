@@ -88,6 +88,43 @@ export interface BikeRentalStation {
 }
 
 /**
+ * Scooters
+ */
+
+export enum ScooterOperator {
+    VOI = 'VOI',
+    TIER = 'TIER',
+    ZVIPP = 'ZVIPP',
+    LIME = 'LIME',
+}
+
+export type BatteryScooter = {
+    id: string
+    lat: number
+    lon: number
+    code?: string
+    operator: ScooterOperator.VOI | ScooterOperator.TIER | ScooterOperator.ZVIPP
+    battery: number
+}
+
+export enum BatteryLevel {
+    LOW = 'LOW',
+    MEDIUM = 'MEDIUM',
+    HIGH = 'HIGH',
+}
+
+export type BatteryLevelScooter = {
+    id: string
+    lat: number
+    lon: number
+    code?: string
+    operator: ScooterOperator.LIME
+    batteryLevel: BatteryLevel
+}
+
+export type Scooter = BatteryScooter | BatteryLevelScooter
+
+/**
  * Geocoder
  */
 
@@ -739,6 +776,14 @@ export interface EnturService {
         coordinates: Coordinates,
         distance?: number,
     ) => Promise<BikeRentalStation[]>
+
+    getScootersByPosition: (params: {
+        latitude: number
+        longitude: number
+        distance?: number
+        limit?: number
+        operators?: ScooterOperator[]
+    }) => Promise<Scooter[]>
 }
 
 export default function createEnturService(config: Config): EnturService
@@ -916,3 +961,8 @@ export function isTransit(mode: string): boolean
 export function isFoot(mode: string): boolean
 export function isCarPark(mode: string): boolean
 export function isCarPickup(mode: string): boolean
+
+export function isBatteryScooter(scooter: Scooter): scooter is BatteryScooter
+export function isBatteryLevelScooter(
+    scooter: Scooter,
+): scooter is BatteryLevelScooter

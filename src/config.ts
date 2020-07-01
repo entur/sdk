@@ -11,6 +11,7 @@ export interface ServiceConfig {
         journeyPlanner: string
         geocoder: string
         nsr: string
+        scooters: string
     }
     headers: { [key: string]: string }
     fetch?: (
@@ -25,6 +26,7 @@ export interface ArgumentConfig {
         journeyPlanner?: string
         geocoder?: string
         nsr?: string
+        scooters?: string
     }
     headers?: { [key: string]: string }
     fetch?: (
@@ -39,6 +41,7 @@ export interface OverrideConfig {
         journeyPlanner?: string
         geocoder?: string
         nsr?: string
+        scooters?: string
     }
     headers?: { [key: string]: string }
     fetch?: (
@@ -51,6 +54,7 @@ const HOST_CONFIG = {
     journeyPlanner: 'https://api.entur.io/journey-planner/v2',
     geocoder: 'https://api.entur.io/geocoder/v1',
     nsr: 'https://api.entur.io/stop-places/v1',
+    scooters: 'https://api.entur.io/mobility/v1/scooters',
 }
 
 export function getServiceConfig(config: ArgumentConfig): ServiceConfig {
@@ -109,6 +113,20 @@ export function getNSRHost({
 }: ServiceConfig): HostConfig {
     return {
         host: hosts.nsr,
+        headers: {
+            'ET-Client-Name': clientName,
+            ...headers,
+        },
+    }
+}
+
+export function getScootersHost({
+    hosts,
+    clientName,
+    headers,
+}: ServiceConfig): HostConfig {
+    return {
+        host: hosts.scooters,
         headers: {
             'ET-Client-Name': clientName,
             ...headers,
