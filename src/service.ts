@@ -28,6 +28,8 @@ import {
     createGetBikeRentalStationsByPosition,
 } from './bikeRental'
 
+import { createGetScootersByPosition } from './scooters'
+
 import { createGetFeatures, createGetFeaturesReverse } from './geocoder'
 
 import { ArgumentConfig, getServiceConfig, ServiceConfig } from './config'
@@ -89,6 +91,7 @@ function createEnturService(config: ArgumentConfig) {
         getBikeRentalStationsByPosition: createGetBikeRentalStationsByPosition(
             config,
         ),
+        getScootersByPosition: createGetScootersByPosition(config),
     }
 }
 
