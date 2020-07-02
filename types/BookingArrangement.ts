@@ -9,7 +9,7 @@ export interface BookingArrangement {
     bookingAccess: boolean
     bookingContact: BookingContact
     latestBookingTime: string
-    bookingMethods?: Array<BookingMethod>
+    bookingMethods?: BookingMethod[]
     bookWhen?: string
     minimumBookingPeriod?: string
     bookingNote?: string

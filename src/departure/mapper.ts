@@ -4,7 +4,7 @@ import { Notice } from '../fields/Notice'
 
 import { uniqBy } from '../utils'
 
-function getNoticesFromLeg(leg: Leg): Array<Notice> {
+function getNoticesFromLeg(leg: Leg): Notice[] {
     const notices = [
         ...(leg.serviceJourney?.notices || []),
         ...(leg.serviceJourney?.journeyPattern?.notices || []),
@@ -14,7 +14,7 @@ function getNoticesFromLeg(leg: Leg): Array<Notice> {
     return uniqBy(notices, (notice) => notice.text)
 }
 
-function getNotices(departure: EstimatedCall): Array<Notice> {
+function getNotices(departure: EstimatedCall): Notice[] {
     const notices = [
         ...(departure.notices || []),
         ...(departure.serviceJourney?.notices || []),

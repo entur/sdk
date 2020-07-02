@@ -34,7 +34,7 @@ export function createGetBikeRentalStations(argConfig: ArgumentConfig) {
     const config = getServiceConfig(argConfig)
 
     return function getBikeRentalStations(
-        stationIds: Array<string>,
+        stationIds: string[],
     ): Promise<Array<BikeRentalStation | void>> {
         if (!stationIds || !Array.isArray(stationIds)) {
             throw new Error(
@@ -68,7 +68,7 @@ export function createGetBikeRentalStationsByPosition(
     return function getBikeRentalStationsByPosition(
         coordinates: Coordinates,
         distance = 500,
-    ): Promise<Array<BikeRentalStation>> {
+    ): Promise<BikeRentalStation[]> {
         const variables = convertPositionToBbox(coordinates, distance)
 
         return journeyPlannerQuery<{

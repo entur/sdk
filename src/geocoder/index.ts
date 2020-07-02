@@ -29,8 +29,8 @@ type GetFeaturesParam = {
     'boundary.rect.min_lat'?: number
     'boundary.rect.max_lat'?: number
     'boundary.country'?: string
-    sources?: Array<string>
-    layers?: Array<string>
+    sources?: string[]
+    layers?: string[]
     limit?: number
 }
 
@@ -69,7 +69,7 @@ export function createGetFeatures(argConfig: ArgumentConfig) {
 type GetFeaturesReverseParam = {
     radius?: number
     size?: number
-    layers?: Array<string>
+    layers?: string[]
 }
 
 export function createGetFeaturesReverse(argConfig: ArgumentConfig) {

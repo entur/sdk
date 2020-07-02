@@ -29,7 +29,7 @@ import { isTruthy } from '../utils'
 
 export type DeparturesById = {
     id: string
-    departures: Array<EstimatedCall>
+    departures: EstimatedCall[]
 }
 
 type GetDeparturesParams = {
@@ -39,16 +39,16 @@ type GetDeparturesParams = {
     limitPerLine?: number
     start?: Date
     timeRange?: number
-    whiteListedLines?: Array<string>
-    whiteListedAuthorities?: Array<string>
-    whiteListedModes?: Array<string>
+    whiteListedLines?: string[]
+    whiteListedAuthorities?: string[]
+    whiteListedModes?: string[]
 }
 
 export function createGetDeparturesFromStopPlaces(argConfig: ArgumentConfig) {
     const config = getServiceConfig(argConfig)
 
     return function getDeparturesFromStopPlaces(
-        stopPlaceIds: Array<string>,
+        stopPlaceIds: string[],
         params: GetDeparturesParams = {},
     ): Promise<Array<DeparturesById | undefined>> {
         if (!Array.isArray(stopPlaceIds)) {
@@ -105,7 +105,7 @@ export function createGetDeparturesFromStopPlaces(argConfig: ArgumentConfig) {
                     }),
                 )
             })
-            .then((stopPlaces: Array<DeparturesById>) => {
+            .then((stopPlaces: DeparturesById[]) => {
                 return forceOrder(stopPlaces, stopPlaceIds, ({ id }) => id)
             })
     }
@@ -119,7 +119,7 @@ export function createGetDeparturesFromStopPlace(argConfig: ArgumentConfig) {
     return function getDeparturesFromStopPlace(
         stopPlaceId: string,
         params?: GetDeparturesParams,
-    ): Promise<Array<EstimatedCall>> {
+    ): Promise<EstimatedCall[]> {
         return getDeparturesFromStopPlaces([stopPlaceId], params).then(
             (stopPlaces: Array<DeparturesById | void>) => {
                 if (!stopPlaces?.length || !stopPlaces[0]) return []
@@ -133,7 +133,7 @@ export function createGetDeparturesFromQuays(argConfig: ArgumentConfig) {
     const config = getServiceConfig(argConfig)
 
     return function getDeparturesFromQuays(
-        quayIds: Array<string>,
+        quayIds: string[],
         params: GetDeparturesParams = {},
     ): Promise<Array<DeparturesById | void>> {
         if (!Array.isArray(quayIds)) {
@@ -181,7 +181,7 @@ export function createGetDeparturesFromQuays(argConfig: ArgumentConfig) {
                     departures: estimatedCalls.map(destinationMapper),
                 }))
             })
-            .then((quayDepartures: Array<DeparturesById>) => {
+            .then((quayDepartures: DeparturesById[]) => {
                 return forceOrder(quayDepartures, quayIds, ({ id }) => id)
             })
     }
@@ -200,7 +200,7 @@ export function createGetDeparturesBetweenStopPlaces(
         fromStopPlaceId: string,
         toStopPlaceId: string,
         params: GetDeparturesBetweenStopPlacesParams = {},
-    ): Promise<Array<EstimatedCall>> {
+    ): Promise<EstimatedCall[]> {
         const { limit = 20, start = new Date(), ...rest } = params
         const variables = {
             from: { place: fromStopPlaceId },
@@ -239,7 +239,7 @@ export function createGetDeparturesForServiceJourney(
     return function getDeparturesForServiceJourney(
         id: string,
         date?: string,
-    ): Promise<Array<EstimatedCall>> {
+    ): Promise<EstimatedCall[]> {
         const variables = {
             id,
             date,

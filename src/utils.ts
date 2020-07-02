@@ -63,7 +63,7 @@ export function convertPositionToBbox(
 
 export function throttler<T, V>(
     func: (arg: T) => Promise<V>,
-    args: Array<T>,
+    args: T[],
 ): Promise<V[]> {
     const argCount = args.length
 
@@ -83,7 +83,7 @@ export function isValidDate(d: any): boolean {
     )
 }
 
-export function uniqBy<T, K>(arr: Array<T>, getKey: (arg: T) => K): Array<T> {
+export function uniqBy<T, K>(arr: T[], getKey: (arg: T) => K): T[] {
     return [
         ...arr
             .reduce((map, item) => {
@@ -108,8 +108,8 @@ export function uniq<T>(arr: T[]): T[] {
 }
 
 export function forceOrder<T, V>(
-    list: Array<T>,
-    sequence: Array<V>,
+    list: T[],
+    sequence: V[],
     getKey: (arg: T) => V,
 ): Array<T | undefined> {
     let queue = [...list]

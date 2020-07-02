@@ -45,7 +45,7 @@ export function createGetStopPlaces(argConfig: ArgumentConfig) {
     const config = getServiceConfig(argConfig)
 
     return function getStopPlaces(
-        stopPlaceIds: Array<string>,
+        stopPlaceIds: string[],
         params: StopPlaceParams = {},
     ): Promise<Array<StopPlaceDetails | void>> {
         if (!Array.isArray(stopPlaceIds)) {
@@ -110,7 +110,7 @@ export function createGetStopPlacesByPosition(argConfig: ArgumentConfig) {
         coordinates: Coordinates,
         distance = 500,
         params: StopPlaceParams = {},
-    ): Promise<Array<StopPlaceDetails>> {
+    ): Promise<StopPlaceDetails[]> {
         const { includeUnusedQuays = true, ...rest } = params
         const variables = {
             ...convertPositionToBbox(coordinates, distance),
@@ -143,7 +143,7 @@ export function createGetQuaysForStopPlace(argConfig: ArgumentConfig) {
     return function getQuaysForStopPlace(
         stopPlaceId: string,
         params: StopPlaceParams = {},
-    ): Promise<Array<Quay>> {
+    ): Promise<Quay[]> {
         const { includeUnusedQuays = true, ...rest } = params
         const variables = {
             id: stopPlaceId,

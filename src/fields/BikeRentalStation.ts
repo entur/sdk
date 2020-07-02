@@ -1,7 +1,7 @@
 export interface BikeRentalStation {
     id: string
     name: string
-    networks: Array<string>
+    networks: string[]
     spacesAvailable?: number
     bikesAvailable?: number
     longitude: number

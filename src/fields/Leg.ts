@@ -72,17 +72,17 @@ export interface Leg {
     fromPlace: Place
     interchangeFrom?: Interchange
     interchangeTo?: Interchange
-    intermediateEstimatedCalls: Array<IntermediateEstimatedCall>
+    intermediateEstimatedCalls: IntermediateEstimatedCall[]
     line?: Line
     mode: LegMode
-    notices?: Array<Notice> // from mapper
+    notices?: Notice[] // from mapper
     operator?: Operator
     pointsOnLink?: PointsOnLink
     realtime: boolean
     ride: boolean
     rentedBike?: boolean
     serviceJourney: ServiceJourney
-    situations: Array<Situation>
+    situations: Situation[]
     toEstimatedCall?: EstimatedCall
     toPlace: Place
     transportSubmode: TransportSubmode

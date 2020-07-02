@@ -12,11 +12,11 @@ type ReportType = 'general' | 'incident' | null
 
 export interface Situation {
     situationNumber: string
-    summary: Array<MultilingualString>
-    description: Array<MultilingualString>
-    advice: Array<MultilingualString>
-    detail: Array<MultilingualString> // Deprecated! `advice` should be used instead.
-    lines: Array<Line>
+    summary: MultilingualString[]
+    description: MultilingualString[]
+    advice: MultilingualString[]
+    detail: MultilingualString[] // Deprecated! `advice` should be used instead.
+    lines: Line[]
     validityPeriod: {
         startTime: string
         endTime: string

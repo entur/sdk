@@ -15,7 +15,7 @@ function getNoticesFromIntermediateEstimatedCalls(
         .reduce((a, b) => [...a, ...b], [])
 }
 
-export function getNotices(leg: Leg): Array<Notice> {
+export function getNotices(leg: Leg): Notice[] {
     const notices = [
         ...getNoticesFromIntermediateEstimatedCalls(
             leg.intermediateEstimatedCalls,
