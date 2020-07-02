@@ -4,7 +4,7 @@ import {
     ScooterOperator,
     BatteryScooter,
     BatteryLevelScooter,
-} from '../../types/Scooter'
+} from './types'
 import { getServiceConfig, getScootersHost, ArgumentConfig } from '../config'
 
 const ALL_OPERATORS = Object.values(ScooterOperator)
