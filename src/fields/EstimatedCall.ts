@@ -38,13 +38,13 @@ export interface EstimatedCall {
     expectedDepartureTime: string
     forAlighting: boolean
     forBoarding: boolean
-    notices?: Array<Notice>
+    notices?: Notice[]
     predictionInaccurate: boolean
     quay?: Quay
     realtime: boolean
     requestStop: boolean
     serviceJourney: ServiceJourney
-    situations: Array<Situation>
+    situations: Situation[]
 }
 
 export type IntermediateEstimatedCall = EstimatedCall

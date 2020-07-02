@@ -17,7 +17,7 @@ export interface Quay {
     name: string
     description: string
     publicCode: string
-    situations: Array<Situation>
+    situations: Situation[]
     stopPlace: StopPlace
 }
 

@@ -32,7 +32,7 @@ export type Line = {
     flexibleLineType?: FlexibleLineType
     id: string
     name: string
-    notices: Array<Notice>
+    notices: Notice[]
     publicCode: string
     transportMode: TransportMode
     transportSubmode: TransportSubmode

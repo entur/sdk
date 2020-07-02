@@ -17,7 +17,7 @@ export interface StopPlaceDetails {
         | 'noInterchange'
     transportMode: TransportMode
     transportSubmode?: TransportSubmode
-    quays?: Array<Quay>
+    quays?: Quay[]
 }
 
 type LimitationStatusType = 'FALSE' | 'TRUE' | 'PARTIAL' | 'UNKNOWN'
@@ -90,10 +90,10 @@ interface StopPlaceFacilitiesStopPlace {
         }
     }
     placeEquipments: {
-        waitingRoomEquipment?: Array<WaitingRoomEquipment>
-        shelterEquipment?: Array<ShelterEquipment>
-        sanitaryEquipment?: Array<SanitaryEquipment>
-        ticketingEquipment?: Array<TicketingEquipment>
+        waitingRoomEquipment?: WaitingRoomEquipment[]
+        shelterEquipment?: ShelterEquipment[]
+        sanitaryEquipment?: SanitaryEquipment[]
+        ticketingEquipment?: TicketingEquipment[]
     }
 }
 
@@ -102,10 +102,10 @@ interface StopPlaceFacilitiesParking {
     parentSiteRef: string
     totalCapacity?: number
     principalCapacity?: number
-    parkingVehicleTypes?: Array<ParkingVehicle>
+    parkingVehicleTypes?: ParkingVehicle[]
 }
 
 export interface StopPlaceFacilities {
-    stopPlace: Array<StopPlaceFacilitiesStopPlace>
-    parking: Array<StopPlaceFacilitiesParking>
+    stopPlace: StopPlaceFacilitiesStopPlace[]
+    parking: StopPlaceFacilitiesParking[]
 }

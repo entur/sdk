@@ -34,7 +34,7 @@ export type Feature = {
         accuracy: 'point'
         layer: 'venue' | 'address'
         borough_gid: string
-        category: Array<Category>
+        category: Category[]
         country_gid: string
         county: string
         county_gid: string

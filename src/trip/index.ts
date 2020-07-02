@@ -35,29 +35,29 @@ interface TripPattern {
     duration: number
     endTime: string
     id?: string
-    legs: Array<Leg>
+    legs: Leg[]
     startTime: string
     walkDistance: number
 }
 
 interface TransportSubmodeParam {
     transportMode: TransportMode
-    transportSubmodes: Array<TransportSubmode>
+    transportSubmodes: TransportSubmode[]
 }
 
 interface InputBanned {
-    lines?: Array<string>
-    authorities?: Array<string>
-    organisations?: Array<string>
-    quays?: Array<string>
-    quaysHard?: Array<string>
-    serviceJourneys?: Array<string>
+    lines?: string[]
+    authorities?: string[]
+    organisations?: string[]
+    quays?: string[]
+    quaysHard?: string[]
+    serviceJourneys?: string[]
 }
 
 interface InputWhiteListed {
-    lines?: Array<string>
-    authorities?: Array<string>
-    organisations?: Array<string>
+    lines?: string[]
+    authorities?: string[]
+    organisations?: string[]
 }
 
 export interface GetTripPatternsParams {
@@ -67,9 +67,9 @@ export interface GetTripPatternsParams {
     arriveBy?: boolean
     limit?: number
     maxPreTransitWalkDistance?: number
-    modes?: Array<QueryMode>
+    modes?: QueryMode[]
     searchDate?: Date
-    transportSubmodes?: Array<TransportSubmodeParam>
+    transportSubmodes?: TransportSubmodeParam[]
     useFlex?: boolean
     walkSpeed?: number
     minimumTransferTime?: number
@@ -85,9 +85,9 @@ interface GetTripPatternsVariables {
     arriveBy: boolean
     numTripPatterns: number
     maxPreTransitWalkDistance?: number
-    modes: Array<QueryMode>
+    modes: QueryMode[]
     dateTime: string
-    transportSubmodes: Array<TransportSubmodeParam>
+    transportSubmodes: TransportSubmodeParam[]
     useFlex?: boolean
     walkSpeed?: number
     minimumTransferTime?: number
@@ -167,7 +167,7 @@ export function createFindTrips(argConfig: ArgumentConfig) {
         from: string,
         to: string,
         date?: Date | string | number,
-    ): Promise<Array<TripPattern>> {
+    ): Promise<TripPattern[]> {
         const searchDate = date ? new Date(date) : new Date()
 
         if (!isValidDate(searchDate)) {

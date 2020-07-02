@@ -46,8 +46,8 @@ function convertTypeNameToFilterPlaceType(
 type NearestParams = {
     maximumDistance?: number
     maximumResults?: number
-    filterByPlaceTypes?: Array<TypeName>
-    filterByModes?: Array<TransportMode>
+    filterByPlaceTypes?: TypeName[]
+    filterByModes?: TransportMode[]
     filterByInUse?: boolean
     multiModalMode?: 'parent' | 'child' | 'all'
 }
@@ -74,7 +74,7 @@ export function createGetNearestPlaces(argConfig: ArgumentConfig) {
     return function getNearestPlaces(
         coordinates: Coordinates,
         params: NearestParams = {},
-    ): Promise<Array<NearestPlace>> {
+    ): Promise<NearestPlace[]> {
         const { latitude, longitude } = coordinates
 
         const {

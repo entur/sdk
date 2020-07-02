@@ -16,13 +16,13 @@ import {
 
 interface JourneyPattern {
     line: Line
-    notices?: Array<Notice>
+    notices?: Notice[]
 }
 
 export interface ServiceJourney {
     id: string
     journeyPattern?: JourneyPattern
-    notices?: Array<Notice>
+    notices?: Notice[]
     publicCode?: string
     privateCode?: string
     transportSubmode?: TransportSubmode
