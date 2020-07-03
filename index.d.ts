@@ -63,14 +63,14 @@ interface InfoLink {
 
 export interface Situation {
     situationNumber: string
-    summary: Array<MultilingualString>
-    description: Array<MultilingualString>
-    advice: Array<MultilingualString>
-    detail: Array<MultilingualString> // Deprecated! `advice` should be used instead.
-    lines: Array<Line>
+    summary: MultilingualString[]
+    description: MultilingualString[]
+    advice: MultilingualString[]
+    detail: MultilingualString[] // Deprecated! `advice` should be used instead.
+    lines: Line[]
     validityPeriod: ValidityPeriod
     reportType: ReportType
-    infoLinks: Array<InfoLink>
+    infoLinks: InfoLink[]
 }
 
 /**
@@ -84,7 +84,7 @@ export interface BikeRentalStation {
     spacesAvailable?: number
     longitude: number
     latitude: number
-    networks: Array<string>
+    networks: string[]
 }
 
 /**
@@ -92,10 +92,10 @@ export interface BikeRentalStation {
  */
 
 export enum ScooterOperator {
-    VOI = 'VOI',
-    TIER = 'TIER',
-    ZVIPP = 'ZVIPP',
-    LIME = 'LIME',
+    VOI = 'voi',
+    TIER = 'tier',
+    ZVIPP = 'zvipp',
+    LIME = 'lime',
 }
 
 export type BatteryScooter = {
@@ -156,15 +156,15 @@ export interface GetFeaturesParams {
     'boundary.rect.min_lat'?: number
     'boundary.rect.max_lat'?: number
     'boundary.country'?: string
-    sources?: Array<string>
-    layers?: Array<string>
+    sources?: string[]
+    layers?: string[]
     limit?: number
 }
 
 export interface GetFeaturesReverseParam {
     radius?: number
     size?: number
-    layers?: Array<string>
+    layers?: string[]
 }
 
 export interface Feature {
@@ -180,7 +180,7 @@ export interface Feature {
         accuracy: 'point'
         layer: 'venue' | 'address'
         borough_gid: string
-        category: Array<Category>
+        category: Category[]
         country_gid: string
         county: string
         county_gid: string
@@ -235,7 +235,7 @@ export interface Quay {
     name: string
     description: string
     publicCode: string
-    situations: Array<Situation>
+    situations: Situation[]
     stopPlace: StopPlace
 }
 
@@ -335,13 +335,13 @@ export interface EstimatedCall {
     expectedDepartureTime: string
     forAlighting: boolean
     forBoarding: boolean
-    notices?: Array<Notice>
+    notices?: Notice[]
     predictionInaccurate: boolean
     quay?: Quay
     realtime: boolean
     requestStop: boolean
     serviceJourney: ServiceJourney
-    situations: Array<Situation>
+    situations: Situation[]
 }
 
 export type IntermediateEstimatedCall = EstimatedCall
@@ -359,7 +359,7 @@ export interface BookingArrangement {
     bookingAccess: boolean
     bookingContact: BookingContact
     latestBookingTime: string
-    bookingMethods?: Array<BookingMethod>
+    bookingMethods?: BookingMethod[]
     bookWhen?: string
     minimumBookingPeriod?: string
     bookingNote?: string
@@ -372,7 +372,7 @@ export interface Line {
     flexibleLineType?: FlexibleLineType
     id: string
     name: string
-    notices?: Array<Notice>
+    notices?: Notice[]
     publicCode: string
     transportMode: TransportMode
     transportSubmode: TransportSubmode
@@ -408,13 +408,13 @@ export interface PointsOnLink {
 
 export interface JourneyPattern {
     line: Line
-    notices?: Array<Notice>
+    notices?: Notice[]
 }
 
 export interface ServiceJourney {
     id: string
     journeyPattern?: JourneyPattern
-    notices?: Array<Notice>
+    notices?: Notice[]
     publicCode?: string
     privateCode?: string
     transportSubmode?: TransportSubmode
@@ -433,17 +433,17 @@ export interface Leg {
     fromPlace: Place
     interchangeFrom?: Interchange
     interchangeTo?: Interchange
-    intermediateEstimatedCalls: Array<IntermediateEstimatedCall>
+    intermediateEstimatedCalls: IntermediateEstimatedCall[]
     line?: Line
     mode: LegMode
-    notices?: Array<Notice>
+    notices?: Notice[]
     operator?: Operator
     pointsOnLink: PointsOnLink
     realtime: boolean
     ride: boolean
     rentedBike?: boolean
     serviceJourney: ServiceJourney
-    situations: Array<Situation>
+    situations: Situation[]
     toEstimatedCall?: EstimatedCall
     toPlace: Place
     transportSubmode: TransportSubmode
@@ -451,22 +451,22 @@ export interface Leg {
 
 export interface TransportSubmodeParam {
     transportMode: TransportMode
-    transportSubmodes: Array<TransportSubmode>
+    transportSubmodes: TransportSubmode[]
 }
 
 export interface InputBanned {
-    lines?: Array<string>
-    authorities?: Array<string>
-    organisations?: Array<string>
-    quays?: Array<string>
-    quaysHard?: Array<string>
-    serviceJourneys?: Array<string>
+    lines?: string[]
+    authorities?: string[]
+    organisations?: string[]
+    quays?: string[]
+    quaysHard?: string[]
+    serviceJourneys?: string[]
 }
 
 export interface InputWhiteListed {
-    lines?: Array<string>
-    authorities?: Array<string>
-    organisations?: Array<string>
+    lines?: string[]
+    authorities?: string[]
+    organisations?: string[]
 }
 
 export interface GetTripPatternsParams {
@@ -476,9 +476,9 @@ export interface GetTripPatternsParams {
     arriveBy?: boolean
     limit?: number
     maxPreTransitWalkDistance?: number
-    modes?: Array<QueryMode>
+    modes?: QueryMode[]
     searchDate?: Date
-    transportSubmodes?: Array<TransportSubmodeParam>
+    transportSubmodes?: TransportSubmodeParam[]
     useFlex?: boolean
     walkSpeed?: number
     minimumTransferTime?: number
@@ -493,7 +493,7 @@ export interface TripPattern {
     duration: number
     endTime: string
     id?: string
-    legs: Array<Leg>
+    legs: Leg[]
     startTime: string
     walkDistance: number
 }
@@ -505,9 +505,9 @@ export interface GetDeparturesParams {
     limitPerLine?: number
     start?: Date
     timeRange?: number
-    whiteListedAuthorities?: Array<string>
-    whiteListedLines?: Array<string>
-    whiteListedModes?: Array<QueryMode>
+    whiteListedAuthorities?: string[]
+    whiteListedLines?: string[]
+    whiteListedModes?: QueryMode[]
 }
 
 export interface GetDeparturesBetweenStopPlacesParams {
@@ -540,7 +540,7 @@ export interface NearestPlace {
 
 export interface DeparturesById {
     id: string
-    departures: Array<Departure>
+    departures: Departure[]
 }
 
 export interface StopPlaceDetails {
@@ -630,10 +630,10 @@ export interface StopPlaceFacilitiesStopPlace {
         }
     }
     placeEquipments: {
-        waitingRoomEquipment?: Array<WaitingRoomEquipment>
-        shelterEquipment?: Array<ShelterEquipment>
-        sanitaryEquipment?: Array<SanitaryEquipment>
-        ticketingEquipment?: Array<TicketingEquipment>
+        waitingRoomEquipment?: WaitingRoomEquipment[]
+        shelterEquipment?: ShelterEquipment[]
+        sanitaryEquipment?: SanitaryEquipment[]
+        ticketingEquipment?: TicketingEquipment[]
     }
 }
 
@@ -642,12 +642,12 @@ export interface StopPlaceFacilitiesParking {
     parentSiteRef: string
     totalCapacity?: number
     principalCapacity?: number
-    parkingVehicleTypes?: Array<ParkingVehicle>
+    parkingVehicleTypes?: ParkingVehicle[]
 }
 
 export interface StopPlaceFacilities {
-    stopPlace: Array<StopPlaceFacilitiesStopPlace>
-    parking: Array<StopPlaceFacilitiesParking>
+    stopPlace: StopPlaceFacilitiesStopPlace[]
+    parking: StopPlaceFacilitiesParking[]
 }
 
 export interface StopPlaceParams {
@@ -700,7 +700,7 @@ export interface EnturService {
     ) => Promise<TripPattern[]>
 
     getDeparturesFromStopPlaces: (
-        stopPlaceIds: Array<string>,
+        stopPlaceIds: string[],
         params?: GetDeparturesParams,
     ) => Promise<Array<DeparturesById | undefined>>
 
@@ -710,7 +710,7 @@ export interface EnturService {
     ) => Promise<Departure[]>
 
     getDeparturesFromQuays: (
-        quayIds: Array<string>,
+        quayIds: string[],
         params?: GetDeparturesParams,
     ) => Promise<Array<DeparturesById | undefined>>
 
@@ -730,12 +730,12 @@ export interface EnturService {
         params?: {
             maximumDistance?: number
             maximumResults?: number
-            filterByPlaceTypes?: Array<TypeName>
-            filterByModes?: Array<TransportMode>
+            filterByPlaceTypes?: TypeName[]
+            filterByModes?: TransportMode[]
             filterByInUse?: boolean
             multiModalMode?: 'parent' | 'child' | 'all'
         },
-    ) => Promise<Array<NearestPlace>>
+    ) => Promise<NearestPlace[]>
 
     getStopPlace: (
         id: string,
@@ -743,7 +743,7 @@ export interface EnturService {
     ) => Promise<StopPlaceDetails>
 
     getStopPlaces: (
-        stopPlaceId: Array<string>,
+        stopPlaceId: string[],
         params?: StopPlaceParams,
     ) => Promise<Array<StopPlaceDetails | undefined>>
 
@@ -769,7 +769,7 @@ export interface EnturService {
     getBikeRentalStation: (stationId: string) => Promise<BikeRentalStation>
 
     getBikeRentalStations: (
-        stationIds: Array<string>,
+        stationIds: string[],
     ) => Promise<Array<BikeRentalStation | undefined>>
 
     getBikeRentalStationsByPosition: (

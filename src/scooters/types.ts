@@ -1,8 +1,8 @@
 export enum ScooterOperator {
-    VOI = 'VOI',
-    TIER = 'TIER',
-    ZVIPP = 'ZVIPP',
-    LIME = 'LIME',
+    VOI = 'voi',
+    TIER = 'tier',
+    ZVIPP = 'zvipp',
+    LIME = 'lime',
 }
 
 interface BaseScooter {

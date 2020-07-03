@@ -220,7 +220,7 @@ type $entur$sdk$BikeRentalStation = {
  * Scooters
  */
 
-type $entur$sdk$ScooterOperator = 'VOI' | 'LIME' | 'TIER' | 'ZVIPP'
+type $entur$sdk$ScooterOperator = 'voi' | 'lime' | 'tier' | 'zvipp'
 
 type $entur$sdk$BaseScooter = {|
     id: string,
@@ -231,7 +231,7 @@ type $entur$sdk$BaseScooter = {|
 
 type $entur$sdk$BatteryScooter = {|
     ...$entur$sdk$BaseScooter,
-    operator: 'VOI' | 'TIER' | 'ZVIPP',
+    operator: 'voi' | 'tier' | 'zvipp',
     battery: number,
 |}
 
@@ -239,7 +239,7 @@ type $entur$sdk$BatteryLevel = 'LOW' | 'MEDIUM' | 'HIGH'
 
 type $entur$sdk$BatteryLevelScooter = {|
     ...$entur$sdk$BaseScooter,
-    operator: 'LIME',
+    operator: 'lime',
     batteryLevel: $entur$sdk$BatteryLevel,
 |}
 
