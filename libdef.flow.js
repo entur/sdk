@@ -227,6 +227,10 @@ type $entur$sdk$BaseScooter = {|
     lat: number,
     lon: number,
     code?: string,
+    rental_uris?: {
+        android: string,
+        ios: string,
+    },
 |}
 
 type $entur$sdk$BatteryScooter = {|

@@ -10,6 +10,10 @@ interface BaseScooter {
     lat: number
     lon: number
     code?: string
+    rental_uris?: {
+        android: string
+        ios: string
+    }
 }
 
 export interface BatteryScooter extends BaseScooter {
