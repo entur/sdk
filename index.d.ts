@@ -105,6 +105,10 @@ export type BatteryScooter = {
     code?: string
     operator: ScooterOperator.VOI | ScooterOperator.TIER | ScooterOperator.ZVIPP
     battery: number
+    rental_uris?: {
+        android: string
+        ios: string
+    }
 }
 
 export enum BatteryLevel {
@@ -120,6 +124,10 @@ export type BatteryLevelScooter = {
     code?: string
     operator: ScooterOperator.LIME
     batteryLevel: BatteryLevel
+    rental_uris?: {
+        android: string
+        ios: string
+    }
 }
 
 export type Scooter = BatteryScooter | BatteryLevelScooter
