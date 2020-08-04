@@ -159,13 +159,31 @@ export type Category =
     | 'bydel'
 
 export interface GetFeaturesParams {
+    // @deprecated Use `boundary` object instead
     'boundary.rect.min_lon'?: number
+    // @deprecated Use `boundary` object instead
     'boundary.rect.max_lon'?: number
+    // @deprecated Use `boundary` object instead
     'boundary.rect.min_lat'?: number
+    // @deprecated Use `boundary` object instead
     'boundary.rect.max_lat'?: number
+    // @deprecated Use `boundary` object instead
     'boundary.country'?: string
-    'boundary.county_ids'?: string[]
-    'boundary.locality_ids'?: string[]
+    // @deprecated Use `boundary` object instead
+    'boundary.county_ids'?: string
+    // @deprecated Use `boundary` object instead
+    'boundary.locality_ids'?: string
+    boundary?: {
+        rect?: {
+            minLat: number
+            minLon: number
+            maxLat: number
+            maxLon: number
+        }
+        country?: string
+        countyIds?: string[]
+        localityIds?: string[]
+    }
     sources?: string[]
     layers?: string[]
     limit?: number
