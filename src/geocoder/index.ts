@@ -29,6 +29,7 @@ type GetFeaturesParam = {
     'boundary.rect.min_lat'?: number
     'boundary.rect.max_lat'?: number
     'boundary.country'?: string
+    'boundary.county_ids'?: string
     sources?: string[]
     layers?: string[]
     limit?: number
