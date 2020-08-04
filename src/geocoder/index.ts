@@ -2,6 +2,7 @@ import { get } from '../http'
 import { getGeocoderHost, getServiceConfig, ArgumentConfig } from '../config'
 import { Feature } from '../../types/Feature'
 import { Coordinates } from '../../types/Coordinates'
+import { County } from './countyIds'
 
 interface PositionParam {
     'focus.point.lat': number
@@ -31,7 +32,7 @@ interface Boundary {
         maxLon: number
     }
     country?: string
-    countyIds?: string[]
+    countyIds?: County[]
     localityIds?: string[]
 }
 
@@ -61,7 +62,7 @@ type GetFeaturesParam = {
             maxLon: number
         }
         country?: string
-        countyIds?: string[]
+        countyIds?: County[]
         localityIds?: string[]
     }
     sources?: string[]

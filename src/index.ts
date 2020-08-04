@@ -16,4 +16,6 @@ export * from './constants/featureCategory'
 
 export { journeyPlannerQuery, nsrQuery } from './api'
 
+export { County } from './geocoder/countyIds'
+
 export default EnturService
