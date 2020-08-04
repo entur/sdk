@@ -24,8 +24,27 @@ The results closest to the coordinates will be weighted above results with equal
 As an example, the street `Dronningens gate` exists both in Oslo and Trondheim. If you call `service.getFeatures('Dronningens gate', { latitude: 63.4305103, longitude: 10.3949874 })` (coordinates of Trondheim city center), the Dronningens gate in Trondheim will be preferred to the one in Oslo.
 
 ### params (`GetFeaturesQuery`) [Optional]
-An optional object of parameters to pass to the query.
+An optional object of parameters to pass to the query for filtering. Read more on https://developer.entur.org/pages-geocoder-api.
 
-| Key                  | Type     | Default             | Description |
-|:---------------------|:---------|:--------------------|:------------|
-| `layers`             | `Array<string>` | `["venue", "address"]`   | The types of places to search for. `venue` means stop places and stations, `address` means postal addresses that might not be connected to public transport.
+| Key                     | Type       | Default                | Description |
+|:------------------------|:-----------|:-----------------------|:------------|
+| `boundary`              | `Boundary` |                        | Allows filtering by geographical region. See details below. |
+| `sources`               | `string[]` |                        |             |
+| `limit`                 | `number`   | No limitation          | Limit the maximum number of results to this number. Valid values are from 1 to 100 inclusive. |
+| `layers`                | `string[]` | `["venue", "address"]` | The types of places to search for. `venue` means stop places and stations, `address` means postal addresses that might not be connected to public transport.
+
+#### Boundary (object)
+| Key            | Type       | Description |
+|:----------------------------|:------------|
+| `country`      | `string`   |             |
+| `countyIds`    | `County[]` | Use this for filtering on counties. You can import the County enum directly from @entur/sdk. |
+| `localityIds`  | `string[]` | Use this for filtering on municipalities |
+| `rect`         | `Rect`     |             |
+
+#### Rect (object)
+| Key      | Type     |
+|:---------|:---------|
+| `minLat` | `number` |
+| `minLon` | `number` |
+| `maxLat` | `number` |
+| `maxLon` | `number` |

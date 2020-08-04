@@ -158,12 +158,72 @@ export type Category =
     | 'tettsteddel'
     | 'bydel'
 
+declare enum County {
+    // Norway:
+    Oslo = 'KVE:TopographicPlace:03',
+    Rogaland = 'KVE:TopographicPlace:11',
+    MoreOgRomsdal = 'KVE:TopographicPlace:15',
+    Nordland = 'KVE:TopographicPlace:18',
+    Svalbard = 'KVE:TopographicPlace:21',
+    JanMayen = 'KVE:TopographicPlace:22',
+    Viken = 'KVE:TopographicPlace:30',
+    Innlandet = 'KVE:TopographicPlace:34',
+    VestfoldOgTelemark = 'KVE:TopographicPlace:38',
+    Agder = 'KVE:TopographicPlace:42',
+    Vestland = 'KVE:TopographicPlace:46',
+    Trondelag = 'KVE:TopographicPlace:50',
+    TromsOgFinnmark = 'KVE:TopographicPlace:54',
+
+    // Sweden:
+    StockholmsLan = 'LAN:TopographicPlace:01',
+    UppsalaLan = 'LAN:TopographicPlace:03',
+    SodermanlandsLan = 'LAN:TopographicPlace:04',
+    OstergotlandsLan = 'LAN:TopographicPlace:05',
+    JonkopingsLan = 'LAN:TopographicPlace:06',
+    KronobergsLan = 'LAN:TopographicPlace:07',
+    KalmarLan = 'LAN:TopographicPlace:08',
+    GotlandsLan = 'LAN:TopographicPlace:09',
+    BlekingeLan = 'LAN:TopographicPlace:10',
+    SkaneLan = 'LAN:TopographicPlace:12',
+    HallandsLan = 'LAN:TopographicPlace:13',
+    VastraGotalandsLan = 'LAN:TopographicPlace:14',
+    VarmlandsLan = 'LAN:TopographicPlace:17',
+    OrebroLan = 'LAN:TopographicPlace:18',
+    VastmanlandsLan = 'LAN:TopographicPlace:19',
+    DalarnasLan = 'LAN:TopographicPlace:20',
+    GavleborgsLan = 'LAN:TopographicPlace:21',
+    VasternorrlandsLan = 'LAN:TopographicPlace:22',
+    JamtlandsLan = 'LAN:TopographicPlace:23',
+    VasterbottensLan = 'LAN:TopographicPlace:24',
+    NorrbottensLan = 'LAN:TopographicPlace:25',
+}
+
 export interface GetFeaturesParams {
+    // @deprecated Use `boundary` object instead
     'boundary.rect.min_lon'?: number
+    // @deprecated Use `boundary` object instead
     'boundary.rect.max_lon'?: number
+    // @deprecated Use `boundary` object instead
     'boundary.rect.min_lat'?: number
+    // @deprecated Use `boundary` object instead
     'boundary.rect.max_lat'?: number
+    // @deprecated Use `boundary` object instead
     'boundary.country'?: string
+    // @deprecated Use `boundary` object instead
+    'boundary.county_ids'?: string
+    // @deprecated Use `boundary` object instead
+    'boundary.locality_ids'?: string
+    boundary?: {
+        rect?: {
+            minLat: number
+            minLon: number
+            maxLat: number
+            maxLon: number
+        }
+        country?: string
+        countyIds?: County[]
+        localityIds?: string[]
+    }
     sources?: string[]
     layers?: string[]
     limit?: number
