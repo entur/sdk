@@ -29,10 +29,19 @@ type GetFeaturesParam = {
     'boundary.rect.min_lat'?: number
     'boundary.rect.max_lat'?: number
     'boundary.country'?: string
-    'boundary.county_ids'?: string
+    'boundary.county_ids'?: string[]
+    'boundary.locality_ids'?: string[]
     sources?: string[]
     layers?: string[]
     limit?: number
+}
+
+function stringifyCommaSeparatedList(
+    value: string | string[] | undefined,
+): string | undefined {
+    if (!value) return undefined
+    if (typeof value === 'string') return value
+    return value.join(',')
 }
 
 export function createGetFeatures(argConfig: ArgumentConfig) {
@@ -50,8 +59,14 @@ export function createGetFeatures(argConfig: ArgumentConfig) {
             text,
             lang: 'no',
             ...getPositionParamsFromGeolocationResult(coords),
-            sources: sources ? sources.join(',') : undefined,
-            layers: layers ? layers.join(',') : undefined,
+            sources: stringifyCommaSeparatedList(sources),
+            layers: stringifyCommaSeparatedList(layers),
+            'boundary.county_ids': stringifyCommaSeparatedList(
+                params['boundary.county_ids'],
+            ),
+            'boundary.locality_ids': stringifyCommaSeparatedList(
+                params['boundary.locality_ids'],
+            ),
             size: limit,
             ...rest,
         }

@@ -281,6 +281,8 @@ type $entur$sdk$GetFeaturesParams = {
     'boundary.rect.min_lat'?: number,
     'boundary.rect.max_lat'?: number,
     'boundary.country'?: string,
+    'boundary.county_ids'?: string[],
+    'boundary.locality_ids'?: string[],
     sources?: Array<string>,
     layers?: Array<string>,
     limit?: number,
