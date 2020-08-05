@@ -1,25 +1,8 @@
-version: 2
-jobs:
-  build:
-    docker:
-      - image: circleci/node:10
-
-    working_directory: ~/sdk
-
-    steps:
-      - checkout
-
-      - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "package-lock.json" }}
-          - v1-dependencies-
-
-      - run: npm install
-
-      - save_cache:
-          paths:
-            - node_modules
-            - ~/.npm
-          key: v1-dependencies-{{ checksum "package-lock.json" }}
-
-      - run: npm run build
+version: 2.1
+orbs:
+    node: 'circleci/node@3.0.1'
+workflows:
+    build-and-test:
+        jobs:
+            - node/test:
+                version: 10.22.0
