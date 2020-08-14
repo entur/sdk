@@ -12,8 +12,8 @@ import {
 import { convertPositionToBbox, forceOrder } from '../utils'
 import { Quay } from '../fields/Quay'
 
-import { Coordinates } from '../../types/Coordinates'
-import { StopPlaceDetails, StopPlaceFacilities } from '../../types/StopPlace'
+import { Coordinates } from '../types/Coordinates'
+import { StopPlaceDetails, StopPlaceFacilities } from '../types/StopPlace'
 
 import { getServiceConfig, ArgumentConfig } from '../config'
 

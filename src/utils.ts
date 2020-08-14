@@ -2,9 +2,9 @@ import { point, lineString } from '@turf/helpers'
 import bbox from '@turf/bbox'
 import destination from '@turf/destination'
 import PromiseThrottle from 'promise-throttle'
-import { Feature } from '../types/Feature'
-import { Location } from '../types/Location'
-import { Coordinates } from '../types/Coordinates'
+import { Feature } from './types/Feature'
+import { Location } from './types/Location'
+import { Coordinates } from './types/Coordinates'
 import {
     MAX_CALLS_PER_SECOND,
     MAX_CALLS_PER_MINUTE,

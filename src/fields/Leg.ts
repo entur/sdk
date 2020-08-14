@@ -1,4 +1,4 @@
-import { LegMode, TransportSubmode } from '../../types/Mode'
+import { LegMode, TransportSubmode } from '../types/Mode'
 
 import { uniq } from '../utils'
 

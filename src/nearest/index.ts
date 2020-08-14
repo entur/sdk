@@ -2,9 +2,9 @@ import { journeyPlannerQuery } from '../api'
 
 import { getNearestPlacesQuery } from './query'
 
-import { TransportMode } from '../../types/Mode'
-import { Coordinates } from '../../types/Coordinates'
-import { NearestPlace, TypeName } from '../../types/NearestPlace'
+import { TransportMode } from '../types/Mode'
+import { Coordinates } from '../types/Coordinates'
+import { NearestPlace, TypeName } from '../types/NearestPlace'
 
 import { getServiceConfig, ArgumentConfig } from '../config'
 import { isTruthy } from '../utils'

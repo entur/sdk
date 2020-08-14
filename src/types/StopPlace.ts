@@ -1,7 +1,7 @@
 import { MultilingualString } from './MultilingualString'
 import { TransportMode, TransportSubmode } from './Mode'
 
-import { Quay } from '../src/fields/Quay'
+import { Quay } from '../fields/Quay'
 
 export interface StopPlaceDetails {
     id: string

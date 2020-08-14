@@ -1,4 +1,4 @@
-import { MultilingualString } from '../../types/MultilingualString'
+import { MultilingualString } from '../types/MultilingualString'
 
 import { uniq } from '../utils'
 
