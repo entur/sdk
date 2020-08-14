@@ -1,3 +1,4 @@
+// @deprecated: Use the FeatureCategory enum instead of individual exports
 export const ONSTREET_BUS = 'onstreetBus'
 export const ONSTREET_TRAM = 'onstreetTram'
 export const AIRPORT = 'airport'
@@ -19,25 +20,25 @@ export const TETTSTEDDEL = 'tettsteddel'
 export const BYDEL = 'bydel'
 export const OTHER = 'other'
 
-export const FeatureCategory = {
-    ONSTREET_BUS,
-    ONSTREET_TRAM,
-    AIRPORT,
-    RAIL_STATION,
-    METRO_STATION,
-    BUS_STATION,
-    COACH_STATION,
-    TRAM_STATION,
-    HARBOUR_PORT,
-    FERRY_PORT,
-    FERRY_STOP,
-    LIFT_STATION,
-    VEHICLE_RAIL_INTERCHANGE,
-    GROUP_OF_STOP_PLACES,
-    POI,
-    VEGADRESSE,
-    STREET,
-    TETTSTEDDEL,
-    BYDEL,
-    OTHER,
+export enum FeatureCategory {
+    ONSTREET_BUS = 'onstreetBus',
+    ONSTREET_TRAM = 'onstreetTram',
+    AIRPORT = 'airport',
+    RAIL_STATION = 'railStation',
+    METRO_STATION = 'metroStation',
+    BUS_STATION = 'busStation',
+    COACH_STATION = 'coachStation',
+    TRAM_STATION = 'tramStation',
+    HARBOUR_PORT = 'harbourPort',
+    FERRY_PORT = 'ferryPort',
+    FERRY_STOP = 'ferryStop',
+    LIFT_STATION = 'liftStation',
+    VEHICLE_RAIL_INTERCHANGE = 'vehicleRailInterchange',
+    GROUP_OF_STOP_PLACES = 'GroupOfStopPlaces',
+    POI = 'poi',
+    VEGADRESSE = 'Vegadresse',
+    STREET = 'street',
+    TETTSTEDDEL = 'tettsteddel',
+    BYDEL = 'bydel',
+    OTHER = 'other',
 }

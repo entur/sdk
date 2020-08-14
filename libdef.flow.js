@@ -887,6 +887,7 @@ declare module '@entur/sdk' {
         CITY_TRAM: 'cityTram',
     }
 
+    // @deprecated: Use the FeatureCategory enum instead of individual exports
     declare export var ONSTREET_BUS: 'onstreetBus'
     declare export var ONSTREET_TRAM: 'onstreetTram'
     declare export var AIRPORT: 'airport'
