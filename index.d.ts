@@ -136,6 +136,7 @@ export type Scooter = BatteryScooter | BatteryLevelScooter
  * Geocoder
  */
 
+// @deprecated. Use FeatureCategory enum instead
 export type Category =
     | 'onstreetBus'
     | 'onstreetTram'
@@ -248,7 +249,7 @@ export interface Feature {
         accuracy: 'point'
         layer: 'venue' | 'address'
         borough_gid: string
-        category: Category[]
+        category: FeatureCategory[]
         country_gid: string
         county: string
         county_gid: string
