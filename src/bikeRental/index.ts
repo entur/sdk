@@ -7,7 +7,7 @@ import {
 } from './query'
 
 import { convertPositionToBbox, forceOrder } from '../utils'
-import { Coordinates } from '../../types/Coordinates'
+import { Coordinates } from '../types/Coordinates'
 
 import { BikeRentalStation } from '../fields/BikeRentalStation'
 import { getServiceConfig, ArgumentConfig } from '../config'

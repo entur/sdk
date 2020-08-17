@@ -13,8 +13,8 @@ import { getTripPatternQuery } from './query'
 
 import { legMapper } from './mapper'
 
-import { Location } from '../../types/Location'
-import { TransportMode, TransportSubmode, QueryMode } from '../../types/Mode'
+import { Location } from '../types/Location'
+import { TransportMode, TransportSubmode, QueryMode } from '../types/Mode'
 
 import { convertFeatureToLocation, isValidDate } from '../utils'
 

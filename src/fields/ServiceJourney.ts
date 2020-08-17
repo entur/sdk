@@ -1,6 +1,6 @@
 import { uniq } from '../utils'
 
-import { TransportSubmode } from '../../types/Mode'
+import { TransportSubmode } from '../types/Mode'
 
 import {
     fragmentName as noticeFields,

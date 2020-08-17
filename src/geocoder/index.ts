@@ -1,7 +1,7 @@
 import { get } from '../http'
 import { getGeocoderHost, getServiceConfig, ArgumentConfig } from '../config'
-import { Feature } from '../../types/Feature'
-import { Coordinates } from '../../types/Coordinates'
+import { Feature } from '../types/Feature'
+import { Coordinates } from '../types/Coordinates'
 import { County } from './countyIds'
 
 interface PositionParam {
