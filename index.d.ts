@@ -136,6 +136,7 @@ export type Scooter = BatteryScooter | BatteryLevelScooter
  * Geocoder
  */
 
+// @deprecated. Use FeatureCategory enum instead
 export type Category =
     | 'onstreetBus'
     | 'onstreetTram'
@@ -248,7 +249,7 @@ export interface Feature {
         accuracy: 'point'
         layer: 'venue' | 'address'
         borough_gid: string
-        category: Category[]
+        category: FeatureCategory[]
         country_gid: string
         county: string
         county_gid: string
@@ -933,6 +934,7 @@ export var TransportSubmode: {
     CITY_TRAM: 'cityTram'
 }
 
+// @deprecated: Use the FeatureCategory enum instead of individual exports
 export var ONSTREET_BUS: 'onstreetBus'
 export var ONSTREET_TRAM: 'onstreetTram'
 export var AIRPORT: 'airport'
@@ -954,27 +956,27 @@ export var TETTSTEDDEL: 'tettsteddel'
 export var BYDEL: 'bydel'
 export var OTHER: 'other'
 
-export var FeatureCategory: {
-    ONSTREET_BUS: 'onstreetBus'
-    ONSTREET_TRAM: 'onstreetTram'
-    AIRPORT: 'airport'
-    RAIL_STATION: 'railStation'
-    METRO_STATION: 'metroStation'
-    BUS_STATION: 'busStation'
-    COACH_STATION: 'coachStation'
-    TRAM_STATION: 'tramStation'
-    HARBOUR_PORT: 'harbourPort'
-    FERRY_PORT: 'ferryPort'
-    FERRY_STOP: 'ferryStop'
-    LIFT_STATION: 'liftStation'
-    VEHICLE_RAIL_INTERCHANGE: 'vehicleRailInterchange'
-    GROUP_OF_STOP_PLACES: 'GroupOfStopPlaces'
-    POI: 'poi'
-    VEGADRESSE: 'Vegadresse'
-    STREET: 'street'
-    TETTSTEDDEL: 'tettsteddel'
-    BYDEL: 'bydel'
-    OTHER: 'other'
+declare enum FeatureCategory {
+    ONSTREET_BUS = 'onstreetBus',
+    ONSTREET_TRAM = 'onstreetTram',
+    AIRPORT = 'airport',
+    RAIL_STATION = 'railStation',
+    METRO_STATION = 'metroStation',
+    BUS_STATION = 'busStation',
+    COACH_STATION = 'coachStation',
+    TRAM_STATION = 'tramStation',
+    HARBOUR_PORT = 'harbourPort',
+    FERRY_PORT = 'ferryPort',
+    FERRY_STOP = 'ferryStop',
+    LIFT_STATION = 'liftStation',
+    VEHICLE_RAIL_INTERCHANGE = 'vehicleRailInterchange',
+    GROUP_OF_STOP_PLACES = 'GroupOfStopPlaces',
+    POI = 'poi',
+    VEGADRESSE = 'Vegadresse',
+    STREET = 'street',
+    TETTSTEDDEL = 'tettsteddel',
+    BYDEL = 'bydel',
+    OTHER = 'other',
 }
 
 /**

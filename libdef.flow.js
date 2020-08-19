@@ -253,7 +253,7 @@ type $entur$sdk$Scooter = $entur$sdk$BatteryScooter | $entur$sdk$BatteryLevelSco
  * Geocoder
  */
 
-type $entur$sdk$Category =
+type $entur$sdk$FeatureCategory =
     | 'onstreetBus'
     | 'onstreetTram'
     | 'airport'
@@ -274,6 +274,9 @@ type $entur$sdk$Category =
     | 'street'
     | 'tettsteddel'
     | 'bydel'
+
+// @deprecated. Use FeatureCategory instead
+type $entur$sdk$Category = $entur$sdk$FeatureCategory
 
 type $entur$sdk$GetFeaturesParams = {
     // @deprecated Use `boundary` object instead
@@ -325,7 +328,7 @@ type $entur$sdk$Feature = {
         accuracy: 'point',
         layer: 'venue' | 'address',
         borough_gid: string,
-        category: Array<$entur$sdk$Category>,
+        category: Array<$entur$sdk$FeatureCategory>,
         country_gid: string,
         county: string,
         county_gid: string,
@@ -887,6 +890,7 @@ declare module '@entur/sdk' {
         CITY_TRAM: 'cityTram',
     }
 
+    // @deprecated: Use the FeatureCategory enum instead of individual exports
     declare export var ONSTREET_BUS: 'onstreetBus'
     declare export var ONSTREET_TRAM: 'onstreetTram'
     declare export var AIRPORT: 'airport'

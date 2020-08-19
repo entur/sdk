@@ -1,25 +1,4 @@
-/* eslint-disable camelcase */
-export type Category =
-    | 'onstreetBus'
-    | 'onstreetTram'
-    | 'airport'
-    | 'railStation'
-    | 'metroStation'
-    | 'busStation'
-    | 'coachStation'
-    | 'tramStation'
-    | 'harbourPort'
-    | 'ferryPort'
-    | 'ferryStop'
-    | 'liftStation'
-    | 'vehicleRailInterchange'
-    | 'other'
-    | 'GroupOfStopPlaces'
-    | 'poi'
-    | 'Vegadresse'
-    | 'street'
-    | 'tettsteddel'
-    | 'bydel'
+import { FeatureCategory } from '../constants/featureCategory'
 
 export type Feature = {
     geometry: {
@@ -34,7 +13,7 @@ export type Feature = {
         accuracy: 'point'
         layer: 'venue' | 'address'
         borough_gid: string
-        category: Category[]
+        category: FeatureCategory[]
         country_gid: string
         county: string
         county_gid: string
