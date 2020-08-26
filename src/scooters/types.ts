@@ -21,7 +21,7 @@ export interface BatteryScooter extends BaseScooter {
     battery: number
 }
 
-enum BatteryLevel {
+export enum BatteryLevel {
     LOW = 'LOW',
     MEDIUM = 'MEDIUM',
     HIGH = 'HIGH',
