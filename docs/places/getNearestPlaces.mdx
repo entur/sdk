@@ -27,3 +27,32 @@ The latitude and longitude for the point you want to find places close to.
 | `filterByModes`          | `TransportMode` | No restrictions. | Only include places that include this mode. Only checked for places with mode i.e. quays, departures. |
 | `filterByInUse`          | `boolean` | `false`. | Only affects queries for quays and stop places. If true only quays and stop places with at least one visiting line are included. |
 | `multiModalMode`         | `'parent' | 'child' | 'all'` | `'parent'`. | MultiModalMode for query. To control whether multi modal parent stop places, their mono modal children or both are included in the response. Does not affect mono modal stop places that do not belong to a multi modal stop place. Only applicable for placeType StopPlace |
+
+## Example
+
+```typescript
+import createEnturService, { TypeName } from '@entur/sdk'
+// or: const createEnturService = require('@entur/sdk').default
+
+const service = createEnturService({
+    clientName: 'awesomecompany-awesomeapp'
+})
+
+async function example() {
+    try {
+        const nearbyPlaces = await service.getNearestPlaces(
+            {
+                latitude: 59.911898,
+                longitude:10.75038,
+            },
+            {
+                filterByPlaceTypes: [TypeName.STOP_PLACE],
+                maximumDistance: 500,
+            },
+        )
+        console.log('Places nearby: ', nearbyPlaces)
+    } catch (error) {
+        console.error(error)
+    }
+}
+```
