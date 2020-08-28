@@ -5,7 +5,7 @@ import { getIntrospectionQuery } from 'graphql'
 
 const { writeFile } = fs.promises
 
-function runIntrospectionQuery(url: string): Promise<object> {
+function runIntrospectionQuery(url: string): Promise<unknown> {
     return fetch(url, {
         method: 'POST',
         headers: {

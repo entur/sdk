@@ -20,10 +20,10 @@ function errorHandler(response: any) {
 
 export function getGraphqlParams(
     query: string,
-    variables: { [key: string]: any },
+    variables: Record<string, any>,
 ): {
     query: string
-    variables?: { [key: string]: any }
+    variables?: Record<string, any>
 } {
     return {
         query: minify(query),
@@ -33,7 +33,7 @@ export function getGraphqlParams(
 
 export function journeyPlannerQuery<T>(
     queryObj: string,
-    variables: object,
+    variables: Record<string, any>,
     config: ServiceConfig,
 ): Promise<T> {
     const { host, headers } = getJourneyPlannerHost(config)
@@ -48,7 +48,7 @@ export function journeyPlannerQuery<T>(
 
 export function nsrQuery<T>(
     query: string,
-    variables: object,
+    variables: Record<string, any>,
     config: ServiceConfig,
 ): Promise<T> {
     const { host, headers } = getNSRHost(config)

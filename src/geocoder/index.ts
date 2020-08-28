@@ -11,13 +11,12 @@ interface PositionParam {
 
 function getPositionParamsFromGeolocationResult(
     coords?: Coordinates,
-): PositionParam | void {
+): PositionParam | undefined {
     if (!coords) {
         return
     }
 
     const { latitude, longitude } = coords
-    // eslint-disable-next-line consistent-return
     return {
         'focus.point.lat': latitude,
         'focus.point.lon': longitude,
@@ -81,8 +80,6 @@ function stringifyCommaSeparatedList(
 function transformBoundaryParam(boundary?: Boundary): BoundaryApi {
     if (!boundary) return {}
 
-    /* eslint-disable @typescript-eslint/camelcase */
-
     let result: BoundaryApi = {
         'boundary.country': boundary.country,
         'boundary.county_ids': stringifyCommaSeparatedList(boundary.countyIds),
@@ -100,8 +97,6 @@ function transformBoundaryParam(boundary?: Boundary): BoundaryApi {
             'boundary.rect.max_lon': boundary.rect.maxLon,
         }
     }
-
-    /* eslint-enable @typescript-eslint/camelcase */
 
     return result
 }

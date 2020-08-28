@@ -37,11 +37,11 @@ function responseHandler(response: Response): Response | PromiseLike<Response> {
     return response
 }
 
-export function get<T extends object>(
+export function get<T>(
     url: string,
-    params?: object,
-    headers?: object,
-    config?: object,
+    params?: Record<string, unknown>,
+    headers?: Record<string, unknown>,
+    config?: Record<string, unknown>,
     customFetch?: (
         url: RequestInfo,
         init?: RequestInit | undefined,
@@ -67,9 +67,9 @@ export function get<T extends object>(
 
 export function post<T>(
     url: string,
-    params?: object,
-    headers?: object,
-    config?: object,
+    params?: Record<string, unknown>,
+    headers?: Record<string, unknown>,
+    config?: Record<string, unknown>,
     customFetch?: (
         url: RequestInfo,
         init?: RequestInit | undefined,

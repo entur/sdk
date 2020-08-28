@@ -113,8 +113,7 @@ export function forceOrder<T, V>(
     getKey: (arg: T) => V,
 ): Array<T | undefined> {
     let queue = [...list]
-    // @ts-ignore
-    const result = []
+    const result: Array<T | undefined> = []
 
     const getKeyFunc = getKey || identity
 
@@ -127,7 +126,7 @@ export function forceOrder<T, V>(
             result.push(undefined)
         }
     })
-    // @ts-ignore
+
     return result
 }
 
