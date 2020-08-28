@@ -21,7 +21,7 @@ export function createGetScootersByPosition(argConfig: ArgumentConfig) {
     const config = getServiceConfig(argConfig)
     const { host, headers } = getScootersHost(config)
 
-    return function getScootersByPosition(
+    return async function getScootersByPosition(
         params: GetScootersByPositionParams,
     ): Promise<Scooter[]> {
         const {
@@ -32,7 +32,11 @@ export function createGetScootersByPosition(argConfig: ArgumentConfig) {
             operators = ALL_OPERATORS,
         } = params
 
-        return get<Scooter[]>(
+        if (!operators?.length) {
+            return []
+        }
+
+        const data = await get<Scooter[]>(
             host,
             {
                 lat,
@@ -42,7 +46,9 @@ export function createGetScootersByPosition(argConfig: ArgumentConfig) {
                 operators: operators.join(','),
             },
             headers,
-        ).then((data) => data || [])
+        )
+
+        return data || []
     }
 }
 
