@@ -38,7 +38,7 @@ function createEnturService(config: ArgumentConfig) {
     return {
         journeyPlannerQuery: <T>(
             query: string,
-            variables: object,
+            variables: Record<string, unknown>,
             config: ServiceConfig,
         ): Promise<T> => {
             if (process.env.NODE_ENV !== 'production') {
@@ -49,12 +49,12 @@ function createEnturService(config: ArgumentConfig) {
         },
         queryJourneyPlanner: <T>(
             queryObj: string,
-            variables: object,
+            variables: Record<string, unknown>,
         ): Promise<T> =>
             journeyPlannerQuery(queryObj, variables, getServiceConfig(config)),
         nsrQuery: <T>(
             query: string,
-            variables: object,
+            variables: Record<string, unknown>,
             config: ServiceConfig,
         ): Promise<T> => {
             if (process.env.NODE_ENV !== 'production') {
@@ -63,7 +63,10 @@ function createEnturService(config: ArgumentConfig) {
             }
             return nsrQuery(query, variables, config)
         },
-        queryNsr: <T>(queryObj: string, variables: object): Promise<T> =>
+        queryNsr: <T>(
+            queryObj: string,
+            variables: Record<string, unknown>,
+        ): Promise<T> =>
             nsrQuery(queryObj, variables, getServiceConfig(config)),
         getFeatures: createGetFeatures(config),
         getFeaturesReverse: createGetFeaturesReverse(config),
