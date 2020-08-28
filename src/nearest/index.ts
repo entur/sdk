@@ -4,7 +4,7 @@ import { getNearestPlacesQuery } from './query'
 
 import { TransportMode } from '../types/Mode'
 import { Coordinates } from '../types/Coordinates'
-import { NearestPlace, TypeName } from '../types/NearestPlace'
+import { NearestPlace, TypeName } from './types'
 
 import { getServiceConfig, ArgumentConfig } from '../config'
 import { isTruthy } from '../utils'
@@ -28,15 +28,15 @@ function convertTypeNameToFilterPlaceType(
     typeName: TypeName,
 ): FilterPlaceType | undefined {
     switch (typeName) {
-        case 'BikePark':
+        case TypeName.BIKE_PARK:
             return 'bikePark'
-        case 'BikeRentalStation':
+        case TypeName.BIKE_RENTAL_STATION:
             return 'bicycleRent'
-        case 'CarPark':
+        case TypeName.CAR_PARK:
             return 'carPark'
-        case 'Quay':
+        case TypeName.QUAY:
             return 'quay'
-        case 'StopPlace':
+        case TypeName.STOP_PLACE:
             return 'stopPlace'
         default:
             return undefined

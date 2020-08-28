@@ -8,6 +8,7 @@ export {
     throttler,
 } from './utils'
 
+export { TypeName } from './nearest/types'
 export { getTripPatternsQuery } from './trip'
 export { isBatteryScooter, isBatteryLevelScooter } from './scooters'
 export { ScooterOperator, BatteryLevel } from './scooters/types'

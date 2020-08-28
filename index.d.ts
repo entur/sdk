@@ -588,12 +588,13 @@ export interface GetDeparturesBetweenStopPlacesParams {
  * Nearest
  */
 
-export type TypeName =
-    | 'BikePark'
-    | 'BikeRentalStation'
-    | 'CarPark'
-    | 'Quay'
-    | 'StopPlace'
+declare enum TypeName {
+    BIKE_PARK = 'BikePark',
+    BIKE_RENTAL_STATION = 'BikeRentalStation',
+    CAR_PARK = 'CarPark',
+    QUAY = 'Quay',
+    STOP_PLACE = 'StopPlace',
+}
 
 export interface NearestPlace {
     id: string
