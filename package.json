@@ -34,7 +34,7 @@
     "@turf/destination": "^6.0.1",
     "@turf/helpers": "^6.1.4",
     "clean-deep": "^3.4.0",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.1",
     "promise-throttle": "^1.1.0",
     "qs": "^6.9.4",
     "regenerator-runtime": "^0.13.7"
