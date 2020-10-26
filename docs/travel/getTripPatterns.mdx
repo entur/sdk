@@ -10,8 +10,6 @@ route: /travel/getTripPatterns
 (params: GetTripPatternsParams, overrideConfig?: OverrideConfig) => Promise<Array<TripPattern>>
 ```
 
-Types: [TripPattern](flow-types/TripPattern.js)
-
 `getTripPatterns` is for searching for itineraries for a trip from some location to a destination at a given time. The method takes one argument `query`, which is an object with search parameters.
 
 If you are going to do a huge amount of different searches at the same time, consider using our [`throttler`](/utils/throttler) utility.
