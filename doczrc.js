@@ -1,7 +1,7 @@
 export default {
     title: 'Entur SDK',
     description: 'Docs for the Entur JavaScript SDK',
-    src: './docs',
+    files: './docs/**/*.mdx',
     menu: [
         'Entur SDK',
         'Getting Started',
