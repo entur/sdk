@@ -59,6 +59,7 @@ export type TransportSubmode =
     | 'internationalCarFerry'
     | 'nationalCarFerry'
     | 'localCarFerry'
+    | 'regionalCarFerry'
     | 'internationalPassengerFerry'
     | 'localPassengerFerry'
     | 'sightseeingService'
