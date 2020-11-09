@@ -89,6 +89,7 @@ type $entur$sdk$Config = {|
         journeyPlanner?: string,
         geocoder?: string,
         nsr?: string,
+        scooters?: string,
     },
     headers?: {[string]: string},
     fetch?: (
@@ -103,6 +104,7 @@ type $entur$sdk$OverrideConfig = {|
         journeyPlanner?: string,
         geocoder?: string,
         nsr?: string,
+        scooters?: string,
     },
     headers?: {[string]: string},
     fetch?: (
@@ -134,6 +136,7 @@ type $entur$sdk$ServiceConfig = {
         journeyPlanner: string,
         geocoder: string,
         nsr: string,
+        scooters: string,
     },
     headers: {[string]: string},
 }
