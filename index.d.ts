@@ -8,6 +8,7 @@ export interface Config {
         journeyPlanner?: string
         geocoder?: string
         nsr?: string
+        scooters?: string
     }
     headers?: { [key: string]: string }
     fetch?: (url: string, init?: Record<string, any>) => Promise<any>
@@ -19,6 +20,7 @@ export interface OverrideConfig {
         journeyPlanner?: string
         geocoder?: string
         nsr?: string
+        scooters?: string
     }
     headers?: { [key: string]: string }
     fetch?: (url: string, init?: Record<string, any>) => Promise<any>
@@ -47,6 +49,7 @@ export interface ServiceConfig {
         journeyPlanner: string
         geocoder: string
         nsr: string
+        scooters: string
     }
     headers: { [key: string]: string }
 }
