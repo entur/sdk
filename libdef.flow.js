@@ -65,6 +65,7 @@ type $entur$sdk$TransportSubmode =
     | 'airportLinkRail'
     | 'internationalCarFerry'
     | 'nationalCarFerry'
+    | 'regionalCarFerry'
     | 'localCarFerry'
     | 'internationalPassengerFerry'
     | 'localPassengerFerry'

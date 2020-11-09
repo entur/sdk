@@ -376,6 +376,7 @@ export type TransportSubmode =
     | 'airportLinkRail'
     | 'internationalCarFerry'
     | 'nationalCarFerry'
+    | 'regionalCarFerry'
     | 'localCarFerry'
     | 'internationalPassengerFerry'
     | 'localPassengerFerry'
