@@ -893,28 +893,6 @@ declare module '@entur/sdk' {
         CITY_TRAM: 'cityTram',
     }
 
-    // @deprecated: Use the FeatureCategory enum instead of individual exports
-    declare export var ONSTREET_BUS: 'onstreetBus'
-    declare export var ONSTREET_TRAM: 'onstreetTram'
-    declare export var AIRPORT: 'airport'
-    declare export var RAIL_STATION: 'railStation'
-    declare export var METRO_STATION: 'metroStation'
-    declare export var BUS_STATION: 'busStation'
-    declare export var COACH_STATION: 'coachStation'
-    declare export var TRAM_STATION: 'tramStation'
-    declare export var HARBOUR_PORT: 'harbourPort'
-    declare export var FERRY_PORT: 'ferryPort'
-    declare export var FERRY_STOP: 'ferryStop'
-    declare export var LIFT_STATION: 'liftStation'
-    declare export var VEHICLE_RAIL_INTERCHANGE: 'vehicleRailInterchange'
-    declare export var GROUP_OF_STOP_PLACES: 'GroupOfStopPlaces'
-    declare export var POI: 'poi'
-    declare export var VEGADRESSE: 'Vegadresse'
-    declare export var STREET: 'street'
-    declare export var TETTSTEDDEL: 'tettsteddel'
-    declare export var BYDEL: 'bydel'
-    declare export var OTHER: 'other'
-
     declare export var FeatureCategory: {
         ONSTREET_BUS: 'onstreetBus',
         ONSTREET_TRAM: 'onstreetTram',

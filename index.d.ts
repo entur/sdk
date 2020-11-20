@@ -938,28 +938,6 @@ export var TransportSubmode: {
     CITY_TRAM: 'cityTram'
 }
 
-// @deprecated: Use the FeatureCategory enum instead of individual exports
-export var ONSTREET_BUS: 'onstreetBus'
-export var ONSTREET_TRAM: 'onstreetTram'
-export var AIRPORT: 'airport'
-export var RAIL_STATION: 'railStation'
-export var METRO_STATION: 'metroStation'
-export var BUS_STATION: 'busStation'
-export var COACH_STATION: 'coachStation'
-export var TRAM_STATION: 'tramStation'
-export var HARBOUR_PORT: 'harbourPort'
-export var FERRY_PORT: 'ferryPort'
-export var FERRY_STOP: 'ferryStop'
-export var LIFT_STATION: 'liftStation'
-export var VEHICLE_RAIL_INTERCHANGE: 'vehicleRailInterchange'
-export var GROUP_OF_STOP_PLACES: 'GroupOfStopPlaces'
-export var POI: 'poi'
-export var VEGADRESSE: 'Vegadresse'
-export var STREET: 'street'
-export var TETTSTEDDEL: 'tettsteddel'
-export var BYDEL: 'bydel'
-export var OTHER: 'other'
-
 declare enum FeatureCategory {
     ONSTREET_BUS = 'onstreetBus',
     ONSTREET_TRAM = 'onstreetTram',
