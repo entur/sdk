@@ -15,7 +15,6 @@ export interface Situation {
     summary: MultilingualString[]
     description: MultilingualString[]
     advice: MultilingualString[]
-    detail: MultilingualString[] // Deprecated! `advice` should be used instead.
     lines: Line[]
     validityPeriod: {
         startTime: string
@@ -42,10 +41,6 @@ fragment ${fragmentName} on PtSituationElement {
         value
     }
     advice {
-        language
-        value
-    }
-    detail {
         language
         value
     }
