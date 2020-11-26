@@ -563,9 +563,13 @@ export interface TripPattern {
     distance: number
     directDuration: number
     duration: number
+    /** @deprecated Use expectedEndTime instead */
     endTime: string
+    expectedEndTime: string
+    expectedStartTime: string
     id?: string
     legs: Leg[]
+    /** @deprecated Use expectedStartTime instead */
     startTime: string
     walkDistance: number
 }
