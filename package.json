@@ -19,7 +19,7 @@
   "scripts": {
     "lint": "eslint src/ scripts/ --ext=js,ts",
     "test": "npm run lint && npm run check-libdefs && ts-node scripts/validate-queries.js && tsc --noEmit -p .",
-    "check-libdefs": "flow && tsc index.d.ts --noEmit",
+    "check-libdefs": "tsc index.d.ts --noEmit",
     "prebuild": "npm test && rm -rf lib",
     "build": "babel --extensions .ts src --out-dir lib",
     "prepublishOnly": "npm run build",
@@ -57,7 +57,6 @@
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-prettier": "^3.1.4",
     "firebase-tools": "^8.16.2",
-    "flow-bin": "^0.89.0",
     "gatsby-theme-docz": "^2.3.1",
     "prettier": "^2.1.2",
     "react": "^16.14.0",
