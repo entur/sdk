@@ -7,6 +7,7 @@ import {
     fragmentName as departureFields,
     fragments as departureFragments,
 } from '../fields/Departure'
+import { uniq } from '../utils'
 
 export const getDeparturesFromStopPlacesQuery = `
 query(
@@ -104,8 +105,7 @@ query(
     }
 }
 
-${departureFragments.join('')}
-${legFragments.join('')}
+${uniq<string>([...departureFragments, ...legFragments]).join('')}
 `
 
 export const getDeparturesForServiceJourneyQuery = `
