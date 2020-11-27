@@ -237,6 +237,16 @@
                   "defaultValue": "false"
                 },
                 {
+                  "name": "useBikeRentalAvailabilityInformation",
+                  "description": "Consider bike rental availability information when routing.",
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "Boolean",
+                    "ofType": null
+                  },
+                  "defaultValue": "false"
+                },
+                {
                   "name": "minimumTransferTime",
                   "description": "A global minimum transfer time (in seconds) that specifies the minimum amount of time that must pass between exiting one public transport vehicle and boarding another. This time is in addition to time it might take to walk between stops.",
                   "type": {
@@ -2058,12 +2068,60 @@
                 "name": "DateTime",
                 "ofType": null
               },
-              "isDeprecated": false,
-              "deprecationReason": null
+              "isDeprecated": true,
+              "deprecationReason": "Replaced with expectedStartTime"
             },
             {
               "name": "endTime",
               "description": "Time that the trip arrives.",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              },
+              "isDeprecated": true,
+              "deprecationReason": "Replaced with expectedEndTime"
+            },
+            {
+              "name": "aimedStartTime",
+              "description": "The aimed date and time the trip starts.",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "expectedStartTime",
+              "description": "The expected, realtime adjusted date and time the trip starts.",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "aimedEndTime",
+              "description": "The aimed date and time the trip ends.",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "expectedEndTime",
+              "description": "The expected, realtime adjusted date and time the trip ends.",
               "args": [],
               "type": {
                 "kind": "SCALAR",
@@ -4131,13 +4189,7 @@
           "interfaces": null,
           "enumValues": [
             {
-              "name": "timeOfTravelOnly",
-              "description": null,
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "dayOfTravelOnly",
+              "name": "advanceOnly",
               "description": null,
               "isDeprecated": false,
               "deprecationReason": null
@@ -4149,13 +4201,25 @@
               "deprecationReason": null
             },
             {
-              "name": "advanceOnly",
+              "name": "dayOfTravelOnly",
               "description": null,
               "isDeprecated": false,
               "deprecationReason": null
             },
             {
               "name": "advanceAndDayOfTravel",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "timeOfTravelOnly",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "subscriptionChargeMoment",
               "description": null,
               "isDeprecated": false,
               "deprecationReason": null
@@ -4194,7 +4258,25 @@
               "deprecationReason": null
             },
             {
+              "name": "inAdvance",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "inAdvanceOnly",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "beforeBoarding",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "beforeBoardingOnly",
               "description": null,
               "isDeprecated": false,
               "deprecationReason": null
@@ -4206,13 +4288,31 @@
               "deprecationReason": null
             },
             {
+              "name": "onBoardingOnly",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "afterBoarding",
               "description": null,
               "isDeprecated": false,
               "deprecationReason": null
             },
             {
+              "name": "onCheckIn",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "onCheckOut",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "subscriptionOnly",
               "description": null,
               "isDeprecated": false,
               "deprecationReason": null
@@ -7911,6 +8011,18 @@
               },
               "isDeprecated": false,
               "deprecationReason": null
+            },
+            {
+              "name": "replacementForServiceJourneyId",
+              "description": "When a trip is added using realtime-data, this is a reference to the replaced ServiceJourney.",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
             }
           ],
           "inputFields": null,
@@ -8392,6 +8504,18 @@
               "deprecationReason": null
             },
             {
+              "name": "occupancyStatus",
+              "description": "OccupancyStatus.",
+              "args": [],
+              "type": {
+                "kind": "ENUM",
+                "name": "Occupancy",
+                "ofType": null
+              },
+              "isDeprecated": true,
+              "deprecationReason": "Not yet officially supported."
+            },
+            {
               "name": "forBoarding",
               "description": "Whether vehicle may be boarded at quay.",
               "args": [],
@@ -8592,6 +8716,65 @@
             {
               "name": "modified",
               "description": "The service journey information has been updated and resulted in a different journey pattern compared to the journey pattern of the scheduled service journey.",
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "possibleTypes": null
+        },
+        {
+          "kind": "ENUM",
+          "name": "Occupancy",
+          "description": null,
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "enumValues": [
+            {
+              "name": "unknown",
+              "description": "The Occupancy is unknown. DEFAULT.",
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "empty",
+              "description": "The vehicle is considered empty by most measures, and has few or no passengers onboard, but is still accepting passengers.",
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "manySeatsAvailable",
+              "description": "The vehicle has a large percentage of seats available. What percentage of free seats out of the total seats available is to be considered large enough to fall into this category is determined at the discretion of the producer.",
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "fewSeatsAvailable",
+              "description": "The vehicle has a small percentage of seats available. What percentage of free seats out of the total seats available is to be considered small enough to fall into this category is determined at the discretion of the producer.",
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "standingRoomOnly",
+              "description": "The vehicle can currently accommodate only standing passengers.",
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "crushedStandingRoomOnly",
+              "description": "The vehicle can currently accommodate only standing passengers and has limited space for them.",
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "full",
+              "description": "The vehicle is considered full by most measures, but may still be allowing passengers to board.",
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "notAcceptingPassengers",
+              "description": "The vehicle can not accept passengers.",
               "isDeprecated": false,
               "deprecationReason": null
             }

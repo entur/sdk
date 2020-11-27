@@ -35,6 +35,8 @@ query (${declaration}) {
         tripPatterns {
             startTime
             endTime
+            expectedStartTime
+            expectedEndTime
             directDuration
             duration
             distance
