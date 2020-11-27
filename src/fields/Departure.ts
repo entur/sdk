@@ -24,7 +24,7 @@ import {
     Situation,
 } from './Situation'
 
-export interface EstimatedCall {
+export interface Departure {
     actualArrivalTime?: string // Only available AFTER arrival has taken place
     actualDepartureTime?: string // Only available AFTER departure has taken place
     aimedArrivalTime: string
@@ -44,11 +44,8 @@ export interface EstimatedCall {
     realtime: boolean
     requestStop: boolean
     serviceJourney: ServiceJourney
-    /** @deprecated Use leg.situations or getDeparturesXxx methods */
-    situations?: Situation[]
+    situations: Situation[]
 }
-
-export type IntermediateEstimatedCall = EstimatedCall
 
 export const fragmentName = 'estimatedCallFields'
 

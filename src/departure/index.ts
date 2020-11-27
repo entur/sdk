@@ -12,8 +12,7 @@ import {
 
 import { forceOrder } from '../utils'
 
-import { EstimatedCall } from '../fields/EstimatedCall'
-import { Leg } from '../fields/Leg'
+import { Departure } from '../fields/Departure'
 
 import {
     getDeparturesFromStopPlacesQuery,
@@ -22,14 +21,18 @@ import {
     getDeparturesForServiceJourneyQuery,
 } from './query'
 
-import { destinationMapper, legToDepartureMapper } from './mapper'
+import {
+    destinationMapper,
+    legToDepartureMapper,
+    LegWithDepartures,
+} from './mapper'
 
 import { getServiceConfig, ArgumentConfig } from '../config'
 import { isTruthy } from '../utils'
 
 export type DeparturesById = {
     id: string
-    departures: EstimatedCall[]
+    departures: Departure[]
 }
 
 type GetDeparturesParams = {
@@ -89,7 +92,7 @@ export function createGetDeparturesFromStopPlaces(argConfig: ArgumentConfig) {
         }
 
         return journeyPlannerQuery<{
-            stopPlaces?: Array<{ id: string; estimatedCalls: EstimatedCall[] }>
+            stopPlaces?: Array<{ id: string; estimatedCalls: Departure[] }>
         }>(getDeparturesFromStopPlacesQuery, variables, config)
             .then((data) => {
                 if (!data?.stopPlaces) {
@@ -119,7 +122,7 @@ export function createGetDeparturesFromStopPlace(argConfig: ArgumentConfig) {
     return function getDeparturesFromStopPlace(
         stopPlaceId: string,
         params?: GetDeparturesParams,
-    ): Promise<EstimatedCall[]> {
+    ): Promise<Departure[]> {
         return getDeparturesFromStopPlaces([stopPlaceId], params).then(
             (stopPlaces: Array<DeparturesById | void>) => {
                 if (!stopPlaces?.length || !stopPlaces[0]) return []
@@ -167,7 +170,7 @@ export function createGetDeparturesFromQuays(argConfig: ArgumentConfig) {
             ...rest,
         }
         return journeyPlannerQuery<{
-            quays?: Array<{ estimatedCalls: EstimatedCall[]; id: string }>
+            quays?: Array<{ estimatedCalls: Departure[]; id: string }>
         }>(getDeparturesFromQuayQuery, variables, config)
             .then((data) => {
                 if (!data || !data?.quays) {
@@ -200,7 +203,7 @@ export function createGetDeparturesBetweenStopPlaces(
         fromStopPlaceId: string,
         toStopPlaceId: string,
         params: GetDeparturesBetweenStopPlacesParams = {},
-    ): Promise<EstimatedCall[]> {
+    ): Promise<Departure[]> {
         const { limit = 20, start = new Date(), ...rest } = params
         const variables = {
             from: { place: fromStopPlaceId },
@@ -213,7 +216,7 @@ export function createGetDeparturesBetweenStopPlaces(
         }
 
         return journeyPlannerQuery<{
-            trip: { tripPatterns: Array<{ legs: Leg[] }> }
+            trip: { tripPatterns: Array<{ legs: LegWithDepartures[] }> }
         }>(getDeparturesBetweenStopPlacesQuery, variables, config).then(
             (data) => {
                 if (!data || !data?.trip?.tripPatterns) return []
@@ -239,14 +242,14 @@ export function createGetDeparturesForServiceJourney(
     return function getDeparturesForServiceJourney(
         id: string,
         date?: string,
-    ): Promise<EstimatedCall[]> {
+    ): Promise<Departure[]> {
         const variables = {
             id,
             date,
         }
 
         return journeyPlannerQuery<{
-            serviceJourney?: { estimatedCalls: EstimatedCall[] }
+            serviceJourney?: { estimatedCalls: Departure[] }
         }>(getDeparturesForServiceJourneyQuery, variables, config).then(
             (data) => {
                 return (data?.serviceJourney?.estimatedCalls || []).map(

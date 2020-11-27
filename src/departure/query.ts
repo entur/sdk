@@ -4,9 +4,9 @@ import {
 } from '../fields/Leg'
 
 import {
-    fragmentName as estimatedCallFields,
-    fragments as estimatedCallFragments,
-} from '../fields/EstimatedCall'
+    fragmentName as departureFields,
+    fragments as departureFragments,
+} from '../fields/Departure'
 
 export const getDeparturesFromStopPlacesQuery = `
 query(
@@ -36,12 +36,12 @@ query(
             whiteListedModes: $whiteListedModes,
             includeCancelledTrips: $includeCancelledTrips
         ) {
-            ...${estimatedCallFields}
+            ...${departureFields}
         }
     }
 }
 
-${estimatedCallFragments.join('')}
+${departureFragments.join('')}
 `
 
 export const getDeparturesFromQuayQuery = `
@@ -64,12 +64,12 @@ query(
             includeCancelledTrips: $includeCancelledTrips,
             numberOfDeparturesPerLineAndDestinationDisplay: $limitPerLine
         ) {
-            ...${estimatedCallFields}
+            ...${departureFields}
         }
     }
 }
 
-${estimatedCallFragments.join('')}
+${departureFragments.join('')}
 `
 
 export const getDeparturesBetweenStopPlacesQuery = `
@@ -96,11 +96,15 @@ query(
         tripPatterns {
             legs {
                 ...${legFields}
+                fromEstimatedCall {
+                    ...${departureFields}
+                }
             }
         }
     }
 }
 
+${departureFragments.join('')}
 ${legFragments.join('')}
 `
 
@@ -111,10 +115,10 @@ query(
 ) {
     serviceJourney(id: $id) {
         estimatedCalls(date: $date) {
-            ...${estimatedCallFields}
+            ...${departureFields}
         }
     }
 }
 
-${estimatedCallFragments.join('')}
+${departureFragments.join('')}
 `

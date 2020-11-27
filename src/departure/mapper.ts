@@ -1,10 +1,14 @@
-import { EstimatedCall } from '../fields/EstimatedCall'
+import { Departure } from '../fields/Departure'
 import { Leg } from '../fields/Leg'
 import { Notice } from '../fields/Notice'
 
 import { uniqBy } from '../utils'
 
-function getNoticesFromLeg(leg: Leg): Notice[] {
+export interface LegWithDepartures extends Leg {
+    fromEstimatedCall?: Departure
+}
+
+function getNoticesFromLeg(leg: LegWithDepartures): Notice[] {
     const notices = [
         ...(leg.serviceJourney?.notices || []),
         ...(leg.serviceJourney?.journeyPattern?.notices || []),
@@ -14,7 +18,7 @@ function getNoticesFromLeg(leg: Leg): Notice[] {
     return uniqBy(notices, (notice) => notice.text)
 }
 
-function getNotices(departure: EstimatedCall): Notice[] {
+function getNotices(departure: Departure): Notice[] {
     const notices = [
         ...(departure.notices || []),
         ...(departure.serviceJourney?.notices || []),
@@ -24,14 +28,16 @@ function getNotices(departure: EstimatedCall): Notice[] {
     return uniqBy(notices, (notice) => notice.text)
 }
 
-export function destinationMapper(departure: EstimatedCall): EstimatedCall {
+export function destinationMapper(departure: Departure): Departure {
     return {
         ...departure,
         notices: getNotices(departure),
     }
 }
 
-export function legToDepartureMapper(leg: Leg): EstimatedCall | undefined {
+export function legToDepartureMapper(
+    leg: LegWithDepartures,
+): Departure | undefined {
     const { fromEstimatedCall } = leg
 
     if (!fromEstimatedCall) return undefined
