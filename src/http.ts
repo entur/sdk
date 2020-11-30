@@ -60,8 +60,12 @@ export function get<T>(
         .then((response) => retryIfNecessary(response, call))
         .then(responseHandler)
         .then((res) => res.json())
-        .then((data) =>
-            cleanDeep(data, { emptyArrays: false, emptyStrings: false }),
+        .then(
+            (data) =>
+                cleanDeep(data, {
+                    emptyArrays: false,
+                    emptyStrings: false,
+                }) as T,
         )
 }
 
@@ -89,7 +93,11 @@ export function post<T>(
         .then((response) => retryIfNecessary(response, call))
         .then(responseHandler)
         .then((res) => res.json())
-        .then((data) =>
-            cleanDeep(data, { emptyArrays: false, emptyStrings: false }),
+        .then(
+            (data) =>
+                cleanDeep(data, {
+                    emptyArrays: false,
+                    emptyStrings: false,
+                }) as T,
         )
 }
