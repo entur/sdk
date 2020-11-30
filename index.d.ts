@@ -396,8 +396,36 @@ export interface DestinationDisplay {
 }
 
 export interface EstimatedCall {
-    actualArrivalTime?: string // Only available AFTER arrival has taken place
-    actualDepartureTime?: string // Only available AFTER departure has taken place
+    /** Only available AFTER arrival has taken place */
+    actualArrivalTime?: string
+    /** Only available AFTER departure has taken place */
+    actualDepartureTime?: string
+    aimedArrivalTime: string
+    aimedDepartureTime: string
+    cancellation: boolean
+    date: string
+    destinationDisplay: DestinationDisplay
+    expectedArrivalTime: string
+    expectedDepartureTime: string
+    forAlighting: boolean
+    forBoarding: boolean
+    notices?: Notice[]
+    predictionInaccurate: boolean
+    quay?: Quay
+    realtime: boolean
+    requestStop: boolean
+    serviceJourney: ServiceJourney
+    /** @deprecated Use leg.situations or getDeparturesXxx methods */
+    situations?: Situation[]
+}
+
+export type IntermediateEstimatedCall = EstimatedCall
+
+export interface Departure {
+    /** Only available AFTER arrival has taken place */
+    actualArrivalTime?: string
+    /** Only available AFTER departure has taken place */
+    actualDepartureTime?: string
     aimedArrivalTime: string
     aimedDepartureTime: string
     cancellation: boolean
@@ -415,10 +443,6 @@ export interface EstimatedCall {
     serviceJourney: ServiceJourney
     situations: Situation[]
 }
-
-export type IntermediateEstimatedCall = EstimatedCall
-
-export type Departure = EstimatedCall
 
 export type BookingMethod = 'callOffice' | 'online'
 
