@@ -1,12 +1,23 @@
 import {
-    fragmentName as legFields,
-    fragments as legFragments,
-} from '../fields/Leg'
+    fragmentName as quayFields,
+    fragments as quayFragments,
+} from '../fields/Quay'
+
+import {
+    fragmentName as serviceJourneyFields,
+    fragments as serviceJourneyFragments,
+} from '../fields/ServiceJourney'
 
 import {
     fragmentName as departureFields,
     fragments as departureFragments,
 } from '../fields/Departure'
+
+import {
+    fragmentName as situationFields,
+    fragments as situationFragments,
+} from '../fields/Situation'
+
 import { uniq } from '../utils'
 
 export const getDeparturesFromStopPlacesQuery = `
@@ -96,7 +107,20 @@ query(
     ) {
         tripPatterns {
             legs {
-                ...${legFields}
+                aimedStartTime
+                expectedStartTime
+                fromPlace {
+                    quay {
+                        ...${quayFields}
+                    }
+                }
+                realtime
+                serviceJourney {
+                    ...${serviceJourneyFields}
+                }
+                situations {
+                    ...${situationFields}
+                }
                 fromEstimatedCall {
                     ...${departureFields}
                 }
@@ -105,7 +129,12 @@ query(
     }
 }
 
-${uniq<string>([...departureFragments, ...legFragments]).join('')}
+${uniq<string>([
+    ...departureFragments,
+    ...quayFragments,
+    ...serviceJourneyFragments,
+    ...situationFragments,
+]).join('')}
 `
 
 export const getDeparturesForServiceJourneyQuery = `
