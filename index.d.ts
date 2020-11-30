@@ -318,78 +318,102 @@ export interface Place {
     bikeRentalStation?: BikeRentalStation
 }
 
-export type TransportMode =
-    | 'air'
-    | 'bus'
-    | 'cableway'
-    | 'coach'
-    | 'funicular'
-    | 'lift'
-    | 'metro'
-    | 'rail'
-    | 'tram'
-    | 'unknown'
-    | 'water'
+export declare enum TransportMode {
+    AIR = 'air',
+    BUS = 'bus',
+    CABLEWAY = 'cableway',
+    CAR = 'car',
+    COACH = 'coach',
+    FUNICULAR = 'funicular',
+    LIFT = 'lift',
+    METRO = 'metro',
+    RAIL = 'rail',
+    TRAM = 'tram',
+    UNKNOWN = 'unknown',
+    WATER = 'water',
+}
 
-// All valid values for the 'mode' parameter to JourneyPlanner
-export type QueryMode =
-    | 'air'
-    | 'bicycle'
-    | 'bus'
-    | 'cableway'
-    | 'car'
-    | 'car_dropoff'
-    | 'car_park'
-    | 'car_pickup'
-    | 'coach'
-    | 'foot'
-    | 'funicular'
-    | 'lift'
-    | 'metro'
-    | 'rail'
-    | 'tram'
-    | 'transit'
-    | 'water'
+export declare enum TransportSubmode {
+    AIRPORT_LINK_BUS = 'airportLinkBus',
+    AIRPORT_LINK_RAIL = 'airportLinkRail',
+    CITY_TRAM = 'cityTram',
+    DOMESTIC_FLIGHT = 'domesticFlight',
+    EXPRESS_BUS = 'expressBus',
+    FUNICULAR = 'funicular',
+    HELICOPTER_SERVICE = 'helicopterService',
+    HIGH_SPEED_PASSENGER_SERVICE = 'highSpeedPassengerService',
+    HIGH_SPEED_VEHICLE_SERVICE = 'highSpeedVehicleService',
+    INTERNATIONAL = 'international',
+    INTERNATIONAL_CAR_FERRY = 'internationalCarFerry',
+    INTERNATIONAL_COACH = 'internationalCoach',
+    INTERNATIONAL_FLIGHT = 'internationalFlight',
+    INTERNATIONAL_PASSENGER_FERRY = 'internationalPassengerFerry',
+    INTERREGIONAL_RAIL = 'interregionalRail',
+    LOCAL = 'local',
+    LOCAL_BUS = 'localBus',
+    LOCAL_CAR_FERRY = 'localCarFerry',
+    LOCAL_PASSENGER_FERRY = 'localPassengerFerry',
+    LOCAL_TRAM = 'localTram',
+    LONG_DISTANCE = 'longDistance',
+    METRO = 'metro',
+    NATIONAL_CAR_FERRY = 'nationalCarFerry',
+    NATIONAL_COACH = 'nationalCoach',
+    NIGHT_BUS = 'nightBus',
+    NIGHT_RAIL = 'nightRail',
+    RAIL_REPLACEMENT_BUS = 'railReplacementBus',
+    REGIONAL_BUS = 'regionalBus',
+    REGIONAL_CAR_FERRY = 'regionalCarFerry',
+    REGIONAL_RAIL = 'regionalRail',
+    SCHOOL_BUS = 'schoolBus',
+    SHUTTLE_BUS = 'shuttleBus',
+    SIGHTSEEING_BUS = 'sightseeingBus',
+    SIGHTSEEING_SERVICE = 'sightseeingService',
+    TELECABIN = 'telecabin',
+    TOURIST_RAILWAY = 'touristRailway',
+}
 
-export type LegMode = TransportMode | 'bicycle' | 'car' | 'foot'
+/**
+ * The possible modes that can be returned on a Leg
+ */
+export declare enum LegMode {
+    AIR = 'air',
+    BICYCLE = 'bicycle',
+    BUS = 'bus',
+    CABLEWAY = 'cableway',
+    CAR = 'car',
+    COACH = 'coach',
+    FOOT = 'foot',
+    FUNICULAR = 'funicular',
+    LIFT = 'lift',
+    METRO = 'metro',
+    RAIL = 'rail',
+    TRAM = 'tram',
+    UNKNOWN = 'unknown',
+    WATER = 'water',
+}
 
-export type TransportSubmode =
-    | 'localBus'
-    | 'regionalBus'
-    | 'expressBus'
-    | 'nightBus'
-    | 'sightseeingBus'
-    | 'shuttleBus'
-    | 'schoolBus'
-    | 'railReplacementBus'
-    | 'airportLinkBus'
-    | 'internationalCoach'
-    | 'nationalCoach'
-    | 'localTram'
-    | 'cityTram'
-    | 'metro'
-    | 'local'
-    | 'regionalRail'
-    | 'interregionalRail'
-    | 'longDistance'
-    | 'international'
-    | 'touristRailway'
-    | 'nightRail'
-    | 'airportLinkRail'
-    | 'internationalCarFerry'
-    | 'nationalCarFerry'
-    | 'regionalCarFerry'
-    | 'localCarFerry'
-    | 'internationalPassengerFerry'
-    | 'localPassengerFerry'
-    | 'sightseeingService'
-    | 'highSpeedVehicleService'
-    | 'highSpeedPassengerService'
-    | 'internationalFlight'
-    | 'domesticFlight'
-    | 'helicopterService'
-    | 'telecabin'
-    | 'funicular'
+/**
+ * All valid values for the "mode" parameter to JourneyPlanner
+ */
+export declare enum QueryMode {
+    AIR = 'air',
+    BICYCLE = 'bicycle',
+    BUS = 'bus',
+    CABLEWAY = 'cableway',
+    CAR = 'car',
+    CAR_DROPOFF = 'car_dropoff',
+    CAR_PARK = 'car_park',
+    CAR_PICKUP = 'car_pickup',
+    COACH = 'coach',
+    FOOT = 'foot',
+    FUNICULAR = 'funicular',
+    LIFT = 'lift',
+    METRO = 'metro',
+    RAIL = 'rail',
+    TRAM = 'tram',
+    TRANSIT = 'transit',
+    WATER = 'water',
+}
 
 export interface DestinationDisplay {
     frontText: string
@@ -870,77 +894,65 @@ export default function createEnturService(config: Config): EnturService
  */
 
 // Any for of public transportation
+/** @deprecated Use QueryMode.AIR instead */
 export var AIR: 'air'
+/** @deprecated Use QueryMode.BICYCLE instead */
 export var BICYCLE: 'bicycle'
+/** @deprecated Use QueryMode.BUS instead */
 export var BUS: 'bus'
+/** @deprecated Use QueryMode.CABLEWAY instead */
 export var CABLEWAY: 'cableway'
+/** @deprecated Use QueryMode.CAR instead */
 export var CAR: 'car'
+/** @deprecated Use QueryMode.COACH instead */
 export var COACH: 'coach'
+/** @deprecated Use QueryMode.WATER instead */
 export var WATER: 'water'
+/** @deprecated Use QueryMode.FUNICULAR instead */
 export var FUNICULAR: 'funicular'
+/** @deprecated Use QueryMode.LIFT instead */
 export var LIFT: 'lift'
+/** @deprecated Use QueryMode.RAIL instead */
 export var RAIL: 'rail'
+/** @deprecated Use QueryMode.METRO instead */
 export var METRO: 'metro'
+/** @deprecated Use QueryMode.TRAM instead */
 export var TRAM: 'tram'
+/** @deprecated Use QueryMode.TRANSIT instead */
 export var TRANSIT: 'transit'
+/** @deprecated Use QueryMode.FOOT instead */
 export var FOOT: 'foot'
 
 // Combine with foot and transit for park and ride.
+/** @deprecated Use QueryMode.CAR_PARK instead */
 export var CAR_PARK: 'car_park'
 
 // Combine with foot and transit for ride and kiss
+/** @deprecated Use QueryMode.CAR_PICKUP instead */
 export var CAR_PICKUP: 'car_pickup'
 
+/** @deprecated Use TransportSubmode.AIRPORT_LINK_RAIL instead */
 export var AIRPORT_LINK_RAIL: 'airportLinkRail'
+/** @deprecated Use TransportSubmode.HIGH_SPEED_PASSENGER_SERVICE instead */
 export var HIGH_SPEED_PASSENGER_SERVICE: 'highSpeedPassengerService'
+/** @deprecated Use TransportSubmode.HIGH_SPEED_VEHICLE_SERVICE instead */
 export var HIGH_SPEED_VEHICLE_SERVICE: 'highSpeedVehicleService'
+/** @deprecated Use TransportSubmode.INTERNATIONAL_CAR_FERRY instead */
 export var INTERNATIONAL_CAR_FERRY: 'internationalCarFerry'
+/** @deprecated Use TransportSubmode.LOCAL_CAR_FERRY instead */
 export var LOCAL_CAR_FERRY: 'localCarFerry'
+/** @deprecated Use TransportSubmode.LOCAL_PASSENGER_FERRY instead */
 export var LOCAL_PASSENGER_FERRY: 'localPassengerFerry'
+/** @deprecated Use TransportSubmode.NATIONAL_CAR_FERRY instead */
 export var NATIONAL_CAR_FERRY: 'nationalCarFerry'
+/** @deprecated Use TransportSubmode.RAIL_REPLACEMENT_BUS instead */
 export var RAIL_REPLACEMENT_BUS: 'railReplacementBus'
+/** @deprecated Use TransportSubmode.REGIONAL_CAR_FERRY instead */
 export var REGIONAL_CAR_FERRY: 'regionalCarFerry'
+/** @deprecated Use TransportSubmode.TOURIST_RAILWAY instead */
 export var TOURIST_RAILWAY: 'touristRailway'
+/** @deprecated Use TransportSubmode.AIRPORT_LINK_BUS instead */
 export var AIRPORT_LINK_BUS: 'airportLinkBus'
-
-export var TransportMode: {
-    BUS: 'bus'
-    TRAM: 'tram'
-    RAIL: 'rail'
-    METRO: 'metro'
-    WATER: 'water'
-    AIR: 'air'
-    COACH: 'coach'
-    CAR: 'car'
-}
-
-export var LegMode: {
-    BUS: 'bus'
-    TRAM: 'tram'
-    RAIL: 'rail'
-    METRO: 'metro'
-    WATER: 'water'
-    AIR: 'air'
-    COACH: 'coach'
-    CAR: 'car'
-    FOOT: 'foot'
-    BICYCLE: 'bicycle'
-}
-
-export var TransportSubmode: {
-    AIRPORT_LINK_RAIL: 'airportLinkRail'
-    HIGH_SPEED_PASSENGER_SERVICE: 'highSpeedPassengerService'
-    HIGH_SPEED_VEHICLE_SERVICE: 'highSpeedVehicleService'
-    INTERNATIONAL_CAR_FERRY: 'internationalCarFerry'
-    LOCAL_CAR_FERRY: 'localCarFerry'
-    LOCAL_PASSENGER_FERRY: 'localPassengerFerry'
-    NATIONAL_CAR_FERRY: 'nationalCarFerry'
-    RAIL_REPLACEMENT_BUS: 'railReplacementBus'
-    REGIONAL_CAR_FERRY: 'regionalCarFerry'
-    TOURIST_RAILWAY: 'touristRailway'
-    AIRPORT_LINK_BUS: 'airportLinkBus'
-    CITY_TRAM: 'cityTram'
-}
 
 declare enum FeatureCategory {
     ONSTREET_BUS = 'onstreetBus',
@@ -1001,21 +1013,37 @@ export function nsrQuery<T>(
     config: ServiceConfig,
 ): Promise<T>
 
+/** @deprecated Implement your own equality check */
 export function isAir(mode: string): boolean
+/** @deprecated Implement your own equality check */
 export function isBicycle(mode: string): boolean
+/** @deprecated Implement your own equality check */
 export function isBus(mode: string): boolean
+/** @deprecated Implement your own equality check */
 export function isCableway(mode: string): boolean
+/** @deprecated Implement your own equality check */
 export function isCar(mode: string): boolean
+/** @deprecated Implement your own equality check */
 export function isCoach(mode: string): boolean
+/** @deprecated Implement your own equality check */
 export function isWater(mode: string): boolean
+/** @deprecated Implement your own equality check */
 export function isFunicular(mode: string): boolean
+/** @deprecated Implement your own equality check */
 export function isLift(mode: string): boolean
+/** @deprecated Implement your own equality check */
 export function isRail(mode: string): boolean
+/** @deprecated Implement your own equality check */
 export function isMetro(mode: string): boolean
+/** @deprecated Implement your own equality check */
 export function isTram(mode: string): boolean
+/** @deprecated Implement your own equality check */
 export function isTransit(mode: string): boolean
+/** @deprecated Implement your own equality check */
 export function isFoot(mode: string): boolean
+/** @deprecated Implement your own equality check */
 export function isCarPark(mode: string): boolean
+/** @deprecated Implement your own equality check */
 export function isCarPickup(mode: string): boolean
 
 export function isBatteryScooter(scooter: Scooter): scooter is BatteryScooter

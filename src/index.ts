@@ -13,7 +13,7 @@ export { getTripPatternsQuery } from './trip'
 export { isBatteryScooter, isBatteryLevelScooter } from './scooters'
 export { ScooterOperator, BatteryLevel } from './scooters/types'
 
-export * from './constants/travelModes'
+export * from './types/Mode'
 export * from './constants/featureCategory'
 
 export { journeyPlannerQuery, nsrQuery } from './api'
