@@ -7,7 +7,7 @@ route: /places/getStopPlaces
 # getStopPlaces
 
 ```typescript
-(ids: Array<string>, params?: StopPlaceParams) => Promise<Array<StopPlaceDetails | void>>
+(ids: Array<string>, params?: StopPlaceParams) => Promise<Array<StopPlaceDetails | undefined>>
 ```
 
 `getStopPlaces` finds multiple stop places according to an array of IDs. The returned array will have the same order as the input array, and may contain undefined values if the corresponding ID didn't produce a result.

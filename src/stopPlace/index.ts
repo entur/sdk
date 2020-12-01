@@ -47,7 +47,7 @@ export function createGetStopPlaces(argConfig: ArgumentConfig) {
     return function getStopPlaces(
         stopPlaceIds: string[],
         params: StopPlaceParams = {},
-    ): Promise<Array<StopPlaceDetails | void>> {
+    ): Promise<Array<StopPlaceDetails | undefined>> {
         if (!Array.isArray(stopPlaceIds)) {
             throw new Error(
                 `getStopPlaces takes an array of strings, but got ${typeof stopPlaceIds}`,
