@@ -1,14 +1,4 @@
 import { journeyPlannerQuery } from '../api'
-import {
-    BUS,
-    TRAM,
-    RAIL,
-    METRO,
-    WATER,
-    AIR,
-    COACH,
-    CAR,
-} from '../constants/travelModes'
 
 import { forceOrder } from '../utils'
 
@@ -29,6 +19,7 @@ import {
 
 import { getServiceConfig, ArgumentConfig } from '../config'
 import { isTruthy } from '../utils'
+import { QueryMode } from '../types/Mode'
 
 export type DeparturesById = {
     id: string
@@ -211,7 +202,16 @@ export function createGetDeparturesBetweenStopPlaces(
             limit,
             dateTime: start.toISOString(),
             arriveBy: false,
-            modes: [BUS, TRAM, RAIL, METRO, WATER, AIR, COACH, CAR],
+            modes: [
+                QueryMode.BUS,
+                QueryMode.TRAM,
+                QueryMode.RAIL,
+                QueryMode.METRO,
+                QueryMode.WATER,
+                QueryMode.AIR,
+                QueryMode.COACH,
+                QueryMode.CAR,
+            ],
             ...rest,
         }
 

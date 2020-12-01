@@ -1,5 +1,5 @@
 import { MultilingualString } from './MultilingualString'
-import { TransportMode, TransportSubmode } from './Mode'
+import { TransportMode, TransportSubmode } from '../types/Mode'
 
 import { Quay } from '../fields/Quay'
 

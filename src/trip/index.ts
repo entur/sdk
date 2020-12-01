@@ -1,13 +1,4 @@
 import { journeyPlannerQuery, getGraphqlParams } from '../api'
-import {
-    FOOT,
-    BUS,
-    TRAM,
-    RAIL,
-    METRO,
-    WATER,
-    AIR,
-} from '../constants/travelModes'
 
 import { getTripPatternQuery } from './query'
 
@@ -100,7 +91,15 @@ interface GetTripPatternsVariables {
     whiteListed?: InputWhiteListed
 }
 
-const DEFAULT_MODES: QueryMode[] = [FOOT, BUS, TRAM, RAIL, METRO, WATER, AIR]
+const DEFAULT_MODES = [
+    QueryMode.FOOT,
+    QueryMode.BUS,
+    QueryMode.TRAM,
+    QueryMode.RAIL,
+    QueryMode.METRO,
+    QueryMode.WATER,
+    QueryMode.AIR,
+]
 
 function getTripPatternsVariables(
     params: GetTripPatternsParams,
