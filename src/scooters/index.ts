@@ -9,7 +9,7 @@ import { getServiceConfig, getScootersHost, ArgumentConfig } from '../config'
 
 const ALL_OPERATORS = Object.values(ScooterOperator)
 
-interface GetScootersByPositionParams {
+export interface GetScootersByPositionParams {
     latitude: number
     longitude: number
     distance?: number
