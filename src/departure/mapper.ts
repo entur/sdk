@@ -1,11 +1,19 @@
 import { Departure } from '../fields/Departure'
-import { Leg } from '../fields/Leg'
 import { Notice } from '../fields/Notice'
+import { Place } from '../fields/Place'
+import { ServiceJourney } from '../fields/ServiceJourney'
+import { Situation } from '../fields/Situation'
 
 import { uniqBy } from '../utils'
 
-export interface LegWithDepartures extends Leg {
+export interface LegWithDepartures {
+    aimedStartTime: string
+    expectedStartTime: string
     fromEstimatedCall?: Departure
+    fromPlace: Place
+    realtime: boolean
+    serviceJourney: ServiceJourney
+    situations: Situation[]
 }
 
 function getNoticesFromLeg(leg: LegWithDepartures): Notice[] {
