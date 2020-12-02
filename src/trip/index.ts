@@ -20,7 +20,7 @@ import {
     OverrideConfig,
 } from '../config'
 
-interface TripPattern {
+export interface TripPattern {
     distance: number
     directDuration: number
     duration: number

@@ -35,7 +35,7 @@ export function createGetBikeRentalStations(argConfig: ArgumentConfig) {
 
     return function getBikeRentalStations(
         stationIds: string[],
-    ): Promise<Array<BikeRentalStation | void>> {
+    ): Promise<Array<BikeRentalStation | undefined>> {
         if (!stationIds || !Array.isArray(stationIds)) {
             throw new Error(
                 `getBikeRentalStations takes an array of strings, but got ${typeof stationIds}`,

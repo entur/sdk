@@ -115,7 +115,7 @@ export function createGetDeparturesFromStopPlace(argConfig: ArgumentConfig) {
         params?: GetDeparturesParams,
     ): Promise<Departure[]> {
         return getDeparturesFromStopPlaces([stopPlaceId], params).then(
-            (stopPlaces: Array<DeparturesById | void>) => {
+            (stopPlaces: Array<DeparturesById | undefined>) => {
                 if (!stopPlaces?.length || !stopPlaces[0]) return []
                 return stopPlaces[0].departures || []
             },
@@ -129,7 +129,7 @@ export function createGetDeparturesFromQuays(argConfig: ArgumentConfig) {
     return function getDeparturesFromQuays(
         quayIds: string[],
         params: GetDeparturesParams = {},
-    ): Promise<Array<DeparturesById | void>> {
+    ): Promise<Array<DeparturesById | undefined>> {
         if (!Array.isArray(quayIds)) {
             throw new Error(
                 `getDeparturesFromQuays takes an array of strings, but got ${typeof quayIds}`,
