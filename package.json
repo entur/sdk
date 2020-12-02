@@ -1,6 +1,6 @@
 {
   "name": "@entur/sdk",
-  "version": "3.0.0-alpha.0",
+  "version": "3.0.0-alpha.1",
   "license": "EUPL-1.2",
   "main": "./lib/index.js",
   "repository": "github:entur/sdk",
