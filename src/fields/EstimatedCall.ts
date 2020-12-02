@@ -18,12 +18,6 @@ import {
     ServiceJourney,
 } from './ServiceJourney'
 
-import {
-    fragmentName as situationFields,
-    fragments as situationFragments,
-    Situation,
-} from './Situation'
-
 export interface EstimatedCall {
     actualArrivalTime?: string // Only available AFTER arrival has taken place
     actualDepartureTime?: string // Only available AFTER departure has taken place
@@ -44,8 +38,6 @@ export interface EstimatedCall {
     realtime: boolean
     requestStop: boolean
     serviceJourney: ServiceJourney
-    /** @deprecated Use leg.situations or getDeparturesXxx methods */
-    situations?: Situation[]
 }
 
 export type IntermediateEstimatedCall = EstimatedCall
@@ -79,9 +71,6 @@ fragment ${fragmentName} on EstimatedCall {
     serviceJourney {
         ...${serviceJourneyFields}
     }
-    situations {
-        ...${situationFields}
-    }
 }`
 
 export const fragments = uniq<string>([
@@ -89,5 +78,4 @@ export const fragments = uniq<string>([
     ...noticeFragments,
     ...quayFragments,
     ...serviceJourneyFragments,
-    ...situationFragments,
 ])
