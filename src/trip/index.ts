@@ -21,17 +21,27 @@ import {
 } from '../config'
 
 export interface TripPattern {
+    /** Total distance for the trip, in meters. */
     distance: number
+    /**
+     * This sums the direct durations of each leg. Be careful about using this,
+     * as it is not equal to the duration between startTime and endTime.
+     * See the directDuration documentation on Leg.
+     * */
     directDuration: number
+    /** Duration of the trip, in seconds. */
     duration: number
     /** @deprecated Use expectedEndTime instead */
     endTime: string
+    /** The expected, realtime adjusted date and time the trip ends. */
     expectedEndTime: string
+    /** The expected, realtime adjusted date and time the trip starts. */
     expectedStartTime: string
     id?: string
     legs: Leg[]
     /** @deprecated Use expectedStartTime instead */
     startTime: string
+    /** How far the user has to walk, in meters. */
     walkDistance: number
 }
 
