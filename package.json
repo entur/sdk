@@ -13,8 +13,7 @@
   "typings": "./lib/index.d.ts",
   "files": [
     "lib",
-    "index.d.ts",
-    "libdef.flow.js"
+    "index.d.ts"
   ],
   "scripts": {
     "lint": "eslint src/ scripts/ --ext=js,ts",
