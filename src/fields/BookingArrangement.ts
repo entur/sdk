@@ -1,6 +1,6 @@
 type BookingMethod = 'callOffice' | 'online'
 
-interface BookingContact {
+export interface BookingContact {
     phone: string
     url: string
 }

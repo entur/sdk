@@ -8,7 +8,17 @@ import {
     Line,
 } from './Line'
 
-type ReportType = 'general' | 'incident' | null
+export type ReportType = 'general' | 'incident' | null
+
+export interface ValidityPeriod {
+    startTime: string
+    endTime: string
+}
+
+export interface InfoLink {
+    uri: string
+    label: string
+}
 
 export interface Situation {
     situationNumber: string
@@ -16,15 +26,9 @@ export interface Situation {
     description: MultilingualString[]
     advice: MultilingualString[]
     lines: Line[]
-    validityPeriod: {
-        startTime: string
-        endTime: string
-    }
+    validityPeriod: ValidityPeriod
     reportType: ReportType
-    infoLinks: Array<{
-        uri: string
-        label: string
-    }>
+    infoLinks: InfoLink[]
 }
 
 export const fragmentName = 'situationFields'

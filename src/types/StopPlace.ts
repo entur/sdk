@@ -20,30 +20,30 @@ export interface StopPlaceDetails {
     quays?: Quay[]
 }
 
-type LimitationStatusType = 'FALSE' | 'TRUE' | 'PARTIAL' | 'UNKNOWN'
+export type LimitationStatusType = 'FALSE' | 'TRUE' | 'PARTIAL' | 'UNKNOWN'
 
-type WaitingRoomEquipment = {
+export type WaitingRoomEquipment = {
     id: string
 }
 
-type ShelterEquipment = {
+export type ShelterEquipment = {
     id: string
 }
 
-type SanitaryEquipment = {
+export type SanitaryEquipment = {
     id: string
     numberOfToilets: number
     gender: 'both' | 'femaleOnly' | 'maleOnly' | 'sameSexOnly'
 }
 
-type TicketingEquipment = {
+export type TicketingEquipment = {
     id: string
     ticketOffice: boolean
     ticketMachines: boolean
     numberOfMachines: number
 }
 
-type ParkingVehicle =
+export type ParkingVehicle =
     | 'pedalCycle'
     | 'moped'
     | 'motorcycle'
@@ -80,7 +80,7 @@ type ParkingVehicle =
     | 'allPassengerVehicles'
     | 'all'
 
-interface StopPlaceFacilitiesStopPlace {
+export interface StopPlaceFacilitiesStopPlace {
     id: string
     name: MultilingualString
     accessibilityAssessment: {
@@ -97,7 +97,7 @@ interface StopPlaceFacilitiesStopPlace {
     }
 }
 
-interface StopPlaceFacilitiesParking {
+export interface StopPlaceFacilitiesParking {
     name: MultilingualString
     parentSiteRef: string
     totalCapacity?: number
