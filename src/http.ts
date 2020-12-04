@@ -1,6 +1,6 @@
 import qs from 'qs'
 import cleanDeep from 'clean-deep'
-import { Response } from 'node-fetch'
+import { Response, RequestInfo, RequestInit } from 'node-fetch'
 
 import fetch from './fetch'
 

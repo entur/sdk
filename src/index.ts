@@ -10,8 +10,16 @@ export {
 
 export { TypeName } from './nearest/types'
 export type { NearestPlace } from './nearest/types'
+
 export { getTripPatternsQuery } from './trip'
-export type { TripPattern } from './trip'
+export type {
+    TripPattern,
+    GetTripPatternsParams,
+    InputWhiteListed,
+    InputBanned,
+    TransportSubmodeParam,
+} from './trip'
+
 export { isBatteryScooter, isBatteryLevelScooter } from './scooters'
 export { ScooterOperator, BatteryLevel } from './scooters/types'
 export type { Scooter } from './scooters/types'
