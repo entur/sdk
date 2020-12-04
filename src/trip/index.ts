@@ -45,12 +45,12 @@ export interface TripPattern {
     walkDistance: number
 }
 
-interface TransportSubmodeParam {
+export interface TransportSubmodeParam {
     transportMode: TransportMode
     transportSubmodes: TransportSubmode[]
 }
 
-interface InputBanned {
+export interface InputBanned {
     lines?: string[]
     authorities?: string[]
     organisations?: string[]
@@ -59,7 +59,7 @@ interface InputBanned {
     serviceJourneys?: string[]
 }
 
-interface InputWhiteListed {
+export interface InputWhiteListed {
     lines?: string[]
     authorities?: string[]
     organisations?: string[]
