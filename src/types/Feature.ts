@@ -25,5 +25,6 @@ export type Feature = {
         source: string
         source_id: string
         street: string
+        tariff_zones?: string[]
     }
 }
