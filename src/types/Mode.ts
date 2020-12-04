@@ -9,7 +9,6 @@ export enum TransportMode {
     METRO = 'metro',
     RAIL = 'rail',
     TRAM = 'tram',
-    UNKNOWN = 'unknown',
     WATER = 'water',
 }
 
@@ -65,7 +64,6 @@ export enum LegMode {
     METRO = 'metro',
     RAIL = 'rail',
     TRAM = 'tram',
-    UNKNOWN = 'unknown',
     WATER = 'water',
 }
 
