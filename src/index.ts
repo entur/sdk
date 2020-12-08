@@ -24,6 +24,7 @@ export { isBatteryScooter, isBatteryLevelScooter } from './scooters'
 export { ScooterOperator, BatteryLevel } from './scooters/types'
 export type {
     Scooter,
+    StandardScooter,
     BatteryScooter,
     BatteryLevelScooter,
 } from './scooters/types'
