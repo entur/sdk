@@ -45,14 +45,21 @@ interface BoundaryApi {
     'boundary.locality_ids'?: string
 }
 
-type GetFeaturesParam = {
-    'boundary.rect.min_lon'?: number // @deprecated Use boundary object instead
-    'boundary.rect.max_lon'?: number // @deprecated Use boundary object instead
-    'boundary.rect.min_lat'?: number // @deprecated Use boundary object instead
-    'boundary.rect.max_lat'?: number // @deprecated Use boundary object instead
-    'boundary.country'?: string // @deprecated Use boundary object instead
-    'boundary.county_ids'?: string // @deprecated Use boundary object instead
-    'boundary.locality_ids'?: string // @deprecated Use boundary object instead
+export interface GetFeaturesParams {
+    /** @deprecated Use boundary object instead */
+    'boundary.rect.min_lon'?: number
+    /** @deprecated Use boundary object instead */
+    'boundary.rect.max_lon'?: number
+    /** @deprecated Use boundary object instead */
+    'boundary.rect.min_lat'?: number
+    /** @deprecated Use boundary object instead */
+    'boundary.rect.max_lat'?: number
+    /** @deprecated Use boundary object instead */
+    'boundary.country'?: string
+    /** @deprecated Use boundary object instead */
+    'boundary.county_ids'?: string
+    /** @deprecated Use boundary object instead */
+    'boundary.locality_ids'?: string
     boundary?: {
         rect?: {
             minLat: number
@@ -107,7 +114,7 @@ export function createGetFeatures(argConfig: ArgumentConfig) {
     return function getFeatures(
         text: string,
         coords?: Coordinates,
-        params: GetFeaturesParam = {},
+        params: GetFeaturesParams = {},
     ): Promise<Feature[]> {
         const { host, headers } = getGeocoderHost(config)
         const { sources, layers, limit, boundary, ...rest } = params
@@ -134,7 +141,7 @@ export function createGetFeatures(argConfig: ArgumentConfig) {
     }
 }
 
-type GetFeaturesReverseParam = {
+export interface GetFeaturesReverseParam {
     radius?: number
     size?: number
     layers?: string[]

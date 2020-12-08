@@ -1,14 +1,4 @@
 import { journeyPlannerQuery } from '../api'
-import {
-    BUS,
-    TRAM,
-    RAIL,
-    METRO,
-    WATER,
-    AIR,
-    COACH,
-    CAR,
-} from '../constants/travelModes'
 
 import { forceOrder } from '../utils'
 
@@ -29,6 +19,7 @@ import {
 
 import { getServiceConfig, ArgumentConfig } from '../config'
 import { isTruthy } from '../utils'
+import { QueryMode } from '../types/Mode'
 
 export type DeparturesById = {
     id: string
@@ -124,7 +115,7 @@ export function createGetDeparturesFromStopPlace(argConfig: ArgumentConfig) {
         params?: GetDeparturesParams,
     ): Promise<Departure[]> {
         return getDeparturesFromStopPlaces([stopPlaceId], params).then(
-            (stopPlaces: Array<DeparturesById | void>) => {
+            (stopPlaces: Array<DeparturesById | undefined>) => {
                 if (!stopPlaces?.length || !stopPlaces[0]) return []
                 return stopPlaces[0].departures || []
             },
@@ -138,7 +129,7 @@ export function createGetDeparturesFromQuays(argConfig: ArgumentConfig) {
     return function getDeparturesFromQuays(
         quayIds: string[],
         params: GetDeparturesParams = {},
-    ): Promise<Array<DeparturesById | void>> {
+    ): Promise<Array<DeparturesById | undefined>> {
         if (!Array.isArray(quayIds)) {
             throw new Error(
                 `getDeparturesFromQuays takes an array of strings, but got ${typeof quayIds}`,
@@ -211,7 +202,16 @@ export function createGetDeparturesBetweenStopPlaces(
             limit,
             dateTime: start.toISOString(),
             arriveBy: false,
-            modes: [BUS, TRAM, RAIL, METRO, WATER, AIR, COACH, CAR],
+            modes: [
+                QueryMode.BUS,
+                QueryMode.TRAM,
+                QueryMode.RAIL,
+                QueryMode.METRO,
+                QueryMode.WATER,
+                QueryMode.AIR,
+                QueryMode.COACH,
+                QueryMode.CAR,
+            ],
             ...rest,
         }
 

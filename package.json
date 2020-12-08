@@ -1,6 +1,6 @@
 {
   "name": "@entur/sdk",
-  "version": "2.1.1",
+  "version": "3.0.0-alpha.3",
   "license": "EUPL-1.2",
   "main": "./lib/index.js",
   "repository": "github:entur/sdk",
@@ -10,18 +10,17 @@
   "browser": {
     "./lib/fetch.js": "./lib/fetch.browser.js"
   },
-  "typings": "./index.d.ts",
+  "typings": "./lib/index.d.ts",
   "files": [
     "lib",
-    "index.d.ts",
-    "libdef.flow.js"
+    "index.d.ts"
   ],
   "scripts": {
     "lint": "eslint src/ scripts/ --ext=js,ts",
-    "test": "npm run lint && npm run check-libdefs && ts-node scripts/validate-queries.js && tsc --noEmit -p .",
-    "check-libdefs": "tsc index.d.ts --noEmit",
+    "test": "npm run lint && ts-node scripts/validate-queries.js && tsc --noEmit --emitDeclarationOnly false -p .",
     "prebuild": "npm test && rm -rf lib",
-    "build": "babel --extensions .ts src --out-dir lib",
+    "declaration": "tsc",
+    "build": "babel --extensions .ts src --out-dir lib && npm run declaration",
     "prepublishOnly": "npm run build",
     "docs": "docz dev",
     "build:docs": "docz build",
@@ -33,6 +32,7 @@
     "@turf/bbox": "^6.0.1",
     "@turf/destination": "^6.0.1",
     "@turf/helpers": "^6.1.4",
+    "@types/node-fetch": "^2.5.7",
     "clean-deep": "^3.4.0",
     "node-fetch": "^2.6.1",
     "promise-throttle": "^1.1.2",
@@ -40,13 +40,12 @@
     "regenerator-runtime": "^0.13.7"
   },
   "devDependencies": {
-    "@babel/cli": "^7.12.1",
-    "@babel/core": "^7.12.3",
+    "@babel/cli": "^7.12.8",
+    "@babel/core": "^7.12.9",
     "@babel/node": "^7.12.6",
-    "@babel/preset-env": "^7.12.1",
-    "@babel/preset-typescript": "^7.12.1",
+    "@babel/preset-env": "^7.12.7",
+    "@babel/preset-typescript": "^7.12.7",
     "@babel/register": "^7.12.1",
-    "@types/node-fetch": "^2.5.7",
     "@types/qs": "^6.9.5",
     "@typescript-eslint/eslint-plugin": "^3.10.1",
     "@typescript-eslint/parser": "^3.10.1",
@@ -55,13 +54,13 @@
     "eslint": "^6.8.0",
     "eslint-plugin-flowtype": "^4.7.0",
     "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-prettier": "^3.1.4",
-    "firebase-tools": "^8.16.2",
+    "eslint-plugin-prettier": "^3.2.0",
+    "firebase-tools": "^8.17.0",
     "gatsby-theme-docz": "^2.3.1",
-    "prettier": "^2.1.2",
+    "prettier": "^2.2.1",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "ts-node": "^8.10.2",
-    "typescript": "^4.0.5"
+    "typescript": "^4.1.2"
   }
 }

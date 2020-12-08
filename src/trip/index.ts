@@ -1,13 +1,4 @@
 import { journeyPlannerQuery, getGraphqlParams } from '../api'
-import {
-    FOOT,
-    BUS,
-    TRAM,
-    RAIL,
-    METRO,
-    WATER,
-    AIR,
-} from '../constants/travelModes'
 
 import { getTripPatternQuery } from './query'
 
@@ -29,27 +20,37 @@ import {
     OverrideConfig,
 } from '../config'
 
-interface TripPattern {
+export interface TripPattern {
+    /** Total distance for the trip, in meters. */
     distance: number
+    /**
+     * This sums the direct durations of each leg. Be careful about using this,
+     * as it is not equal to the duration between startTime and endTime.
+     * See the directDuration documentation on Leg.
+     * */
     directDuration: number
+    /** Duration of the trip, in seconds. */
     duration: number
     /** @deprecated Use expectedEndTime instead */
     endTime: string
+    /** The expected, realtime adjusted date and time the trip ends. */
     expectedEndTime: string
+    /** The expected, realtime adjusted date and time the trip starts. */
     expectedStartTime: string
     id?: string
     legs: Leg[]
     /** @deprecated Use expectedStartTime instead */
     startTime: string
+    /** How far the user has to walk, in meters. */
     walkDistance: number
 }
 
-interface TransportSubmodeParam {
+export interface TransportSubmodeParam {
     transportMode: TransportMode
     transportSubmodes: TransportSubmode[]
 }
 
-interface InputBanned {
+export interface InputBanned {
     lines?: string[]
     authorities?: string[]
     organisations?: string[]
@@ -58,7 +59,7 @@ interface InputBanned {
     serviceJourneys?: string[]
 }
 
-interface InputWhiteListed {
+export interface InputWhiteListed {
     lines?: string[]
     authorities?: string[]
     organisations?: string[]
@@ -100,7 +101,15 @@ interface GetTripPatternsVariables {
     whiteListed?: InputWhiteListed
 }
 
-const DEFAULT_MODES: QueryMode[] = [FOOT, BUS, TRAM, RAIL, METRO, WATER, AIR]
+const DEFAULT_MODES = [
+    QueryMode.FOOT,
+    QueryMode.BUS,
+    QueryMode.TRAM,
+    QueryMode.RAIL,
+    QueryMode.METRO,
+    QueryMode.WATER,
+    QueryMode.AIR,
+]
 
 function getTripPatternsVariables(
     params: GetTripPatternsParams,

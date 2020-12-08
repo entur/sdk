@@ -1,4 +1,4 @@
-import { Response } from 'node-fetch'
+import { Response, RequestInfo, RequestInit } from 'node-fetch'
 
 export interface HostConfig {
     host: string
