@@ -17,12 +17,15 @@ interface BaseScooter {
     }
 }
 
+export interface StandardScooter extends BaseScooter {
+    operator: ScooterOperator.BOLT
+}
+
 export interface BatteryScooter extends BaseScooter {
     operator:
         | ScooterOperator.VOI
         | ScooterOperator.TIER
         | ScooterOperator.ZVIPP
-        | ScooterOperator.BOLT
     battery: number
 }
 
@@ -37,4 +40,4 @@ export interface BatteryLevelScooter extends BaseScooter {
     batteryLevel: BatteryLevel
 }
 
-export type Scooter = BatteryScooter | BatteryLevelScooter
+export type Scooter = StandardScooter | BatteryScooter | BatteryLevelScooter
