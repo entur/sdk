@@ -22,7 +22,7 @@ export type {
 
 export { isBatteryScooter, isBatteryLevelScooter } from './scooters'
 export { ScooterOperator, BatteryLevel } from './scooters/types'
-export type { Scooter } from './scooters/types'
+export type { Scooter, BatteryScooter, BatteryLevelScooter } from './scooters/types'
 
 export * from './constants/featureCategory'
 
