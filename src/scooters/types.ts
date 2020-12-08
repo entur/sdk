@@ -22,10 +22,7 @@ export interface StandardScooter extends BaseScooter {
 }
 
 export interface BatteryScooter extends BaseScooter {
-    operator:
-        | ScooterOperator.VOI
-        | ScooterOperator.TIER
-        | ScooterOperator.ZVIPP
+    operator: ScooterOperator.VOI | ScooterOperator.TIER | ScooterOperator.ZVIPP
     battery: number
 }
 
