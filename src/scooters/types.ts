@@ -3,6 +3,7 @@ export enum ScooterOperator {
     TIER = 'tier',
     ZVIPP = 'zvipp',
     LIME = 'lime',
+    BOLT = 'bolt',
 }
 
 interface BaseScooter {
@@ -14,6 +15,10 @@ interface BaseScooter {
         android: string
         ios: string
     }
+}
+
+export interface StandardScooter extends BaseScooter {
+    operator: ScooterOperator.BOLT
 }
 
 export interface BatteryScooter extends BaseScooter {
@@ -32,4 +37,4 @@ export interface BatteryLevelScooter extends BaseScooter {
     batteryLevel: BatteryLevel
 }
 
-export type Scooter = BatteryScooter | BatteryLevelScooter
+export type Scooter = StandardScooter | BatteryScooter | BatteryLevelScooter
