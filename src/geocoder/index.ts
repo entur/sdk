@@ -71,6 +71,7 @@ export interface GetFeaturesParams {
         countyIds?: County[]
         localityIds?: string[]
     }
+    multiModal?: 'parent' | 'child' | 'all'
     sources?: string[]
     layers?: string[]
     limit?: number
