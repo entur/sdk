@@ -26,3 +26,10 @@ The ID of the stop place to get departures _to_.
 |:-------------------------|:---------------|:-------------|:------------|
 | `start`                  | `Date`         | `new Date()` | DateTime for when to fetch estimated calls from. |
 | `limit`                  | `number`       | `20`         | The maximum number of departures to fetch. |
+
+### options (`RequestOptions`) [Optional]
+An object containing a subset of `RequestInit` options that's applied to the request.
+
+| Key      | Type          | Description |
+|:---------|:--------------|:------------|
+| `signal` | `AbortSignal` | Allows you to communicate with a fetch request and abort it if desired. [Read more](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal) |

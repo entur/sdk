@@ -17,3 +17,10 @@ Facilities can be accessibility assessments like is the stop place wheelchair ac
 
 ### stopPlaceId (`string`)
 The ID of the stop place to find facilities for. Example: `"NSR:StopPlace:59616"`.
+
+### options (`RequestOptions`) [Optional]
+An object containing a subset of `RequestInit` options that's applied to the request.
+
+| Key      | Type          | Description |
+|:---------|:--------------|:------------|
+| `signal` | `AbortSignal` | Allows you to communicate with a fetch request and abort it if desired. [Read more](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal) |
