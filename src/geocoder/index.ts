@@ -1,4 +1,4 @@
-import { get } from '../http'
+import { get, RequestOptions } from '../http'
 import { getGeocoderHost, getServiceConfig, ArgumentConfig } from '../config'
 import { Feature } from '../types/Feature'
 import { Coordinates } from '../types/Coordinates'
@@ -71,6 +71,7 @@ export interface GetFeaturesParams {
         countyIds?: County[]
         localityIds?: string[]
     }
+    multiModal?: 'parent' | 'child' | 'all'
     sources?: string[]
     layers?: string[]
     limit?: number
@@ -115,6 +116,7 @@ export function createGetFeatures(argConfig: ArgumentConfig) {
         text: string,
         coords?: Coordinates,
         params: GetFeaturesParams = {},
+        options?: RequestOptions,
     ): Promise<Feature[]> {
         const { host, headers } = getGeocoderHost(config)
         const { sources, layers, limit, boundary, ...rest } = params
@@ -135,8 +137,8 @@ export function createGetFeatures(argConfig: ArgumentConfig) {
             url,
             searchParams,
             headers,
-            undefined,
             config.fetch,
+            options,
         ).then((data) => data.features || [])
     }
 }
@@ -153,6 +155,7 @@ export function createGetFeaturesReverse(argConfig: ArgumentConfig) {
     return function getFeaturesReverse(
         coords: Coordinates,
         params: GetFeaturesReverseParam = {},
+        options?: RequestOptions,
     ): Promise<Feature[]> {
         const { host, headers } = getGeocoderHost(config)
 
@@ -172,8 +175,8 @@ export function createGetFeaturesReverse(argConfig: ArgumentConfig) {
             url,
             searchParams,
             headers,
-            undefined,
             config.fetch,
+            options,
         ).then((data) => data.features || [])
     }
 }

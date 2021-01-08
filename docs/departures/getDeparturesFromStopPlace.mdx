@@ -32,3 +32,10 @@ An optional object of parameters to pass to the query.
 | `whiteListedLines`       | `Array<string>` | `undefined` | A list of line IDs to include. All others will be excluded. If omitted, all are included. |
 | `whiteListedAuthorities` | `Array<string>` | `undefined` | A list of authority IDs to include. All others will be excluded. If omitted, all are included. |
 | `whiteListedModes`       | `Array<QueryMode>` | `undefined` | A list of transport modes to include. All others will be excluded. If omitted, all are included. |
+
+### options (`RequestOptions`) [Optional]
+An object containing a subset of `RequestInit` options that's applied to the request.
+
+| Key      | Type          | Description |
+|:---------|:--------------|:------------|
+| `signal` | `AbortSignal` | Allows you to communicate with a fetch request and abort it if desired. [Read more](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal) |

@@ -17,6 +17,13 @@ route: /bikes/getBikeRentalStations
 ### stationIds (`Array<string>`)
 The IDs of the bike rental stations you are interested in. The method will return a Promise which will resolve to an array of objects of type BikeRentalStation.
 
+### options (`RequestOptions`) [Optional]
+An object containing a subset of `RequestInit` options that's applied to the request.
+
+| Key      | Type          | Description |
+|:---------|:--------------|:------------|
+| `signal` | `AbortSignal` | Allows you to communicate with a fetch request and abort it if desired. [Read more](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal) |
+
 ## Example
 
 ```javascript
