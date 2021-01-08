@@ -1,3 +1,4 @@
+import { RequestOptions } from '../http'
 import { journeyPlannerQuery } from '../api'
 
 import {
@@ -17,6 +18,7 @@ export function createGetBikeRentalStation(argConfig: ArgumentConfig) {
 
     return function getBikeRentalStation(
         stationId: string,
+        options?: RequestOptions,
     ): Promise<BikeRentalStation> {
         const variables = {
             id: stationId,
@@ -26,6 +28,7 @@ export function createGetBikeRentalStation(argConfig: ArgumentConfig) {
             getBikeRentalStationQuery,
             variables,
             config,
+            options,
         ).then((data) => data?.bikeRentalStation)
     }
 }
@@ -35,6 +38,7 @@ export function createGetBikeRentalStations(argConfig: ArgumentConfig) {
 
     return function getBikeRentalStations(
         stationIds: string[],
+        options?: RequestOptions,
     ): Promise<Array<BikeRentalStation | undefined>> {
         if (!stationIds || !Array.isArray(stationIds)) {
             throw new Error(
@@ -52,7 +56,7 @@ export function createGetBikeRentalStations(argConfig: ArgumentConfig) {
 
         return journeyPlannerQuery<{
             bikeRentalStations?: BikeRentalStation[]
-        }>(getBikeRentalStationsQuery, variables, config)
+        }>(getBikeRentalStationsQuery, variables, config, options)
             .then((data) => data?.bikeRentalStations || [])
             .then((stations) =>
                 forceOrder(stations, stationIds, ({ id }) => id),
@@ -68,13 +72,17 @@ export function createGetBikeRentalStationsByPosition(
     return function getBikeRentalStationsByPosition(
         coordinates: Coordinates,
         distance = 500,
+        options?: RequestOptions,
     ): Promise<BikeRentalStation[]> {
         const variables = convertPositionToBbox(coordinates, distance)
 
         return journeyPlannerQuery<{
             bikeRentalStationsByBbox?: BikeRentalStation[]
-        }>(getBikeRentalStationsByPositionQuery, variables, config).then(
-            (data) => data?.bikeRentalStationsByBbox || [],
-        )
+        }>(
+            getBikeRentalStationsByPositionQuery,
+            variables,
+            config,
+            options,
+        ).then((data) => data?.bikeRentalStationsByBbox || [])
     }
 }

@@ -1,4 +1,4 @@
-import { post } from './http'
+import { post, RequestOptions } from './http'
 
 import { getJourneyPlannerHost, getNSRHost } from './config'
 import { ServiceConfig } from './config'
@@ -35,21 +35,21 @@ export function journeyPlannerQuery<T>(
     queryObj: string,
     variables: Record<string, any>,
     config: ServiceConfig,
+    options?: RequestOptions,
 ): Promise<T> {
     const { host, headers } = getJourneyPlannerHost(config)
     const url = `${host}/graphql`
 
     const params = getGraphqlParams(queryObj, variables)
 
-    return post(url, params, headers, undefined, config.fetch).then(
-        errorHandler,
-    )
+    return post(url, params, headers, config.fetch, options).then(errorHandler)
 }
 
 export function nsrQuery<T>(
     query: string,
     variables: Record<string, any>,
     config: ServiceConfig,
+    options?: RequestOptions,
 ): Promise<T> {
     const { host, headers } = getNSRHost(config)
     const url = `${host}/graphql`
@@ -59,7 +59,5 @@ export function nsrQuery<T>(
         variables,
     }
 
-    return post(url, params, headers, undefined, config.fetch).then(
-        errorHandler,
-    )
+    return post(url, params, headers, config.fetch, options).then(errorHandler)
 }

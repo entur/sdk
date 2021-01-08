@@ -1,3 +1,4 @@
+import { RequestOptions } from '../http'
 import { journeyPlannerQuery, getGraphqlParams } from '../api'
 
 import { getTripPatternQuery } from './query'
@@ -145,11 +146,13 @@ export function createGetTripPatterns(argConfig: ArgumentConfig) {
     return function getTripPatterns(
         params: GetTripPatternsParams,
         overrideConfig?: OverrideConfig,
+        options?: RequestOptions,
     ): Promise<TripPattern[]> {
         return journeyPlannerQuery<{ trip: { tripPatterns: TripPattern[] } }>(
             getTripPatternQuery,
             getTripPatternsVariables(params),
             mergeConfig(config, overrideConfig),
+            options,
         ).then((data) => {
             if (!data?.trip?.tripPatterns) {
                 return []
@@ -180,6 +183,7 @@ export function createFindTrips(argConfig: ArgumentConfig) {
         from: string,
         to: string,
         date?: Date | string | number,
+        options?: RequestOptions,
     ): Promise<TripPattern[]> {
         const searchDate = date ? new Date(date) : new Date()
 
@@ -206,10 +210,14 @@ export function createFindTrips(argConfig: ArgumentConfig) {
             )
         }
 
-        return getTripPatterns({
-            from: convertFeatureToLocation(fromFeatures[0]),
-            to: convertFeatureToLocation(toFeatures[0]),
-            searchDate,
-        })
+        return getTripPatterns(
+            {
+                from: convertFeatureToLocation(fromFeatures[0]),
+                to: convertFeatureToLocation(toFeatures[0]),
+                searchDate,
+            },
+            undefined,
+            options,
+        )
     }
 }

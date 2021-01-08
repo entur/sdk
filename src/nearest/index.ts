@@ -1,3 +1,4 @@
+import { RequestOptions } from '../http'
 import { journeyPlannerQuery } from '../api'
 
 import { getNearestPlacesQuery } from './query'
@@ -74,6 +75,7 @@ export function createGetNearestPlaces(argConfig: ArgumentConfig) {
     return function getNearestPlaces(
         coordinates: Coordinates,
         params: NearestParams = {},
+        options?: RequestOptions,
     ): Promise<NearestPlace[]> {
         const { latitude, longitude } = coordinates
 
@@ -107,6 +109,7 @@ export function createGetNearestPlaces(argConfig: ArgumentConfig) {
             getNearestPlacesQuery,
             variables,
             config,
+            options,
         ).then((data) =>
             (data?.nearest?.edges || []).map(({ node }) => {
                 const { distance, place } = node

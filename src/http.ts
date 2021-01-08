@@ -4,6 +4,8 @@ import { Response, RequestInfo, RequestInit } from 'node-fetch'
 
 import fetch from './fetch'
 
+export type RequestOptions = Pick<RequestInit, 'signal'>
+
 const DEFAULT_HEADERS = {
     Accept: 'application/json',
     'Content-Type': 'application/json',
@@ -41,18 +43,18 @@ export function get<T>(
     url: string,
     params?: Record<string, unknown>,
     headers?: Record<string, unknown>,
-    config?: Record<string, unknown>,
     customFetch?: (
         url: RequestInfo,
         init?: RequestInit | undefined,
     ) => Promise<Response>,
+    { signal }: RequestOptions = {},
 ): Promise<T> {
     const fetcher = customFetch || fetch
 
     const call = (): Promise<Response> =>
         fetcher(`${url}?${qs.stringify(params)}`, {
             method: 'get',
-            ...config,
+            signal,
             headers: { ...DEFAULT_HEADERS, ...headers },
         })
 
@@ -73,18 +75,18 @@ export function post<T>(
     url: string,
     params?: Record<string, unknown>,
     headers?: Record<string, unknown>,
-    config?: Record<string, unknown>,
     customFetch?: (
         url: RequestInfo,
         init?: RequestInit | undefined,
     ) => Promise<Response>,
+    { signal }: RequestOptions = {},
 ): Promise<T> {
     const fetcher = customFetch || fetch
 
     const call = (): Promise<Response> =>
         fetcher(url, {
             method: 'post',
-            ...config,
+            signal,
             headers: { ...DEFAULT_HEADERS, ...headers },
             body: JSON.stringify(params),
         })

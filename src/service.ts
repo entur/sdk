@@ -1,3 +1,4 @@
+import { RequestOptions } from './http'
 import { journeyPlannerQuery, nsrQuery } from './api'
 
 import { createFindTrips, createGetTripPatterns } from './trip'
@@ -50,8 +51,14 @@ function createEnturService(config: ArgumentConfig) {
         queryJourneyPlanner: <T>(
             queryObj: string,
             variables: Record<string, unknown>,
+            options?: RequestOptions,
         ): Promise<T> =>
-            journeyPlannerQuery(queryObj, variables, getServiceConfig(config)),
+            journeyPlannerQuery(
+                queryObj,
+                variables,
+                getServiceConfig(config),
+                options,
+            ),
         nsrQuery: <T>(
             query: string,
             variables: Record<string, unknown>,
@@ -66,8 +73,9 @@ function createEnturService(config: ArgumentConfig) {
         queryNsr: <T>(
             queryObj: string,
             variables: Record<string, unknown>,
+            options?: RequestOptions,
         ): Promise<T> =>
-            nsrQuery(queryObj, variables, getServiceConfig(config)),
+            nsrQuery(queryObj, variables, getServiceConfig(config), options),
         getFeatures: createGetFeatures(config),
         getFeaturesReverse: createGetFeaturesReverse(config),
         getTripPatterns: createGetTripPatterns(config),

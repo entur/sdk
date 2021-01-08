@@ -1,3 +1,4 @@
+import { RequestOptions } from '../http'
 import { journeyPlannerQuery, nsrQuery } from '../api'
 
 import {
@@ -25,6 +26,7 @@ export function createGetStopPlace(argConfig: ArgumentConfig) {
     return function getStopPlace(
         stopPlaceId: string,
         params: StopPlaceParams = {},
+        options?: RequestOptions,
     ): Promise<StopPlaceDetails | undefined> {
         const { includeUnusedQuays = true, ...rest } = params
         const variables = {
@@ -37,6 +39,7 @@ export function createGetStopPlace(argConfig: ArgumentConfig) {
             getStopPlaceQuery,
             variables,
             config,
+            options,
         ).then((data) => data?.stopPlace)
     }
 }
@@ -47,6 +50,7 @@ export function createGetStopPlaces(argConfig: ArgumentConfig) {
     return function getStopPlaces(
         stopPlaceIds: string[],
         params: StopPlaceParams = {},
+        options?: RequestOptions,
     ): Promise<Array<StopPlaceDetails | undefined>> {
         if (!Array.isArray(stopPlaceIds)) {
             throw new Error(
@@ -69,6 +73,7 @@ export function createGetStopPlaces(argConfig: ArgumentConfig) {
             getStopPlacesQuery,
             variables,
             config,
+            options,
         )
             .then((data) => data?.stopPlaces || [])
             .then((stopPlaceDetails: StopPlaceDetails[]) => {
@@ -87,6 +92,7 @@ export function createGetParentStopPlace(argConfig: ArgumentConfig) {
     return function getParentStopPlace(
         stopPlaceId: string,
         params: StopPlaceParams = {},
+        options?: RequestOptions,
     ): Promise<StopPlaceDetails | undefined> {
         const { includeUnusedQuays = true, ...rest } = params
         const variables = {
@@ -97,7 +103,7 @@ export function createGetParentStopPlace(argConfig: ArgumentConfig) {
 
         return journeyPlannerQuery<{
             stopPlace?: { parent?: StopPlaceDetails }
-        }>(getParentStopPlaceQuery, variables, config).then(
+        }>(getParentStopPlaceQuery, variables, config, options).then(
             (data) => data?.stopPlace?.parent,
         )
     }
@@ -110,6 +116,7 @@ export function createGetStopPlacesByPosition(argConfig: ArgumentConfig) {
         coordinates: Coordinates,
         distance = 500,
         params: StopPlaceParams = {},
+        options?: RequestOptions,
     ): Promise<StopPlaceDetails[]> {
         const { includeUnusedQuays = true, ...rest } = params
         const variables = {
@@ -122,6 +129,7 @@ export function createGetStopPlacesByPosition(argConfig: ArgumentConfig) {
             getStopPlacesByBboxQuery,
             variables,
             config,
+            options,
         ).then((data) => data?.stopPlacesByBbox || [])
     }
 }
@@ -131,9 +139,10 @@ export function createGetStopPlaceFacilities(argConfig: ArgumentConfig) {
 
     return function getStopPlaceFacilities(
         stopPlaceId: string,
+        options?: RequestOptions,
     ): Promise<StopPlaceFacilities> {
         const variables = { id: stopPlaceId }
-        return nsrQuery(getStopPlaceFacilitiesQuery, variables, config)
+        return nsrQuery(getStopPlaceFacilitiesQuery, variables, config, options)
     }
 }
 
@@ -143,6 +152,7 @@ export function createGetQuaysForStopPlace(argConfig: ArgumentConfig) {
     return function getQuaysForStopPlace(
         stopPlaceId: string,
         params: StopPlaceParams = {},
+        options?: RequestOptions,
     ): Promise<Quay[]> {
         const { includeUnusedQuays = true, ...rest } = params
         const variables = {
@@ -155,6 +165,7 @@ export function createGetQuaysForStopPlace(argConfig: ArgumentConfig) {
             getQuaysForStopPlaceQuery,
             variables,
             config,
+            options,
         ).then((data) => data?.stopPlace?.quays || [])
     }
 }

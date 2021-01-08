@@ -1,3 +1,4 @@
+import { RequestOptions } from '../http'
 import { journeyPlannerQuery } from '../api'
 
 import { forceOrder } from '../utils'
@@ -44,6 +45,7 @@ export function createGetDeparturesFromStopPlaces(argConfig: ArgumentConfig) {
     return function getDeparturesFromStopPlaces(
         stopPlaceIds: string[],
         params: GetDeparturesParams = {},
+        options?: RequestOptions,
     ): Promise<Array<DeparturesById | undefined>> {
         if (!Array.isArray(stopPlaceIds)) {
             throw new Error(
@@ -84,7 +86,7 @@ export function createGetDeparturesFromStopPlaces(argConfig: ArgumentConfig) {
 
         return journeyPlannerQuery<{
             stopPlaces?: Array<{ id: string; estimatedCalls: Departure[] }>
-        }>(getDeparturesFromStopPlacesQuery, variables, config)
+        }>(getDeparturesFromStopPlacesQuery, variables, config, options)
             .then((data) => {
                 if (!data?.stopPlaces) {
                     throw new Error(
@@ -129,6 +131,7 @@ export function createGetDeparturesFromQuays(argConfig: ArgumentConfig) {
     return function getDeparturesFromQuays(
         quayIds: string[],
         params: GetDeparturesParams = {},
+        options?: RequestOptions,
     ): Promise<Array<DeparturesById | undefined>> {
         if (!Array.isArray(quayIds)) {
             throw new Error(
@@ -162,7 +165,7 @@ export function createGetDeparturesFromQuays(argConfig: ArgumentConfig) {
         }
         return journeyPlannerQuery<{
             quays?: Array<{ estimatedCalls: Departure[]; id: string }>
-        }>(getDeparturesFromQuayQuery, variables, config)
+        }>(getDeparturesFromQuayQuery, variables, config, options)
             .then((data) => {
                 if (!data || !data?.quays) {
                     throw new Error(
@@ -194,6 +197,7 @@ export function createGetDeparturesBetweenStopPlaces(
         fromStopPlaceId: string,
         toStopPlaceId: string,
         params: GetDeparturesBetweenStopPlacesParams = {},
+        options?: RequestOptions,
     ): Promise<Departure[]> {
         const { limit = 20, start = new Date(), ...rest } = params
         const variables = {
@@ -217,20 +221,23 @@ export function createGetDeparturesBetweenStopPlaces(
 
         return journeyPlannerQuery<{
             trip: { tripPatterns: Array<{ legs: LegWithDepartures[] }> }
-        }>(getDeparturesBetweenStopPlacesQuery, variables, config).then(
-            (data) => {
-                if (!data || !data?.trip?.tripPatterns) return []
+        }>(
+            getDeparturesBetweenStopPlacesQuery,
+            variables,
+            config,
+            options,
+        ).then((data) => {
+            if (!data || !data?.trip?.tripPatterns) return []
 
-                return data.trip.tripPatterns
-                    .map((trip) => {
-                        const [leg] = trip.legs
-                        if (!leg) return undefined
+            return data.trip.tripPatterns
+                .map((trip) => {
+                    const [leg] = trip.legs
+                    if (!leg) return undefined
 
-                        return legToDepartureMapper(leg)
-                    })
-                    .filter(isTruthy)
-            },
-        )
+                    return legToDepartureMapper(leg)
+                })
+                .filter(isTruthy)
+        })
     }
 }
 
@@ -242,6 +249,7 @@ export function createGetDeparturesForServiceJourney(
     return function getDeparturesForServiceJourney(
         id: string,
         date?: string,
+        options?: RequestOptions,
     ): Promise<Departure[]> {
         const variables = {
             id,
@@ -250,13 +258,16 @@ export function createGetDeparturesForServiceJourney(
 
         return journeyPlannerQuery<{
             serviceJourney?: { estimatedCalls: Departure[] }
-        }>(getDeparturesForServiceJourneyQuery, variables, config).then(
-            (data) => {
-                return (data?.serviceJourney?.estimatedCalls || []).map(
-                    destinationMapper,
-                )
-            },
-        )
+        }>(
+            getDeparturesForServiceJourneyQuery,
+            variables,
+            config,
+            options,
+        ).then((data) => {
+            return (data?.serviceJourney?.estimatedCalls || []).map(
+                destinationMapper,
+            )
+        })
     }
 }
 

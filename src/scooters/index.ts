@@ -1,4 +1,4 @@
-import { get } from '../http'
+import { get, RequestOptions } from '../http'
 import {
     Scooter,
     ScooterOperator,
@@ -23,6 +23,7 @@ export function createGetScootersByPosition(argConfig: ArgumentConfig) {
 
     return async function getScootersByPosition(
         params: GetScootersByPositionParams,
+        options?: RequestOptions,
     ): Promise<Scooter[]> {
         const {
             latitude: lat,
@@ -46,6 +47,8 @@ export function createGetScootersByPosition(argConfig: ArgumentConfig) {
                 operators: operators.join(','),
             },
             headers,
+            config.fetch,
+            options,
         )
 
         return data || []
