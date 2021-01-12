@@ -1,25 +1,59 @@
-type BookingMethod = 'callOffice' | 'online'
+type BookingMethod =
+    | 'callDriver'
+    | 'callOffice'
+    | 'online'
+    | 'other'
+    | 'phoneAtStop'
+    | 'text'
+    | 'none'
+
+type BookWhen =
+    | 'advanceOnly'
+    | 'untilPreviousDay'
+    | 'dayOfTravelOnly'
+    | 'advanceAndDayOfTravel'
+    | 'timeOfTravelOnly'
+    | 'subscriptionChargeMoment'
+    | 'other'
+
+type BuyWhen =
+    | 'onReservation'
+    | 'inAdvance'
+    | 'inAdvanceOnly'
+    | 'beforeBoarding'
+    | 'beforeBoardingOnly'
+    | 'onBoarding'
+    | 'onBoardingOnly'
+    | 'afterBoarding'
+    | 'onCheckIn'
+    | 'onCheckOut'
+    | 'subscriptionOnly'
+    | 'other'
 
 export interface BookingContact {
-    phone: string
-    url: string
+    contactPerson?: string
+    email?: string
+    furtherDetails?: string
+    phone?: string
+    url?: string
 }
 
 export interface BookingArrangement {
-    bookingAccess: boolean
-    bookingContact: BookingContact
-    latestBookingTime: string
+    bookingAccess?: boolean
+    bookingContact?: BookingContact
     bookingMethods?: BookingMethod[]
-    bookWhen?: string
-    minimumBookingPeriod?: string
     bookingNote?: string
-    buyWhen: string
+    bookWhen?: BookWhen
+    buyWhen?: BuyWhen[]
+    latestBookingTime?: string
+    minimumBookingPeriod?: string
 }
 
 export const fragmentName = 'bookingArrangementFields'
 
 const fragment = `
 fragment ${fragmentName} on BookingArrangement {
+    bookingAccess
     bookingContact {
         contactPerson
         email
@@ -27,11 +61,12 @@ fragment ${fragmentName} on BookingArrangement {
         phone
         furtherDetails
     }
-    bookingAccess
+    bookingMethods
+    bookingNote
     bookWhen
+    buyWhen
     latestBookingTime
     minimumBookingPeriod
-    bookingNote
 }
 `
 
