@@ -20,13 +20,18 @@ export const fragmentName = 'bookingArrangementFields'
 
 const fragment = `
 fragment ${fragmentName} on BookingArrangement {
-    bookingMethods
-    bookingNote
-    minimumBookingPeriod
     bookingContact {
-        phone
+        contactPerson
+        email
         url
+        phone
+        furtherDetails
     }
+    bookingAccess
+    bookWhen
+    latestBookingTime
+    minimumBookingPeriod
+    bookingNote
 }
 `
 
