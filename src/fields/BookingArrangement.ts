@@ -30,6 +30,8 @@ type BuyWhen =
     | 'subscriptionOnly'
     | 'other'
 
+type BookingAccess = 'publicAccess' | 'authorisedPublic' | 'staff' | 'other'
+
 export interface BookingContact {
     contactPerson?: string
     email?: string
@@ -39,7 +41,7 @@ export interface BookingContact {
 }
 
 export interface BookingArrangement {
-    bookingAccess?: boolean
+    bookingAccess?: BookingAccess
     bookingContact?: BookingContact
     bookingMethods?: BookingMethod[]
     bookingNote?: string
