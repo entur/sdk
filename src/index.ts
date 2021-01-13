@@ -42,8 +42,11 @@ export default EnturService
 export type { Authority } from './fields/Authority'
 export type { BikeRentalStation } from './fields/BikeRentalStation'
 export type {
+    BookingMethod,
     BookingContact,
+    BookingAccess,
     BookingArrangement,
+    BookWhen,
 } from './fields/BookingArrangement'
 export type { Departure } from './fields/Departure'
 export type {
