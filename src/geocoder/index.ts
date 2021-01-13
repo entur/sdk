@@ -45,6 +45,12 @@ interface BoundaryApi {
     'boundary.locality_ids'?: string
 }
 
+interface FocusApi {
+    'focus.weight'?: number
+    'focus.function'?: 'linear' | 'exp'
+    'focus.scale'?: string
+}
+
 export interface GetFeaturesParams {
     /** @deprecated Use boundary object instead */
     'boundary.rect.min_lon'?: number
@@ -70,6 +76,11 @@ export interface GetFeaturesParams {
         country?: string
         countyIds?: County[]
         localityIds?: string[]
+    }
+    focus?: {
+        weight?: number
+        function?: 'linear' | 'exp'
+        scale?: string
     }
     multiModal?: 'parent' | 'child' | 'all'
     sources?: string[]
@@ -109,6 +120,18 @@ function transformBoundaryParam(boundary?: Boundary): BoundaryApi {
     return result
 }
 
+function transformFocusParam(
+    focusPoint?: GetFeaturesParams['focus'],
+): FocusApi {
+    if (!focusPoint) return {}
+
+    return {
+        'focus.weight': focusPoint.weight,
+        'focus.function': focusPoint.function,
+        'focus.scale': focusPoint.scale,
+    }
+}
+
 export function createGetFeatures(argConfig: ArgumentConfig) {
     const config = getServiceConfig(argConfig)
 
@@ -119,13 +142,14 @@ export function createGetFeatures(argConfig: ArgumentConfig) {
         options?: RequestOptions,
     ): Promise<Feature[]> {
         const { host, headers } = getGeocoderHost(config)
-        const { sources, layers, limit, boundary, ...rest } = params
+        const { sources, layers, limit, boundary, focus, ...rest } = params
 
         const searchParams = {
             text,
             lang: 'no',
             ...getPositionParamsFromGeolocationResult(coords),
             ...transformBoundaryParam(boundary),
+            ...transformFocusParam(focus),
             sources: stringifyCommaSeparatedList(sources),
             layers: stringifyCommaSeparatedList(layers),
             size: limit,
