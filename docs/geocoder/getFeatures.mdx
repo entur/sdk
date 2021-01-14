@@ -15,43 +15,59 @@ route: /geocoder/getFeatures
 ## Parameters
 
 ### query (`string`)
+
 The search string that should resemble the name of the desired stop place or address. Examples: `"Oslo S"`, `"Schweigaards gate 23, Oslo"`, `"Voss stasjon"`.
 
 ### coords (`Coordinates`) [Optional]
+
 A set of coordinates to use when the weighting search results. Examples: `{ latitude: 59.909774, longitude: 10.763712 }`.
 
 The results closest to the coordinates will be weighted above results with equally good string matches.
 As an example, the street `Dronningens gate` exists both in Oslo and Trondheim. If you call `service.getFeatures('Dronningens gate', { latitude: 63.4305103, longitude: 10.3949874 })` (coordinates of Trondheim city center), the Dronningens gate in Trondheim will be preferred to the one in Oslo.
 
 ### params (`GetFeaturesQuery`) [Optional]
+
 An optional object of parameters to pass to the query for filtering. Read more on https://developer.entur.org/pages-geocoder-api.
 
-| Key                     | Type       | Default                | Description |
-|:------------------------|:-----------|:-----------------------|:------------|
-| `boundary`              | `Boundary` |                        | Allows filtering by geographical region. See details below. |
-| `sources`               | `string[]` |                        |             |
-| `limit`                 | `number`   | No limitation          | Limit the maximum number of results to this number. Valid values are from 1 to 100 inclusive. |
-| `layers`                | `string[]` | `["venue", "address"]` | The types of places to search for. `venue` means stop places and stations, `address` means postal addresses that might not be connected to public transport.
+| Key          | Type                      | Default                | Description                                                                                                                                                  |
+| :----------- | :------------------------ | :--------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `boundary`   | `Boundary`                |                        | Allows filtering by geographical region. See details below.                                                                                                  |
+| `sources`    | `string[]`                |                        |                                                                                                                                                              |
+| `limit`      | `number`                  | No limitation          | Limit the maximum number of results to this number. Valid values are from 1 to 100 inclusive.                                                                |
+| `layers`     |  `string[]`               | `["venue", "address"]` | The types of places to search for. `venue` means stop places and stations, `address` means postal addresses that might not be connected to public transport. |
+| `focus`      | `Focus`                   |                        | Override default values for priority of `Coordinates` focus point                                                                                            |
+| `multiModal` |  `parent`, `child`, `all` |                        | The types of places to search for. `venue` means stop places and stations, `address` means postal addresses that might not be connected to public transport. |
+
+#### Focus (object)
+
+| Key        | Type            | Default  | Description                                                                                                                                                        |
+| :--------- | :-------------- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `weight`   | `number`        | 15       | Base weight to be applied to boosting results based on location. This value will be multiplied by a factor determined by decay function and scale.                 |
+| `function` | `linear`, `exp` | `linear` | Which decay function to apply: `linear` or `exp`. [Read more on decay functions](https://www.elastic.co/guide/en/elasticsearch/guide/current/decay-functions.html) |
+| `scale`    | `string`        | 2500km   | Controls the rate of decay, i.e. at which distance from the given location the scoring will be given the boost factor of the default decay value, which is 0.5.    |
 
 #### Boundary (object)
-| Key            | Type       | Description |
-|:---------------|------------|:------------|
-| `country`      | `string`   |             |
-| `countyIds`    | `County[]` | Use this for filtering on counties. You can import the County enum directly from @entur/sdk. |
-| `localityIds`  | `string[]` | Use this for filtering on municipalities |
-| `rect`         | `Rect`     |             |
+
+| Key           | Type       | Description                                                                                  |
+| :------------ | ---------- | :------------------------------------------------------------------------------------------- |
+| `country`     | `string`   |                                                                                              |
+| `countyIds`   | `County[]` | Use this for filtering on counties. You can import the County enum directly from @entur/sdk. |
+| `localityIds` | `string[]` | Use this for filtering on municipalities                                                     |
+| `rect`        | `Rect`     |                                                                                              |
 
 #### Rect (object)
+
 | Key      | Type     |
-|:---------|:---------|
+| :------- | :------- |
 | `minLat` | `number` |
 | `minLon` | `number` |
 | `maxLat` | `number` |
 | `maxLon` | `number` |
 
 ### options (`RequestOptions`) [Optional]
+
 An object containing a subset of `RequestInit` options that's applied to the request.
 
-| Key      | Type          | Description |
-|:---------|:--------------|:------------|
+| Key      | Type          | Description                                                                                                                                       |
+| :------- | :------------ | :------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `signal` | `AbortSignal` | Allows you to communicate with a fetch request and abort it if desired. [Read more](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal) |
