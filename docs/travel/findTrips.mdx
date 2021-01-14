@@ -17,19 +17,23 @@ If no locations are found for either `from` or `to`, or if `date` is invalid, an
 ## Parameters
 
 ### from (`string`)
+
 The place you want to search from. For instance `"Oslo"`
 
 ### to (`string`)
+
 The place you want to search from. For instance `"Bergen"`
 
 ### date (`Date | string | number`) [Optional]
+
 The wanted time of departure. Can be anything that is parseable by `new Date()`. If not provided, the search will be from "now".
 
 ### options (`RequestOptions`) [Optional]
+
 An object containing a subset of `RequestInit` options that's applied to the request.
 
-| Key      | Type          | Description |
-|:---------|:--------------|:------------|
+| Key      | Type          | Description                                                                                                                                       |
+| :------- | :------------ | :------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `signal` | `AbortSignal` | Allows you to communicate with a fetch request and abort it if desired. [Read more](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal) |
 
 ## Example
@@ -39,13 +43,13 @@ import createEnturService from '@entur/sdk'
 // or: const createEnturService = require('@entur/sdk').default
 
 const service = createEnturService({
-    clientName: 'awesomecompany-awesomeapp'
+    clientName: 'awesomecompany-awesomeapp',
 })
 
 async function findSomeTrips() {
     try {
         const trips = await service.findTrips('Oslo S', 'Bergen stasjon')
-        console.log(trips);
+        console.log(trips)
     } catch (error) {
         console.error(error)
     }

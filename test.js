@@ -1,10 +1,13 @@
-const [,, nameOfMethodToRun] = process.argv
+const [, , nameOfMethodToRun] = process.argv
 
 require('@babel/register')({
     presets: [
-        ['@babel/preset-env', {
-            targets: { node: 'current' },
-        }],
+        [
+            '@babel/preset-env',
+            {
+                targets: { node: 'current' },
+            },
+        ],
     ],
     ignore: [/node_modules/],
 })
@@ -67,10 +70,13 @@ function getMethodToRun(name) {
         case 'getBikeRentalStation':
             return service.getBikeRentalStation(JERNBANETORGET_BIKE_STOP)
         case 'getBikeRentalStationsByPosition':
-            return service.getBikeRentalStationsByPosition({
-                latitude: 59.911898,
-                longitude: 10.75038,
-            }, 50)
+            return service.getBikeRentalStationsByPosition(
+                {
+                    latitude: 59.911898,
+                    longitude: 10.75038,
+                },
+                50,
+            )
         case 'getDeparturesFromStopPlace':
             return service.getDeparturesFromStopPlace(JERNBANETORGET)
         case 'getDeparturesFromStopPlaces':
@@ -79,7 +85,10 @@ function getMethodToRun(name) {
                 { limit: 2 },
             )
         case 'getDeparturesBetweenStopPlaces':
-            return service.getDeparturesBetweenStopPlaces(LILLEHAMMER_STASJON, HAMAR_STASJON)
+            return service.getDeparturesBetweenStopPlaces(
+                LILLEHAMMER_STASJON,
+                HAMAR_STASJON,
+            )
         default:
             // eslint-disable-next-line prefer-promise-reject-errors
             return Promise.reject(`Error: method ${name} is not defined`)
@@ -88,4 +97,7 @@ function getMethodToRun(name) {
 
 getMethodToRun(nameOfMethodToRun)
     // eslint-disable-next-line no-console
-    .then(data => console.log(JSON.stringify(data, undefined, 4)), console.error)
+    .then(
+        (data) => console.log(JSON.stringify(data, undefined, 4)),
+        console.error,
+    )

@@ -16,7 +16,9 @@
     "index.d.ts"
   ],
   "scripts": {
-    "lint": "eslint src/ scripts/ --ext=js,ts",
+    "lint": "eslint src/ scripts/ --ext=js,ts && npm run prettier -- --check",
+    "prettier": "prettier src docs scripts *.{md,js}",
+    "format": "npm run prettier -- --write",
     "test": "npm run lint && ts-node scripts/validate-queries.js && tsc --noEmit --emitDeclarationOnly false -p .",
     "prebuild": "npm test && rm -rf lib",
     "declaration": "tsc",

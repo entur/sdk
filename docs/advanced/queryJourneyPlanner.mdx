@@ -25,23 +25,23 @@ The GraphQL query string.
 An object with GraphQL variables.
 
 ### options (`RequestOptions`) [Optional]
+
 An object containing a subset of `RequestInit` options that's applied to the request.
 
-| Key      | Type          | Description |
-|:---------|:--------------|:------------|
+| Key      | Type          | Description                                                                                                                                       |
+| :------- | :------------ | :------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `signal` | `AbortSignal` | Allows you to communicate with a fetch request and abort it if desired. [Read more](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal) |
 
 ## Example
 
 The example below finds lines that stops at the given stop places. Also check this out at [Shamash](https://api.staging.entur.io/journey-planner/v2/ide/?query=%7B%0A%20%20%0A%7D&variables=%7B%0A%20%20%22ids%22%3A%20%5B%22NSR%3AStopPlace%3A4089%22%2C%20%22NSR%3AStopPlace%3A1337%22%5D%0A%7D).
 
-
 ```typescript
 import createEnturService from '@entur/sdk'
 // or: const createEnturService = require('@entur/sdk').default
 
 const service = createEnturService({
-    clientName: 'awesomecompany-awesomeapp'
+    clientName: 'awesomecompany-awesomeapp',
 })
 
 const query = `
@@ -57,9 +57,8 @@ query ($ids: [String!]!) {
 `
 
 const variables = {
-    ids: ['NSR:StopPlace:4089', 'NSR:StopPlace:1337']
+    ids: ['NSR:StopPlace:4089', 'NSR:StopPlace:1337'],
 }
 
-service.queryJourneyPlanner(query, variables)
-    .then(res => console.log(res)) // Print out lines servicing these stop places
+service.queryJourneyPlanner(query, variables).then((res) => console.log(res)) // Print out lines servicing these stop places
 ```
