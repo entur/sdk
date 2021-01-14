@@ -19,6 +19,7 @@ The returned array _can_ contain undefined values. If that's the case, the ID yo
 ## Parameters
 
 ### stopPlaceIds (`Array<string>`)
+
 The IDs of the stop places you are interested in.
 
 ### params (`Object`) [Optional]
@@ -26,8 +27,9 @@ The IDs of the stop places you are interested in.
 See the `params` parameter for [`getDeparturesForStopPlace`](/departures/getDeparturesFromStopPlace#params-object-optional).
 
 ### options (`RequestOptions`) [Optional]
+
 An object containing a subset of `RequestInit` options that's applied to the request.
 
-| Key      | Type          | Description |
-|:---------|:--------------|:------------|
+| Key      | Type          | Description                                                                                                                                       |
+| :------- | :------------ | :------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `signal` | `AbortSignal` | Allows you to communicate with a fetch request and abort it if desired. [Read more](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal) |

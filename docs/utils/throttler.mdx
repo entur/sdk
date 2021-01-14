@@ -12,27 +12,35 @@ To help you with this, we have a `throttler` utility that throttles the requests
 Example usage:
 
 ```javascript
-import createEnturService, { throttler, convertFeatureToLocation } from '@entur/sdk'
+import createEnturService, {
+    throttler,
+    convertFeatureToLocation,
+} from '@entur/sdk'
 // or: const { default: createEnturService, throttler, convertFeatureToLocation } = require('@entur/sdk')
 
-const service = createEnturService({ clientName: 'myawesomecompany-myawesomeapp' })
+const service = createEnturService({
+    clientName: 'myawesomecompany-myawesomeapp',
+})
 
 async function getTripPatternsForVeryManyDifferentLocations() {
-  const [fromLocation] = await service.getFeatures('Oslo S')
-  const [toLocation] = await service.getFeatures('Drammen stasjon')
-  const params = {
-      searchDate: new Date(),
-      from: convertFeatureToLocation(fromLocation),
-      to: convertFeatureToLocation(toLocation),
-  }
+    const [fromLocation] = await service.getFeatures('Oslo S')
+    const [toLocation] = await service.getFeatures('Drammen stasjon')
+    const params = {
+        searchDate: new Date(),
+        from: convertFeatureToLocation(fromLocation),
+        to: convertFeatureToLocation(toLocation),
+    }
 
-  // A huge array of arguments that we want to call a function with, one by one.
-  const queries = Array(3000).fill(params)
+    // A huge array of arguments that we want to call a function with, one by one.
+    const queries = Array(3000).fill(params)
 
-  // We pass the function and the huge list of arguments to the throttler.
-  // The resulting list will be in the same order as the arguments passed.
-  const tripPatterns = await throttler(query => service.getTripPatterns(query), queries)
-  console.log('Done!')
-  return tripPatterns
+    // We pass the function and the huge list of arguments to the throttler.
+    // The resulting list will be in the same order as the arguments passed.
+    const tripPatterns = await throttler(
+        (query) => service.getTripPatterns(query),
+        queries,
+    )
+    console.log('Done!')
+    return tripPatterns
 }
 ```

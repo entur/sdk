@@ -15,13 +15,15 @@ route: /bikes/getBikeRentalStation
 ## Parameters
 
 ### stationId (`string`)
+
 The ID of the bike rental station you are interested in. The method will return a Promise which will resolve to an object of type BikeRentalStation.
 
 ### options (`RequestOptions`) [Optional]
+
 An object containing a subset of `RequestInit` options that's applied to the request.
 
-| Key      | Type          | Description |
-|:---------|:--------------|:------------|
+| Key      | Type          | Description                                                                                                                                       |
+| :------- | :------------ | :------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `signal` | `AbortSignal` | Allows you to communicate with a fetch request and abort it if desired. [Read more](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal) |
 
 ## Example
@@ -31,12 +33,14 @@ import createEnturService from '@entur/sdk'
 // or: const createEnturService = require('@entur/sdk').default
 
 const service = createEnturService({
-    clientName: 'awesomecompany-awesomeapp'
+    clientName: 'awesomecompany-awesomeapp',
 })
 
 async function example() {
     try {
-        const bikeRentalStation = await service.getBikeRentalStation('YBE:VehicleSharingParkingArea:368')
+        const bikeRentalStation = await service.getBikeRentalStation(
+            'YBE:VehicleSharingParkingArea:368',
+        )
         console.log(bikeRentalStation)
     } catch (error) {
         console.error(error)

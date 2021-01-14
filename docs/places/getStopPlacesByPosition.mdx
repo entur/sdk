@@ -15,9 +15,11 @@ route: /places/getStopPlacesByPosition
 ## Parameters
 
 ### coordinates (`Coordinates`)
+
 The coordinates of which to find bike rental stations around.
 
 ### distance (`number`) [Optional]
+
 Default: `500`
 
 The "radius" in meters of the surrounding bounding box in which you want to find stop places.
@@ -28,8 +30,9 @@ The width and height of the bounding box are therefore `2 * distance`, and the c
 See the `params` parameter for `getStopPlace`.
 
 ### options (`RequestOptions`) [Optional]
+
 An object containing a subset of `RequestInit` options that's applied to the request.
 
-| Key      | Type          | Description |
-|:---------|:--------------|:------------|
+| Key      | Type          | Description                                                                                                                                       |
+| :------- | :------------ | :------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `signal` | `AbortSignal` | Allows you to communicate with a fetch request and abort it if desired. [Read more](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal) |

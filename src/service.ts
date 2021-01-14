@@ -43,8 +43,9 @@ function createEnturService(config: ArgumentConfig) {
             config: ServiceConfig,
         ): Promise<T> => {
             if (process.env.NODE_ENV !== 'production') {
-                // eslint-disable-next-line
-                console.warn('journeyPlannerQuery is deprecated and will be removed in a future release. Please use queryJourneyPlanner instead.')
+                console.warn(
+                    'journeyPlannerQuery is deprecated and will be removed in a future release. Please use queryJourneyPlanner instead.',
+                )
             }
             return journeyPlannerQuery(query, variables, config)
         },
@@ -65,8 +66,9 @@ function createEnturService(config: ArgumentConfig) {
             config: ServiceConfig,
         ): Promise<T> => {
             if (process.env.NODE_ENV !== 'production') {
-                // eslint-disable-next-line
-                console.warn('nsrQuery is deprecated and will be removed in a future release. Please use queryNsr instead.')
+                console.warn(
+                    'nsrQuery is deprecated and will be removed in a future release. Please use queryNsr instead.',
+                )
             }
             return nsrQuery(query, variables, config)
         },
