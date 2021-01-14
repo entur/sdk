@@ -78,8 +78,23 @@ export interface GetFeaturesParams {
         localityIds?: string[]
     }
     focus?: {
+        /**
+         * Base weight to be applied to boosting results based on location. This value will be multiplied by a factor determined by decay function and scale.
+         *
+         * @defaultValue 15
+         */
         weight?: number
+        /**
+         * Which decay function to apply.
+         *
+         * @defaultValue linear
+         */
         function?: 'linear' | 'exp'
+        /**
+         * Controls the rate of decay, i.e. at which distance in km from the given location the scoring will be given the boost factor of the default decay value, which is 0.5.
+         *
+         * @defaultValue 2500
+         */
         scale?: string
     }
     multiModal?: 'parent' | 'child' | 'all'
