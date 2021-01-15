@@ -5,3 +5,4 @@ lib/
 .tern-port
 .docz
 .firebase/
+*.tgz
