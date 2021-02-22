@@ -11,6 +11,7 @@ query($id: String!, $filterByInUse: Boolean) {
         description
         latitude
         longitude
+        wheelchairBoarding
         weighting
         transportMode
         transportSubmode
@@ -31,6 +32,7 @@ query($ids: [String]!, $filterByInUse: Boolean) {
         description
         latitude
         longitude
+        wheelchairBoarding
         weighting
         transportMode
         transportSubmode
@@ -52,6 +54,7 @@ query($id: String!, $filterByInUse: Boolean) {
             description
             latitude
             longitude
+            wheelchairBoarding
             weighting
             transportMode
             transportSubmode
@@ -84,6 +87,7 @@ query(
         description
         latitude
         longitude
+        wheelchairBoarding
         weighting
         transportMode
         transportSubmode

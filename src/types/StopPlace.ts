@@ -9,6 +9,7 @@ export interface StopPlaceDetails {
     description?: string
     latitude: number
     longitude: number
+    wheelchairBoarding: 'noInformation' | 'possible' | 'notPossible'
     weighting:
         | 'preferredInterchange'
         | 'recommendedInterchange'
