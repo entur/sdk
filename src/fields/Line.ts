@@ -27,7 +27,7 @@ type FlexibleLineType =
     | 'other'
 
 export type Line = {
-    bookingArrangements?: BookingArrangement
+    bookingArrangements?: BookingArrangement // @deprecated
     description?: string
     flexibleLineType?: FlexibleLineType
     id: string

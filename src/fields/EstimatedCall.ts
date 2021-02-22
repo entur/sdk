@@ -29,7 +29,7 @@ export interface EstimatedCall {
     actualDepartureTime?: string // Only available AFTER departure has taken place
     aimedArrivalTime: string
     aimedDepartureTime: string
-    bookingArrangements?: BookingArrangement
+    bookingArrangements?: BookingArrangement // @deprecated
     cancellation: boolean
     date: string
     destinationDisplay: {

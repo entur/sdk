@@ -27,7 +27,7 @@ interface JourneyPattern {
 
 export interface ServiceJourney {
     id: string
-    bookingArrangements?: BookingArrangement
+    bookingArrangements?: BookingArrangement // @deprecated
     journeyPattern?: JourneyPattern
     notices?: Notice[]
     publicCode?: string
