@@ -19,6 +19,7 @@ export interface Quay {
     publicCode: string
     situations: Situation[]
     stopPlace: StopPlace
+    wheelchairAccessible: 'noInformation' | 'possible' | 'notPossible'
 }
 
 export const fragmentName = 'quayFields'
@@ -29,6 +30,7 @@ fragment ${fragmentName} on Quay {
     name
     description
     publicCode
+    wheelchairAccessible
     situations {
         ...${situationFields}
     }
