@@ -3,12 +3,6 @@ import { TransportMode, TransportSubmode } from '../types/Mode'
 import { uniq } from '../utils'
 
 import {
-    fragmentName as bookingArrangementFields,
-    fragments as bookingArrangementFragments,
-    BookingArrangement,
-} from './BookingArrangement'
-
-import {
     fragmentName as noticeFields,
     fragments as noticeFragments,
     Notice,
@@ -27,7 +21,6 @@ type FlexibleLineType =
     | 'other'
 
 export type Line = {
-    bookingArrangements?: BookingArrangement
     description?: string
     flexibleLineType?: FlexibleLineType
     id: string
@@ -42,9 +35,6 @@ export const fragmentName = 'lineFields'
 
 export const fragment = `
 fragment ${fragmentName} on Line {
-    bookingArrangements {
-        ...${bookingArrangementFields}
-    }
     description
     flexibleLineType
     id
@@ -58,8 +48,4 @@ fragment ${fragmentName} on Line {
 }
 `
 
-export const fragments = uniq<string>([
-    fragment,
-    ...bookingArrangementFragments,
-    ...noticeFragments,
-])
+export const fragments = uniq<string>([fragment, ...noticeFragments])

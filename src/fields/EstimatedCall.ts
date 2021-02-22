@@ -18,18 +18,11 @@ import {
     ServiceJourney,
 } from './ServiceJourney'
 
-import {
-    fragmentName as bookingArrangementFields,
-    fragments as bookingArrangementFragments,
-    BookingArrangement,
-} from './BookingArrangement'
-
 export interface EstimatedCall {
     actualArrivalTime?: string // Only available AFTER arrival has taken place
     actualDepartureTime?: string // Only available AFTER departure has taken place
     aimedArrivalTime: string
     aimedDepartureTime: string
-    bookingArrangements?: BookingArrangement
     cancellation: boolean
     date: string
     destinationDisplay: {
@@ -57,9 +50,6 @@ fragment ${fragmentName} on EstimatedCall {
     actualDepartureTime
     aimedArrivalTime
     aimedDepartureTime
-    bookingArrangements {
-        ...${bookingArrangementFields}
-    }
     cancellation
     date
     destinationDisplay {
@@ -85,7 +75,6 @@ fragment ${fragmentName} on EstimatedCall {
 
 export const fragments = uniq<string>([
     fragment,
-    ...bookingArrangementFragments,
     ...noticeFragments,
     ...quayFragments,
     ...serviceJourneyFragments,

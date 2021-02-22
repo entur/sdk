@@ -57,6 +57,12 @@ import {
     IntermediateEstimatedCall,
 } from './EstimatedCall'
 
+import {
+    fragmentName as bookingArrangementFields,
+    fragments as bookingArrangementFragments,
+    BookingArrangement,
+} from './BookingArrangement'
+
 import { Notice } from './Notice'
 
 export interface Leg {
@@ -105,6 +111,7 @@ export interface Leg {
     toPlace: Place
     /** The transport sub mode (e.g., localBus or expressBus) used when traversing this leg. Null if leg is not a ride */
     transportSubmode?: TransportSubmode
+    bookingArrangements?: BookingArrangement
 }
 
 export const fragmentName = 'legFields'
@@ -162,6 +169,9 @@ fragment ${fragmentName} on Leg {
         ...${placeFields}
     }
     transportSubmode
+    bookingArrangements {
+        ...${bookingArrangementFields}
+    }
 }
 `
 
@@ -176,4 +186,5 @@ export const fragments = uniq<string>([
     ...interchangeFragments,
     ...pointsOnLinkFragments,
     ...estimatedCallFragments,
+    ...bookingArrangementFragments,
 ])

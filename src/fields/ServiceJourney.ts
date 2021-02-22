@@ -14,12 +14,6 @@ import {
     Line,
 } from './Line'
 
-import {
-    fragmentName as bookingArrangementFields,
-    fragments as bookingArrangementFragments,
-    BookingArrangement,
-} from './BookingArrangement'
-
 interface JourneyPattern {
     line: Line
     notices?: Notice[]
@@ -27,7 +21,6 @@ interface JourneyPattern {
 
 export interface ServiceJourney {
     id: string
-    bookingArrangements?: BookingArrangement
     journeyPattern?: JourneyPattern
     notices?: Notice[]
     publicCode?: string
@@ -40,9 +33,6 @@ export const fragmentName = 'serviceJourneyFields'
 export const fragment = `
 fragment ${fragmentName} on ServiceJourney {
     id
-    bookingArrangements {
-        ...${bookingArrangementFields}
-    }
     journeyPattern {
         line {
             ...${lineFields}
@@ -62,7 +52,6 @@ fragment ${fragmentName} on ServiceJourney {
 
 export const fragments = uniq<string>([
     fragment,
-    ...bookingArrangementFragments,
     ...noticeFragments,
     ...lineFragments,
 ])
