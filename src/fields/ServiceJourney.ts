@@ -27,7 +27,6 @@ interface JourneyPattern {
 
 export interface ServiceJourney {
     id: string
-    /** @deprecated Use bookingArrangements on Leg instead. */
     bookingArrangements?: BookingArrangement
     journeyPattern?: JourneyPattern
     notices?: Notice[]
