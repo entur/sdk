@@ -26,13 +26,13 @@ export default function createGetVehicles(argConfig: ArgumentConfig) {
         params: GetVehiclesParams,
         options?: RequestOptions,
     ): Promise<Vehicle[]> {
-        const data = await mobilityQuery<Vehicle[]>(
+        const data = await mobilityQuery<{ vehicles: Vehicle[] }>(
             getVehiclesQuery,
             params,
             config,
             options,
         )
 
-        return data || []
+        return data?.vehicles || []
     }
 }
