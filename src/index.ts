@@ -19,6 +19,7 @@ export type {
     System,
     Vehicle,
 } from './mobility/types'
+export type { GetVehiclesParams } from './mobility/getVehicles'
 
 export { TypeName } from './nearest/types'
 export type { NearestPlace } from './nearest/types'
