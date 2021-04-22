@@ -10,6 +10,7 @@ import { validate } from 'graphql/validation'
 
 import journeyplanner2SchemaJSON from '../schemas/journeyplanner2.json'
 import nsrSchemaJSON from '../schemas/nsr.json'
+import mobilitySchemaJSON from '../schemas/mobility.json'
 
 import {
     getBikeRentalStationQuery,
@@ -37,8 +38,11 @@ import {
 
 import { getTripPatternQuery } from '../src/trip/query'
 
+import getVehiclesQuery from '../src/mobility/getVehicles/query'
+
 const journeyplanner2Schema = buildClientSchema(journeyplanner2SchemaJSON.data)
 const nsrSchema = buildClientSchema(nsrSchemaJSON.data)
+const mobilitySchema = buildClientSchema(mobilitySchemaJSON.data)
 
 const jp2Queries = [
     { getBikeRentalStationQuery },
@@ -58,6 +62,8 @@ const jp2Queries = [
 ]
 
 const nsrQueries = [{ getStopPlaceFacilitiesQuery }]
+
+const mobilityQueries = [{ getVehiclesQuery }]
 
 function validateQuery(queryName, query, schema) {
     try {
@@ -80,6 +86,10 @@ function runValidations() {
     nsrQueries.forEach((obj) => {
         const [name, query] = Object.entries(obj)[0]
         validateQuery(name, query, nsrSchema)
+    })
+    mobilityQueries.forEach((obj) => {
+        const [name, query] = Object.entries(obj)[0]
+        validateQuery(name, query, mobilitySchema)
     })
 }
 
