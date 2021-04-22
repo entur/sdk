@@ -1419,6 +1419,124 @@
               "deprecationReason": null
             },
             {
+              "name": "datedServiceJourney",
+              "description": "Get a single dated service journey based on its id",
+              "args": [
+                {
+                  "name": "id",
+                  "description": null,
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "OBJECT",
+                "name": "DatedServiceJourney",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "datedServiceJourneys",
+              "description": "List dated service journeys",
+              "args": [
+                {
+                  "name": "lines",
+                  "description": "Set of line ids to fetch entities for.",
+                  "type": {
+                    "kind": "LIST",
+                    "name": null,
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "serviceJourneys",
+                  "description": "Set of serviceJourney ids to fetch entities for.",
+                  "type": {
+                    "kind": "LIST",
+                    "name": null,
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "operatingDays",
+                  "description": "Set of dates to fetch entites for.",
+                  "type": {
+                    "kind": "LIST",
+                    "name": null,
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Date",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "alterations",
+                  "description": "Set of serviceAlteration to fetch entities for.",
+                  "type": {
+                    "kind": "LIST",
+                    "name": null,
+                    "ofType": {
+                      "kind": "ENUM",
+                      "name": "ServiceAlteration",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "authorities",
+                  "description": "Set of authorities ids to fetch serviceJourneys for.",
+                  "type": {
+                    "kind": "LIST",
+                    "name": null,
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "DatedServiceJourney",
+                    "ofType": null
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "bikeRentalStations",
               "description": "Get all bike rental stations",
               "args": [
@@ -2547,6 +2665,18 @@
               "type": {
                 "kind": "OBJECT",
                 "name": "Line",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "datedServiceJourney",
+              "description": "For ride legs, the dated service journey if it exist in planned data. If not, null.",
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "DatedServiceJourney",
                 "ofType": null
               },
               "isDeprecated": false,
@@ -5891,6 +6021,26 @@
               "deprecationReason": null
             },
             {
+              "name": "datedServiceJourneys",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "DatedServiceJourney",
+                    "ofType": null
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "quays",
               "description": null,
               "args": [],
@@ -7711,7 +7861,7 @@
             },
             {
               "name": "activeDates",
-              "description": null,
+              "description": "Return a list of operating/service days a ServiceJourney run on. Cancellation/replaced alterations is not included.",
               "args": [],
               "type": {
                 "kind": "NON_NULL",
@@ -7731,15 +7881,15 @@
             },
             {
               "name": "serviceAlteration",
-              "description": "Whether journey is as planned, a cancellation or an extra journey. Default is as planned",
+              "description": "For a Whether journey is as planned, a cancellation, an extra journey or replaced.",
               "args": [],
               "type": {
                 "kind": "ENUM",
                 "name": "ServiceAlteration",
                 "ofType": null
               },
-              "isDeprecated": false,
-              "deprecationReason": null
+              "isDeprecated": true,
+              "deprecationReason": "The service-alteration might be different for each service day, so this method is not always giving the correct result. This method will return 'null' if there is a mix of different alterations."
             },
             {
               "name": "transportSubmode",
@@ -9254,6 +9404,109 @@
             {
               "name": "situations",
               "description": "Get all situations active for the organisation",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "PtSituationElement",
+                    "ofType": null
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "DatedServiceJourney",
+          "description": "A planned vehicle journey with passengers on a given date.",
+          "fields": [
+            {
+              "name": "id",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "operatingDay",
+              "description": "Return the operating/service day the ServiceJourney run on.",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Date",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "serviceAlteration",
+              "description": "Whether journey is as planned, a cancellation, an extra journey or replaced.",
+              "args": [],
+              "type": {
+                "kind": "ENUM",
+                "name": "ServiceAlteration",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "serviceJourney",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "ServiceJourney",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "replacementFor",
+              "description": "The DatedServiceJourney replaced by this DSJ. This is based on planed alterations, not real-time cancelations.",
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "DatedServiceJourney",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "situations",
+              "description": "Get all situations active for the DatedServiceJourney",
               "args": [],
               "type": {
                 "kind": "NON_NULL",
