@@ -8,6 +8,18 @@ export {
     throttler,
 } from './utils'
 
+export { FormFactor, PropulsionType } from './mobility/types'
+export type {
+    VehicleType,
+    PricingSegment,
+    PricingPlan,
+    RentalUris,
+    RentalApp,
+    RentalApps,
+    System,
+    Vehicle,
+} from './mobility/types'
+
 export { TypeName } from './nearest/types'
 export type { NearestPlace } from './nearest/types'
 

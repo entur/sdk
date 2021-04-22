@@ -1,6 +1,6 @@
 import { post, RequestOptions } from './http'
 
-import { getJourneyPlannerHost, getNSRHost } from './config'
+import { getJourneyPlannerHost, getMobilityHost, getNSRHost } from './config'
 import { ServiceConfig } from './config'
 
 function minify(query: string): string {
@@ -52,6 +52,23 @@ export function nsrQuery<T>(
     options?: RequestOptions,
 ): Promise<T> {
     const { host, headers } = getNSRHost(config)
+    const url = `${host}/graphql`
+
+    const params = {
+        query: minify(query),
+        variables,
+    }
+
+    return post(url, params, headers, config.fetch, options).then(errorHandler)
+}
+
+export function mobilityQuery<T>(
+    query: string,
+    variables: Record<string, any>,
+    config: ServiceConfig,
+    options?: RequestOptions,
+): Promise<T> {
+    const { host, headers } = getMobilityHost(config)
     const url = `${host}/graphql`
 
     const params = {
