@@ -30,21 +30,21 @@ export interface PricingSegment {
 
 export interface PricingPlan {
     id: string
-    url: string
+    url?: string
     name: string
     currency: string
     price: number
     isTaxable: boolean
     description: string
-    perKmPricing: PricingSegment[]
-    perMinPricing: PricingSegment[]
-    surgePricing: boolean
+    perKmPricing?: PricingSegment[]
+    perMinPricing?: PricingSegment[]
+    surgePricing?: boolean
 }
 
 export interface RentalUris {
-    android: string
-    ios: string
-    web: string
+    android?: string
+    ios?: string
+    web?: string
 }
 
 export interface RentalApp {
@@ -53,8 +53,8 @@ export interface RentalApp {
 }
 
 export interface RentalApps {
-    ios: RentalApp
-    android: RentalApp
+    ios?: RentalApp
+    android?: RentalApp
 }
 
 export interface System {
@@ -82,7 +82,7 @@ export interface Vehicle {
     isDisabled: boolean
     currentRangeMeters: number
     vehicleType: VehicleType
-    pricingPlan: PricingPlan
-    rentalUris: RentalUris
+    pricingPlan?: PricingPlan
+    rentalUris?: RentalUris
     system: System
 }
