@@ -15,27 +15,52 @@ query ($lat: Float!, $lon: Float!, $range: Int!, $count: Int, $operators: [Strin
         lat
         lon
         pricingPlan {
-            description
+            description {
+                translation {
+                    language
+                    value
+                }
+            }
             id
             currency
             isTaxable
-            name
+            name {
+                translation {
+                    language
+                    value
+                }
+            }
             price
             surgePricing
             url
         }
         system {
-            name
+            name {
+                translation {
+                    language
+                    value
+                }
+            }
             email
             feedContactEmail
             id
             licenseUrl
             language
             phoneNumber
-            operator
+            operator {
+                translation {
+                    language
+                    value
+                }
+            }
             purchaseUrl
             startDate
-            shortName
+            shortName {
+                translation {
+                    language
+                    value
+                }
+            }
             timezone
             url
         }

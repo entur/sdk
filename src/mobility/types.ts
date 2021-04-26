@@ -1,3 +1,12 @@
+export interface Translation {
+    language: string
+    value: string
+}
+
+export interface TranslatedString {
+    translation: Translation[]
+}
+
 export enum FormFactor {
     BICYCLE = 'BICYCLE',
     CAR = 'CAR',
@@ -31,11 +40,11 @@ export interface PricingSegment {
 export interface PricingPlan {
     id: string
     url?: string
-    name: string
+    name: TranslatedString
     currency: string
     price: number
     isTaxable: boolean
-    description: string
+    description: TranslatedString
     perKmPricing?: PricingSegment[]
     perMinPricing?: PricingSegment[]
     surgePricing?: boolean
@@ -60,9 +69,9 @@ export interface RentalApps {
 export interface System {
     id: string
     language: string
-    name: string
-    shortName?: string
-    operator?: string
+    name: TranslatedString
+    shortName?: TranslatedString
+    operator?: TranslatedString
     url?: string
     purchaseUrl?: string
     startDate?: string

@@ -17,6 +17,8 @@ export type {
     RentalApp,
     RentalApps,
     System,
+    TranslatedString,
+    Translation,
     Vehicle,
 } from './mobility/types'
 export type { GetVehiclesParams } from './mobility/getVehicles'

@@ -35,7 +35,7 @@ runIntrospectionQuery(
 )
 
 runIntrospectionQuery(
-    'https://api.entur.io/mobility/v2/graphql',
+    'https://api.dev.entur.io/mobility/v2/graphql',
 ).then((schema) =>
     writeFile('schemas/mobility.json', JSON.stringify(schema, undefined, 2)),
 )
