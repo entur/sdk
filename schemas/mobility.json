@@ -94,25 +94,33 @@
           "description": "",
           "fields": [
             {
-              "name": "name",
+              "name": "id",
               "description": "",
               "args": [],
               "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
               },
               "isDeprecated": false,
               "deprecationReason": null
             },
             {
-              "name": "codespace",
+              "name": "name",
               "description": "",
               "args": [],
               "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "TranslatedString",
+                  "ofType": null
+                }
               },
               "isDeprecated": false,
               "deprecationReason": null
@@ -398,15 +406,15 @@
           "description": "",
           "fields": [
             {
-              "name": "operators",
+              "name": "codespaces",
               "description": "",
               "args": [],
               "type": {
                 "kind": "LIST",
                 "name": null,
                 "ofType": {
-                  "kind": "OBJECT",
-                  "name": "Operator",
+                  "kind": "SCALAR",
+                  "name": "String",
                   "ofType": null
                 }
               },
@@ -414,7 +422,23 @@
               "deprecationReason": null
             },
             {
-              "name": "codespaces",
+              "name": "operators",
+              "description": "",
+              "args": [],
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "systems",
               "description": "",
               "args": [],
               "type": {
@@ -486,7 +510,7 @@
                   "defaultValue": null
                 },
                 {
-                  "name": "operators",
+                  "name": "codespaces",
                   "description": "",
                   "type": {
                     "kind": "LIST",
@@ -500,7 +524,21 @@
                   "defaultValue": null
                 },
                 {
-                  "name": "codespaces",
+                  "name": "systems",
+                  "description": "",
+                  "type": {
+                    "kind": "LIST",
+                    "name": null,
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "operators",
                   "description": "",
                   "type": {
                     "kind": "LIST",
@@ -627,7 +665,7 @@
                   "defaultValue": null
                 },
                 {
-                  "name": "operators",
+                  "name": "codespaces",
                   "description": "",
                   "type": {
                     "kind": "LIST",
@@ -641,7 +679,21 @@
                   "defaultValue": null
                 },
                 {
-                  "name": "codespaces",
+                  "name": "systems",
+                  "description": "",
+                  "type": {
+                    "kind": "LIST",
+                    "name": null,
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "operators",
                   "description": "",
                   "type": {
                     "kind": "LIST",
@@ -1132,9 +1184,13 @@
               "description": "",
               "args": [],
               "type": {
-                "kind": "OBJECT",
-                "name": "TranslatedString",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "Operator",
+                  "ofType": null
+                }
               },
               "isDeprecated": false,
               "deprecationReason": null
