@@ -48,9 +48,12 @@ query ($lat: Float!, $lon: Float!, $range: Int!, $count: Int, $operators: [Strin
             language
             phoneNumber
             operator {
-                translation {
-                    language
-                    value
+                id
+                name {
+                     translation {
+                        language
+                        value
+                    }
                 }
             }
             purchaseUrl
