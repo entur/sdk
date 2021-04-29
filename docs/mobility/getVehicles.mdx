@@ -51,7 +51,7 @@ const service = createEnturService({
 
 async function example() {
     try {
-        const vehicles = await service.getVehicles({
+        const vehicles = await service.mobility.getVehicles({
             lat: 59.95,
             lon: 10.75,
             range: 200,
