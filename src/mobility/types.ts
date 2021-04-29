@@ -66,12 +66,17 @@ export interface RentalApps {
     android?: RentalApp
 }
 
+export interface Operator {
+    id: string
+    name: TranslatedString
+}
+
 export interface System {
     id: string
     language: string
     name: TranslatedString
     shortName?: TranslatedString
-    operator?: TranslatedString
+    operator: Operator
     url?: string
     purchaseUrl?: string
     startDate?: string
