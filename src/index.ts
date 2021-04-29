@@ -9,18 +9,8 @@ export {
 } from './utils'
 
 export { FormFactor, PropulsionType } from './mobility/types'
-export type {
-    VehicleType,
-    PricingSegment,
-    PricingPlan,
-    RentalUris,
-    RentalApp,
-    RentalApps,
-    System,
-    TranslatedString,
-    Translation,
-    Vehicle,
-} from './mobility/types'
+
+export * as MobilityTypes from './mobility/types'
 export type { GetVehiclesParams } from './mobility/getVehicles'
 
 export { TypeName } from './nearest/types'
