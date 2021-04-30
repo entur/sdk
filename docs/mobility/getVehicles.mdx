@@ -7,7 +7,7 @@ route: /vehicles/getVehicles
 # getVehicles
 
 ```typescript
-(params: GetVehiclesParams, options?: RequestOptions) => Promise<Vehicle[]>
+(params: GetVehiclesParams, options?: RequestOptions) => Promise<MobilityTypes.Vehicle[]>
 ```
 
 `getVehicles` finds micromobility vehicles, like e-scooters, shared bikes and cars, within an area surrounding set of coordinates.
@@ -18,18 +18,18 @@ This method uses the `vehicles` query of the [Mobility v2 API](https://developer
 
 ### params (`GetVehiclesParams`)
 
-| Key               | Type                | Required? | Default | Description                                                                   |
-| :---------------- | :------------------ | :-------- | :------ | ----------------------------------------------------------------------------- |
-| `lat`             |  `number`           | `true`    | N/A     | The latitude coordinate to find vehicles around                               |
-| `lon`             |  `number`           | `true`    | N/A     | The longitude coordinate to find vehicles around                              |
-| `range`           |  `number`           | `true`    | N/A     | The radius of the search area, surrounding the latitude/longitude coordinates |
-| `count`           |  `number`           | `false`   |         | The max number of vehicles to return                                          |
-| `operators`       |  `string[]`         | `false`   |         |                                                                               |
-| `codespaces`      |  `string[]`         | `false`   |         |                                                                               |
-| `formFactors`     |  `FormFactor[]`     | `false`   |         |                                                                               |
-| `propulsionTypes` |  `PropulsionType[]` | `false`   |         |                                                                               |
-| `includeReserved` |  `boolean`          | `false`   |         |                                                                               |
-| `includeDisabled` |  `boolean`          | `false`   |         |                                                                               |
+| Key               | Type                | Required? | Default | Description                                                                    |
+| :---------------- | :------------------ | :-------- | :------ | ------------------------------------------------------------------------------ |
+| `lat`             |  `number`           | Yes       | N/A     | The latitude coordinate to find vehicles around.                               |
+| `lon`             |  `number`           | Yes       | N/A     | The longitude coordinate to find vehicles around.                              |
+| `range`           |  `number`           | Yes       | N/A     | The radius of the search area, surrounding the latitude/longitude coordinates. |
+| `count`           |  `number`           | No        |         | The max number of vehicles to return.                                          |
+| `operators`       |  `string[]`         | No        |         | Return only vehicles of the given operator IDs.                                |
+| `codespaces`      |  `string[]`         | No        |         | Return only vehicles of the given code spaces.                                 |
+| `formFactors`     |  `FormFactor[]`     | No        |         | Return only vehicles of the given forms, i.e. `FormFactor.SCOOTER`             |
+| `propulsionTypes` |  `PropulsionType[]` | No        |         | Return only vehicles of the given propulsion types.                            |
+| `includeReserved` |  `boolean`          | No        |         | Set to `true` to also include vehicles that have been reserved.                |
+| `includeDisabled` |  `boolean`          | No        |         | Set to `true` to also include vehicles that have been marked as disabled.      |
 
 ### options (`RequestOptions`) [Optional]
 
@@ -60,5 +60,75 @@ async function example() {
     } catch (error) {
         console.error(error)
     }
+}
+```
+
+## Example vehicle
+
+```
+{
+    lat: 59.967579,
+    lon: 10.732924,
+    pricingPlan: {
+        description: {
+            translation: [
+                {
+                    language: 'nb',
+                    value: 'Start 10 kroner, deretter 2.5 kroner per minutt',
+                },
+            ],
+        },
+        id: 'YVO:PricingPlan:Basic',
+        currency: 'NOK',
+        isTaxable: false,
+        name: {
+            translation: [
+                {
+                    language: 'nb',
+                    value: 'Basic',
+                },
+            ],
+        },
+        price: 10,
+        surgePricing: null,
+        url: null,
+    },
+    system: {
+        name: {
+            translation: [
+                {
+                    language: 'nb',
+                    value: 'VOI',
+                },
+            ],
+        },
+        email: null,
+        feedContactEmail: null,
+        id: 'YVO:System:voioslo',
+        licenseUrl: null,
+        language: 'nb',
+        phoneNumber: null,
+        operator: {
+            id: 'YVO:Operator:voi',
+            name: {
+                translation: [
+                    {
+                        language: 'nb',
+                        value: 'Voi',
+                    },
+                ],
+            },
+        },
+        purchaseUrl: null,
+        startDate: null,
+        shortName: null,
+        timezone: 'UTC',
+        url: null,
+    },
+    isDisabled: false,
+    isReserved: false,
+    id: 'YVO:Scooter:ec01560b-8b12-4cb8-ba50-68439c95dbe7',
+    currentRangeMeters: 0,
+    rentalUris: null,
 }
 ```
