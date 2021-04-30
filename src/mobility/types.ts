@@ -1,3 +1,5 @@
+export type { GetVehiclesParams } from './getVehicles'
+
 export interface Translation {
     language: string
     value: string
