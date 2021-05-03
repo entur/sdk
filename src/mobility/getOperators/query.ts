@@ -1,5 +1,5 @@
 export default `
-query () {
+query {
     operators {
         id
         name {
