@@ -2,7 +2,7 @@ import { RequestOptions } from '../../http'
 import { getServiceConfig, ArgumentConfig } from '../../config'
 import { mobilityQuery } from '../../api'
 
-import {  Operator } from '../types'
+import { Operator } from '../types'
 
 import getOperatorsQuery from './query'
 

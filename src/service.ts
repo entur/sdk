@@ -23,7 +23,7 @@ import {
     createGetQuaysForStopPlace,
 } from './stopPlace'
 
-import {createGetOperators, createGetVehicles} from './mobility'
+import { createGetOperators, createGetVehicles } from './mobility'
 
 import {
     createGetBikeRentalStation,
