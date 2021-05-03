@@ -33,3 +33,9 @@ runIntrospectionQuery(
 ).then((schema) =>
     writeFile('schemas/nsr.json', JSON.stringify(schema, undefined, 2)),
 )
+
+runIntrospectionQuery(
+    'https://api.dev.entur.io/mobility/v2/graphql',
+).then((schema) =>
+    writeFile('schemas/mobility.json', JSON.stringify(schema, undefined, 2)),
+)

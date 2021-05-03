@@ -9,6 +9,7 @@ export default {
         'Travel',
         'Departures',
         'Places',
+        'Mobility',
         'Bikes',
         'Scooters',
         'Utils',
