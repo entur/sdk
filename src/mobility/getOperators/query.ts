@@ -1,5 +1,13 @@
 export default `
 query () {
-    operators
+    operators {
+        id
+        name {
+             translation {
+                 language
+                 value
+             }
+        }
+    }
 }
 `
