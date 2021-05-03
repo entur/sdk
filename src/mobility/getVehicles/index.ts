@@ -17,7 +17,7 @@ export interface GetVehiclesParams {
     count?: number
     /** Return only vehicles of the given operators.  */
     operators?: string[]
-    /** The maximum number of vehicles to return */
+    /** The maximum number of vehicles to return. */
     codespaces?: string[]
     /** Return only vehicles of the given form factors. */
     formFactors?: FormFactor[]
