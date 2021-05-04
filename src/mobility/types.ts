@@ -102,3 +102,20 @@ export interface Vehicle {
     rentalUris?: RentalUris
     system: System
 }
+
+export interface Station {
+    id: string
+    name: TranslatedString
+    lat: number
+    lon: number
+    address?: string
+    capacity?: number
+    numBikesAvailable: number
+    numDocksAvailable?: number
+    isInstalled: boolean
+    isRenting: boolean
+    isReturning: boolean
+    lastReported: number
+    system: System
+    pricingPlans: PricingPlan[]
+}
