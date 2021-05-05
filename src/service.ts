@@ -23,7 +23,11 @@ import {
     createGetQuaysForStopPlace,
 } from './stopPlace'
 
-import { createGetStations, createGetVehicles } from './mobility'
+import {
+    createGetOperators,
+    createGetStations,
+    createGetVehicles,
+} from './mobility'
 
 import {
     createGetBikeRentalStation,
@@ -108,6 +112,7 @@ function createEnturService(config: ArgumentConfig) {
         ),
         getScootersByPosition: createGetScootersByPosition(config),
         mobility: {
+            getOperators: createGetOperators(config),
             getStations: createGetStations(config),
             getVehicles: createGetVehicles(config),
         },
