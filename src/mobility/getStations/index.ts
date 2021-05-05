@@ -6,7 +6,7 @@ import { Station } from '../types'
 
 import getStationsQuery from './query'
 
-export interface GetstationsParams {
+export interface GetStationsParams {
     /** The latitude coordinate. */
     lat: number
     /** The longitude coordinate. */
@@ -27,7 +27,7 @@ export default function createGetStations(argConfig: ArgumentConfig) {
     const config = getServiceConfig(argConfig)
 
     return async function getStations(
-        params: GetstationsParams,
+        params: GetStationsParams,
         options?: RequestOptions,
     ): Promise<Station[]> {
         const data = await mobilityQuery<{ stations: Station[] }>(
