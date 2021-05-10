@@ -110,6 +110,7 @@ const DEFAULT_MODES = [
     QueryMode.METRO,
     QueryMode.WATER,
     QueryMode.AIR,
+    QueryMode.LIFT,
 ]
 
 function getTripPatternsVariables(
