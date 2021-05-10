@@ -38,7 +38,9 @@ import {
 
 import { getTripPatternQuery } from '../src/trip/query'
 
+import getOperatorsQuery from '../src/mobility/getOperators/query'
 import getVehiclesQuery from '../src/mobility/getVehicles/query'
+import getStationsQuery from '../src/mobility/getStations/query'
 
 const journeyplanner2Schema = buildClientSchema(journeyplanner2SchemaJSON.data)
 const nsrSchema = buildClientSchema(nsrSchemaJSON.data)
@@ -63,7 +65,11 @@ const jp2Queries = [
 
 const nsrQueries = [{ getStopPlaceFacilitiesQuery }]
 
-const mobilityQueries = [{ getVehiclesQuery }]
+const mobilityQueries = [
+    { getOperatorsQuery },
+    { getVehiclesQuery },
+    { getStationsQuery },
+]
 
 function validateQuery(queryName, query, schema) {
     try {
