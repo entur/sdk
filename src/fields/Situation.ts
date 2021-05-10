@@ -25,7 +25,10 @@ export interface Situation {
     summary: MultilingualString[]
     description: MultilingualString[]
     advice: MultilingualString[]
-    lines: Line[]
+    /**
+     * @deprecated lines will be removed from Situation in a future major version.
+     */
+    lines?: Line[]
     validityPeriod: ValidityPeriod
     reportType: ReportType
     infoLinks: InfoLink[]
