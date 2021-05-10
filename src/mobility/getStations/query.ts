@@ -20,6 +20,11 @@ query ($lat: Float!, $lon: Float!, $range: Int!, $count: Int, $codespaces: [Stri
       lon
       address
       capacity
+      rentalUris {
+        android
+        ios
+        web
+      }
       numBikesAvailable
       numDocksAvailable
       isInstalled

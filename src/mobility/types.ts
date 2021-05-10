@@ -110,6 +110,7 @@ export interface Station {
     lon: number
     address?: string
     capacity?: number
+    rentalUris?: RentalUris
     numBikesAvailable: number
     numDocksAvailable?: number
     isInstalled: boolean
