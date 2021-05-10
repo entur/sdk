@@ -959,6 +959,18 @@
               "deprecationReason": null
             },
             {
+              "name": "rentalUris",
+              "description": "",
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "RentalUris",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "numBikesAvailable",
               "description": "",
               "args": [],
