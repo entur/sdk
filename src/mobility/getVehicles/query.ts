@@ -66,6 +66,16 @@ query ($lat: Float!, $lon: Float!, $range: Int!, $count: Int, $operators: [Strin
             }
             timezone
             url
+            rentalApps {
+                ios {
+                    storeUri
+                    discoveryUri
+                }
+                android {
+                    storeUri
+                    discoveryUri
+                }
+            }
         }
         isDisabled
         isReserved
