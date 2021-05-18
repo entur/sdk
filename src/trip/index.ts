@@ -167,9 +167,10 @@ export function createGetTripPatterns(argConfig: ArgumentConfig) {
     }
 }
 
-export function getTripPatternsQuery(
-    params: GetTripPatternsParams,
-): { query: string; variables?: { [key: string]: any } } {
+export function getTripPatternsQuery(params: GetTripPatternsParams): {
+    query: string
+    variables?: { [key: string]: any }
+} {
     return getGraphqlParams(
         getTripPatternQuery,
         getTripPatternsVariables(params),

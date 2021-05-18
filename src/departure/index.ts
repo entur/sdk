@@ -108,9 +108,8 @@ export function createGetDeparturesFromStopPlaces(argConfig: ArgumentConfig) {
 }
 
 export function createGetDeparturesFromStopPlace(argConfig: ArgumentConfig) {
-    const getDeparturesFromStopPlaces = createGetDeparturesFromStopPlaces(
-        argConfig,
-    )
+    const getDeparturesFromStopPlaces =
+        createGetDeparturesFromStopPlaces(argConfig)
 
     return function getDeparturesFromStopPlace(
         stopPlaceId: string,
