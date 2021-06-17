@@ -46,13 +46,14 @@ const service = createEnturService({
 
 async function example() {
     try {
-        const bikeRentalStations = await service.getBikeRentalStationsByPosition(
-            {
-                latitude: 59.95,
-                longitude: 10.75,
-            },
-            1000,
-        )
+        const bikeRentalStations =
+            await service.getBikeRentalStationsByPosition(
+                {
+                    latitude: 59.95,
+                    longitude: 10.75,
+                },
+                1000,
+            )
         console.log(bikeRentalStation)
     } catch (error) {
         console.error(error)

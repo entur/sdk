@@ -92,12 +92,10 @@ function createEnturService(config: ArgumentConfig) {
         getDeparturesFromStopPlace: createGetDeparturesFromStopPlace(config),
         getDeparturesFromStopPlaces: createGetDeparturesFromStopPlaces(config),
         getDeparturesFromQuays: createGetDeparturesFromQuays(config),
-        getDeparturesBetweenStopPlaces: createGetDeparturesBetweenStopPlaces(
-            config,
-        ),
-        getDeparturesForServiceJourney: createGetDeparturesForServiceJourney(
-            config,
-        ),
+        getDeparturesBetweenStopPlaces:
+            createGetDeparturesBetweenStopPlaces(config),
+        getDeparturesForServiceJourney:
+            createGetDeparturesForServiceJourney(config),
         getNearestPlaces: createGetNearestPlaces(config),
         getStopPlace: createGetStopPlace(config),
         getStopPlaces: createGetStopPlaces(config),
@@ -107,9 +105,8 @@ function createEnturService(config: ArgumentConfig) {
         getQuaysForStopPlace: createGetQuaysForStopPlace(config),
         getBikeRentalStation: createGetBikeRentalStation(config),
         getBikeRentalStations: createGetBikeRentalStations(config),
-        getBikeRentalStationsByPosition: createGetBikeRentalStationsByPosition(
-            config,
-        ),
+        getBikeRentalStationsByPosition:
+            createGetBikeRentalStationsByPosition(config),
         getScootersByPosition: createGetScootersByPosition(config),
         mobility: {
             getOperators: createGetOperators(config),
