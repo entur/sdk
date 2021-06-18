@@ -11,7 +11,7 @@ export default function createGetQuay(argConfig: ArgumentConfig) {
         id: string,
         options?: RequestOptions,
     ): Promise<Quay> {
-        const url = `${host}/quays/${id}`
+        const url = `${host}/read/quays/${id}`
         const data = await get<Quay>(
             url,
             undefined,

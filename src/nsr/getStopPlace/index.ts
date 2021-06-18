@@ -11,7 +11,7 @@ export default function createGetStopPlace(argConfig: ArgumentConfig) {
         id: string,
         options?: RequestOptions,
     ): Promise<StopPlace> {
-        const url = `${host}/stop-places/${id}`
+        const url = `${host}/read/stop-places/${id}`
         const data = await get<StopPlace>(
             url,
             undefined,

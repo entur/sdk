@@ -11,7 +11,7 @@ export default function createGetFareZone(argConfig: ArgumentConfig) {
         id: string,
         options?: RequestOptions,
     ): Promise<FareZone> {
-        const url = `${host}/fare-zones/${id}`
+        const url = `${host}/read/fare-zones/${id}`
         const data = await get<FareZone>(
             url,
             undefined,

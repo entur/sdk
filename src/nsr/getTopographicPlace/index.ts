@@ -11,7 +11,7 @@ export default function createGetTopographicPlace(argConfig: ArgumentConfig) {
         id: string,
         options?: RequestOptions,
     ): Promise<TopographicPlace> {
-        const url = `${host}/topographic-places/${id}`
+        const url = `${host}/read/topographic-places/${id}`
         const data = await get<TopographicPlace>(
             url,
             undefined,

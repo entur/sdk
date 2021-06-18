@@ -11,7 +11,7 @@ export default function createGetParking(argConfig: ArgumentConfig) {
         id: string,
         options?: RequestOptions,
     ): Promise<Parking> {
-        const url = `${host}/parkings/${id}`
+        const url = `${host}/read/parkings/${id}`
         const data = await get<Parking>(
             url,
             undefined,

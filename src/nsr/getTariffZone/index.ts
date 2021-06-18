@@ -11,7 +11,7 @@ export default function createGetTariffZone(argConfig: ArgumentConfig) {
         id: string,
         options?: RequestOptions,
     ): Promise<TariffZone> {
-        const url = `${host}/tariff-zones/${id}`
+        const url = `${host}/read/tariff-zones/${id}`
         const data = await get<TariffZone>(
             url,
             undefined,

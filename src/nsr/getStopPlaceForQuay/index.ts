@@ -11,7 +11,7 @@ export default function createGetStopPlaceForQuay(argConfig: ArgumentConfig) {
         id: string,
         options?: RequestOptions,
     ): Promise<StopPlace> {
-        const url = `${host}/quays/${id}/stop-place`
+        const url = `${host}/read/quays/${id}/stop-place`
         const data = await get<StopPlace>(
             url,
             undefined,

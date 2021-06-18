@@ -11,7 +11,7 @@ export default function createGetGroupOfStopPlaces(argConfig: ArgumentConfig) {
         id: string,
         options?: RequestOptions,
     ): Promise<GroupOfStopPlaces> {
-        const url = `${host}/groups-of-stop-places/${id}`
+        const url = `${host}/read/groups-of-stop-places/${id}`
         const data = await get<GroupOfStopPlaces>(
             url,
             undefined,
