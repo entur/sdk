@@ -32,9 +32,10 @@ The wanted time of departure. Can be anything that is parseable by `new Date()`.
 
 An object containing a subset of `RequestInit` options that's applied to the request.
 
-| Key      | Type          | Description                                                                                                                                       |
-| :------- | :------------ | :------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `signal` | `AbortSignal` | Allows you to communicate with a fetch request and abort it if desired. [Read more](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal) |
+| Key       | Type          | Description                                                                                                                                       |
+| :-------- | :------------ | :------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `signal`  | `AbortSignal` | Allows you to communicate with a fetch request and abort it if desired. [Read more](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal) |
+| `headers` | `HeadersInit` | Add custom HTTP headers to the fetch request if desired.                                                                                          |
 
 ## Example
 
