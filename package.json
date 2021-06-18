@@ -1,68 +1,70 @@
 {
-  "name": "@entur/sdk",
-  "version": "3.6.2",
-  "license": "EUPL-1.2",
-  "main": "./lib/index.js",
-  "repository": "github:entur/sdk",
-  "bugs": {
-    "url": "https://github.com/entur/sdk/issues"
-  },
-  "browser": {
-    "./lib/fetch.js": "./lib/fetch.browser.js"
-  },
-  "typings": "./lib/index.d.ts",
-  "files": [
-    "lib",
-    "index.d.ts"
-  ],
-  "scripts": {
-    "lint": "eslint src/ scripts/ --ext=js,ts && npm run prettier -- --check",
-    "prettier": "prettier src docs scripts *.{md,js}",
-    "format": "npm run prettier -- --write",
-    "test": "npm run lint && ts-node scripts/validate-queries.js && tsc --noEmit --emitDeclarationOnly false -p .",
-    "prebuild": "npm test && rm -rf lib",
-    "declaration": "tsc",
-    "build": "babel --extensions .ts src --out-dir lib && npm run declaration",
-    "prepublishOnly": "npm run build",
-    "docs": "docz dev",
-    "build:docs": "docz build",
-    "deploy:docs": "npm run build:docs && firebase deploy",
-    "fetch-schemas": "ts-node scripts/fetch-schemas.ts"
-  },
-  "dependencies": {
-    "@babel/polyfill": "^7.12.1",
-    "@turf/bbox": "^6.3.0",
-    "@turf/destination": "^6.3.0",
-    "@turf/helpers": "^6.3.0",
-    "@types/node-fetch": "^2.5.10",
-    "clean-deep": "^3.4.0",
-    "node-fetch": "^2.6.1",
-    "promise-throttle": "^1.1.2",
-    "qs": "^6.10.1",
-    "regenerator-runtime": "^0.13.8"
-  },
-  "devDependencies": {
-    "@babel/cli": "^7.14.3",
-    "@babel/core": "^7.14.3",
-    "@babel/node": "^7.14.2",
-    "@babel/preset-env": "^7.14.2",
-    "@babel/preset-typescript": "^7.13.0",
-    "@babel/register": "^7.13.16",
-    "@types/qs": "^6.9.6",
-    "@typescript-eslint/eslint-plugin": "^4.24.0",
-    "@typescript-eslint/parser": "^4.24.0",
-    "babel-eslint": "^10.1.0",
-    "docz": "^2.3.1",
-    "eslint": "^7.26.0",
-    "eslint-plugin-import": "^2.23.2",
-    "eslint-plugin-prettier": "^3.4.0",
-    "eslint-plugin-tsdoc": "^0.2.14",
-    "firebase-tools": "^9.11.0",
-    "gatsby-theme-docz": "^2.3.1",
-    "prettier": "^2.3.0",
-    "react": "^16.14.0",
-    "react-dom": "^16.14.0",
-    "ts-node": "^10.0.0",
-    "typescript": "^4.2.4"
-  }
+    "name": "@entur/sdk",
+    "version": "3.6.2",
+    "license": "EUPL-1.2",
+    "main": "./lib/index.js",
+    "repository": "github:entur/sdk",
+    "bugs": {
+        "url": "https://github.com/entur/sdk/issues"
+    },
+    "browser": {
+        "./lib/fetch.js": "./lib/fetch.browser.js"
+    },
+    "typings": "./lib/index.d.ts",
+    "files": [
+        "lib",
+        "index.d.ts"
+    ],
+    "scripts": {
+        "lint": "eslint src/ scripts/ --ext=js,ts && npm run prettier -- --check",
+        "prettier": "prettier src docs scripts *.{md,js}",
+        "format": "npm run prettier -- --write",
+        "test": "npm run lint && ts-node scripts/validate-queries.js && tsc --noEmit --emitDeclarationOnly false -p .",
+        "prebuild": "npm test && rm -rf lib",
+        "declaration": "tsc",
+        "build": "babel --extensions .ts src --out-dir lib && npm run declaration",
+        "prepublishOnly": "npm run build",
+        "docs": "docz dev",
+        "build:docs": "docz build",
+        "deploy:docs": "npm run build:docs && firebase deploy",
+        "generate-types": "./scripts/generate-types.sh",
+        "fetch-schemas": "ts-node scripts/fetch-schemas.ts"
+    },
+    "dependencies": {
+        "@babel/polyfill": "^7.12.1",
+        "@turf/bbox": "^6.3.0",
+        "@turf/destination": "^6.3.0",
+        "@turf/helpers": "^6.3.0",
+        "@types/node-fetch": "^2.5.10",
+        "clean-deep": "^3.4.0",
+        "node-fetch": "^2.6.1",
+        "promise-throttle": "^1.1.2",
+        "qs": "^6.10.1",
+        "regenerator-runtime": "^0.13.8"
+    },
+    "devDependencies": {
+        "@babel/cli": "^7.14.3",
+        "@babel/core": "^7.14.3",
+        "@babel/node": "^7.14.2",
+        "@babel/preset-env": "^7.14.2",
+        "@babel/preset-typescript": "^7.13.0",
+        "@babel/register": "^7.13.16",
+        "@types/qs": "^6.9.6",
+        "@typescript-eslint/eslint-plugin": "^4.24.0",
+        "@typescript-eslint/parser": "^4.24.0",
+        "babel-eslint": "^10.1.0",
+        "docz": "^2.3.1",
+        "eslint": "^7.26.0",
+        "eslint-plugin-import": "^2.23.2",
+        "eslint-plugin-prettier": "^3.4.0",
+        "eslint-plugin-tsdoc": "^0.2.14",
+        "firebase-tools": "^9.11.0",
+        "gatsby-theme-docz": "^2.3.1",
+        "prettier": "^2.3.0",
+        "react": "^16.14.0",
+        "react-dom": "^16.14.0",
+        "swagger-typescript-api": "^9.1.2",
+        "ts-node": "^10.0.0",
+        "typescript": "^4.2.4"
+    }
 }
