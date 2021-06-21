@@ -11,7 +11,6 @@ import { default as createGetTopographicPlace } from './getTopographicPlace'
 
 export default function createClient(config: ArgumentConfig) {
     return {
-        getTopograpicPlace: createGetTopographicPlace(config),
         getFareZone: createGetFareZone(config),
         getGroupOfStopPlaces: createGetGroupOfStopPlaces(config),
         getParking: createGetParking(config),
