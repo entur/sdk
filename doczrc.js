@@ -6,6 +6,7 @@ export default {
         'Entur SDK',
         'Getting Started',
         'Geocoder',
+        'NSR',
         'Travel',
         'Departures',
         'Places',
