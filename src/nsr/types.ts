@@ -1624,335 +1624,6 @@ export interface VehicleStoppingPlacesRelStructure {
     vehicleStoppingPlaceRefOrVehicleStoppingPlace?: object[]
 }
 
-export interface BoardingPositionsRelStructure {
-    id?: string
-    modificationSet?: 'ALL' | 'CHANGES_ONLY'
-    boardingPositionRefOrBoardingPosition?: object[]
-}
-
-export interface CheckConstraintsRelStructure {
-    id?: string
-    modificationSet?: 'ALL' | 'CHANGES_ONLY'
-    checkConstraintRefOrCheckConstraint?: object[]
-}
-
-export interface ClassOfUseRef {
-    value?: string
-    nameOfRefClass?: string
-    modification?: 'NEW' | 'REVISE' | 'DELETE' | 'UNCHANGED' | 'DELTA'
-    ref?: string
-    versionRef?: string
-
-    /** @format date-time */
-    created?: string
-
-    /** @format date-time */
-    changed?: string
-    version?: string
-}
-
-export interface DestinationDisplayViewsRelStructure {
-    id?: string
-    modificationSet?: 'ALL' | 'CHANGES_ONLY'
-    destinationDisplayRefOrDestinationDisplayView?: object[]
-}
-
-export interface LevelRefStructure {
-    value?: string
-    nameOfRefClass?: string
-    modification?: 'NEW' | 'REVISE' | 'DELETE' | 'UNCHANGED' | 'DELTA'
-    ref?: string
-    versionRef?: string
-
-    /** @format date-time */
-    created?: string
-
-    /** @format date-time */
-    changed?: string
-    version?: string
-}
-
-export interface Quay {
-    nameOfClass?: string
-    id?: string
-    validityConditions?: ValidityConditionsRelStructure
-    validBetween?: ValidBetween[]
-    alternativeTexts?: AlternativeTextsRelStructure
-    dataSourceRef?: string
-
-    /** @format date-time */
-    created?: string
-
-    /** @format date-time */
-    changed?: string
-    modification?: 'NEW' | 'REVISE' | 'DELETE' | 'UNCHANGED' | 'DELTA'
-    version?: string
-    status_BasicModificationDetailsGroup?: 'ACTIVE' | 'INACTIVE' | 'OTHER'
-    derivedFromVersionRef_BasicModificationDetailsGroup?: string
-    compatibleWithVersionFrameVersionRef?: string
-    derivedFromObjectRef?: string
-    keyList?: KeyListStructure
-    extensions?: ExtensionsStructure
-    brandingRef?: BrandingRefStructure
-    responsibilitySetRef?: string
-    name?: MultilingualString
-    shortName?: MultilingualString
-    description?: MultilingualString
-    purposeOfGroupingRef?: PurposeOfGroupingRefStructure
-    privateCode?: PrivateCodeStructure
-    infoLinks?: InfoLinks
-    members?: PointRefsRelStructure
-    types?: TypeOfZoneRefsRelStructure
-    centroid?: SimplePointVersionStructure
-    polygon?: PolygonType
-    projections?: ProjectionsRelStructure
-    parentZoneRef?: ZoneRefStructure
-    placeTypes?: TypeOfPlaceRefsRelStructure
-    url?: string
-    image?: string
-    postalAddress?: PostalAddress
-    roadAddress?: RoadAddress
-    accessibilityAssessment?: AccessibilityAssessment
-    accessModes?: (
-        | 'FOOT'
-        | 'BICYCLE'
-        | 'BOAT'
-        | 'CAR'
-        | 'TAXI'
-        | 'SHUTTLE'
-        | 'SKI'
-        | 'SKATE'
-    )[]
-    nameSuffix?: MultilingualString
-    alternativeNames?: AlternativeNamesRelStructure
-    crossRoad?: MultilingualString
-    landmark?: MultilingualString
-    publicUse?:
-        | 'ALL'
-        | 'DISABLED_PUBLIC_ONLY'
-        | 'AUTHORISED_PUBLIC_ONLY'
-        | 'STAFF_ONLY'
-        | 'PUBLIC_ONLY'
-    covered?: 'INDOORS' | 'OUTDOORS' | 'COVERED' | 'MIXED' | 'UNKNOWN'
-    gated?: 'GATED_AREA' | 'OPEN_AREA' | 'UNKNOWN'
-    lighting?: 'WELL_LIT' | 'POORLY_LIT' | 'UNLIT' | 'UNKNOWN' | 'OTHER'
-    allAreasWheelchairAccessible?: boolean
-    personCapacity?: number
-    facilities?: SiteFacilitySetsRelStructure
-    siteRef?: SiteRefStructure
-    levelRef?: LevelRefStructure
-    classOfUseRef?: ClassOfUseRef
-    checkConstraints?: CheckConstraintsRelStructure
-    equipmentPlaces?: EquipmentPlacesRelStructure
-    placeEquipments?: PlaceEquipmentsRelStructure
-    localServices?: LocalServicesRelStructure
-    transportMode?:
-        | 'AIR'
-        | 'BUS'
-        | 'COACH'
-        | 'FERRY'
-        | 'METRO'
-        | 'RAIL'
-        | 'TROLLEY_BUS'
-        | 'TRAM'
-        | 'WATER'
-        | 'CABLEWAY'
-        | 'FUNICULAR'
-        | 'LIFT'
-        | 'SNOW_AND_ICE'
-        | 'OTHER'
-    airSubmode?:
-        | 'UNKNOWN'
-        | 'UNDEFINED'
-        | 'INTERNATIONAL_FLIGHT'
-        | 'DOMESTIC_FLIGHT'
-        | 'INTERCONTINENTAL_FLIGHT'
-        | 'DOMESTIC_SCHEDULED_FLIGHT'
-        | 'SHUTTLE_FLIGHT'
-        | 'INTERCONTINENTAL_CHARTER_FLIGHT'
-        | 'INTERNATIONAL_CHARTER_FLIGHT'
-        | 'ROUND_TRIP_CHARTER_FLIGHT'
-        | 'SIGHTSEEING_FLIGHT'
-        | 'HELICOPTER_SERVICE'
-        | 'DOMESTIC_CHARTER_FLIGHT'
-        | 'SCHENGEN_AREA_FLIGHT'
-        | 'AIRSHIP_SERVICE'
-        | 'SHORT_HAUL_INTERNATIONAL_FLIGHT'
-    busSubmode?:
-        | 'UNKNOWN'
-        | 'UNDEFINED'
-        | 'LOCAL_BUS'
-        | 'REGIONAL_BUS'
-        | 'EXPRESS_BUS'
-        | 'NIGHT_BUS'
-        | 'POST_BUS'
-        | 'SPECIAL_NEEDS_BUS'
-        | 'MOBILITY_BUS'
-        | 'MOBILITY_BUS_FOR_REGISTERED_DISABLED'
-        | 'SIGHTSEEING_BUS'
-        | 'SHUTTLE_BUS'
-        | 'HIGH_FREQUENCY_BUS'
-        | 'DEDICATED_LANE_BUS'
-        | 'SCHOOL_BUS'
-        | 'SCHOOL_AND_PUBLIC_SERVICE_BUS'
-        | 'RAIL_REPLACEMENT_BUS'
-        | 'DEMAND_AND_RESPONSE_BUS'
-        | 'AIRPORT_LINK_BUS'
-    coachSubmode?:
-        | 'UNKNOWN'
-        | 'UNDEFINED'
-        | 'INTERNATIONAL_COACH'
-        | 'NATIONAL_COACH'
-        | 'SHUTTLE_COACH'
-        | 'REGIONAL_COACH'
-        | 'SPECIAL_COACH'
-        | 'SCHOOL_COACH'
-        | 'SIGHTSEEING_COACH'
-        | 'TOURIST_COACH'
-        | 'COMMUTER_COACH'
-    funicularSubmode?:
-        | 'UNKNOWN'
-        | 'FUNICULAR'
-        | 'STREET_CABLE_CAR'
-        | 'ALL_FUNICULAR_SERVICES'
-        | 'UNDEFINED_FUNICULAR'
-    metroSubmode?: 'UNKNOWN' | 'UNDEFINED' | 'METRO' | 'TUBE' | 'URBAN_RAILWAY'
-    tramSubmode?:
-        | 'UNKNOWN'
-        | 'UNDEFINED'
-        | 'CITY_TRAM'
-        | 'LOCAL_TRAM'
-        | 'REGIONAL_TRAM'
-        | 'SIGHTSEEING_TRAM'
-        | 'SHUTTLE_TRAM'
-        | 'TRAIN_TRAM'
-    telecabinSubmode?:
-        | 'UNKNOWN'
-        | 'UNDEFINED'
-        | 'TELECABIN'
-        | 'CABLE_CAR'
-        | 'LIFT'
-        | 'CHAIR_LIFT'
-        | 'DRAG_LIFT'
-        | 'TELECABIN_LINK'
-    railSubmode?:
-        | 'UNKNOWN'
-        | 'LOCAL'
-        | 'HIGH_SPEED_RAIL'
-        | 'SUBURBAN_RAILWAY'
-        | 'REGIONAL_RAIL'
-        | 'INTERREGIONAL_RAIL'
-        | 'LONG_DISTANCE'
-        | 'INTERNATIONAL'
-        | 'SLEEPER_RAIL_SERVICE'
-        | 'NIGHT_RAIL'
-        | 'CAR_TRANSPORT_RAIL_SERVICE'
-        | 'TOURIST_RAILWAY'
-        | 'AIRPORT_LINK_RAIL'
-        | 'RAIL_SHUTTLE'
-        | 'REPLACEMENT_RAIL_SERVICE'
-        | 'SPECIAL_TRAIN'
-        | 'CROSS_COUNTRY_RAIL'
-        | 'RACK_AND_PINION_RAILWAY'
-    waterSubmode?:
-        | 'UNKNOWN'
-        | 'UNDEFINED'
-        | 'INTERNATIONAL_CAR_FERRY'
-        | 'NATIONAL_CAR_FERRY'
-        | 'REGIONAL_CAR_FERRY'
-        | 'LOCAL_CAR_FERRY'
-        | 'INTERNATIONAL_PASSENGER_FERRY'
-        | 'NATIONAL_PASSENGER_FERRY'
-        | 'REGIONAL_PASSENGER_FERRY'
-        | 'LOCAL_PASSENGER_FERRY'
-        | 'POST_BOAT'
-        | 'TRAIN_FERRY'
-        | 'ROAD_FERRY_LINK'
-        | 'AIRPORT_BOAT_LINK'
-        | 'HIGH_SPEED_VEHICLE_SERVICE'
-        | 'HIGH_SPEED_PASSENGER_SERVICE'
-        | 'SIGHTSEEING_SERVICE'
-        | 'SCHOOL_BOAT'
-        | 'CABLE_FERRY'
-        | 'RIVER_BUS'
-        | 'SCHEDULED_FERRY'
-        | 'SHUTTLE_FERRY_SERVICE'
-        | 'CANAL_BARGE'
-    snowAndIceSubmode?:
-        | 'UNKNOWN'
-        | 'UNDEFINED'
-        | 'SNOW_MOBILE'
-        | 'SNOW_CAT'
-        | 'SNOW_COACH'
-        | 'TERRA_BUS'
-        | 'WIND_SLED'
-    otherTransportModes?: (
-        | 'AIR'
-        | 'BUS'
-        | 'COACH'
-        | 'FERRY'
-        | 'METRO'
-        | 'RAIL'
-        | 'TROLLEY_BUS'
-        | 'TRAM'
-        | 'WATER'
-        | 'CABLEWAY'
-        | 'FUNICULAR'
-        | 'LIFT'
-        | 'SNOW_AND_ICE'
-        | 'OTHER'
-    )[]
-    tariffZones?: TariffZoneRefsRelStructure
-    boardingUse?: boolean
-    alightingUse?: boolean
-    label?: MultilingualString
-    entrances?: SiteEntrancesRelStructure
-    publicCode?: string
-    plateCode?: string
-    shortCode?: number
-    destinations?: DestinationDisplayViewsRelStructure
-
-    /** @format float */
-    compassBearing?: number
-    compassOctant?: 'SW' | 'SE' | 'NW' | 'NE' | 'W' | 'E' | 'S' | 'N'
-    quayType?:
-        | 'AIRLINE_GATE'
-        | 'RAIL_PLATFORM'
-        | 'METRO_PLATFORM'
-        | 'COACH_STOP'
-        | 'BUS_STOP'
-        | 'BUS_PLATFORM'
-        | 'BUS_BAY'
-        | 'TRAM_PLATFORM'
-        | 'TRAM_STOP'
-        | 'BOAT_QUAY'
-        | 'FERRY_LANDING'
-        | 'TELECABINE_PLATFORM'
-        | 'TAXI_STAND'
-        | 'SET_DOWN_PLACE'
-        | 'VEHICLE_LOADING_PLACE'
-        | 'MULTIMODAL'
-        | 'OTHER'
-    parentQuayRef?: QuayRefStructure
-    boardingPositions?: BoardingPositionsRelStructure
-}
-
-export interface QuayRefStructure {
-    value?: string
-    nameOfRefClass?: string
-    modification?: 'NEW' | 'REVISE' | 'DELETE' | 'UNCHANGED' | 'DELTA'
-    ref?: string
-    versionRef?: string
-
-    /** @format date-time */
-    created?: string
-
-    /** @format date-time */
-    changed?: string
-    version?: string
-    nameOfMemberClass?: string
-}
-
 export interface Parking {
     nameOfClass?: string
     id?: string
@@ -2370,6 +2041,335 @@ export interface TypeOfPaymentMethodRefsRelStructure {
     id?: string
     modificationSet?: 'ALL' | 'CHANGES_ONLY'
     typeOfPaymentMethodRef: TypeOfPaymentMethodRef[]
+}
+
+export interface BoardingPositionsRelStructure {
+    id?: string
+    modificationSet?: 'ALL' | 'CHANGES_ONLY'
+    boardingPositionRefOrBoardingPosition?: object[]
+}
+
+export interface CheckConstraintsRelStructure {
+    id?: string
+    modificationSet?: 'ALL' | 'CHANGES_ONLY'
+    checkConstraintRefOrCheckConstraint?: object[]
+}
+
+export interface ClassOfUseRef {
+    value?: string
+    nameOfRefClass?: string
+    modification?: 'NEW' | 'REVISE' | 'DELETE' | 'UNCHANGED' | 'DELTA'
+    ref?: string
+    versionRef?: string
+
+    /** @format date-time */
+    created?: string
+
+    /** @format date-time */
+    changed?: string
+    version?: string
+}
+
+export interface DestinationDisplayViewsRelStructure {
+    id?: string
+    modificationSet?: 'ALL' | 'CHANGES_ONLY'
+    destinationDisplayRefOrDestinationDisplayView?: object[]
+}
+
+export interface LevelRefStructure {
+    value?: string
+    nameOfRefClass?: string
+    modification?: 'NEW' | 'REVISE' | 'DELETE' | 'UNCHANGED' | 'DELTA'
+    ref?: string
+    versionRef?: string
+
+    /** @format date-time */
+    created?: string
+
+    /** @format date-time */
+    changed?: string
+    version?: string
+}
+
+export interface Quay {
+    nameOfClass?: string
+    id?: string
+    validityConditions?: ValidityConditionsRelStructure
+    validBetween?: ValidBetween[]
+    alternativeTexts?: AlternativeTextsRelStructure
+    dataSourceRef?: string
+
+    /** @format date-time */
+    created?: string
+
+    /** @format date-time */
+    changed?: string
+    modification?: 'NEW' | 'REVISE' | 'DELETE' | 'UNCHANGED' | 'DELTA'
+    version?: string
+    status_BasicModificationDetailsGroup?: 'ACTIVE' | 'INACTIVE' | 'OTHER'
+    derivedFromVersionRef_BasicModificationDetailsGroup?: string
+    compatibleWithVersionFrameVersionRef?: string
+    derivedFromObjectRef?: string
+    keyList?: KeyListStructure
+    extensions?: ExtensionsStructure
+    brandingRef?: BrandingRefStructure
+    responsibilitySetRef?: string
+    name?: MultilingualString
+    shortName?: MultilingualString
+    description?: MultilingualString
+    purposeOfGroupingRef?: PurposeOfGroupingRefStructure
+    privateCode?: PrivateCodeStructure
+    infoLinks?: InfoLinks
+    members?: PointRefsRelStructure
+    types?: TypeOfZoneRefsRelStructure
+    centroid?: SimplePointVersionStructure
+    polygon?: PolygonType
+    projections?: ProjectionsRelStructure
+    parentZoneRef?: ZoneRefStructure
+    placeTypes?: TypeOfPlaceRefsRelStructure
+    url?: string
+    image?: string
+    postalAddress?: PostalAddress
+    roadAddress?: RoadAddress
+    accessibilityAssessment?: AccessibilityAssessment
+    accessModes?: (
+        | 'FOOT'
+        | 'BICYCLE'
+        | 'BOAT'
+        | 'CAR'
+        | 'TAXI'
+        | 'SHUTTLE'
+        | 'SKI'
+        | 'SKATE'
+    )[]
+    nameSuffix?: MultilingualString
+    alternativeNames?: AlternativeNamesRelStructure
+    crossRoad?: MultilingualString
+    landmark?: MultilingualString
+    publicUse?:
+        | 'ALL'
+        | 'DISABLED_PUBLIC_ONLY'
+        | 'AUTHORISED_PUBLIC_ONLY'
+        | 'STAFF_ONLY'
+        | 'PUBLIC_ONLY'
+    covered?: 'INDOORS' | 'OUTDOORS' | 'COVERED' | 'MIXED' | 'UNKNOWN'
+    gated?: 'GATED_AREA' | 'OPEN_AREA' | 'UNKNOWN'
+    lighting?: 'WELL_LIT' | 'POORLY_LIT' | 'UNLIT' | 'UNKNOWN' | 'OTHER'
+    allAreasWheelchairAccessible?: boolean
+    personCapacity?: number
+    facilities?: SiteFacilitySetsRelStructure
+    siteRef?: SiteRefStructure
+    levelRef?: LevelRefStructure
+    classOfUseRef?: ClassOfUseRef
+    checkConstraints?: CheckConstraintsRelStructure
+    equipmentPlaces?: EquipmentPlacesRelStructure
+    placeEquipments?: PlaceEquipmentsRelStructure
+    localServices?: LocalServicesRelStructure
+    transportMode?:
+        | 'AIR'
+        | 'BUS'
+        | 'COACH'
+        | 'FERRY'
+        | 'METRO'
+        | 'RAIL'
+        | 'TROLLEY_BUS'
+        | 'TRAM'
+        | 'WATER'
+        | 'CABLEWAY'
+        | 'FUNICULAR'
+        | 'LIFT'
+        | 'SNOW_AND_ICE'
+        | 'OTHER'
+    airSubmode?:
+        | 'UNKNOWN'
+        | 'UNDEFINED'
+        | 'INTERNATIONAL_FLIGHT'
+        | 'DOMESTIC_FLIGHT'
+        | 'INTERCONTINENTAL_FLIGHT'
+        | 'DOMESTIC_SCHEDULED_FLIGHT'
+        | 'SHUTTLE_FLIGHT'
+        | 'INTERCONTINENTAL_CHARTER_FLIGHT'
+        | 'INTERNATIONAL_CHARTER_FLIGHT'
+        | 'ROUND_TRIP_CHARTER_FLIGHT'
+        | 'SIGHTSEEING_FLIGHT'
+        | 'HELICOPTER_SERVICE'
+        | 'DOMESTIC_CHARTER_FLIGHT'
+        | 'SCHENGEN_AREA_FLIGHT'
+        | 'AIRSHIP_SERVICE'
+        | 'SHORT_HAUL_INTERNATIONAL_FLIGHT'
+    busSubmode?:
+        | 'UNKNOWN'
+        | 'UNDEFINED'
+        | 'LOCAL_BUS'
+        | 'REGIONAL_BUS'
+        | 'EXPRESS_BUS'
+        | 'NIGHT_BUS'
+        | 'POST_BUS'
+        | 'SPECIAL_NEEDS_BUS'
+        | 'MOBILITY_BUS'
+        | 'MOBILITY_BUS_FOR_REGISTERED_DISABLED'
+        | 'SIGHTSEEING_BUS'
+        | 'SHUTTLE_BUS'
+        | 'HIGH_FREQUENCY_BUS'
+        | 'DEDICATED_LANE_BUS'
+        | 'SCHOOL_BUS'
+        | 'SCHOOL_AND_PUBLIC_SERVICE_BUS'
+        | 'RAIL_REPLACEMENT_BUS'
+        | 'DEMAND_AND_RESPONSE_BUS'
+        | 'AIRPORT_LINK_BUS'
+    coachSubmode?:
+        | 'UNKNOWN'
+        | 'UNDEFINED'
+        | 'INTERNATIONAL_COACH'
+        | 'NATIONAL_COACH'
+        | 'SHUTTLE_COACH'
+        | 'REGIONAL_COACH'
+        | 'SPECIAL_COACH'
+        | 'SCHOOL_COACH'
+        | 'SIGHTSEEING_COACH'
+        | 'TOURIST_COACH'
+        | 'COMMUTER_COACH'
+    funicularSubmode?:
+        | 'UNKNOWN'
+        | 'FUNICULAR'
+        | 'STREET_CABLE_CAR'
+        | 'ALL_FUNICULAR_SERVICES'
+        | 'UNDEFINED_FUNICULAR'
+    metroSubmode?: 'UNKNOWN' | 'UNDEFINED' | 'METRO' | 'TUBE' | 'URBAN_RAILWAY'
+    tramSubmode?:
+        | 'UNKNOWN'
+        | 'UNDEFINED'
+        | 'CITY_TRAM'
+        | 'LOCAL_TRAM'
+        | 'REGIONAL_TRAM'
+        | 'SIGHTSEEING_TRAM'
+        | 'SHUTTLE_TRAM'
+        | 'TRAIN_TRAM'
+    telecabinSubmode?:
+        | 'UNKNOWN'
+        | 'UNDEFINED'
+        | 'TELECABIN'
+        | 'CABLE_CAR'
+        | 'LIFT'
+        | 'CHAIR_LIFT'
+        | 'DRAG_LIFT'
+        | 'TELECABIN_LINK'
+    railSubmode?:
+        | 'UNKNOWN'
+        | 'LOCAL'
+        | 'HIGH_SPEED_RAIL'
+        | 'SUBURBAN_RAILWAY'
+        | 'REGIONAL_RAIL'
+        | 'INTERREGIONAL_RAIL'
+        | 'LONG_DISTANCE'
+        | 'INTERNATIONAL'
+        | 'SLEEPER_RAIL_SERVICE'
+        | 'NIGHT_RAIL'
+        | 'CAR_TRANSPORT_RAIL_SERVICE'
+        | 'TOURIST_RAILWAY'
+        | 'AIRPORT_LINK_RAIL'
+        | 'RAIL_SHUTTLE'
+        | 'REPLACEMENT_RAIL_SERVICE'
+        | 'SPECIAL_TRAIN'
+        | 'CROSS_COUNTRY_RAIL'
+        | 'RACK_AND_PINION_RAILWAY'
+    waterSubmode?:
+        | 'UNKNOWN'
+        | 'UNDEFINED'
+        | 'INTERNATIONAL_CAR_FERRY'
+        | 'NATIONAL_CAR_FERRY'
+        | 'REGIONAL_CAR_FERRY'
+        | 'LOCAL_CAR_FERRY'
+        | 'INTERNATIONAL_PASSENGER_FERRY'
+        | 'NATIONAL_PASSENGER_FERRY'
+        | 'REGIONAL_PASSENGER_FERRY'
+        | 'LOCAL_PASSENGER_FERRY'
+        | 'POST_BOAT'
+        | 'TRAIN_FERRY'
+        | 'ROAD_FERRY_LINK'
+        | 'AIRPORT_BOAT_LINK'
+        | 'HIGH_SPEED_VEHICLE_SERVICE'
+        | 'HIGH_SPEED_PASSENGER_SERVICE'
+        | 'SIGHTSEEING_SERVICE'
+        | 'SCHOOL_BOAT'
+        | 'CABLE_FERRY'
+        | 'RIVER_BUS'
+        | 'SCHEDULED_FERRY'
+        | 'SHUTTLE_FERRY_SERVICE'
+        | 'CANAL_BARGE'
+    snowAndIceSubmode?:
+        | 'UNKNOWN'
+        | 'UNDEFINED'
+        | 'SNOW_MOBILE'
+        | 'SNOW_CAT'
+        | 'SNOW_COACH'
+        | 'TERRA_BUS'
+        | 'WIND_SLED'
+    otherTransportModes?: (
+        | 'AIR'
+        | 'BUS'
+        | 'COACH'
+        | 'FERRY'
+        | 'METRO'
+        | 'RAIL'
+        | 'TROLLEY_BUS'
+        | 'TRAM'
+        | 'WATER'
+        | 'CABLEWAY'
+        | 'FUNICULAR'
+        | 'LIFT'
+        | 'SNOW_AND_ICE'
+        | 'OTHER'
+    )[]
+    tariffZones?: TariffZoneRefsRelStructure
+    boardingUse?: boolean
+    alightingUse?: boolean
+    label?: MultilingualString
+    entrances?: SiteEntrancesRelStructure
+    publicCode?: string
+    plateCode?: string
+    shortCode?: number
+    destinations?: DestinationDisplayViewsRelStructure
+
+    /** @format float */
+    compassBearing?: number
+    compassOctant?: 'SW' | 'SE' | 'NW' | 'NE' | 'W' | 'E' | 'S' | 'N'
+    quayType?:
+        | 'AIRLINE_GATE'
+        | 'RAIL_PLATFORM'
+        | 'METRO_PLATFORM'
+        | 'COACH_STOP'
+        | 'BUS_STOP'
+        | 'BUS_PLATFORM'
+        | 'BUS_BAY'
+        | 'TRAM_PLATFORM'
+        | 'TRAM_STOP'
+        | 'BOAT_QUAY'
+        | 'FERRY_LANDING'
+        | 'TELECABINE_PLATFORM'
+        | 'TAXI_STAND'
+        | 'SET_DOWN_PLACE'
+        | 'VEHICLE_LOADING_PLACE'
+        | 'MULTIMODAL'
+        | 'OTHER'
+    parentQuayRef?: QuayRefStructure
+    boardingPositions?: BoardingPositionsRelStructure
+}
+
+export interface QuayRefStructure {
+    value?: string
+    nameOfRefClass?: string
+    modification?: 'NEW' | 'REVISE' | 'DELETE' | 'UNCHANGED' | 'DELTA'
+    ref?: string
+    versionRef?: string
+
+    /** @format date-time */
+    created?: string
+
+    /** @format date-time */
+    changed?: string
+    version?: string
+    nameOfMemberClass?: string
 }
 
 export interface GroupOfStopPlaces {
