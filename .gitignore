@@ -3,7 +3,6 @@ lib/
 .DS_Store
 .idea/
 .tern-port
-.docz
 .firebase/
 *.tgz
 *.log

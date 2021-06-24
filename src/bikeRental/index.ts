@@ -16,6 +16,10 @@ import { getServiceConfig, ArgumentConfig } from '../config'
 export function createGetBikeRentalStation(argConfig: ArgumentConfig) {
     const config = getServiceConfig(argConfig)
 
+    /**
+     * @param stationId - The ID of the bike rental station in question
+     * @param options - RequestOptions
+     */
     return function getBikeRentalStation(
         stationId: string,
         options?: RequestOptions,

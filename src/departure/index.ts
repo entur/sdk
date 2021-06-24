@@ -111,6 +111,9 @@ export function createGetDeparturesFromStopPlace(argConfig: ArgumentConfig) {
     const getDeparturesFromStopPlaces =
         createGetDeparturesFromStopPlaces(argConfig)
 
+    /**
+     * Finds departures that leaves from a certain StopPlace.
+     */
     return function getDeparturesFromStopPlace(
         stopPlaceId: string,
         params?: GetDeparturesParams,
