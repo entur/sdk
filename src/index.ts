@@ -1,6 +1,7 @@
 import 'regenerator-runtime/runtime'
 
-import EnturService from './service'
+import createEnturService from './service'
+export type { EnturService } from './service'
 
 export {
     convertFeatureToLocation,
@@ -9,7 +10,10 @@ export {
 } from './utils'
 
 export * as MobilityTypes from './mobility/types'
+export type { MobilityClient } from './mobility'
+
 export * as NsrTypes from './nsr/types'
+export type { NsrClient } from './nsr'
 
 export { TypeName } from './nearest/types'
 export type { NearestPlace } from './nearest/types'
@@ -40,7 +44,7 @@ export type { DeparturesById } from './departure'
 export { County } from './geocoder/countyIds'
 export type { GetFeaturesParams, GetFeaturesReverseParam } from './geocoder'
 
-export default EnturService
+export default createEnturService
 
 export type { Authority } from './fields/Authority'
 export type { BikeRentalStation } from './fields/BikeRentalStation'

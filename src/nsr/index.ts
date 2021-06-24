@@ -10,7 +10,19 @@ import { default as createGetStopPlaceForQuay } from './getStopPlaceForQuay'
 import { default as createGetTariffZone } from './getTariffZone'
 import { default as createGetTopographicPlace } from './getTopographicPlace'
 
-export default function createClient(config: ArgumentConfig) {
+export interface NsrClient {
+    getFareZone: ReturnType<typeof createGetFareZone>
+    getGroupOfStopPlaces: ReturnType<typeof createGetGroupOfStopPlaces>
+    getParking: ReturnType<typeof createGetParking>
+    getParkingsForStopPlace: ReturnType<typeof createGetParkingsForStopPlace>
+    getQuay: ReturnType<typeof createGetQuay>
+    getStopPlace: ReturnType<typeof createGetStopPlace>
+    getStopPlaceForQuay: ReturnType<typeof createGetStopPlaceForQuay>
+    getTariffZone: ReturnType<typeof createGetTariffZone>
+    getTopographicPlace: ReturnType<typeof createGetTopographicPlace>
+}
+
+export default function createClient(config: ArgumentConfig): NsrClient {
     return {
         getFareZone: createGetFareZone(config),
         getGroupOfStopPlaces: createGetGroupOfStopPlaces(config),
