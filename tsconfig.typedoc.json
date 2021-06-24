@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "target": "esnext",
+        "moduleResolution": "node",
+        "allowJs": true,
+        "strict": true,
+        "isolatedModules": true,
+        "esModuleInterop": true,
+        "typeRoots": ["./node_modules/@types", "./typings"]
+    },
+    "include": ["src"]
+}
