@@ -57,7 +57,7 @@
         "eslint-plugin-import": "^2.23.2",
         "eslint-plugin-prettier": "^3.4.0",
         "eslint-plugin-tsdoc": "^0.2.14",
-        "firebase-tools": "^9.11.0",
+        "firebase-tools": "^9.14.0",
         "gatsby-theme-docz": "^2.3.1",
         "prettier": "^2.3.0",
         "react": "^16.14.0",
