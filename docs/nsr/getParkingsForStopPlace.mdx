@@ -12,6 +12,8 @@ route: /nsr/getParkingsForStopPlace
 
 `getParkingsForStopPlace` finds the Parkings that belong to a certain StopPlace.
 
+If no StopPlace with the given ID exists, the method will throw an error. If the StopPlace exists, but has no parkings, it will return an empty array.
+
 ### options (`RequestOptions`) [Optional]
 
 An object containing a subset of `RequestInit` options that's applied to the request.
