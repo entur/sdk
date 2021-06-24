@@ -9,6 +9,7 @@ export {
 } from './utils'
 
 export * as MobilityTypes from './mobility/types'
+export * as NsrTypes from './nsr/types'
 
 export { TypeName } from './nearest/types'
 export type { NearestPlace } from './nearest/types'

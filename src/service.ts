@@ -25,6 +25,8 @@ import {
 
 import { default as createMobilityClient } from './mobility'
 
+import { default as createNsrClient } from './nsr'
+
 import {
     createGetBikeRentalStation,
     createGetBikeRentalStations,
@@ -105,6 +107,7 @@ function createEnturService(config: ArgumentConfig) {
             createGetBikeRentalStationsByPosition(config),
         getScootersByPosition: createGetScootersByPosition(config),
         mobility: createMobilityClient(config),
+        nsr: createNsrClient(config),
     }
 }
 
