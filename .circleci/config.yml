@@ -5,4 +5,4 @@ workflows:
     build-and-test:
         jobs:
             - node/test:
-                version: 10.22.0
+                  version: 10.22.0
