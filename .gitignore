@@ -6,3 +6,4 @@ lib/
 .docz
 .firebase/
 *.tgz
+*.log
