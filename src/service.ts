@@ -23,9 +23,9 @@ import {
     createGetQuaysForStopPlace,
 } from './stopPlace'
 
-import { default as createMobilityClient } from './mobility'
+import { default as createMobilityClient, MobilityClient } from './mobility'
 
-import { default as createNsrClient } from './nsr'
+import { default as createNsrClient, NsrClient } from './nsr'
 
 import {
     createGetBikeRentalStation,
@@ -39,7 +39,63 @@ import { createGetFeatures, createGetFeaturesReverse } from './geocoder'
 
 import { ArgumentConfig, getServiceConfig, ServiceConfig } from './config'
 
-function createEnturService(config: ArgumentConfig) {
+export interface EnturService {
+    journeyPlannerQuery: <T>(
+        query: string,
+        variables: Record<string, unknown>,
+        config: ServiceConfig,
+    ) => Promise<T>
+    queryJourneyPlanner: <T>(
+        queryObj: string,
+        variables: Record<string, unknown>,
+        options?: RequestOptions,
+    ) => Promise<T>
+    nsrQuery: <T>(
+        query: string,
+        variables: Record<string, unknown>,
+        config: ServiceConfig,
+    ) => Promise<T>
+    queryNsr: <T>(
+        queryObj: string,
+        variables: Record<string, unknown>,
+        options?: RequestOptions,
+    ) => Promise<T>
+    getFeatures: ReturnType<typeof createGetFeatures>
+    getFeaturesReverse: ReturnType<typeof createGetFeaturesReverse>
+    getTripPatterns: ReturnType<typeof createGetTripPatterns>
+    findTrips: ReturnType<typeof createFindTrips>
+    getStopPlaceDepartures: typeof getStopPlaceDeparturesDEPRECATED
+    getDeparturesFromStopPlace: ReturnType<
+        typeof createGetDeparturesFromStopPlace
+    >
+    getDeparturesFromStopPlaces: ReturnType<
+        typeof createGetDeparturesFromStopPlaces
+    >
+    getDeparturesFromQuays: ReturnType<typeof createGetDeparturesFromQuays>
+    getDeparturesBetweenStopPlaces: ReturnType<
+        typeof createGetDeparturesBetweenStopPlaces
+    >
+    getDeparturesForServiceJourney: ReturnType<
+        typeof createGetDeparturesForServiceJourney
+    >
+    getNearestPlaces: ReturnType<typeof createGetNearestPlaces>
+    getStopPlace: ReturnType<typeof createGetStopPlace>
+    getStopPlaces: ReturnType<typeof createGetStopPlaces>
+    getParentStopPlace: ReturnType<typeof createGetParentStopPlace>
+    getStopPlacesByPosition: ReturnType<typeof createGetStopPlacesByPosition>
+    getStopPlaceFacilities: ReturnType<typeof createGetStopPlaceFacilities>
+    getQuaysForStopPlace: ReturnType<typeof createGetQuaysForStopPlace>
+    getBikeRentalStation: ReturnType<typeof createGetBikeRentalStation>
+    getBikeRentalStations: ReturnType<typeof createGetBikeRentalStations>
+    getBikeRentalStationsByPosition: ReturnType<
+        typeof createGetBikeRentalStationsByPosition
+    >
+    getScootersByPosition: ReturnType<typeof createGetScootersByPosition>
+    mobility: MobilityClient
+    nsr: NsrClient
+}
+
+function createEnturService(config: ArgumentConfig): EnturService {
     return {
         journeyPlannerQuery: <T>(
             query: string,
