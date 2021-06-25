@@ -1,17 +1,15 @@
 {
     "compilerOptions": {
-      "target": "esnext",
-      "moduleResolution": "node",
-      "allowJs": true,
-      "emitDeclarationOnly": true,
-      "declarationDir": "lib",
-      "declaration": true,
-      "strict": true,
-      "isolatedModules": true,
-      "esModuleInterop": true,
-      "typeRoots": ["./node_modules/@types", "./typings"]
+        "target": "esnext",
+        "moduleResolution": "node",
+        "allowJs": true,
+        "emitDeclarationOnly": true,
+        "declarationDir": "lib",
+        "declaration": true,
+        "strict": true,
+        "isolatedModules": true,
+        "esModuleInterop": true,
+        "typeRoots": ["./node_modules/@types", "./typings"]
     },
-    "include": [
-      "src"
-    ],
+    "include": ["src"]
 }
