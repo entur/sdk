@@ -4,11 +4,16 @@ menu: Places
 route: /places/getStopPlaceFacilities
 ---
 
-# getStopPlaceFacilities
+# getStopPlaceFacilities DEPRECATED
 
 ```typescript
 (stopPlaceId: string) => Promise<StopPlaceFacilities>
 ```
+
+This method is deprecated. Please use one or both of these NSR methods instead:
+
+-   [`getStopPlace`](/nsr/getStopPlace)
+-   [`getParkingsForStopPlace`](/nsr/getParkingsForStopPlace)
 
 `getStopPlaceFacilities` returns information about the available facilities at a given stop place.
 Facilities can be accessibility assessments like is the stop place wheelchair accessible? Or other things, like is there a waiting room, sanitary or ticketing equipment, etc.
