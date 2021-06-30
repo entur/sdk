@@ -83,6 +83,9 @@ export interface EnturService {
     getStopPlaces: ReturnType<typeof createGetStopPlaces>
     getParentStopPlace: ReturnType<typeof createGetParentStopPlace>
     getStopPlacesByPosition: ReturnType<typeof createGetStopPlacesByPosition>
+    /**
+     * @deprecated Use methods nsr.getStopPlace, nsr.getParkingsForStopPlace instead
+     */
     getStopPlaceFacilities: ReturnType<typeof createGetStopPlaceFacilities>
     getQuaysForStopPlace: ReturnType<typeof createGetQuaysForStopPlace>
     getBikeRentalStation: ReturnType<typeof createGetBikeRentalStation>
