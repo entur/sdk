@@ -37,23 +37,13 @@ import { createGetScootersByPosition } from './scooters'
 
 import { createGetFeatures, createGetFeaturesReverse } from './geocoder'
 
-import { ArgumentConfig, getServiceConfig, ServiceConfig } from './config'
+import { ArgumentConfig, getServiceConfig } from './config'
 
 export interface EnturService {
-    journeyPlannerQuery: <T>(
-        query: string,
-        variables: Record<string, unknown>,
-        config: ServiceConfig,
-    ) => Promise<T>
     queryJourneyPlanner: <T>(
         queryObj: string,
         variables: Record<string, unknown>,
         options?: RequestOptions,
-    ) => Promise<T>
-    nsrQuery: <T>(
-        query: string,
-        variables: Record<string, unknown>,
-        config: ServiceConfig,
     ) => Promise<T>
     queryNsr: <T>(
         queryObj: string,
@@ -100,18 +90,6 @@ export interface EnturService {
 
 function createEnturService(config: ArgumentConfig): EnturService {
     return {
-        journeyPlannerQuery: <T>(
-            query: string,
-            variables: Record<string, unknown>,
-            config: ServiceConfig,
-        ): Promise<T> => {
-            if (process.env.NODE_ENV !== 'production') {
-                console.warn(
-                    'journeyPlannerQuery is deprecated and will be removed in a future release. Please use queryJourneyPlanner instead.',
-                )
-            }
-            return journeyPlannerQuery(query, variables, config)
-        },
         queryJourneyPlanner: <T>(
             queryObj: string,
             variables: Record<string, unknown>,
@@ -123,18 +101,6 @@ function createEnturService(config: ArgumentConfig): EnturService {
                 getServiceConfig(config),
                 options,
             ),
-        nsrQuery: <T>(
-            query: string,
-            variables: Record<string, unknown>,
-            config: ServiceConfig,
-        ): Promise<T> => {
-            if (process.env.NODE_ENV !== 'production') {
-                console.warn(
-                    'nsrQuery is deprecated and will be removed in a future release. Please use queryNsr instead.',
-                )
-            }
-            return nsrQuery(query, variables, config)
-        },
         queryNsr: <T>(
             queryObj: string,
             variables: Record<string, unknown>,
