@@ -1,0 +1,65 @@
+---
+name: getFeaturesReverse
+menu: Geocoder
+route: /geocoder/getFeaturesReverse
+---
+
+# getFeaturesReverse
+
+```typescript
+(coords: Coordinates, params?: GetFeaturesReverseParam) => Promise<FeatureCollection<GeocoderTypes.Location>>
+```
+
+`getFeaturesReverse` does a reverse lookup of stop places, stations or addresses around the given coordinates.
+
+## Parameters
+
+### coords (`Coordinates`)
+
+The coordinates to do a lookup for. Examples: `{ latitude: 59.909774, longitude: 10.763712 }`.
+
+### params (`ReverseGeocoderParams`) [Optional]
+
+An optional object of parameters to pass to the query.
+
+| Key        | Type                           | Default               | Description                                                                                                                                                                              |
+| :--------- | :----------------------------- | :-------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `point`    | `{ lat: number, lon: number }` |                       | The coordinates to do a lookup for. Examples: `{ lat: 59.909774, lon: 10.763712 }`.                                                                                                      |
+| `radius`   | `number`                       | 1                     | Radius (in meters) from the given point to limit results.                                                                                                                                |
+| `size`     | `number`                       | 10                    | The number of results to return                                                                                                                                                          |
+| `layers`   |  `string[]`                    | `["venue","address"]` | The types of places to search for in a comma-separated string. `venue` means stop places and stations, `address` means postal addresses that might not be connected to public transport. |
+| `boundary` | `Boundary`                     |                       | Allows filtering by geographical region. See details below.                                                                                                                              |
+
+#### Boundary (object)
+
+| Key           | Type       | Description                                                   |
+| :------------ | ---------- | :------------------------------------------------------------ |
+| `country`     | `string`   |                                                               |
+| `countyIds`   | `string[]` | Use this for filtering on counties.                           |
+| `localityIds` | `string[]` | Use this for filtering on municipalities.                     |
+| `rect`        | `Rect`     | A bounding box to get features within.                        |
+| `circle`      | `Circle`   | A bounding circle surrounding `point` to get features within. |
+
+#### Rect (object)
+
+| Key      | Type     |
+| :------- | :------- |
+| `minLat` | `number` |
+| `minLon` | `number` |
+| `maxLat` | `number` |
+| `maxLon` | `number` |
+
+#### Circle (object)
+
+| Key      | Type     |
+| :------- | :------- |
+| `radius` | `number` |
+
+### options (`RequestOptions`) [Optional]
+
+An object containing a subset of `RequestInit` options that's applied to the request.
+
+| Key       | Type          | Description                                                                                                                                       |
+| :-------- | :------------ | :------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `signal`  | `AbortSignal` | Allows you to communicate with a fetch request and abort it if desired. [Read more](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal) |
+| `headers` | `HeadersInit` | Add custom HTTP headers to the fetch request if desired.                                                                                          |
