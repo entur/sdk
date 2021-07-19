@@ -104,6 +104,7 @@ export interface Location {
 export interface Boundary {
     /**
      * A bounding box to get features within. Features that are outside this box will not be returned.
+     * Only supported for autocomplete, not reverse.
      */
     rect?: {
         minLat: number
@@ -126,6 +127,7 @@ export interface Boundary {
     localityIds?: string[]
     /**
      * A bounding circle to get features within. Features that are outside this circle will not be returned.
+     * Only supported for reverse, not autocomplete.
      */
     circle?: {
         /**
