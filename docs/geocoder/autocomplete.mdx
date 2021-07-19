@@ -63,3 +63,32 @@ An object containing a subset of `RequestInit` options that's applied to the req
 | :-------- | :------------ | :------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `signal`  | `AbortSignal` | Allows you to communicate with a fetch request and abort it if desired. [Read more](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal) |
 | `headers` | `HeadersInit` | Add custom HTTP headers to the fetch request if desired.                                                                                          |
+
+## Example
+
+```typescript
+import { Feature, Point } from 'geojson'
+import createEnturService, { GeocoderTypes } from '@entur/sdk'
+// or: const createEnturService = require('@entur/sdk').default
+
+const service = createEnturService({
+    clientName: 'awesomecompany-awesomeapp',
+})
+
+async function example() {
+    try {
+        const featureCollection = await service.geocoder.autocomplete({
+            text: 'Oslo S',
+        })
+
+        const features: Array<Feature<Point, GeocoderTypes.Location>> =
+            featureCollection.features
+
+        console.log(features)
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+example()
+```
