@@ -3,24 +3,12 @@ import { FeatureCollection, Point } from 'geojson'
 import { ArgumentConfig, getServiceConfig, getGeocoderHost } from '../../config'
 import { get, RequestOptions } from '../../http'
 
-import { stringifyCommaSeparatedList, transformBoundaryParam } from '../helper'
+import {
+    stringifyCommaSeparatedList,
+    transformBoundaryParam,
+    transformFocusParam,
+} from '../helper'
 import { Boundary, Focus, Location } from '../types'
-
-interface FocusApi {
-    'focus.weight'?: number
-    'focus.function'?: 'linear' | 'exp'
-    'focus.scale'?: string
-}
-
-function transformFocusParam(focusPoint?: Focus): FocusApi {
-    if (!focusPoint) return {}
-
-    return {
-        'focus.weight': focusPoint.weight,
-        'focus.function': focusPoint.function,
-        'focus.scale': focusPoint.scale,
-    }
-}
 
 export interface AutocompleteParams {
     text: string

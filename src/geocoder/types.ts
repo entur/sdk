@@ -145,7 +145,17 @@ export interface Boundary {
     }
 }
 
+/**
+ * To focus your search based upon a geographical area, such as the center of
+ * the user's map or at the device's GPS location, supply the parameters
+ * focus.point.lat and focus.point.lon.
+ * This boosts locally relevant results higher.
+ */
 export interface Focus {
+    point: {
+        lat: number
+        lon: number
+    }
     /**
      * Base weight to be applied to boosting results based on location.
      * This value will be multiplied by a factor determined by decay

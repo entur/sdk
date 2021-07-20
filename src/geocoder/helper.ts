@@ -1,4 +1,4 @@
-import { Boundary } from './types'
+import { Boundary, Focus } from './types'
 
 export function stringifyCommaSeparatedList(
     value: string | string[] | undefined,
@@ -60,4 +60,24 @@ export function transformBoundaryParam(boundary?: Boundary): BoundaryApi {
     }
 
     return result
+}
+
+interface FocusApi {
+    'focus.point.lat': number
+    'focus.point.lon': number
+    'focus.weight'?: number
+    'focus.function'?: 'linear' | 'exp'
+    'focus.scale'?: string
+}
+
+export function transformFocusParam(focus?: Focus): FocusApi | undefined {
+    if (!focus) return
+
+    return {
+        'focus.point.lat': focus.point.lat,
+        'focus.point.lon': focus.point.lon,
+        'focus.weight': focus.weight,
+        'focus.function': focus.function,
+        'focus.scale': focus.scale,
+    }
 }
