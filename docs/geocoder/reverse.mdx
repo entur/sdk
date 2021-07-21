@@ -26,7 +26,7 @@ An optional object of parameters to pass to the query.
 | :--------- | :----------------------------- | :-------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `point`    | `{ lat: number, lon: number }` |                       | The coordinates to do a lookup for. Examples: `{ lat: 59.909774, lon: 10.763712 }`.                                                                                                      |
 | `radius`   | `number`                       | 1                     | Radius (in meters) from the given point to limit results.                                                                                                                                |
-| `size`     | `number`                       | 10                    | The number of results to return                                                                                                                                                          |
+| `size`     | `number`                       | No limitation         | Limit the maximum number of results to this number. Valid values are from 1 to 100 inclusive.                                                                                            |
 | `layers`   |  `string[]`                    | `["venue","address"]` | The types of places to search for in a comma-separated string. `venue` means stop places and stations, `address` means postal addresses that might not be connected to public transport. |
 | `boundary` | `Boundary`                     |                       | Allows filtering by geographical region. See details below.                                                                                                                              |
 
@@ -75,12 +75,20 @@ const service = createEnturService({
     clientName: 'awesomecompany-awesomeapp',
 })
 
+/**
+ * Finding locations within 2 km of Oslo City Hall (Rådhuset).
+ */
 async function example() {
     try {
         const featureCollection = await service.geocoder.reverse({
             point: {
                 lat: 60.1283,
                 lon: 10.7654,
+            },
+            boundary: {
+                circle: {
+                    radius: 2,
+                },
             },
         })
 

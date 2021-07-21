@@ -11,9 +11,37 @@ import {
 import { Boundary, Focus, Location } from '../types'
 
 export interface AutocompleteParams {
+    /**
+     * The search query to find matching locations for.
+     *
+     * @example "Oslo S"
+     */
     text: string
+    /**
+     * You can get search results in another language, if available, by
+     * specifying a target language code with your request following the
+     * BCP47 standard (https://www.rfc-editor.org/rfc/bcp/bcp47.txt).
+     *
+     * By default, search responses are in the default locale of the dataset.
+     * However, if you include a language code, the search attempts to return
+     * place names in the language you specified.
+     *
+     * If the language you requested is unavailable, then the default language
+     * is returned. In some cases, this is the local dialect, or it may be
+     * English for other datasets.
+     *
+     * @defaultValue "no"
+     */
     lang?: string
+    /**
+     * To focus your search based upon a geographical area, such as the center
+     * of the user's map or at the device's GPS location, supply a focus point.
+     * This boosts locally relevant results higher.
+     */
     focus?: Focus
+    /**
+     * You can set a boundary to filter results by a geographical region.
+     */
     boundary?: Boundary
     sources?: string[]
     /**
@@ -25,6 +53,16 @@ export interface AutocompleteParams {
      * - address: POI, streets, addresses, stop groups
      */
     layers?: Array<'address' | 'venue'>
+    /**
+     * Controls whether the search returns multimodal stops, child stops of the
+     * multimodal stops, or both. Does not affect monomodal stops.
+     *
+     * @defaultValue 'parent'
+     */
+    multiModal?: 'parent' | 'child' | 'all'
+    /**
+     * Governs the maximum number of results. Valid values are from 1 to 100 inclusive.
+     */
     size?: number
     tariffZoneAuthorities?: string[]
     tariffZoneIds?: string[]

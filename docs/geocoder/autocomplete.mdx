@@ -27,15 +27,22 @@ An object of parameters to pass to the query for filtering. Read more on https:/
 | `size`       | `number`                  | No limitation          | Limit the maximum number of results to this number. Valid values are from 1 to 100 inclusive.                                                                |
 | `layers`     |  `string[]`               | `["venue", "address"]` | The types of places to search for. `venue` means stop places and stations, `address` means postal addresses that might not be connected to public transport. |
 | `focus`      | `Focus`                   |                        | Override default values for priority of `Coordinates` focus point                                                                                            |
-| `multiModal` |  `parent`, `child`, `all` |                        | The types of places to search for. `venue` means stop places and stations, `address` means postal addresses that might not be connected to public transport. |
+| `multiModal` |  `parent`, `child`, `all` | `parent`               | Controls whether the search returns multimodal stops, child stops of the multimodal stops, or both. Does not affect monomodal stops.                         |
 
 #### Focus (object)
 
-| Key        | Type            | Default  | Description                                                                                                                                                        |
-| :--------- | :-------------- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `weight`   | `number`        | 15       | Base weight to be applied to boosting results based on location. This value will be multiplied by a factor determined by decay function and scale.                 |
-| `function` | `linear`, `exp` | `linear` | Which decay function to apply: `linear` or `exp`. [Read more on decay functions](https://www.elastic.co/guide/en/elasticsearch/guide/current/decay-functions.html) |
-| `scale`    | `string`        | 2500km   | Controls the rate of decay, i.e. at which distance from the given location the scoring will be given the boost factor of the default decay value, which is 0.5.    |
+To focus your search based upon a geographical area, such as the center of the user's map or at the device's GPS location, supply the parameters focus.point.lat and focus.point.lon.
+This boosts locally relevant results higher. For example, searching for "Dronningens gate" with a focus point in the center of Trondheim will make the Dronningens gate in Trondheim be
+prioritized over those in Bergen, Oslo and other places.
+
+We have exposed the following pelias-internal parameters in the autocomplete endpoint, related to boosting results according to proximity when the focus.point parameter is given in the query.
+
+| Key        | Type                           | Default  | Description                                                                                                                                                        |
+| :--------- | :----------------------------- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `point`    | `{ lat: number, lon: number }` |          | The coordinates of the focus point.                                                                                                                                |
+| `weight`   | `number`                       | 15       | Base weight to be applied to boosting results based on location. This value will be multiplied by a factor determined by decay function and scale.                 |
+| `function` | `linear`, `exp`                | `linear` | Which decay function to apply: `linear` or `exp`. [Read more on decay functions](https://www.elastic.co/guide/en/elasticsearch/guide/current/decay-functions.html) |
+| `scale`    | `string`                       | 2500km   | Controls the rate of decay, i.e. at which distance from the given location the scoring will be given the boost factor of the default decay value, which is 0.5.    |
 
 #### Boundary (object)
 
