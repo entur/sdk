@@ -10,7 +10,7 @@ import { TransportMode, TransportSubmode, QueryMode } from '../types/Mode'
 
 import { convertFeatureToLocation, isValidDate } from '../utils'
 
-import { createGetFeatures } from '../geocoder'
+import { createGetFeatures } from '../geocoderLegacy'
 
 import { Leg } from '../fields/Leg'
 

@@ -23,6 +23,8 @@ import {
     createGetQuaysForStopPlace,
 } from './stopPlace'
 
+import { default as createGeocoderClient, GeocoderClient } from './geocoder'
+
 import { default as createMobilityClient, MobilityClient } from './mobility'
 
 import { default as createNsrClient, NsrClient } from './nsr'
@@ -35,7 +37,7 @@ import {
 
 import { createGetScootersByPosition } from './scooters'
 
-import { createGetFeatures, createGetFeaturesReverse } from './geocoder'
+import { createGetFeatures, createGetFeaturesReverse } from './geocoderLegacy'
 
 import { ArgumentConfig, getServiceConfig } from './config'
 
@@ -84,6 +86,7 @@ export interface EnturService {
         typeof createGetBikeRentalStationsByPosition
     >
     getScootersByPosition: ReturnType<typeof createGetScootersByPosition>
+    geocoder: GeocoderClient
     mobility: MobilityClient
     nsr: NsrClient
 }
@@ -131,6 +134,7 @@ function createEnturService(config: ArgumentConfig): EnturService {
         getBikeRentalStationsByPosition:
             createGetBikeRentalStationsByPosition(config),
         getScootersByPosition: createGetScootersByPosition(config),
+        geocoder: createGeocoderClient(config),
         mobility: createMobilityClient(config),
         nsr: createNsrClient(config),
     }
