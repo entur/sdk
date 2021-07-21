@@ -10,6 +10,7 @@ export {
 } from './utils'
 
 export * as GeocoderTypes from './geocoder/types'
+export type { GeocoderClient } from './geocoder'
 
 export * as MobilityTypes from './mobility/types'
 export type { MobilityClient } from './mobility'

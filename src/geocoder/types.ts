@@ -1,3 +1,6 @@
+export type { AutocompleteParams } from './autocomplete'
+export type { ReverseParams } from './reverse'
+
 export interface Location {
     /**
      * The accuracy field gives information on the accuracy of the latitude/longitude point returned with the given result. This value is a property of the result itself and won't change based on the query.
