@@ -40,16 +40,16 @@ An object containing a subset of `RequestInit` options that's applied to the req
 ## Example
 
 ```javascript
-import createEnturService from '@entur/sdk'
-// or: const createEnturService = require('@entur/sdk').default
+import createEnturClient from '@entur/sdk'
+// or: const createEnturClient = require('@entur/sdk').default
 
-const service = createEnturService({
+const enturClient = createEnturClient({
     clientName: 'awesomecompany-awesomeapp',
 })
 
 async function findSomeTrips() {
     try {
-        const trips = await service.findTrips('Oslo S', 'Bergen stasjon')
+        const trips = await enturClient.findTrips('Oslo S', 'Bergen stasjon')
         console.log(trips)
     } catch (error) {
         console.error(error)

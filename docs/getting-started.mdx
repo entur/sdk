@@ -11,22 +11,24 @@ npm install @entur/sdk --save
 
 ## Setup
 
-Import the service creator:
+Import the client creator:
 
 ```javascript
-import createEnturService from '@entur/sdk'
+import createEnturClient from '@entur/sdk'
 ```
 
 Or if you are using CommonJS:
 
 ```javascript
-const createEnturService = require('@entur/sdk').default
+const createEnturClient = require('@entur/sdk').default
 ```
 
-Then create an instance of the service:
+Then create an instance of the client:
 
 ```javascript
-const service = createEnturService({ clientName: 'awesomecompany-awesomeapp' })
+const enturClient = createEnturClient({
+    clientName: 'awesomecompany-awesomeapp',
+})
 ```
 
 ### Configuration
@@ -44,7 +46,7 @@ followed by a hyphen and your application's name. See https://developer.entur.or
 
 #### hosts
 
-The Entur SDK uses multiple endpoints for its services. Each endpoint can be overridden with hosts config (in case you use a proxy or a local instance of the endpoint). Available hosts are:
+The Entur SDK uses multiple endpoints for its clients. Each endpoint can be overridden with hosts config (in case you use a proxy or a local instance of the endpoint). Available hosts are:
 
 ```javascript
 {
@@ -63,7 +65,7 @@ If you need to configure the fetch implementation that is used, use this. You co
 -   Do some common logging on all SDK requests
 
 ```
-const service = createEnturService({
+const enturClient = createEnturClient({
   clientName: 'awesomecompany-awesomeapp',
   fetch: (url, init) => {
     const startTime = new Date()
