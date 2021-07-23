@@ -1,7 +1,7 @@
 import 'regenerator-runtime/runtime'
 
-import createEnturService from './service'
-export type { EnturService } from './service'
+import createEnturClient from './client'
+export type { EnturClient, EnturService } from './client'
 
 export {
     convertFeatureToLocation,
@@ -44,7 +44,7 @@ export type { DeparturesById } from './departure'
 export { County } from './geocoder/countyIds'
 export type { GetFeaturesParams, GetFeaturesReverseParam } from './geocoder'
 
-export default createEnturService
+export default createEnturClient
 
 export type { Authority } from './fields/Authority'
 export type { BikeRentalStation } from './fields/BikeRentalStation'
