@@ -24,16 +24,16 @@ An object containing a subset of `RequestInit` options that's applied to the req
 ## Example
 
 ```javascript
-import createEnturService from '@entur/sdk'
-// or: const createEnturService = require('@entur/sdk').default
+import createEnturClient from '@entur/sdk'
+// or: const createEnturClient = require('@entur/sdk').default
 
-const service = createEnturService({
+const enturClient = createEnturClient({
     clientName: 'awesomecompany-awesomeapp',
 })
 
 async function example() {
     try {
-        const parking = await service.nsr.getParking('NSR:Parking:41')
+        const parking = await enturClient.nsr.getParking('NSR:Parking:41')
         console.log(parking)
     } catch (error) {
         console.error(error)

@@ -58,7 +58,7 @@ interface InputWhiteListed {
 
 ### overrideConfig (`OverrideConfig`) [Optional]
 
-You can override the default service config on invocation if necessary.
+You can override the default client config on invocation if necessary.
 
 ```typescript
 interface OverrideConfig {
@@ -84,14 +84,14 @@ An object containing a subset of `RequestInit` options that's applied to the req
 ## Example
 
 ```javascript
-import createEnturService from '@entur/sdk'
-// or: const createEnturService = require('@entur/sdk').default
+import createEnturClient from '@entur/sdk'
+// or: const createEnturClient = require('@entur/sdk').default
 
-const service = createEnturService({
+const enturClient = createEnturClient({
     clientName: 'awesomecompany-awesomeapp'
 })
 
-service.getTripPatterns(
+enturClient.getTripPatterns(
     {
         from: {
             name: 'Ryllikvegen, Lillehammer',
