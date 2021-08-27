@@ -15,7 +15,7 @@ It reflects the /autocomplete endpoint of the Geocoder service. Read more here: 
 
 ## Parameters
 
-### params (`GetFeaturesQuery`) [Optional]
+### params (`GetFeaturesQuery`)
 
 An object of parameters to pass to the query for filtering. Read more on https://developer.entur.org/pages-geocoder-api.
 
@@ -75,16 +75,16 @@ An object containing a subset of `RequestInit` options that's applied to the req
 
 ```typescript
 import { Feature, Point } from 'geojson'
-import createEnturService, { GeocoderTypes } from '@entur/sdk'
-// or: const createEnturService = require('@entur/sdk').default
+import createEnturClient, { GeocoderTypes } from '@entur/sdk'
+// or: const createEnturClient = require('@entur/sdk').default
 
-const service = createEnturService({
+const enturClient = createEnturClient({
     clientName: 'awesomecompany-awesomeapp',
 })
 
 async function example() {
     try {
-        const featureCollection = await service.geocoder.autocomplete({
+        const featureCollection = await enturClient.geocoder.autocomplete({
             text: 'Oslo S',
         })
 

@@ -4,31 +4,27 @@ menu: Geocoder
 route: /geocoder/reverse
 ---
 
-# getFeaturesReverse
+# reverse
 
 ```typescript
-(coords: Coordinates, params?: GetFeaturesReverseParam) => Promise<FeatureCollection<GeocoderTypes.Location>>
+(params: ReverseParams, options?: RequestOptions) => Promise<FeatureCollection<GeocoderTypes.Location>>
 ```
 
-`getFeaturesReverse` does a reverse lookup of stop places, stations or addresses around the given coordinates.
+`reverse` does a reverse lookup of stop places, stations or addresses around the given coordinates.
 
 ## Parameters
 
-### coords (`Coordinates`)
+### params (`ReverseParams`)
 
-The coordinates to do a lookup for. Examples: `{ latitude: 59.909774, longitude: 10.763712 }`.
+An optional object of parameters to pass to the query. Read more on https://developer.entur.org/pages-geocoder-api.
 
-### params (`ReverseGeocoderParams`) [Optional]
-
-An optional object of parameters to pass to the query.
-
-| Key        | Type                           | Default               | Description                                                                                                                                                                              |
-| :--------- | :----------------------------- | :-------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `point`    | `{ lat: number, lon: number }` |                       | The coordinates to do a lookup for. Examples: `{ lat: 59.909774, lon: 10.763712 }`.                                                                                                      |
-| `radius`   | `number`                       | 1                     | Radius (in meters) from the given point to limit results.                                                                                                                                |
-| `size`     | `number`                       | No limitation         | Limit the maximum number of results to this number. Valid values are from 1 to 100 inclusive.                                                                                            |
-| `layers`   |  `string[]`                    | `["venue","address"]` | The types of places to search for in a comma-separated string. `venue` means stop places and stations, `address` means postal addresses that might not be connected to public transport. |
-| `boundary` | `Boundary`                     |                       | Allows filtering by geographical region. See details below.                                                                                                                              |
+| Key        | Type                           | Default                | Description                                                                                                                                                  |
+| :--------- | :----------------------------- | :--------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `point`    | `{ lat: number, lon: number }` |                        | The coordinates to do a lookup for. Examples: `{ lat: 59.909774, lon: 10.763712 }`.                                                                          |
+| `radius`   | `number`                       | 1                      | Radius (in meters) from the given point to limit results.                                                                                                    |
+| `size`     | `number`                       | No limitation          | Limit the maximum number of results to this number. Valid values are from 1 to 100 inclusive.                                                                |
+| `layers`   | `string[]`                     | `["venue", "address"]` | The types of places to search for. `venue` means stop places and stations, `address` means postal addresses that might not be connected to public transport. |
+| `boundary` | `Boundary`                     |                        | Allows filtering by geographical region. See details below.                                                                                                  |
 
 #### Boundary (object)
 
@@ -68,10 +64,10 @@ An object containing a subset of `RequestInit` options that's applied to the req
 
 ```typescript
 import { Feature, Point } from 'geojson'
-import createEnturService, { GeocoderTypes } from '@entur/sdk'
+import createEnturClient, { GeocoderTypes } from '@entur/sdk'
 // or: const createEnturService = require('@entur/sdk').default
 
-const service = createEnturService({
+const enturClient = createEnturClient({
     clientName: 'awesomecompany-awesomeapp',
 })
 
@@ -80,7 +76,7 @@ const service = createEnturService({
  */
 async function example() {
     try {
-        const featureCollection = await service.geocoder.reverse({
+        const featureCollection = await enturClient.geocoder.reverse({
             point: {
                 lat: 60.1283,
                 lon: 10.7654,
