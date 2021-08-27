@@ -9,6 +9,9 @@ export {
     throttler,
 } from './utils'
 
+export * as GeocoderTypes from './geocoder/types'
+export type { GeocoderClient } from './geocoder'
+
 export * as MobilityTypes from './mobility/types'
 export type { MobilityClient } from './mobility'
 
@@ -41,8 +44,11 @@ export * from './constants/featureCategory'
 export { journeyPlannerQuery, nsrQuery } from './api'
 
 export type { DeparturesById } from './departure'
-export { County } from './geocoder/countyIds'
-export type { GetFeaturesParams, GetFeaturesReverseParam } from './geocoder'
+export { County } from './geocoderLegacy/countyIds'
+export type {
+    GetFeaturesParams,
+    GetFeaturesReverseParam,
+} from './geocoderLegacy'
 
 export default createEnturClient
 
