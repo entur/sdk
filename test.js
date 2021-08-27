@@ -38,25 +38,25 @@ const JERNBANETORGET = 'NSR:StopPlace:58366'
 const OSLO_S = 'NSR:StopPlace:59872'
 const MISSING = 'NSR:StopPlace:5483957348574389'
 
-const { default: createEnturService } = require('./src')
+const { default: createEnturClient } = require('./src')
 
-const service = createEnturService({
+const client = createEnturClient({
     clientName: 'SDK cli-test',
 })
 
 function getMethodToRun(name) {
     switch (name) {
         case 'getTripPatterns':
-            return service.getTripPatterns(
+            return client.getTripPatterns(
                 MOMOEN_LOCATION,
                 LILLESTROM_LEGESENTER_LOCATION,
                 undefined,
                 [],
             )
         case 'getStopPlace':
-            return service.getStopPlace(JERNBANETORGET)
+            return client.getStopPlace(JERNBANETORGET)
         case 'getStopPlaces':
-            return service.getStopPlaces([
+            return client.getStopPlaces([
                 OSLO_S,
                 MISSING,
                 JERNBANETORGET,
@@ -64,13 +64,13 @@ function getMethodToRun(name) {
                 LILLEHAMMER_STASJON,
             ])
         case 'getStopPlaceFacilities':
-            return service.getStopPlaceFacilities(JERNBANETORGET)
+            return client.getStopPlaceFacilities(JERNBANETORGET)
         case 'getQuaysFromStopPlace':
-            return service.getQuaysFromStopPlace(JERNBANETORGET)
+            return client.getQuaysFromStopPlace(JERNBANETORGET)
         case 'getBikeRentalStation':
-            return service.getBikeRentalStation(JERNBANETORGET_BIKE_STOP)
+            return client.getBikeRentalStation(JERNBANETORGET_BIKE_STOP)
         case 'getBikeRentalStationsByPosition':
-            return service.getBikeRentalStationsByPosition(
+            return client.getBikeRentalStationsByPosition(
                 {
                     latitude: 59.911898,
                     longitude: 10.75038,
@@ -78,14 +78,14 @@ function getMethodToRun(name) {
                 50,
             )
         case 'getDeparturesFromStopPlace':
-            return service.getDeparturesFromStopPlace(JERNBANETORGET)
+            return client.getDeparturesFromStopPlace(JERNBANETORGET)
         case 'getDeparturesFromStopPlaces':
-            return service.getDeparturesFromStopPlaces(
+            return client.getDeparturesFromStopPlaces(
                 [JERNBANETORGET, HAMAR_STASJON, LILLEHAMMER_STASJON],
                 { limit: 2 },
             )
         case 'getDeparturesBetweenStopPlaces':
-            return service.getDeparturesBetweenStopPlaces(
+            return client.getDeparturesBetweenStopPlaces(
                 LILLEHAMMER_STASJON,
                 HAMAR_STASJON,
             )

@@ -41,7 +41,7 @@ import { createGetFeatures, createGetFeaturesReverse } from './geocoderLegacy'
 
 import { ArgumentConfig, getServiceConfig } from './config'
 
-export interface EnturService {
+export interface EnturClient {
     queryJourneyPlanner: <T>(
         queryObj: string,
         variables: Record<string, unknown>,
@@ -91,7 +91,12 @@ export interface EnturService {
     nsr: NsrClient
 }
 
-function createEnturService(config: ArgumentConfig): EnturService {
+/**
+ * @deprecated Use `EnturClient` instead.
+ */
+export type EnturService = EnturClient
+
+function createEnturClient(config: ArgumentConfig): EnturClient {
     return {
         queryJourneyPlanner: <T>(
             queryObj: string,
@@ -140,4 +145,4 @@ function createEnturService(config: ArgumentConfig): EnturService {
     }
 }
 
-export default createEnturService
+export default createEnturClient

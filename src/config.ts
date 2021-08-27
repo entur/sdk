@@ -64,7 +64,7 @@ const HOST_CONFIG = {
 export function getServiceConfig(config: ArgumentConfig): ServiceConfig {
     if (!config || !config.clientName) {
         throw new Error(
-            'ERROR: You must pass a "clientName" to EnturService through the config argument. ' +
+            'ERROR: You must pass a "clientName" to EnturClient through the config argument. ' +
                 'See https://www.entur.org/dev/api/header/ for information.\n',
         )
     }
