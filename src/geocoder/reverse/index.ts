@@ -55,13 +55,33 @@ export default function createReverse(argConfig: ArgumentConfig) {
         options?: RequestOptions,
     ): Promise<FeatureCollection<Point, Location>> {
         const { host, headers } = getGeocoderHost(config)
-        const { sources, layers, lang, boundary, ...rest } = params
+        const { point, sources, layers, lang, boundary, size } = params
+
+        if (typeof point !== 'object') {
+            throw new TypeError(
+                `geocoder.reverse expects argument \`point\` to be of type object, but got ${typeof point}.`,
+            )
+        }
+
+        if (typeof point.lat !== 'number') {
+            throw new TypeError(
+                `geocoder.reverse expects \`point.lat\` to be of type number, but got ${typeof point.lat}.`,
+            )
+        }
+
+        if (typeof point.lon !== 'number') {
+            throw new TypeError(
+                `geocoder.reverse expects \`point.lon\` to be of type number, but got ${typeof point.lon}.`,
+            )
+        }
 
         const searchParams = {
-            ...rest,
+            'point.lat': point.lat,
+            'point.lon': point.lon,
             lang: lang || 'no',
             sources: stringifyCommaSeparatedList(sources),
             layers: stringifyCommaSeparatedList(layers),
+            size,
             ...transformBoundaryParam(boundary),
         }
 
