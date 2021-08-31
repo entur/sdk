@@ -7,7 +7,7 @@ route: /places/getNearestPlaces
 # getNearestPlaces
 
 ```typescript
-(coordinates: { latitude: number, longitude: number }, params?: NearestPlacesParams) => Promise<Array<NearestPlace>>
+(coordinates: { latitude: number, longitude: number }, params?: NearestPlacesParams, options?: RequestOptions) => Promise<Array<NearestPlace>>
 ```
 
 Finds the nearest places to a given coordinate.

@@ -7,7 +7,7 @@ route: /travel/getTripPatterns
 # getTripPatterns
 
 ```typescript
-(params: GetTripPatternsParams, overrideConfig?: OverrideConfig) => Promise<Array<TripPattern>>
+(params: GetTripPatternsParams, overrideConfig?: OverrideConfig, options?: RequestOptions) => Promise<Array<TripPattern>>
 ```
 
 `getTripPatterns` is for searching for itineraries for a trip from some location to a destination at a given time. The method takes one argument `query`, which is an object with search parameters.

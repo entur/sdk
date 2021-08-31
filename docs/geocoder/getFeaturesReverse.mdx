@@ -7,7 +7,7 @@ route: /geocoder/getFeaturesReverse
 # getFeaturesReverse
 
 ```typescript
-(coords: Coordinates, params?: GetFeaturesReverseParam) => Promise<Array<Feature>>
+(coords: Coordinates, params?: GetFeaturesReverseParam, options?: RequestOptions) => Promise<Array<Feature>>
 ```
 
 `getFeaturesReverse` does a reverse lookup of stop places, stations or addresses around the given coordinates.

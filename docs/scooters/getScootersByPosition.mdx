@@ -7,7 +7,7 @@ route: /scooters/getScootersByPosition
 # getScootersByPosition
 
 ```typescript
-(params: GetScootersByPositionParams) => Promise<Scooter[]>
+(params: GetScootersByPositionParams, options?: RequestOptions) => Promise<Scooter[]>
 ```
 
 `getScooters` finds scooters within an area surrounding a coordinate.

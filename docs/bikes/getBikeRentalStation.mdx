@@ -7,7 +7,7 @@ route: /bikes/getBikeRentalStation
 # getBikeRentalStation
 
 ```typescript
-(stationId: string) => Promise<BikeRentalStation>
+(stationId: string, options?: RequestOptions) => Promise<BikeRentalStation>
 ```
 
 `getBikeRentalStation` finds a single bike rental station by its ID.

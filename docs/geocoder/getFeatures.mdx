@@ -7,7 +7,7 @@ route: /geocoder/getFeatures
 # getFeatures
 
 ```typescript
-(query: string, coords?: Coordinates, params?: GetFeaturesQuery) => Promise<Array<Feature>>
+(query: string, coords?: Coordinates, params?: GetFeaturesQuery, options?: RequestOptions) => Promise<Array<Feature>>
 ```
 
 `getFeatures` is for searching for stop places, stations or addresses.

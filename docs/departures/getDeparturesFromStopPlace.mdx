@@ -7,7 +7,7 @@ route: /departures/getDeparturesFromStopPlace
 # getDeparturesFromStopPlace
 
 ```typescript
-(stopPlaceId: string, params?: GetDeparturesParams) => Promise<Array<Departure>>
+(stopPlaceId: string, params?: GetDeparturesParams, options?: RequestOptions) => Promise<Array<Departure>>
 ```
 
 `getDeparturesFromStopPlace` finds departures from one given stop place. Also see `getDeparturesFromStopPlaces` for fetching for multiple stops simultaneously.
