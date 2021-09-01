@@ -7,7 +7,7 @@ route: /departures/getDeparturesForServiceJourney
 # getDeparturesForServiceJourney
 
 ```typescript
-(id: string, date?: string) => Promise<Array<Departure>>
+(id: string, date?: string, options?: RequestOptions) => Promise<Array<Departure>>
 ```
 
 `getDeparturesForServiceJourney` finds departures for a given service journey ID. You can also provide a desired date on the form "YYYY-MM-DD".

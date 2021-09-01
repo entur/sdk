@@ -7,7 +7,7 @@ route: /bikes/getBikeRentalStationsByPosition
 # getBikeRentalStationsByPosition
 
 ```typescript
-(coordinates: Coordinates, distance?: number) => Promise<Array<BikeRentalStation>>
+(coordinates: Coordinates, distance?: number, options?: RequestOptions) => Promise<Array<BikeRentalStation>>
 ```
 
 `getBikeRentalStations` finds bike rental stations within an area surrounding a coordinate.

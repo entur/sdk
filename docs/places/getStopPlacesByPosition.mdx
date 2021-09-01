@@ -7,7 +7,7 @@ route: /places/getStopPlacesByPosition
 # getStopPlacesByPosition
 
 ```typescript
-(coordinates: Coordinates, distance?: number, params?: StopPlaceParams) => Promise<Array<StopPlaceDetails>>
+(coordinates: Coordinates, distance?: number, params?: StopPlaceParams, options?: RequestOptions) => Promise<Array<StopPlaceDetails>>
 ```
 
 `getStopPlacesByPosition` finds stop places within an area surrounding a coordinate.

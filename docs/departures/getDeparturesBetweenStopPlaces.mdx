@@ -7,7 +7,7 @@ route: /departures/getDeparturesBetweenStopPlaces
 # getDeparturesBetweenStopPlaces
 
 ```typescript
-(fromStopPlaceId: string, toStopPlaceId: string, params?: GetDeparturesBetweenStopPlacesParams) => Promise<Array<Departure>>
+(fromStopPlaceId: string, toStopPlaceId: string, params?: GetDeparturesBetweenStopPlacesParams, options?: RequestOptions) => Promise<Array<Departure>>
 ```
 
 `getDeparturesBetweenStopPlaces` finds departures from a stop place, but only departures that will go to the destination stop place.
