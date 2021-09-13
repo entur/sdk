@@ -7,7 +7,7 @@ route: /mobility/getStationsById
 # getStationsById
 
 ```typescript
-(params: getStationsByIdParams, options?: RequestOptions) => Promise<MobilityTypes.Station[]>
+(params: GetStationsByIdParams, options?: RequestOptions) => Promise<MobilityTypes.Station[]>
 ```
 
 `getStationsById` finds micromobility stations with the given station IDs.
@@ -18,7 +18,7 @@ This method uses the `stationsById` query of the [Mobility v2 API](https://devel
 
 ## Parameters
 
-### params (`getStationsByIdParams`)
+### params (`GetStationsByIdParams`)
 
 | Key          | Type        | Required? | Default | Description                                |
 | :----------- | :---------- | :-------- | :------ | ------------------------------------------ |
