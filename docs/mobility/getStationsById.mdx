@@ -1,0 +1,178 @@
+---
+name: getStationsById
+menu: Mobility
+route: /mobility/getStationsById
+---
+
+# getStationsById
+
+```typescript
+(params: GetStationsByIdParams, options?: RequestOptions) => Promise<MobilityTypes.Station[]>
+```
+
+`getStationsById` finds micromobility stations with the given station IDs.
+If an ID is invalid or not found, it will not be included in the result. Therefore, the resulting
+array might be shorter than the argument array.
+
+This method uses the `stationsById` query of the [Mobility v2 API](https://developer.entur.org/pages-mobility-docs-mobility-v2).
+
+## Parameters
+
+### params (`GetStationsByIdParams`)
+
+| Key          | Type        | Required? | Default | Description                                |
+| :----------- | :---------- | :-------- | :------ | ------------------------------------------ |
+| `stationIds` |  `string[]` | Yes       | N/A     | The list of IDs to fetch station data for. |
+
+### options (`RequestOptions`) [Optional]
+
+An object containing a subset of `RequestInit` options that's applied to the request.
+
+| Key       | Type          | Description                                                                                                                                       |
+| :-------- | :------------ | :------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `signal`  | `AbortSignal` | Allows you to communicate with a fetch request and abort it if desired. [Read more](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal) |
+| `headers` | `HeadersInit` | Add custom HTTP headers to the fetch request if desired.                                                                                          |
+
+## Example
+
+```javascript
+import createEnturClient from '@entur/sdk'
+// or: const createEnturClient = require('@entur/sdk').default
+
+const enturClient = createEnturClient({
+    clientName: 'awesomecompany-awesomeapp',
+})
+
+async function example() {
+    try {
+        const stations = await enturClient.mobility.getStationsById({
+            stationIds: [
+                'YBE:VehicleSharingParkingArea:731',
+                'YOS:VehicleSharingParkingArea:483',
+                'some invalid id',
+            ],
+        })
+
+        // Probably 2 or less, since 'some invalid url' is invalid
+        console.log(stations.length)
+
+        return stations
+    } catch (error) {
+        console.error(error)
+    }
+}
+```
+
+## Example station
+
+```javascript
+{
+    id: 'YOS:VehicleSharingParkingArea:495',
+    name: {
+        translation: [
+            {
+                language: 'nb',
+                value: 'Vaterlandsparken',
+            },
+        ],
+    },
+    lat: 59.91351552854147,
+    lon: 10.757334670552268,
+    address: 'Vaterlandsparken',
+    capacity: 41,
+    rentalUris: null,
+    numBikesAvailable: 17,
+    numDocksAvailable: 23,
+    isInstalled: true,
+    isRenting: true,
+    isReturning: true,
+    lastReported: 1631535154,
+    system: {
+        id: 'oslobysykkel',
+        language: 'nb',
+        name: {
+            translation: [
+                {
+                    language: 'nb',
+                    value: 'Oslo Bysykkel',
+                },
+            ],
+        },
+        shortName: null,
+        operator: {
+            id: 'YOS:Operator:oslobysykkel',
+            name: {
+                translation: [
+                    {
+                        language: 'nb',
+                        value: 'UIP Oslo Bysykkel AS',
+                    },
+                ],
+            },
+        },
+        url: null,
+        purchaseUrl: null,
+        startDate: null,
+        phoneNumber: '+4791589700',
+        email: 'post@oslobysykkel.no',
+        feedContactEmail: null,
+        timezone: 'Europe/Oslo',
+        licenseUrl: null,
+        rentalApps: null,
+    },
+    pricingPlans: [
+        {
+            id: 'YOS:PricingPlan:CD863B56-B502-4FDE-B872-C21CD1F8F15C',
+            url: 'https://oslobysykkel.no/',
+            name: {
+                translation: [
+                    {
+                        language: 'nb',
+                        value: 'sesongkort',
+                    },
+                ],
+            },
+            currency: 'NOK',
+            price: 399,
+            isTaxable: false,
+            description: {
+                translation: [
+                    {
+                        language: 'nb',
+                        value: 'Ved sammenhengende bruk i over en time vil det forekomme et ekstra gebyr på 15.0 NOK per kvarter.',
+                    },
+                ],
+            },
+            perKmPricing: null,
+            perMinPricing: null,
+            surgePricing: null,
+        },
+        {
+            id: 'YOS:PricingPlan:3F6450C4-05F7-4E4E-8E71-2E641E011FEE',
+            url: 'https://oslobysykkel.no/',
+            name: {
+                translation: [
+                    {
+                        language: 'nb',
+                        value: 'dagskort',
+                    },
+                ],
+            },
+            currency: 'NOK',
+            price: 49,
+            isTaxable: false,
+            description: {
+                translation: [
+                    {
+                        language: 'nb',
+                        value: 'Ved sammenhengende bruk i over en time, vil det forekomme et ekstra gebyr på 15.0 NOK per kvarter.',
+                    },
+                ],
+            },
+            perKmPricing: null,
+            perMinPricing: null,
+            surgePricing: null,
+        },
+    ],
+}
+```
