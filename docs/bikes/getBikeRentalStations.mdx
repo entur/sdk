@@ -41,9 +41,9 @@ async function example() {
     try {
         const bikeRentalStations = await enturClient.getBikeRentalStations([
             'YBE:VehicleSharingParkingArea:368',
-            'YBE:VehicleSharingParkingArea:83',
+            'YOS:VehicleSharingParkingArea:495',
         ])
-        console.log(bikeRentalStation)
+        console.log(bikeRentalStations)
     } catch (error) {
         console.error(error)
     }
