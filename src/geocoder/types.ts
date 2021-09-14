@@ -180,5 +180,5 @@ export interface Focus {
      *
      * @defaultValue 2500
      */
-    scale?: string
+    scale?: number
 }

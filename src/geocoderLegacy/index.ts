@@ -48,7 +48,7 @@ interface BoundaryApi {
 interface FocusApi {
     'focus.weight'?: number
     'focus.function'?: 'linear' | 'exp'
-    'focus.scale'?: string
+    'focus.scale'?: number
 }
 
 export interface GetFeaturesParams {
@@ -95,7 +95,7 @@ export interface GetFeaturesParams {
          *
          * @defaultValue 2500
          */
-        scale?: string
+        scale?: number
     }
     multiModal?: 'parent' | 'child' | 'all'
     sources?: string[]
