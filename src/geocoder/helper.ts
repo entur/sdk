@@ -67,7 +67,7 @@ interface FocusApi {
     'focus.point.lon': number
     'focus.weight'?: number
     'focus.function'?: 'linear' | 'exp'
-    'focus.scale'?: string
+    'focus.scale'?: number
 }
 
 export function transformFocusParam(focus?: Focus): FocusApi | undefined {
