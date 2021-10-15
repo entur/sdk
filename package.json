@@ -9,6 +9,10 @@
     "browser": {
         "./lib/fetch.js": "./lib/fetch.browser.js"
     },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/entur/sdk.git"
+  },
     "typings": "./lib/index.d.ts",
     "files": [
         "lib",
