@@ -118,5 +118,9 @@ export interface Station {
     isReturning: boolean
     lastReported: number
     system: System
+    vehicleTypesAvailable: Array<{
+        vehicleType: VehicleType
+        count: number
+    }>
     pricingPlans: PricingPlan[]
 }
