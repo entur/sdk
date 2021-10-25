@@ -2040,12 +2040,16 @@
           "fields": [
             {
               "name": "name",
-              "description": null,
+              "description": "The __Directive type represents a Directive that a server supports.",
               "args": [],
               "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
               },
               "isDeprecated": false,
               "deprecationReason": null
@@ -2063,19 +2067,39 @@
               "deprecationReason": null
             },
             {
+              "name": "isRepeatable",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Boolean",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "locations",
               "description": null,
               "args": [],
               "type": {
-                "kind": "LIST",
+                "kind": "NON_NULL",
                 "name": null,
                 "ofType": {
-                  "kind": "NON_NULL",
+                  "kind": "LIST",
                   "name": null,
                   "ofType": {
-                    "kind": "ENUM",
-                    "name": "__DirectiveLocation",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "ENUM",
+                      "name": "__DirectiveLocation",
+                      "ofType": null
+                    }
                   }
                 }
               },
@@ -2169,6 +2193,12 @@
               "deprecationReason": null
             },
             {
+              "name": "SUBSCRIPTION",
+              "description": "Indicates the directive is valid on subscriptions.",
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "FIELD",
               "description": "Indicates the directive is valid on fields.",
               "isDeprecated": false,
@@ -2189,6 +2219,12 @@
             {
               "name": "INLINE_FRAGMENT",
               "description": "Indicates the directive is valid on inline fragments.",
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "VARIABLE_DEFINITION",
+              "description": "Indicates the directive is valid on variable definitions.",
               "isDeprecated": false,
               "deprecationReason": null
             },
@@ -2508,6 +2544,18 @@
           "description": "A GraphQL Introspection defines the capabilities of a GraphQL server. It exposes all available types and directives on the server, the entry points for query, mutation, and subscription operations.",
           "fields": [
             {
+              "name": "description",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "types",
               "description": "A list of all types supported by this server.",
               "args": [],
@@ -2779,6 +2827,18 @@
               },
               "isDeprecated": false,
               "deprecationReason": null
+            },
+            {
+              "name": "specifiedByUrl",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
             }
           ],
           "inputFields": null,
@@ -2796,7 +2856,7 @@
           "enumValues": [
             {
               "name": "SCALAR",
-              "description": "Indicates this type is a scalar.",
+              "description": "Indicates this type is a scalar. 'specifiedByUrl' is a valid field",
               "isDeprecated": false,
               "deprecationReason": null
             },
@@ -2909,6 +2969,25 @@
               "name": "reason",
               "description": "The reason for the deprecation",
               "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": "\"No longer supported\""
+            }
+          ]
+        },
+        {
+          "name": "specifiedBy",
+          "description": "Exposes a URL that specifies the behaviour of this scalar.",
+          "locations": [
+            "SCALAR"
+          ],
+          "args": [
+            {
+              "name": "url",
+              "description": "The URL that specifies the behaviour of this scalar.",
+              "type": {
                 "kind": "NON_NULL",
                 "name": null,
                 "ofType": {
@@ -2917,7 +2996,7 @@
                   "ofType": null
                 }
               },
-              "defaultValue": "\"No longer supported\""
+              "defaultValue": null
             }
           ]
         }

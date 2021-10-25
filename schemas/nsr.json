@@ -2383,6 +2383,73 @@
               "deprecationReason": null
             },
             {
+              "name": "groupOfTariffZones",
+              "description": "Group of tariff zones",
+              "args": [
+                {
+                  "name": "page",
+                  "description": "Pagenumber when using pagination - default is 0",
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "Int",
+                    "ofType": null
+                  },
+                  "defaultValue": "0"
+                },
+                {
+                  "name": "size",
+                  "description": "Number of hits per page when using pagination - default is 20",
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "Int",
+                    "ofType": null
+                  },
+                  "defaultValue": "20"
+                },
+                {
+                  "name": "id",
+                  "description": null,
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "query",
+                  "description": null,
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "tariffZoneId",
+                  "description": null,
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "GroupOfTariffZones",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "tariffZones",
               "description": "Tariff zones",
               "args": [
@@ -3297,6 +3364,22 @@
                 "ofType": {
                   "kind": "OBJECT",
                   "name": "AlternativeName",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "boardingPositions",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "BoardingPosition",
                   "ofType": null
                 }
               },
@@ -4438,6 +4521,53 @@
               "type": {
                 "kind": "SCALAR",
                 "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "BoardingPosition",
+          "description": null,
+          "fields": [
+            {
+              "name": "id",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "publicCode",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "geometry",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "GeoJSON",
                 "ofType": null
               },
               "isDeprecated": false,
@@ -6369,6 +6499,93 @@
                 "ofType": {
                   "kind": "SCALAR",
                   "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "GroupOfTariffZones",
+          "description": null,
+          "fields": [
+            {
+              "name": "id",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "name",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "EmbeddableMultilingualString",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "description",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "EmbeddableMultilingualString",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "version",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "versionComment",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "members",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "FareZone",
                   "ofType": null
                 }
               },
@@ -9296,6 +9513,20 @@
                 "ofType": null
               },
               "defaultValue": null
+            },
+            {
+              "name": "boardingPositions",
+              "description": null,
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "BoardingPositionInput",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
             }
           ],
           "interfaces": null,
@@ -9692,6 +9923,47 @@
                   "name": "VersionLessEntityRefInput",
                   "ofType": null
                 }
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "BoardingPositionInput",
+          "description": null,
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "id",
+              "description": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "publicCode",
+              "description": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "geometry",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "GeoJSONInput",
+                "ofType": null
               },
               "defaultValue": null
             }
