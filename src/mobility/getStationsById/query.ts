@@ -100,6 +100,21 @@ query ($stationIds: [String]!) {
             }
             surgePricing
         }
+        vehicleTypesAvailable {
+            vehicleType {
+                formFactor
+                propulsionType
+                id
+                maxRangeMeters
+                name {
+                    translation {
+                        language
+                        value
+                    }
+                }
+            }
+            count
+        }
     }
 }
 `
