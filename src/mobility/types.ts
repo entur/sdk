@@ -118,7 +118,7 @@ export interface Station {
     isReturning: boolean
     lastReported: number
     system: System
-    vehicleTypesAvailable: Array<{
+    vehicleTypesAvailable?: Array<{
         vehicleType: VehicleType
         count: number
     }>
