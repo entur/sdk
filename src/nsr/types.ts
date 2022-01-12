@@ -1975,12 +1975,13 @@ export interface ParkingProperties {
     )[]
     maximumStay?: {
         seconds?: number
+        nano?: number
         units?: {
             duration?: {
                 seconds?: number
+                nano?: number
                 zero?: boolean
                 negative?: boolean
-                nano?: number
             }
             durationEstimated?: boolean
             dateBased?: boolean
@@ -1988,7 +1989,6 @@ export interface ParkingProperties {
         }[]
         zero?: boolean
         negative?: boolean
-        nano?: number
     }
     areas?: ParkingAreaRefsRelStructure
     spaces?: ParkingCapacitiesRelStructure
@@ -2370,6 +2370,38 @@ export interface QuayRefStructure {
     changed?: string
     version?: string
     nameOfMemberClass?: string
+}
+
+export interface GroupOfTariffZones {
+    nameOfClass?: string
+    id?: string
+    validityConditions?: ValidityConditionsRelStructure
+    validBetween?: ValidBetween[]
+    alternativeTexts?: AlternativeTextsRelStructure
+    dataSourceRef?: string
+
+    /** @format date-time */
+    created?: string
+
+    /** @format date-time */
+    changed?: string
+    modification?: 'NEW' | 'REVISE' | 'DELETE' | 'UNCHANGED' | 'DELTA'
+    version?: string
+    status_BasicModificationDetailsGroup?: 'ACTIVE' | 'INACTIVE' | 'OTHER'
+    derivedFromVersionRef_BasicModificationDetailsGroup?: string
+    compatibleWithVersionFrameVersionRef?: string
+    derivedFromObjectRef?: string
+    keyList?: KeyListStructure
+    extensions?: ExtensionsStructure
+    brandingRef?: BrandingRefStructure
+    responsibilitySetRef?: string
+    name?: MultilingualString
+    shortName?: MultilingualString
+    description?: MultilingualString
+    purposeOfGroupingRef?: PurposeOfGroupingRefStructure
+    privateCode?: PrivateCodeStructure
+    infoLinks?: InfoLinks
+    members?: TariffZoneRefsRelStructure
 }
 
 export interface GroupOfStopPlaces {
