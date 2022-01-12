@@ -1,0 +1,9 @@
+overwrite: true
+schema: 'https://api.entur.io/journey-planner/v3/graphql'
+hooks:
+    afterAllFileWrite:
+        - prettier --write
+generates:
+    src/journeyPlanner/types.ts:
+        plugins:
+            - 'typescript'

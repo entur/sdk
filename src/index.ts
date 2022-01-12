@@ -9,6 +9,8 @@ export {
     throttler,
 } from './utils'
 
+export * as JourneyPlannerTypes from './journeyPlanner/types'
+
 export * as GeocoderTypes from './geocoder/types'
 export type { GeocoderClient } from './geocoder'
 
