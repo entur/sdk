@@ -14,8 +14,8 @@ export interface AbstractRingPropertyType {
         name?: { namespaceURI?: string; localPart?: string; prefix?: string }
         value?: AbstractRingType
         nil?: boolean
-        globalScope?: boolean
         typeSubstituted?: boolean
+        globalScope?: boolean
     }
 }
 
@@ -429,8 +429,8 @@ export interface PointRefsRelStructure {
         name?: { namespaceURI?: string; localPart?: string; prefix?: string }
         value?: PointRefStructure
         nil?: boolean
-        globalScope?: boolean
         typeSubstituted?: boolean
+        globalScope?: boolean
     }[]
 }
 
@@ -457,8 +457,8 @@ export interface ProjectionsRelStructure {
         name?: { namespaceURI?: string; localPart?: string; prefix?: string }
         value?: object
         nil?: boolean
-        globalScope?: boolean
         typeSubstituted?: boolean
+        globalScope?: boolean
     }[]
 }
 
@@ -964,8 +964,8 @@ export interface ExplicitEquipmentsRelStructure {
         name?: { namespaceURI?: string; localPart?: string; prefix?: string }
         value?: object
         nil?: boolean
-        globalScope?: boolean
         typeSubstituted?: boolean
+        globalScope?: boolean
     }[]
 }
 
@@ -1000,8 +1000,8 @@ export interface LocalServicesRelStructure {
         name?: { namespaceURI?: string; localPart?: string; prefix?: string }
         value?: object
         nil?: boolean
-        globalScope?: boolean
         typeSubstituted?: boolean
+        globalScope?: boolean
     }[]
 }
 
@@ -1042,8 +1042,8 @@ export interface OrganisationDerivedViewStructure {
         name?: { namespaceURI?: string; localPart?: string; prefix?: string }
         value?: OrganisationRefStructure
         nil?: boolean
-        globalScope?: boolean
         typeSubstituted?: boolean
+        globalScope?: boolean
     }
     name?: MultilingualString
     shortName?: MultilingualString
@@ -1066,8 +1066,8 @@ export interface PlaceEquipmentsRelStructure {
         name?: { namespaceURI?: string; localPart?: string; prefix?: string }
         value?: object
         nil?: boolean
-        globalScope?: boolean
         typeSubstituted?: boolean
+        globalScope?: boolean
     }[]
 }
 
@@ -1188,8 +1188,8 @@ export interface SiteEntrancesRelStructure {
         name?: { namespaceURI?: string; localPart?: string; prefix?: string }
         value?: object
         nil?: boolean
-        globalScope?: boolean
         typeSubstituted?: boolean
+        globalScope?: boolean
     }[]
 }
 
@@ -1228,8 +1228,8 @@ export interface SiteRefsRelStructure {
         name?: { namespaceURI?: string; localPart?: string; prefix?: string }
         value?: SiteRefStructure
         nil?: boolean
-        globalScope?: boolean
         typeSubstituted?: boolean
+        globalScope?: boolean
     }[]
 }
 
@@ -1317,8 +1317,8 @@ export interface StopPlace {
         name?: { namespaceURI?: string; localPart?: string; prefix?: string }
         value?: OrganisationRefStructure
         nil?: boolean
-        globalScope?: boolean
         typeSubstituted?: boolean
+        globalScope?: boolean
     }
     operatingOrganisationView?: OrganisationDerivedViewStructure
     parentSiteRef?: SiteRefStructure
@@ -1708,8 +1708,8 @@ export interface Parking {
         name?: { namespaceURI?: string; localPart?: string; prefix?: string }
         value?: OrganisationRefStructure
         nil?: boolean
-        globalScope?: boolean
         typeSubstituted?: boolean
+        globalScope?: boolean
     }
     operatingOrganisationView?: OrganisationDerivedViewStructure
     parentSiteRef?: SiteRefStructure
@@ -1975,12 +1975,13 @@ export interface ParkingProperties {
     )[]
     maximumStay?: {
         seconds?: number
+        nano?: number
         units?: {
             duration?: {
                 seconds?: number
+                nano?: number
                 zero?: boolean
                 negative?: boolean
-                nano?: number
             }
             durationEstimated?: boolean
             dateBased?: boolean
@@ -1988,7 +1989,6 @@ export interface ParkingProperties {
         }[]
         zero?: boolean
         negative?: boolean
-        nano?: number
     }
     areas?: ParkingAreaRefsRelStructure
     spaces?: ParkingCapacitiesRelStructure
@@ -2372,6 +2372,38 @@ export interface QuayRefStructure {
     nameOfMemberClass?: string
 }
 
+export interface GroupOfTariffZones {
+    nameOfClass?: string
+    id?: string
+    validityConditions?: ValidityConditionsRelStructure
+    validBetween?: ValidBetween[]
+    alternativeTexts?: AlternativeTextsRelStructure
+    dataSourceRef?: string
+
+    /** @format date-time */
+    created?: string
+
+    /** @format date-time */
+    changed?: string
+    modification?: 'NEW' | 'REVISE' | 'DELETE' | 'UNCHANGED' | 'DELTA'
+    version?: string
+    status_BasicModificationDetailsGroup?: 'ACTIVE' | 'INACTIVE' | 'OTHER'
+    derivedFromVersionRef_BasicModificationDetailsGroup?: string
+    compatibleWithVersionFrameVersionRef?: string
+    derivedFromObjectRef?: string
+    keyList?: KeyListStructure
+    extensions?: ExtensionsStructure
+    brandingRef?: BrandingRefStructure
+    responsibilitySetRef?: string
+    name?: MultilingualString
+    shortName?: MultilingualString
+    description?: MultilingualString
+    purposeOfGroupingRef?: PurposeOfGroupingRefStructure
+    privateCode?: PrivateCodeStructure
+    infoLinks?: InfoLinks
+    members?: TariffZoneRefsRelStructure
+}
+
 export interface GroupOfStopPlaces {
     nameOfClass?: string
     id?: string
@@ -2633,8 +2665,8 @@ export interface FareZone {
         name?: { namespaceURI?: string; localPart?: string; prefix?: string }
         value?: OrganisationRefStructure
         nil?: boolean
-        globalScope?: boolean
         typeSubstituted?: boolean
+        globalScope?: boolean
     }
     groupOfOperatorsRef?: GroupOfOperatorsRefStructure
     fareSections?: FareSectionsRelStructure
