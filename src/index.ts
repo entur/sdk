@@ -32,15 +32,6 @@ export type {
     TransportSubmodeParam,
 } from './trip'
 
-export { isBatteryScooter, isBatteryLevelScooter } from './scooters'
-export { ScooterOperator, BatteryLevel } from './scooters/types'
-export type {
-    Scooter,
-    StandardScooter,
-    BatteryScooter,
-    BatteryLevelScooter,
-} from './scooters/types'
-
 export * from './constants/featureCategory'
 
 export { journeyPlannerQuery, nsrQuery } from './api'
