@@ -61,7 +61,6 @@
         "docz": "^2.3.1",
         "eslint": "^8.6.0",
         "eslint-plugin-import": "^2.23.2",
-        "eslint-plugin-prettier": "^4.0.0",
         "eslint-plugin-tsdoc": "^0.2.14",
         "firebase-tools": "^9.14.0",
         "gatsby-theme-docz": "^2.3.1",
