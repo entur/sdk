@@ -1,5 +1,8 @@
 import { FeatureCategory } from '../constants/featureCategory'
 
+/**
+ * @deprecated Use the geocoder.autocomplete and geocoder.reverse methods instead and related types.
+ */
 export type Feature = {
     geometry: {
         coordinates: [number, number] // longitude, latitude

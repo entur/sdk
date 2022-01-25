@@ -1,3 +1,6 @@
+/**
+ * @deprecated The Feature type is deprecated, use the geocoder.autocomplete and geocoder.reverse methods instead and related types.
+ */
 export enum FeatureCategory {
     ONSTREET_BUS = 'onstreetBus',
     ONSTREET_TRAM = 'onstreetTram',
