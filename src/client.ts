@@ -19,7 +19,6 @@ import {
     createGetStopPlaces,
     createGetParentStopPlace,
     createGetStopPlacesByPosition,
-    createGetStopPlaceFacilities,
     createGetQuaysForStopPlace,
 } from './stopPlace'
 
@@ -73,10 +72,6 @@ export interface EnturClient {
     getStopPlaces: ReturnType<typeof createGetStopPlaces>
     getParentStopPlace: ReturnType<typeof createGetParentStopPlace>
     getStopPlacesByPosition: ReturnType<typeof createGetStopPlacesByPosition>
-    /**
-     * @deprecated Use methods nsr.getStopPlace, nsr.getParkingsForStopPlace instead
-     */
-    getStopPlaceFacilities: ReturnType<typeof createGetStopPlaceFacilities>
     getQuaysForStopPlace: ReturnType<typeof createGetQuaysForStopPlace>
     getBikeRentalStation: ReturnType<typeof createGetBikeRentalStation>
     getBikeRentalStations: ReturnType<typeof createGetBikeRentalStations>
@@ -129,7 +124,6 @@ function createEnturClient(config: ArgumentConfig): EnturClient {
         getStopPlaces: createGetStopPlaces(config),
         getParentStopPlace: createGetParentStopPlace(config),
         getStopPlacesByPosition: createGetStopPlacesByPosition(config),
-        getStopPlaceFacilities: createGetStopPlaceFacilities(config),
         getQuaysForStopPlace: createGetQuaysForStopPlace(config),
         getBikeRentalStation: createGetBikeRentalStation(config),
         getBikeRentalStations: createGetBikeRentalStations(config),

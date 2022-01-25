@@ -63,8 +63,6 @@ function getMethodToRun(name) {
                 HAMAR_STASJON,
                 LILLEHAMMER_STASJON,
             ])
-        case 'getStopPlaceFacilities':
-            return client.getStopPlaceFacilities(JERNBANETORGET)
         case 'getQuaysFromStopPlace':
             return client.getQuaysFromStopPlace(JERNBANETORGET)
         case 'getBikeRentalStation':

@@ -32,7 +32,6 @@ import {
     getStopPlacesQuery,
     getParentStopPlaceQuery,
     getStopPlacesByBboxQuery,
-    getStopPlaceFacilitiesQuery,
     getQuaysForStopPlaceQuery,
 } from '../src/stopPlace/query'
 
@@ -63,8 +62,6 @@ const jp2Queries = [
     { getTripPatternQuery },
 ]
 
-const nsrQueries = [{ getStopPlaceFacilitiesQuery }]
-
 const mobilityQueries = [
     { getOperatorsQuery },
     { getVehiclesQuery },
@@ -88,10 +85,6 @@ function runValidations() {
     jp2Queries.forEach((obj) => {
         const [name, query] = Object.entries(obj)[0]
         validateQuery(name, query, journeyplanner2Schema)
-    })
-    nsrQueries.forEach((obj) => {
-        const [name, query] = Object.entries(obj)[0]
-        validateQuery(name, query, nsrSchema)
     })
     mobilityQueries.forEach((obj) => {
         const [name, query] = Object.entries(obj)[0]
