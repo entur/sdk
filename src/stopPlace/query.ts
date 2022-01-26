@@ -100,53 +100,6 @@ query(
 ${quayFragments.join('')}
 `
 
-export const getStopPlaceFacilitiesQuery = `
-query($id: String!) {
-    stopPlace(id: $id) {
-        id
-        name {
-            lang
-            value
-        }
-        accessibilityAssessment {
-            limitations {
-                wheelchairAccess
-                stepFreeAccess
-            }
-        }
-        placeEquipments {
-            waitingRoomEquipment {
-                id
-            }
-            shelterEquipment {
-                id
-            }
-            sanitaryEquipment {
-                id
-                numberOfToilets
-                gender
-            }
-            ticketingEquipment {
-                id
-                numberOfMachines
-                ticketMachines
-                ticketOffice
-            }
-        }
-    }
-    parking(stopPlaceId: $id) {
-        name {
-            lang
-            value
-        }
-        parentSiteRef
-        totalCapacity
-        principalCapacity
-        parkingVehicleTypes
-    }
-}
-`
-
 export const getQuaysForStopPlaceQuery = `
 query($id: String!, $filterByInUse: Boolean) {
     stopPlace(id: $id) {

@@ -1,12 +1,11 @@
 import { RequestOptions } from '../http'
-import { journeyPlannerQuery, nsrQuery } from '../api'
+import { journeyPlannerQuery } from '../api'
 
 import {
     getStopPlaceQuery,
     getStopPlacesQuery,
     getParentStopPlaceQuery,
     getStopPlacesByBboxQuery,
-    getStopPlaceFacilitiesQuery,
     getQuaysForStopPlaceQuery,
 } from './query'
 
@@ -14,7 +13,7 @@ import { convertPositionToBbox, forceOrder } from '../utils'
 import { Quay } from '../fields/Quay'
 
 import { Coordinates } from '../types/Coordinates'
-import { StopPlaceDetails, StopPlaceFacilities } from '../types/StopPlace'
+import { StopPlaceDetails } from '../types/StopPlace'
 
 import { getServiceConfig, ArgumentConfig } from '../config'
 
@@ -131,18 +130,6 @@ export function createGetStopPlacesByPosition(argConfig: ArgumentConfig) {
             config,
             options,
         ).then((data) => data?.stopPlacesByBbox || [])
-    }
-}
-
-export function createGetStopPlaceFacilities(argConfig: ArgumentConfig) {
-    const config = getServiceConfig(argConfig)
-
-    return function getStopPlaceFacilities(
-        stopPlaceId: string,
-        options?: RequestOptions,
-    ): Promise<StopPlaceFacilities> {
-        const variables = { id: stopPlaceId }
-        return nsrQuery(getStopPlaceFacilitiesQuery, variables, config, options)
     }
 }
 
