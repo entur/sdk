@@ -50,7 +50,9 @@ export interface EnturClient {
         variables: Record<string, unknown>,
         options?: RequestOptions,
     ) => Promise<T>
+    /** @deprecated Use geocoder.autocomplete instead. */
     getFeatures: ReturnType<typeof createGetFeatures>
+    /** @deprecated Use geocoder.reverse instead. */
     getFeaturesReverse: ReturnType<typeof createGetFeaturesReverse>
     getTripPatterns: ReturnType<typeof createGetTripPatterns>
     findTrips: ReturnType<typeof createFindTrips>
