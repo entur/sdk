@@ -28,7 +28,7 @@
         "prepublishOnly": "npm run build",
         "docs": "npm run build:docs -- --watch",
         "build:docs": "typedoc --out docs src/index.ts --tsconfig ./tsconfig.typedoc.json --readme ./DOC_INDEX.md",
-        "deploy:docs": "npm run build:docs && firebase hosting:channel:deploy typedoc --expires 30d",
+        "deploy:docs": "npm run build:docs && firebase deploy --only hosting",
         "generate-types": "./scripts/generate-types.sh",
         "fetch-schemas": "ts-node scripts/fetch-schemas.ts"
     },
