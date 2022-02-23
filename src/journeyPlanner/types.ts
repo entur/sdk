@@ -116,6 +116,8 @@ export enum BikesAllowed {
 
 export type BookingArrangement = {
     __typename?: 'BookingArrangement'
+    /** Time constraints for booking */
+    bookWhen?: Maybe<PurchaseWhen>
     /** Who should ticket be contacted for booking */
     bookingContact?: Maybe<Contact>
     /** How should service be booked? */
@@ -136,6 +138,21 @@ export enum BookingMethod {
     Online = 'online',
     PhoneAtStop = 'phoneAtStop',
     Text = 'text',
+}
+
+export type Branding = {
+    __typename?: 'Branding'
+    /** Description of branding. */
+    description?: Maybe<Scalars['String']>
+    id?: Maybe<Scalars['ID']>
+    /** URL to an image be used for branding */
+    image?: Maybe<Scalars['String']>
+    /** Full name to be used for branding. */
+    name?: Maybe<Scalars['String']>
+    /** Short name to be used for branding. */
+    shortName?: Maybe<Scalars['String']>
+    /** URL to be used for branding */
+    url?: Maybe<Scalars['String']>
 }
 
 export type Contact = {
@@ -175,38 +192,39 @@ export type EstimatedCall = {
     /** Actual time of departure from quay. Updated with real time information if available. NOT IMPLEMENTED */
     actualDepartureTime?: Maybe<Scalars['DateTime']>
     /** Scheduled time of arrival at quay. Not affected by read time updated */
-    aimedArrivalTime?: Maybe<Scalars['DateTime']>
+    aimedArrivalTime: Scalars['DateTime']
     /** Scheduled time of departure from quay. Not affected by read time updated */
-    aimedDepartureTime?: Maybe<Scalars['DateTime']>
+    aimedDepartureTime: Scalars['DateTime']
     /** Booking arrangements for this EstimatedCall. */
     bookingArrangements?: Maybe<BookingArrangement>
     /** Whether stop is cancelled. This means that either the ServiceJourney has a planned cancellation, the ServiceJourney has been cancelled by realtime data, or this particular StopPoint has been cancelled. This also means that both boarding and alighting has been cancelled. */
-    cancellation?: Maybe<Scalars['Boolean']>
+    cancellation: Scalars['Boolean']
     /** The date the estimated call is valid for. */
     date?: Maybe<Scalars['Date']>
     destinationDisplay?: Maybe<DestinationDisplay>
     /** Expected time of arrival at quay. Updated with real time information if available. Will be null if an actualArrivalTime exists */
-    expectedArrivalTime?: Maybe<Scalars['DateTime']>
+    expectedArrivalTime: Scalars['DateTime']
     /** Expected time of departure from quay. Updated with real time information if available. Will be null if an actualDepartureTime exists */
-    expectedDepartureTime?: Maybe<Scalars['DateTime']>
+    expectedDepartureTime: Scalars['DateTime']
     /** Whether vehicle may be alighted at quay according to the planned data. If the cancellation flag is set, alighting is not possible, even if this field is set to true. */
-    forAlighting?: Maybe<Scalars['Boolean']>
+    forAlighting: Scalars['Boolean']
     /** Whether vehicle may be boarded at quay according to the planned data. If the cancellation flag is set, boarding is not possible, even if this field is set to true. */
-    forBoarding?: Maybe<Scalars['Boolean']>
-    notices: Array<Maybe<Notice>>
+    forBoarding: Scalars['Boolean']
+    notices: Array<Notice>
     /** Whether the updated estimates are expected to be inaccurate. NOT IMPLEMENTED */
-    predictionInaccurate?: Maybe<Scalars['Boolean']>
+    predictionInaccurate: Scalars['Boolean']
     quay?: Maybe<Quay>
     /** Whether this call has been updated with real time information. */
-    realtime?: Maybe<Scalars['Boolean']>
-    realtimeState?: Maybe<RealtimeState>
+    realtime: Scalars['Boolean']
+    realtimeState: RealtimeState
     /** Whether vehicle will only stop on request. */
-    requestStop?: Maybe<Scalars['Boolean']>
+    requestStop: Scalars['Boolean']
     serviceJourney?: Maybe<ServiceJourney>
     /** Get all relevant situations for this EstimatedCall. */
-    situations: Array<Maybe<PtSituationElement>>
+    situations: Array<PtSituationElement>
+    stopPositionInPattern?: Maybe<Scalars['Int']>
     /** Whether this is a timing point or not. Boarding and alighting is not allowed at timing points. */
-    timingPoint?: Maybe<Scalars['Boolean']>
+    timingPoint: Scalars['Boolean']
 }
 
 export enum FilterPlaceType {
@@ -346,9 +364,9 @@ export type JourneyPatternServiceJourneysForDateArgs = {
 export type Leg = {
     __typename?: 'Leg'
     /** The aimed date and time this leg ends. */
-    aimedEndTime?: Maybe<Scalars['DateTime']>
+    aimedEndTime: Scalars['DateTime']
     /** The aimed date and time this leg starts. */
-    aimedStartTime?: Maybe<Scalars['DateTime']>
+    aimedStartTime: Scalars['DateTime']
     /** For ride legs, the service authority used for this legs. For non-ride legs, null. */
     authority?: Maybe<Authority>
     bikeRentalNetworks: Array<Maybe<Scalars['String']>>
@@ -360,9 +378,9 @@ export type Leg = {
     /** The legs's duration in seconds */
     duration?: Maybe<Scalars['Long']>
     /** The expected, realtime adjusted date and time this leg ends. */
-    expectedEndTime?: Maybe<Scalars['DateTime']>
+    expectedEndTime: Scalars['DateTime']
     /** The expected, realtime adjusted date and time this leg starts. */
-    expectedStartTime?: Maybe<Scalars['DateTime']>
+    expectedStartTime: Scalars['DateTime']
     /** EstimatedCall for the quay where the leg originates. */
     fromEstimatedCall?: Maybe<EstimatedCall>
     /** The Place where the leg originates. */
@@ -374,27 +392,27 @@ export type Leg = {
     /** For ride legs, estimated calls for quays between the Place where the leg originates and the Place where the leg ends. For non-ride legs, empty list. */
     intermediateEstimatedCalls: Array<Maybe<EstimatedCall>>
     /** For ride legs, intermediate quays between the Place where the leg originates and the Place where the leg ends. For non-ride legs, empty list. */
-    intermediateQuays: Array<Maybe<Quay>>
+    intermediateQuays: Array<Quay>
     /** For ride legs, the line. For non-ride legs, null. */
     line?: Maybe<Line>
     /** The mode of transport or access (e.g., foot) used when traversing this leg. */
-    mode?: Maybe<Mode>
+    mode: Mode
     /** For ride legs, the operator used for this legs. For non-ride legs, null. */
     operator?: Maybe<Operator>
     /** The legs's geometry. */
     pointsOnLink?: Maybe<PointsOnLink>
     /** Whether there is real-time data about this leg */
-    realtime?: Maybe<Scalars['Boolean']>
+    realtime: Scalars['Boolean']
     /** Whether this leg is with a rented bike. */
     rentedBike?: Maybe<Scalars['Boolean']>
     /** Whether this leg is a ride leg or not. */
-    ride?: Maybe<Scalars['Boolean']>
+    ride: Scalars['Boolean']
     /** For ride legs, the service journey. For non-ride legs, null. */
     serviceJourney?: Maybe<ServiceJourney>
     /** For ride legs, all estimated calls for the service journey. For non-ride legs, empty list. */
     serviceJourneyEstimatedCalls: Array<Maybe<EstimatedCall>>
     /** All relevant situations for this leg */
-    situations: Array<Maybe<PtSituationElement>>
+    situations: Array<PtSituationElement>
     /** Do we continue from a specified via place */
     steps: Array<Maybe<PathGuidance>>
     /** EstimatedCall for the quay where the leg ends. */
@@ -417,6 +435,7 @@ export type Line = {
      * @deprecated BookingArrangements are defined per stop, and can be found under `passingTimes` or `estimatedCalls`
      */
     bookingArrangements?: Maybe<BookingArrangement>
+    branding?: Maybe<Branding>
     description?: Maybe<Scalars['String']>
     /** Type of flexible line, or null if line is not flexible. */
     flexibleLineType?: Maybe<Scalars['String']>
@@ -640,6 +659,14 @@ export type PtSituationElement = {
     summary: Array<MultilingualString>
     /** Period this situation is in effect */
     validityPeriod?: Maybe<ValidityPeriod>
+}
+
+export enum PurchaseWhen {
+    AdvanceAndDayOfTravel = 'advanceAndDayOfTravel',
+    DayOfTravelOnly = 'dayOfTravelOnly',
+    Other = 'other',
+    TimeOfTravelOnly = 'timeOfTravelOnly',
+    UntilPreviousDay = 'untilPreviousDay',
 }
 
 /** A place such as platform, stance, or quayside where passengers have access to PT vehicles. */
@@ -1157,6 +1184,12 @@ export type ServiceJourneyEstimatedCallsArgs = {
     date?: InputMaybe<Scalars['Date']>
 }
 
+/** A planned vehicle journey with passengers. */
+export type ServiceJourneyQuaysArgs = {
+    first?: InputMaybe<Scalars['Int']>
+    last?: InputMaybe<Scalars['Int']>
+}
+
 export enum Severity {
     /** Situation has no impact on trips. */
     NoImpact = 'noImpact',
@@ -1299,7 +1332,7 @@ export enum TransportMode {
 
 /** Used to specify board and alight slack for a given modes. */
 export type TransportModeSlack = {
-    /** List of modes for witch the given slack apply. */
+    /** List of modes for which the given slack apply. */
     modes: Array<TransportMode>
     /** The slack used for all given modes. */
     slack: Scalars['Int']
@@ -1463,10 +1496,7 @@ export type Trip = {
      * @deprecated Use routingErrors instead
      */
     messageStrings: Array<Maybe<Scalars['String']>>
-    /**
-     * The trip request metadata.
-     * @deprecated Use pageCursor instead
-     */
+    /** The trip request metadata. */
     metadata?: Maybe<TripSearchData>
     /**
      * Use the cursor to get the next page of results. Use this cursor for the pageCursor parameter in the trip query in order to get the next page.
@@ -1490,9 +1520,9 @@ export type Trip = {
 export type TripPattern = {
     __typename?: 'TripPattern'
     /** The aimed date and time the trip ends. */
-    aimedEndTime?: Maybe<Scalars['DateTime']>
+    aimedEndTime: Scalars['DateTime']
     /** The aimed date and time the trip starts. */
-    aimedStartTime?: Maybe<Scalars['DateTime']>
+    aimedStartTime: Scalars['DateTime']
     /** NOT IMPLEMENTED. */
     directDuration?: Maybe<Scalars['Long']>
     /** Total distance for the trip, in meters. NOT IMPLEMENTED */
@@ -1505,9 +1535,9 @@ export type TripPattern = {
      */
     endTime?: Maybe<Scalars['DateTime']>
     /** The expected, realtime adjusted date and time the trip ends. */
-    expectedEndTime?: Maybe<Scalars['DateTime']>
+    expectedEndTime: Scalars['DateTime']
     /** The expected, realtime adjusted date and time the trip starts. */
-    expectedStartTime?: Maybe<Scalars['DateTime']>
+    expectedStartTime: Scalars['DateTime']
     /** Generalized cost or weight of the itinerary. Used for debugging. */
     generalizedCost?: Maybe<Scalars['Int']>
     /** A list of legs. Each leg is either a walking (cycling, car) portion of the trip, or a ride leg on a particular vehicle. So a trip where the use walks to the Q train, transfers to the 6, then walks to their destination, has four legs. */
@@ -1518,7 +1548,7 @@ export type TripPattern = {
      */
     startTime?: Maybe<Scalars['DateTime']>
     /** Get all system notices. */
-    systemNotices: Array<Maybe<SystemNotice>>
+    systemNotices: Array<SystemNotice>
     /** A cost calculated to favor transfer with higher priority. This field is meant for debugging only. */
     transferPriorityCost?: Maybe<Scalars['Int']>
     /** A cost calculated to distribute wait-time and avoid very short transfers. This field is meant for debugging only. */
@@ -1544,10 +1574,7 @@ export type TripSearchData = {
      * @deprecated Use pageCursor instead
      */
     prevDateTime?: Maybe<Scalars['DateTime']>
-    /**
-     * The search-window used in the current trip request. Use the value in the next request and set the request 'dateTime' to 'nextDateTime' or 'prevDateTime' to get the previous/next "window" of results. No duplicate trips should be returned, unless a trip is delayed and new realtime-data is available.Unit: minutes.
-     * @deprecated Use pageCursor instead
-     */
+    /** This is the time window used by the raptor search. The input searchWindow is an optional parameter and is dynamically assigned if not set. OTP might override the value if it is too small or too large. When paging OTP adjusts it to the appropriate size, depending on the number of itineraries found in the current search window. The scaling of the search window ensures faster paging and limits resource usage. The unit is seconds. */
     searchWindowUsed: Scalars['Int']
 }
 

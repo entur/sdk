@@ -7892,6 +7892,18 @@
               "deprecationReason": "The service-alteration might be different for each service day, so this method is not always giving the correct result. This method will return 'null' if there is a mix of different alterations."
             },
             {
+              "name": "transportMode",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "ENUM",
+                "name": "TransportMode",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "transportSubmode",
               "description": "The transport submode of the journey, if different from lines transport submode.",
               "args": [],
