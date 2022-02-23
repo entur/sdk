@@ -20,6 +20,8 @@ export type { MobilityClient } from './mobility'
 export * as NsrTypes from './nsr/types'
 export type { NsrClient } from './nsr'
 
+export type { RequestOptions } from './http'
+
 export { TypeName } from './nearest/types'
 export type { NearestPlace } from './nearest/types'
 

@@ -1,9 +1,9 @@
 node_modules/
 lib/
+docs
 .DS_Store
 .idea/
 .tern-port
-.docz
 .firebase/
 *.tgz
 *.log

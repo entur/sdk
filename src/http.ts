@@ -4,6 +4,10 @@ import { Response, RequestInfo, RequestInit } from 'node-fetch'
 
 import fetch from './fetch'
 
+/**
+ * Options to be passed on to the fetch request.
+ * You can use this to add custom headers or a signal for use with an AbortController.
+ */
 export type RequestOptions = Pick<RequestInit, 'signal' | 'headers'>
 
 const DEFAULT_HEADERS = {
