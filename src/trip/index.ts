@@ -21,6 +21,12 @@ import {
     OverrideConfig,
 } from '../config'
 
+/**
+ * @deprecated
+ * The JourneyPlanner v2 queries and types are deprecated.
+ * Write your own GraphQL queries for JourneyPlanner v3.
+ * Write your own types or use those from JourneyPlannerTypes where applicable.
+ */
 export interface TripPattern {
     /** Total distance for the trip, in meters. */
     distance: number
@@ -46,11 +52,23 @@ export interface TripPattern {
     walkDistance: number
 }
 
+/**
+ * @deprecated
+ * The JourneyPlanner v2 queries and types are deprecated.
+ * Write your own GraphQL queries for JourneyPlanner v3.
+ * Write your own types or use those from JourneyPlannerTypes where applicable.
+ */
 export interface TransportSubmodeParam {
     transportMode: TransportMode
     transportSubmodes: TransportSubmode[]
 }
 
+/**
+ * @deprecated
+ * The JourneyPlanner v2 queries and types are deprecated.
+ * Write your own GraphQL queries for JourneyPlanner v3.
+ * Write your own types or use those from JourneyPlannerTypes where applicable.
+ */
 export interface InputBanned {
     lines?: string[]
     authorities?: string[]
@@ -60,12 +78,24 @@ export interface InputBanned {
     serviceJourneys?: string[]
 }
 
+/**
+ * @deprecated
+ * The JourneyPlanner v2 queries and types are deprecated.
+ * Write your own GraphQL queries for JourneyPlanner v3.
+ * Write your own types or use those from JourneyPlannerTypes where applicable.
+ */
 export interface InputWhiteListed {
     lines?: string[]
     authorities?: string[]
     organisations?: string[]
 }
 
+/**
+ * @deprecated
+ * The JourneyPlanner v2 queries and types are deprecated.
+ * Write your own GraphQL queries for JourneyPlanner v3.
+ * Write your own types or use those from JourneyPlannerTypes where applicable.
+ */
 export interface GetTripPatternsParams {
     from: Location
     to: Location
@@ -84,6 +114,12 @@ export interface GetTripPatternsParams {
     whiteListed?: InputWhiteListed
 }
 
+/**
+ * @deprecated
+ * The JourneyPlanner v2 queries and types are deprecated.
+ * Write your own GraphQL queries for JourneyPlanner v3.
+ * Write your own types or use those from JourneyPlannerTypes where applicable.
+ */
 interface GetTripPatternsVariables {
     from: Location
     to: Location

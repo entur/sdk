@@ -3,6 +3,12 @@ import { TransportMode, TransportSubmode } from '../types/Mode'
 
 import { Quay } from '../fields/Quay'
 
+/**
+ * @deprecated
+ * The JourneyPlanner v2 queries and types are deprecated.
+ * Write your own GraphQL queries for JourneyPlanner v3.
+ * Write your own types or use those from JourneyPlannerTypes where applicable.
+ */
 export interface StopPlaceDetails {
     id: string
     name: string
@@ -20,22 +26,52 @@ export interface StopPlaceDetails {
     quays?: Quay[]
 }
 
+/**
+ * @deprecated
+ * The JourneyPlanner v2 queries and types are deprecated.
+ * Write your own GraphQL queries for JourneyPlanner v3.
+ * Write your own types or use those from JourneyPlannerTypes where applicable.
+ */
 export type LimitationStatusType = 'FALSE' | 'TRUE' | 'PARTIAL' | 'UNKNOWN'
 
+/**
+ * @deprecated
+ * The JourneyPlanner v2 queries and types are deprecated.
+ * Write your own GraphQL queries for JourneyPlanner v3.
+ * Write your own types or use those from JourneyPlannerTypes where applicable.
+ */
 export type WaitingRoomEquipment = {
     id: string
 }
 
+/**
+ * @deprecated
+ * The JourneyPlanner v2 queries and types are deprecated.
+ * Write your own GraphQL queries for JourneyPlanner v3.
+ * Write your own types or use those from JourneyPlannerTypes where applicable.
+ */
 export type ShelterEquipment = {
     id: string
 }
 
+/**
+ * @deprecated
+ * The JourneyPlanner v2 queries and types are deprecated.
+ * Write your own GraphQL queries for JourneyPlanner v3.
+ * Write your own types or use those from JourneyPlannerTypes where applicable.
+ */
 export type SanitaryEquipment = {
     id: string
     numberOfToilets: number
     gender: 'both' | 'femaleOnly' | 'maleOnly' | 'sameSexOnly'
 }
 
+/**
+ * @deprecated
+ * The JourneyPlanner v2 queries and types are deprecated.
+ * Write your own GraphQL queries for JourneyPlanner v3.
+ * Write your own types or use those from JourneyPlannerTypes where applicable.
+ */
 export type TicketingEquipment = {
     id: string
     ticketOffice: boolean
@@ -43,6 +79,12 @@ export type TicketingEquipment = {
     numberOfMachines: number
 }
 
+/**
+ * @deprecated
+ * The JourneyPlanner v2 queries and types are deprecated.
+ * Write your own GraphQL queries for JourneyPlanner v3.
+ * Write your own types or use those from JourneyPlannerTypes where applicable.
+ */
 export type ParkingVehicle =
     | 'pedalCycle'
     | 'moped'
@@ -80,6 +122,12 @@ export type ParkingVehicle =
     | 'allPassengerVehicles'
     | 'all'
 
+/**
+ * @deprecated
+ * The JourneyPlanner v2 queries and types are deprecated.
+ * Write your own GraphQL queries for JourneyPlanner v3.
+ * Write your own types or use those from JourneyPlannerTypes where applicable.
+ */
 export interface StopPlaceFacilitiesStopPlace {
     id: string
     name: MultilingualString
@@ -97,6 +145,12 @@ export interface StopPlaceFacilitiesStopPlace {
     }
 }
 
+/**
+ * @deprecated
+ * The JourneyPlanner v2 queries and types are deprecated.
+ * Write your own GraphQL queries for JourneyPlanner v3.
+ * Write your own types or use those from JourneyPlannerTypes where applicable.
+ */
 export interface StopPlaceFacilitiesParking {
     name: MultilingualString
     parentSiteRef: string
@@ -105,6 +159,12 @@ export interface StopPlaceFacilitiesParking {
     parkingVehicleTypes?: ParkingVehicle[]
 }
 
+/**
+ * @deprecated
+ * The JourneyPlanner v2 queries and types are deprecated.
+ * Write your own GraphQL queries for JourneyPlanner v3.
+ * Write your own types or use those from JourneyPlannerTypes where applicable.
+ */
 export interface StopPlaceFacilities {
     stopPlace: StopPlaceFacilitiesStopPlace[]
     parking: StopPlaceFacilitiesParking[]
