@@ -53,30 +53,149 @@ export interface EnturClient {
     getFeatures: ReturnType<typeof createGetFeatures>
     /** @deprecated Use geocoder.reverse instead. */
     getFeaturesReverse: ReturnType<typeof createGetFeaturesReverse>
+
+    /**
+     * @deprecated
+     * The JourneyPlanner v2 queries and types are deprecated.
+     * Write your own GraphQL queries for JourneyPlanner v3.
+     * Write your own types or use those from JourneyPlannerTypes where applicable.
+     */
     getTripPatterns: ReturnType<typeof createGetTripPatterns>
+
+    /**
+     * @deprecated
+     * The JourneyPlanner v2 queries and types are deprecated.
+     * Write your own GraphQL queries for JourneyPlanner v3.
+     * Write your own types or use those from JourneyPlannerTypes where applicable.
+     */
     findTrips: ReturnType<typeof createFindTrips>
+
+    /**
+     * @deprecated
+     * The JourneyPlanner v2 queries and types are deprecated.
+     * Write your own GraphQL queries for JourneyPlanner v3.
+     * Write your own types or use those from JourneyPlannerTypes where applicable.
+     */
     getStopPlaceDepartures: typeof getStopPlaceDeparturesDEPRECATED
+
+    /**
+     * @deprecated
+     * The JourneyPlanner v2 queries and types are deprecated.
+     * Write your own GraphQL queries for JourneyPlanner v3.
+     * Write your own types or use those from JourneyPlannerTypes where applicable.
+     */
     getDeparturesFromStopPlace: ReturnType<
         typeof createGetDeparturesFromStopPlace
     >
+
+    /**
+     * @deprecated
+     * The JourneyPlanner v2 queries and types are deprecated.
+     * Write your own GraphQL queries for JourneyPlanner v3.
+     * Write your own types or use those from JourneyPlannerTypes where applicable.
+     */
     getDeparturesFromStopPlaces: ReturnType<
         typeof createGetDeparturesFromStopPlaces
     >
+
+    /**
+     * @deprecated
+     * The JourneyPlanner v2 queries and types are deprecated.
+     * Write your own GraphQL queries for JourneyPlanner v3.
+     * Write your own types or use those from JourneyPlannerTypes where applicable.
+     */
     getDeparturesFromQuays: ReturnType<typeof createGetDeparturesFromQuays>
+
+    /**
+     * @deprecated
+     * The JourneyPlanner v2 queries and types are deprecated.
+     * Write your own GraphQL queries for JourneyPlanner v3.
+     * Write your own types or use those from JourneyPlannerTypes where applicable.
+     */
     getDeparturesBetweenStopPlaces: ReturnType<
         typeof createGetDeparturesBetweenStopPlaces
     >
+
+    /**
+     * @deprecated
+     * The JourneyPlanner v2 queries and types are deprecated.
+     * Write your own GraphQL queries for JourneyPlanner v3.
+     * Write your own types or use those from JourneyPlannerTypes where applicable.
+     */
     getDeparturesForServiceJourney: ReturnType<
         typeof createGetDeparturesForServiceJourney
     >
+
+    /**
+     * @deprecated
+     * The JourneyPlanner v2 queries and types are deprecated.
+     * Write your own GraphQL queries for JourneyPlanner v3.
+     * Write your own types or use those from JourneyPlannerTypes where applicable.
+     */
     getNearestPlaces: ReturnType<typeof createGetNearestPlaces>
+
+    /**
+     * @deprecated
+     * The JourneyPlanner v2 queries and types are deprecated.
+     * Write your own GraphQL queries for JourneyPlanner v3.
+     * Write your own types or use those from JourneyPlannerTypes where applicable.
+     */
     getStopPlace: ReturnType<typeof createGetStopPlace>
+
+    /**
+     * @deprecated
+     * The JourneyPlanner v2 queries and types are deprecated.
+     * Write your own GraphQL queries for JourneyPlanner v3.
+     * Write your own types or use those from JourneyPlannerTypes where applicable.
+     */
     getStopPlaces: ReturnType<typeof createGetStopPlaces>
+
+    /**
+     * @deprecated
+     * The JourneyPlanner v2 queries and types are deprecated.
+     * Write your own GraphQL queries for JourneyPlanner v3.
+     * Write your own types or use those from JourneyPlannerTypes where applicable.
+     */
     getParentStopPlace: ReturnType<typeof createGetParentStopPlace>
+
+    /**
+     * @deprecated
+     * The JourneyPlanner v2 queries and types are deprecated.
+     * Write your own GraphQL queries for JourneyPlanner v3.
+     * Write your own types or use those from JourneyPlannerTypes where applicable.
+     */
     getStopPlacesByPosition: ReturnType<typeof createGetStopPlacesByPosition>
+
+    /**
+     * @deprecated
+     * The JourneyPlanner v2 queries and types are deprecated.
+     * Write your own GraphQL queries for JourneyPlanner v3.
+     * Write your own types or use those from JourneyPlannerTypes where applicable.
+     */
     getQuaysForStopPlace: ReturnType<typeof createGetQuaysForStopPlace>
+
+    /**
+     * @deprecated
+     * The JourneyPlanner v2 queries and types are deprecated.
+     * Write your own GraphQL queries for JourneyPlanner v3.
+     * Write your own types or use those from JourneyPlannerTypes where applicable.
+     */
     getBikeRentalStation: ReturnType<typeof createGetBikeRentalStation>
+
+    /**
+     * @deprecated
+     * The JourneyPlanner v2 queries and types are deprecated.
+     * Write your own GraphQL queries for JourneyPlanner v3.
+     * Write your own types or use those from JourneyPlannerTypes where applicable.
+     */
     getBikeRentalStations: ReturnType<typeof createGetBikeRentalStations>
+
+    /**
+     * @deprecated
+     * The JourneyPlanner v2 queries and types are deprecated.
+     * Write your own GraphQL queries for JourneyPlanner v3.
+     * Write your own types or use those from JourneyPlannerTypes where applicable.
+     */
     getBikeRentalStationsByPosition: ReturnType<
         typeof createGetBikeRentalStationsByPosition
     >

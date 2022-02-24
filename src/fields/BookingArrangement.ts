@@ -1,3 +1,9 @@
+/**
+ * @deprecated
+ * The JourneyPlanner v2 queries and types are deprecated.
+ * Write your own GraphQL queries for JourneyPlanner v3.
+ * Write your own types or use those from JourneyPlannerTypes where applicable.
+ */
 export enum BookingMethod {
     CALL_DRIVER = 'callDriver',
     CALL_OFFICE = 'callOffice',
@@ -8,6 +14,12 @@ export enum BookingMethod {
     NONE = 'none',
 }
 
+/**
+ * @deprecated
+ * The JourneyPlanner v2 queries and types are deprecated.
+ * Write your own GraphQL queries for JourneyPlanner v3.
+ * Write your own types or use those from JourneyPlannerTypes where applicable.
+ */
 export enum BookWhen {
     ADVANCE_ONLY = 'advanceOnly',
     UNTIL_PREVIOUS_DAY = 'untilPreviousDay',
@@ -18,6 +30,12 @@ export enum BookWhen {
     OTHER = 'other',
 }
 
+/**
+ * @deprecated
+ * The JourneyPlanner v2 queries and types are deprecated.
+ * Write your own GraphQL queries for JourneyPlanner v3.
+ * Write your own types or use those from JourneyPlannerTypes where applicable.
+ */
 export enum BuyWhen {
     ON_RESERVATION = 'onReservation',
     IN_ADVANCE = 'inAdvance',
@@ -33,6 +51,12 @@ export enum BuyWhen {
     OTHER = 'other',
 }
 
+/**
+ * @deprecated
+ * The JourneyPlanner v2 queries and types are deprecated.
+ * Write your own GraphQL queries for JourneyPlanner v3.
+ * Write your own types or use those from JourneyPlannerTypes where applicable.
+ */
 export enum BookingAccess {
     PUBLIC_ACCESS = 'publicAccess',
     AUTHORISED_PUBLIC = 'authorisedPublic',
@@ -40,6 +64,12 @@ export enum BookingAccess {
     OTHER = 'other',
 }
 
+/**
+ * @deprecated
+ * The JourneyPlanner v2 queries and types are deprecated.
+ * Write your own GraphQL queries for JourneyPlanner v3.
+ * Write your own types or use those from JourneyPlannerTypes where applicable.
+ */
 export interface BookingContact {
     contactPerson?: string
     email?: string
@@ -48,6 +78,12 @@ export interface BookingContact {
     url?: string
 }
 
+/**
+ * @deprecated
+ * The JourneyPlanner v2 queries and types are deprecated.
+ * Write your own GraphQL queries for JourneyPlanner v3.
+ * Write your own types or use those from JourneyPlannerTypes where applicable.
+ */
 export interface BookingArrangement {
     bookingAccess?: BookingAccess
     bookingContact?: BookingContact

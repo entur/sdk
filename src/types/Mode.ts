@@ -1,3 +1,9 @@
+/**
+ * @deprecated
+ * The JourneyPlanner v2 queries and types are deprecated.
+ * Write your own GraphQL queries for JourneyPlanner v3.
+ * Write your own types or use those from JourneyPlannerTypes where applicable.
+ */
 export enum TransportMode {
     AIR = 'air',
     BUS = 'bus',
@@ -12,6 +18,12 @@ export enum TransportMode {
     WATER = 'water',
 }
 
+/**
+ * @deprecated
+ * The JourneyPlanner v2 queries and types are deprecated.
+ * Write your own GraphQL queries for JourneyPlanner v3.
+ * Write your own types or use those from JourneyPlannerTypes where applicable.
+ */
 export enum TransportSubmode {
     AIRPORT_LINK_BUS = 'airportLinkBus',
     AIRPORT_LINK_RAIL = 'airportLinkRail',
@@ -51,6 +63,12 @@ export enum TransportSubmode {
     TOURIST_RAILWAY = 'touristRailway',
 }
 
+/**
+ * @deprecated
+ * The JourneyPlanner v2 queries and types are deprecated.
+ * Write your own GraphQL queries for JourneyPlanner v3.
+ * Write your own types or use those from JourneyPlannerTypes where applicable.
+ */
 export enum LegMode {
     AIR = 'air',
     BICYCLE = 'bicycle',
@@ -68,7 +86,10 @@ export enum LegMode {
 }
 
 /**
- * All valid values for the "mode" parameter to JourneyPlanner
+ * @deprecated
+ * The JourneyPlanner v2 queries and types are deprecated.
+ * Write your own GraphQL queries for JourneyPlanner v3.
+ * Write your own types or use those from JourneyPlannerTypes where applicable.
  */
 export enum QueryMode {
     AIR = 'air',
