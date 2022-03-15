@@ -174,6 +174,8 @@ export type DestinationDisplay = {
     __typename?: 'DestinationDisplay'
     /** Name of destination to show on front of vehicle. */
     frontText?: Maybe<Scalars['String']>
+    /** Intermediary destinations which the vehicle will pass before reaching its final destination. */
+    via?: Maybe<Array<Maybe<Scalars['String']>>>
 }
 
 export enum DirectionType {
@@ -390,7 +392,7 @@ export type Leg = {
     interchangeFrom?: Maybe<Interchange>
     interchangeTo?: Maybe<Interchange>
     /** For ride legs, estimated calls for quays between the Place where the leg originates and the Place where the leg ends. For non-ride legs, empty list. */
-    intermediateEstimatedCalls: Array<Maybe<EstimatedCall>>
+    intermediateEstimatedCalls: Array<EstimatedCall>
     /** For ride legs, intermediate quays between the Place where the leg originates and the Place where the leg ends. For non-ride legs, empty list. */
     intermediateQuays: Array<Quay>
     /** For ride legs, the line. For non-ride legs, null. */
@@ -399,7 +401,7 @@ export type Leg = {
     mode: Mode
     /** For ride legs, the operator used for this legs. For non-ride legs, null. */
     operator?: Maybe<Operator>
-    /** The legs's geometry. */
+    /** The leg's geometry. */
     pointsOnLink?: Maybe<PointsOnLink>
     /** Whether there is real-time data about this leg */
     realtime: Scalars['Boolean']
@@ -410,7 +412,7 @@ export type Leg = {
     /** For ride legs, the service journey. For non-ride legs, null. */
     serviceJourney?: Maybe<ServiceJourney>
     /** For ride legs, all estimated calls for the service journey. For non-ride legs, empty list. */
-    serviceJourneyEstimatedCalls: Array<Maybe<EstimatedCall>>
+    serviceJourneyEstimatedCalls: Array<EstimatedCall>
     /** All relevant situations for this leg */
     situations: Array<PtSituationElement>
     /** Do we continue from a specified via place */
@@ -1541,7 +1543,7 @@ export type TripPattern = {
     /** Generalized cost or weight of the itinerary. Used for debugging. */
     generalizedCost?: Maybe<Scalars['Int']>
     /** A list of legs. Each leg is either a walking (cycling, car) portion of the trip, or a ride leg on a particular vehicle. So a trip where the use walks to the Q train, transfers to the 6, then walks to their destination, has four legs. */
-    legs: Array<Maybe<Leg>>
+    legs: Array<Leg>
     /**
      * Time that the trip departs.
      * @deprecated Replaced with expectedStartTime
