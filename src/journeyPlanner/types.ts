@@ -169,6 +169,18 @@ export type Contact = {
     url?: Maybe<Scalars['String']>
 }
 
+/** A planned journey on a specific day */
+export type DatedServiceJourney = {
+    __typename?: 'DatedServiceJourney'
+    id: Scalars['ID']
+    /** The date this service runs. The date used is based on the service date as opposed to calendar date. */
+    operatingDay?: Maybe<Scalars['String']>
+    /** The service journey this Dated Service Journey is based on */
+    serviceJourney: ServiceJourney
+    /** Alterations specified on the Trip in the planned data */
+    tripAlteration?: Maybe<ServiceAlteration>
+}
+
 /** An advertised destination of a specific journey pattern, usually displayed on a head sign or at other on-board locations. */
 export type DestinationDisplay = {
     __typename?: 'DestinationDisplay'
@@ -242,15 +254,29 @@ export enum FilterPlaceType {
     StopPlace = 'stopPlace',
 }
 
+/** Additional (optional) grouping of lines for particular purposes such as e.g. fare harmonisation or public presentation. */
+export type GroupOfLines = {
+    __typename?: 'GroupOfLines'
+    /** Description of group of lines */
+    description?: Maybe<Scalars['String']>
+    id: Scalars['ID']
+    /** Full name for group of lines. */
+    name?: Maybe<Scalars['String']>
+    /** For internal use by operator/authority. */
+    privateCode?: Maybe<Scalars['String']>
+    /** Short name for group of lines. */
+    shortName?: Maybe<Scalars['String']>
+}
+
 /** Filter trips by disallowing lines involving certain elements. If both lines and authorities are specified, only one must be valid for each line to be banned. If a line is both banned and whitelisted, it will be counted as banned. */
 export type InputBanned = {
     /** Set of ids for authorities that should not be used */
     authorities?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>
     /** Set of ids for lines that should not be used */
     lines?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>
-    /** Set of ids of quays that should not be allowed for boarding or alighting. Trip patterns that travel through the quay will still be permitted. */
+    /** NOT IMPLEMENTED. Set of ids of quays that should not be allowed for boarding or alighting. Trip patterns that travel through the quay will still be permitted. */
     quays?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>
-    /** Set of ids of quays that should not be allowed for boarding, alighting or traveling thorugh. */
+    /** NOT IMPLEMENTED. Set of ids of quays that should not be allowed for boarding, alighting or traveling thorugh. */
     quaysHard?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>
     /** Set of ids of service journeys that should not be used. */
     serviceJourneys?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>
@@ -373,6 +399,8 @@ export type Leg = {
     authority?: Maybe<Authority>
     bikeRentalNetworks: Array<Maybe<Scalars['String']>>
     bookingArrangements?: Maybe<BookingArrangement>
+    /** The dated service journey used for this leg. */
+    datedServiceJourney?: Maybe<DatedServiceJourney>
     /** NOT IMPLEMENTED */
     directDuration?: Maybe<Scalars['Long']>
     /** The distance traveled while traversing the leg in meters. */
@@ -441,6 +469,8 @@ export type Line = {
     description?: Maybe<Scalars['String']>
     /** Type of flexible line, or null if line is not flexible. */
     flexibleLineType?: Maybe<Scalars['String']>
+    /** Groups of lines that line is a part of. */
+    groupOfLines: Array<Maybe<GroupOfLines>>
     id: Scalars['ID']
     journeyPatterns?: Maybe<Array<Maybe<JourneyPattern>>>
     name?: Maybe<Scalars['String']>
@@ -733,6 +763,8 @@ export type QueryType = {
     bikeRentalStations: Array<Maybe<BikeRentalStation>>
     /** Get all bike rental stations within the specified bounding box. */
     bikeRentalStationsByBbox: Array<Maybe<BikeRentalStation>>
+    /** Get a single dated service journey based on its id */
+    datedServiceJourney?: Maybe<DatedServiceJourney>
     /** Get a single line based on its id */
     line?: Maybe<Line>
     /** Get all lines */
@@ -794,6 +826,10 @@ export type QueryTypeBikeRentalStationsByBboxArgs = {
     maximumLongitude?: InputMaybe<Scalars['Float']>
     minimumLatitude?: InputMaybe<Scalars['Float']>
     minimumLongitude?: InputMaybe<Scalars['Float']>
+}
+
+export type QueryTypeDatedServiceJourneyArgs = {
+    id?: InputMaybe<Scalars['String']>
 }
 
 export type QueryTypeLineArgs = {
