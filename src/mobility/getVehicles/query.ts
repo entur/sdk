@@ -30,6 +30,18 @@ query ($lat: Float!, $lon: Float!, $range: Int!, $count: Int, $operators: [Strin
                     value
                 }
             }
+            perKmPricing {
+                start
+                rate
+                interval
+                end
+            }
+            perMinPricing {
+                start
+                rate
+                interval
+                end
+            }
             price
             surgePricing
             url
