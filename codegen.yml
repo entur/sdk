@@ -7,3 +7,18 @@ generates:
     src/journeyPlanner/types.ts:
         plugins:
             - 'typescript'
+        config:
+            strictScalars: true
+            avoidOptionals:
+                field: true
+                inputValue: true
+                object: false
+                defaultValue: false
+            scalars:
+                Coordinates: 'Array<[lat: number, lon: number]>'
+                Date: string
+                DateTime: string
+                DoubleFunction: string
+                LocalTime: string
+                Long: number
+                Time: string

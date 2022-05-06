@@ -1975,12 +1975,13 @@ export interface ParkingProperties {
     )[]
     maximumStay?: {
         seconds?: number
+        nano?: number
         units?: {
             duration?: {
                 seconds?: number
+                nano?: number
                 zero?: boolean
                 negative?: boolean
-                nano?: number
             }
             durationEstimated?: boolean
             dateBased?: boolean
@@ -1988,7 +1989,6 @@ export interface ParkingProperties {
         }[]
         zero?: boolean
         negative?: boolean
-        nano?: number
     }
     areas?: ParkingAreaRefsRelStructure
     spaces?: ParkingCapacitiesRelStructure
