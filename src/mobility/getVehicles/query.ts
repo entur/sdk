@@ -14,6 +14,11 @@ query ($lat: Float!, $lon: Float!, $range: Int!, $count: Int, $operators: [Strin
     ) {
         lat
         lon
+        vehicleType {
+            id
+            formFactor
+            propulsionType
+        }
         pricingPlan {
             description {
                 translation {
