@@ -54,6 +54,23 @@ export interface AutocompleteParams {
      */
     layers?: Array<'address' | 'venue'>
     /**
+     * The type of record is referred to as its layer. Due to limitations in
+     * Pelias the definitions of layers has been re-defined and limited to the
+     * following two layers:
+     *
+     * - venue: onstreetBus, onstreetTram, airport, railStation, metroStation,
+     *          busStation, coachStation, tramStation, harbourPort, ferryPort,
+     *          ferryStop, liftStation, vehicleRailInterchange, other Stops from
+     *          NSR. On multimodal stops, these values are only found on their
+     *          child stops.
+     * - address: GroupOfStopPlaces
+     * - address: POI
+     * - address: Street address
+     * - address: Street
+     * - address: Places
+     */
+    categories?: string[]
+    /**
      * Controls whether the search returns multimodal stops, child stops of the
      * multimodal stops, or both. Does not affect monomodal stops.
      *
@@ -84,6 +101,7 @@ export default function createAutocomplete(argConfig: ArgumentConfig) {
             focus,
             tariffZoneAuthorities,
             tariffZoneIds,
+            categories,
             ...rest
         } = params
 
@@ -91,6 +109,7 @@ export default function createAutocomplete(argConfig: ArgumentConfig) {
             ...rest,
             lang: lang || 'no',
             sources: stringifyCommaSeparatedList(sources),
+            categories: stringifyCommaSeparatedList(categories),
             layers: stringifyCommaSeparatedList(layers),
             tariff_zone_authorities: stringifyCommaSeparatedList(
                 tariffZoneAuthorities,
