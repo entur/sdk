@@ -1,11 +1,5 @@
-# Entur SDK
+# Entur SDK - Deprecated January 2023
 
-![NPM version](https://img.shields.io/npm/v/@entur/sdk)
+Given the low usage of the SDK, we have decided to deprecate this library. If you wish to perform travel searches or queries on our mobility API, we recommend using GraphQL directly.
 
-This SDK simplifies the use of Entur's travel APIs in JavaScript apps. For more information about Entur's APIs, see https://developer.entur.org
-
-Miss anything? Found a bug? File an [issue](https://github.com/entur/sdk/issues/new) or create a pull request!
-
-## Documentation
-
-https://sdk.entur.org
+https://developer.entur.org/pages-journeyplanner-journeyplanner
