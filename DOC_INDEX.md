@@ -1,24 +1,5 @@
-# Entur SDK
+# Entur SDK - Deprecated January 2023
 
-This SDK simplifies the use of Entur's travel APIs in JavaScript apps.
+Given the low usage of the SDK, we have decided to deprecate this library. If you wish to perform travel searches or queries on our mobility API, we recommend using GraphQL directly.
 
-## Installation
-
-```bash
-npm install @entur/sdk
-```
-
-## Usage
-
-```
-import createEnturClient from '@entur/sdk'
-
-const enturClient = createEnturClient({
-    clientName: 'awesomecompany-awesomeapp'
-})
-```
-
-A good place to start is to check out the EnturClient docs: {@link EnturClient}
-
-Miss anything? Found a bug? File an [issue](https://github.com/entur/sdk/issues/new) or create a pull request!
-For more information about Entur's APIs, see https://developer.entur.org
+https://developer.entur.org/pages-journeyplanner-journeyplanner
